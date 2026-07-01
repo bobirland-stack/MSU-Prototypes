@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner with Us | College of Engineering | Michigan State University</title>
+<style>
+/* ============================================================
+   MSU College of Engineering — theme-faithful mockup
+   Reproduces the egrbs5 (Bootstrap 5) look for an integration
+   preview ONLY. Colors/spacing approximate the live site so the
+   web team can see how the CFR-replacement content slots into
+   existing Drupal components. Not production CSS.
+   ============================================================ */
+:root{
+  --msu-green:#18453B;      /* Spartan green */
+  --msu-green-d:#0F2E27;
+  --msu-green-l:#2F6B5B;
+  --msu-accent:#008208;     /* MSU interactive/bright green (matches live site) */
+  --msu-accent-d:#006B06;
+  --ink:#1A1A1A;
+  --gray:#5B6770;
+  --line:#D9DCD6;
+  --bg:#FFFFFF;
+  --bg-alt:#F3F5F2;
+  --sans:'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55}
+a{color:var(--msu-green)}
+img{max-width:100%}
+:focus-visible{outline:3px solid var(--msu-accent);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{transition:none!important}}
+
+/* preview ribbon (NOT part of MSU site) */
+.preview-ribbon{background:#2B2B2B;color:#EDEDED;font:600 12px/1.5 'IBM Plex Mono',monospace;text-align:center;padding:8px 16px;letter-spacing:.04em}
+.preview-ribbon b{color:#fff;font-weight:700}
+
+/* ---- MSU utility bar ---- */
+.msu-util{background:var(--msu-green-d);color:#fff;font-size:13px}
+.msu-util .wrap{max-width:1200px;margin:0 auto;padding:8px 24px;display:flex;justify-content:flex-end;gap:22px}
+.msu-util a{color:#fff;text-decoration:none;opacity:.92}
+.msu-util a:hover{opacity:1;text-decoration:underline}
+
+/* ---- main header ---- */
+.msu-head{background:var(--msu-green);color:#fff}
+.msu-head .wrap{max-width:1200px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:26px}
+.msu-logo{font-weight:800;font-size:20px;letter-spacing:.01em;color:#fff;text-decoration:none;white-space:nowrap}
+.msu-logo span{display:block;font-weight:400;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.msu-nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+.msu-nav a{color:#fff;text-decoration:none;font-size:15px;font-weight:600;padding:6px 2px;border-bottom:3px solid transparent;transition:border-color .15s}
+.msu-nav a:hover{border-bottom-color:var(--msu-accent)}
+.msu-nav a.current{border-bottom-color:var(--msu-accent)}
+.msu-search{background:rgba(255,255,255,.14);border:none;color:#fff;border-radius:4px;padding:7px 12px;font-size:14px;width:120px}
+.msu-search::placeholder{color:rgba(255,255,255,.7)}
+
+/* breadcrumb */
+.crumbs{background:var(--bg-alt);border-bottom:1px solid var(--line)}
+.crumbs .wrap{max-width:1200px;margin:0 auto;padding:11px 24px;font-size:13px;color:var(--gray)}
+.crumbs a{color:var(--msu-green);text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+
+/* hero */
+.hero{position:relative;background:var(--msu-green);color:#fff;overflow:hidden}
+.hero .wrap{max-width:1200px;margin:0 auto;padding:64px 24px;position:relative;z-index:2}
+.hero .ey{font-size:13px;letter-spacing:.16em;text-transform:uppercase;opacity:.8;font-weight:700}
+.hero h1{font-size:46px;line-height:1.08;font-weight:800;margin:14px 0 16px;max-width:760px}
+.hero p{font-size:19px;max-width:680px;opacity:.94}
+.hero .cta-row{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:15px;padding:13px 22px;border-radius:4px;transition:background .15s,color .15s,border-color .15s}
+/* primary on a dark/green background: solid white */
+.btn-primary{background:#fff;color:var(--msu-green);border:1.5px solid #fff}
+.btn-primary:hover{background:#EAF1EE;border-color:#EAF1EE}
+/* primary on a light background: solid MSU green */
+.btn-solid{background:var(--msu-green);color:#fff;border:1.5px solid var(--msu-green)}
+.btn-solid:hover{background:var(--msu-green-d);border-color:var(--msu-green-d)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.hero:after{content:"";position:absolute;right:-80px;top:-80px;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,.05);z-index:1}
+
+/* intro band */
+.intro{max-width:1200px;margin:0 auto;padding:46px 24px 8px}
+.intro p{font-size:18px;max-width:820px;color:#333}
+
+/* CARD SECTION (mirrors the homepage 3-card component) */
+.cards{max-width:1200px;margin:0 auto;padding:30px 24px 10px}
+.cards h2,.numbers h2{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--msu-green);font-weight:800;border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:22px}
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:box-shadow .18s,transform .18s,border-color .18s}
+.card:hover{box-shadow:0 10px 30px rgba(24,69,59,.10);transform:translateY(-2px);border-color:#c4cfc7}
+.card .ph{height:8px;background:var(--msu-green)}
+.card .bd{padding:22px 22px 24px;flex:1;display:flex;flex-direction:column}
+.card .eyb{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--msu-green-l);margin-bottom:9px}
+.card h3{font-size:19px;font-weight:800;color:var(--ink);margin-bottom:7px}
+.card p{font-size:14.5px;color:var(--gray);flex:1}
+.card .more{margin-top:16px;font-weight:700;font-size:14px;color:var(--msu-green);text-decoration:none;transition:gap .15s}
+.card .more:hover{text-decoration:underline}
+
+/* six-card secondary grid */
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1200px;margin:8px auto 0;padding:0 24px}
+.mini{border:1px solid var(--line);border-radius:6px;padding:16px 18px;background:#fff;transition:border-color .15s,box-shadow .15s}
+.mini:hover{border-color:#c4cfc7;box-shadow:0 6px 18px rgba(24,69,59,.07)}
+.mini h4{font-size:16px;font-weight:800;margin-bottom:4px}
+.mini h4 a{color:var(--ink);text-decoration:none}
+.mini h4 a:hover{color:var(--msu-green)}
+.mini p{font-size:13.5px;color:var(--gray)}
+
+/* numbers band (mirrors 'Spartan Engineers by the Numbers') */
+.numbers{background:var(--bg-alt);margin-top:42px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.numbers .wrap{max-width:1200px;margin:0 auto;padding:40px 24px}
+.num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.num .v{font-size:40px;font-weight:800;color:var(--msu-green);letter-spacing:-.02em}
+.num .k{font-size:13.5px;color:var(--gray);margin-top:4px}
+.num .src{display:block;font:600 10px/1.3 'IBM Plex Mono',monospace;color:#9aa39d;margin-top:6px;letter-spacing:.04em}
+
+/* mega-menu spec block */
+.spec{max-width:1200px;margin:46px auto;padding:0 24px}
+.spec h2{font-size:22px;font-weight:800;color:var(--msu-green);margin-bottom:6px}
+.spec .sub{color:var(--gray);font-size:15px;margin-bottom:20px;max-width:760px}
+.megamock{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.megamock .mm-bar{background:var(--msu-green);color:#fff;padding:12px 18px;font-weight:700;font-size:15px;display:flex;gap:26px}
+.megamock .mm-bar span{opacity:.7;font-weight:600}
+.megamock .mm-bar span.on{opacity:1;border-bottom:3px solid var(--msu-accent);padding-bottom:8px}
+.megapanel{display:grid;grid-template-columns:1.3fr 1fr;gap:0}
+.mm-links{padding:22px 26px;display:grid;grid-template-columns:1fr 1fr;gap:8px 26px}
+.mm-links a{font-size:14.5px;color:var(--ink);text-decoration:none;padding:5px 0;border-bottom:1px solid #eee}
+.mm-links a:hover{color:var(--msu-green)}
+.mm-feat{background:linear-gradient(135deg,#2F6B5B,#18453B);color:#fff;padding:26px;display:flex;flex-direction:column;justify-content:flex-end}
+.mm-feat h4{font-size:18px;font-weight:800;margin-bottom:10px}
+.mm-feat a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px;font-size:14px}
+.mm-feat a:hover{opacity:.85}
+
+/* node-mapping table */
+.mapwrap{max-width:1200px;margin:30px auto 50px;padding:0 24px}
+.maptable{width:100%;border-collapse:collapse;font-size:14px}
+.maptable th,.maptable td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.maptable th{background:var(--bg-alt);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--msu-green)}
+.maptable code{font:600 12.5px/1 'IBM Plex Mono',monospace;color:var(--msu-green-d);background:#eef2ef;padding:2px 5px;border-radius:3px}
+.tag{display:inline-block;font:600 10.5px/1 'IBM Plex Mono',monospace;padding:3px 7px;border-radius:3px;letter-spacing:.03em}
+.tag.page{background:#E4EFE8;color:var(--msu-green)}
+.tag.comp{background:#E3E9EF;color:#33546E}
+.tag.defer{background:#ECECEC;color:#555}
+
+/* footer (compact MSU-style) */
+.msu-foot{background:var(--msu-green-d);color:#cfe0d8;margin-top:10px}
+.msu-foot .wrap{max-width:1200px;margin:0 auto;padding:30px 24px;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.msu-foot a{color:#fff;text-decoration:none}
+
+.note{max-width:1200px;margin:0 auto;padding:6px 24px 40px;color:var(--gray);font-size:13px}
+
+/* seam columns */
+.seam{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:10px 0 30px}
+.seam-col{border:1px solid var(--line);border-radius:8px;padding:18px 20px}
+.seam-col.own{border-top:4px solid var(--msu-green)}
+.seam-col.center{border-top:4px solid #2F6FB0}
+.seam-col.emp{border-top:4px solid #9aa39d}
+.seam-h{font:700 12px/1.2 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.seam-col.own .seam-h{color:var(--msu-green)}
+.seam-col.center .seam-h{color:#1F4E7E}
+.seam-col.emp .seam-h{color:#5B6770}
+.seam-col ul{list-style:none;margin:0}
+.seam-col li{font-size:14px;color:#333;padding:6px 0 6px 16px;position:relative;border-bottom:1px solid #eee}
+.seam-col li:last-child{border-bottom:none}
+.seam-col li:before{content:"";position:absolute;left:0;top:13px;width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.4}
+
+/* recruit page preview */
+.recruit-preview{background:var(--bg-alt);border:1px solid var(--line);border-radius:10px;padding:24px 26px;margin:8px 0 10px}
+.rp-tag{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#33546E;background:#E3E9EF;display:inline-block;padding:4px 9px;border-radius:4px;margin-bottom:12px}
+.recruit-preview h3{font-size:21px;font-weight:800;color:var(--ink);margin-bottom:6px}
+.rp-lead{font-size:15px;color:#333;max-width:680px;margin-bottom:18px}
+.rp-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rp-item{background:#fff;border:1px solid var(--line);border-radius:8px;padding:15px 17px;display:flex;flex-direction:column;gap:5px}
+.rp-item b{font-size:15px}
+.rp-item span{font-size:13px;color:var(--gray);flex:1}
+.rp-item a{font-size:13.5px;font-weight:700;text-decoration:none;color:var(--msu-green)}
+.rp-foot{margin-top:16px;font-size:14.5px;color:#333}
+@media(max-width:880px){.seam,.rp-row{grid-template-columns:1fr}}
+
+@media(max-width:880px){
+  .card-grid,.grid6,.num-grid,.megapanel,.mm-links{grid-template-columns:1fr}
+  .msu-nav{display:none}
+  .hero h1{font-size:34px}
+}
+</style>
+</head>
+<body>
+
+<div class="preview-ribbon"><b>INTEGRATION PREVIEW</b> · Concept content shown inside an approximation of the MSU Engineering Drupal theme (egrbs5) · Not the live site · For planning with the web team</div>
+
+<!-- MSU utility bar -->
+<div class="msu-util"><div class="wrap">
+  <a href="#">Current Students</a><a href="#">Future Students</a><a href="#">Directory</a><a href="#">Give</a>
+</div></div>
+
+<!-- Main header + primary nav (matches live mega-menu top level) -->
+<header class="msu-head"><div class="wrap">
+  <a class="msu-logo" href="#">College of Engineering<span>Michigan State University</span></a>
+  <nav class="msu-nav">
+    <a href="#">About</a>
+    <a href="#">Academics</a>
+    <a href="#">Admissions</a>
+    <a href="#">Research</a>
+    <a href="#" class="current">Partner with Us</a>
+    <a href="#">Careers</a>
+    <a href="#">Alumni</a>
+    <input class="msu-search" placeholder="Search">
+  </nav>
+</div></header>
+
+<!-- Breadcrumb (Drupal default) -->
+<div class="crumbs"><div class="wrap">
+  <a href="#">Home</a> &nbsp;›&nbsp; <a href="#">Partner with Us</a>
+</div></div>
+
+<!-- HERO (Drupal hero/storybite component) -->
+<section class="hero"><div class="wrap">
+  <div class="ey">College of Engineering · For companies &amp; foundations</div>
+  <h1>Partner with Spartan Engineering</h1>
+  <p>Recruiting, sponsored research, capstone projects, programs, and giving, in one place, with a clear next step and the right person to talk to. It is an exciting time to partner with the college.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#">Start a conversation</a>
+    <a class="btn btn-ghost" href="#">See ways to partner</a>
+  </div>
+</div></section>
+
+<!-- INTRO -->
+<div class="intro">
+  <p>Companies work with the College of Engineering in more ways than any one page has traditionally shown. This section brings recruiting, research, experiential learning, programs and scholarships, equipment donations, and our capability areas together, each with what it involves, who leads it, and how to begin.</p>
+</div>
+
+<!-- PRIMARY CARD SECTION (mirrors homepage 3-card component) -->
+<section class="cards">
+  <h2>Ways to partner</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="ph"></div>
+      <div class="bd">
+        <div class="eyb">Recruit</div>
+        <h3>Recruit our students</h3>
+        <p>An orienting layer that points to the Center for Spartan Engineering, who run fairs, job posting, and brand-building. We connect recruiting to everything else you do with the college.</p>
+        <a class="more" href="#">Explore recruiting →</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ph"></div>
+      <div class="bd">
+        <div class="eyb">Research</div>
+        <h3>Sponsor research</h3>
+        <p>Fund a faculty project through MSU Business Connect, with standard terms published up front so you do not start from scratch.</p>
+        <a class="more" href="#">Explore research →</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ph"></div>
+      <div class="bd">
+        <div class="eyb">Experiential</div>
+        <h3>Experiential learning</h3>
+        <p>Sponsor a capstone team or a competition team, or share your expertise in a course at faculty invitation.</p>
+        <a class="more" href="#">Explore experiential learning →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECONDARY 6-CARD grid for remaining areas -->
+<div class="grid6" style="margin-top:22px">
+  <div class="mini"><h4><a href="#">Programs &amp; scholarships</a></h4><p>Fund scholarships and programs, and find the student organizations companies sponsor.</p></div>
+  <div class="mini"><h4><a href="#">Donate equipment &amp; software</a></h4><p>Put surplus equipment, software, or materials to work in our labs.</p></div>
+  <div class="mini"><h4><a href="#">Capabilities &amp; expertise</a></h4><p>Find help by the problem you are working on, across twelve capability areas.</p></div>
+  <div class="mini"><h4><a href="#">Records &amp; paperwork</a></h4><p>W-9, IP and indirect-cost terms, brand use, gift agreements, in one place.</p></div>
+  <div class="mini"><h4><a href="#">Outcomes</a></h4><p>What partnership produces, by area, with the metrics employers look for.</p></div>
+  <div class="mini"><h4><a href="#">Start a conversation</a></h4><p>Tell us what you have in mind; we connect you with the right person.</p></div>
+</div>
+
+<!-- NUMBERS BAND (mirrors 'Spartan Engineers by the Numbers'; pulls real careers-report figures) -->
+<section class="numbers"><div class="wrap">
+  <h2>Spartan Engineering, by the numbers</h2>
+  <div class="num-grid">
+    <div class="num"><div class="v">92.9%</div><div class="k">Placement rate (employment or education)</div><span class="src">Center reports, 2025</span></div>
+    <div class="num"><div class="v">$81,259</div><div class="k">Average starting salary</div><span class="src">Center reports, 2025</span></div>
+    <div class="num"><div class="v">60%</div><div class="k">Employed in Michigan</div><span class="src">Center reports, 2025</span></div>
+    <div class="num"><div class="v">400+</div><div class="k">Employers hire MSU engineers</div><span class="src">careers.egr.msu.edu/reports</span></div>
+  </div>
+</div></section>
+
+<!-- MEGA-MENU SPEC -->
+<section class="spec">
+  <h2>How it sits in the main menu</h2>
+  <p class="sub">The current "Corporate and Foundation Relations" page is buried under About. This promotes it to a top-level "Partner with Us" menu, using the theme's existing mega-menu pattern (a two-column link list plus one featured panel with a single call to action).</p>
+  <div class="megamock">
+    <div class="mm-bar">
+      <span>About</span><span>Academics</span><span>Admissions</span><span>Research</span><span class="on">Partner with Us</span><span>Careers</span><span>Alumni</span>
+    </div>
+    <div class="megapanel">
+      <div class="mm-links">
+        <a href="#">Recruit our students</a>
+        <a href="#">Sponsor research</a>
+        <a href="#">Experiential learning</a>
+        <a href="#">Programs &amp; scholarships</a>
+        <a href="#">Donate equipment &amp; software</a>
+        <a href="#">Capabilities &amp; expertise</a>
+        <a href="#">Records &amp; paperwork</a>
+        <a href="#">Outcomes</a>
+        <a href="#">Start a conversation</a>
+        <a href="#">Corporate Partners Program</a>
+      </div>
+      <div class="mm-feat">
+        <h4>Not sure where to start? One conversation reaches a coordinated team across the college.</h4>
+        <a href="#">Start a conversation →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NODE MAPPING -->
+<section class="mapwrap">
+  <h2 style="font-size:22px;font-weight:800;color:var(--msu-green);margin-bottom:6px">Point to the Center, don't duplicate it</h2>
+  <p style="color:var(--gray);font-size:15px;margin-bottom:18px;max-width:820px">The Center for Spartan Engineering owns the recruiting relationship and maintains a deep, current site for it. This section owns everything else a company does with the college, and the routing across all of it. Recruiting is one door here; behind it, we hand off to the Center rather than rebuild their pages. Today the "Careers" menu mixes three audiences; separating them removes the confusion.</p>
+
+  <div class="seam">
+    <div class="seam-col own">
+      <div class="seam-h">This section owns</div>
+      <ul>
+        <li>Research, capstones, giving, equipment, capabilities</li>
+        <li>The coordination across all of it (one conversation)</li>
+        <li>A thin recruiting entry that orients, then hands off</li>
+        <li>Records &amp; paperwork (W-9, IP, brand)</li>
+      </ul>
+    </div>
+    <div class="seam-col center">
+      <div class="seam-h">The Center owns (we link out)</div>
+      <ul>
+        <li>Career fairs, dates, registration</li>
+        <li>Post a job, Grow Your Brand</li>
+        <li>Employer Partners, Michigander Scholars</li>
+        <li>Co-op program, placement &amp; data reports</li>
+      </ul>
+    </div>
+    <div class="seam-col emp">
+      <div class="seam-h">Employee-facing (moves out of Careers)</div>
+      <ul>
+        <li>College Employment (jobs at MSU)</li>
+        <li>Faculty/Staff Intranet</li>
+        <li>These belong with HR / staff resources, not a company menu</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="recruit-preview">
+    <div class="rp-tag">Preview · the "Recruit our students" page</div>
+    <h3>Recruit Spartan engineers</h3>
+    <p class="rp-lead">A short orientation to the ways companies hire here, then a clear handoff to the Center for Spartan Engineering, who run the recruiting relationship day to day.</p>
+    <div class="rp-row">
+      <div class="rp-item"><b>Career fairs</b><span>Dates, booths, and registration are run by the Center.</span><a href="https://www.careers.egr.msu.edu/recruit-spartans" target="_blank" rel="noopener">Recruit Spartans at the Center →</a></div>
+      <div class="rp-item"><b>Corporate Partners Program</b><span>Annual membership for companies that recruit here regularly.</span><a href="https://www.careers.egr.msu.edu/recruit-spartans" target="_blank" rel="noopener">Grow your brand →</a></div>
+      <div class="rp-item"><b>Post a job or co-op</b><span>Through Handshake and the Center's co-op program.</span><a href="https://www.careers.egr.msu.edu/recruit-spartans" target="_blank" rel="noopener">Post a job →</a></div>
+    </div>
+    <p class="rp-foot">Doing more than recruiting? <a href="#">Start a conversation</a> and we coordinate recruiting alongside research, giving, and the rest, so you have one relationship, not five.</p>
+  </div>
+
+  <h2 style="font-size:22px;font-weight:800;color:var(--msu-green);margin:40px 0 6px">How each page maps to Drupal</h2>
+  <p style="color:var(--gray);font-size:15px;margin-bottom:18px;max-width:760px">Every screen from the concept becomes a standard Drupal node under <code>/partner</code>, built from components the theme already has. Interactive conveniences are flagged for the web team to build, scope down, or defer.</p>
+  <table class="maptable">
+    <tr><th>Page</th><th>URL slug</th><th>Built from</th><th>Type</th></tr>
+    <tr><td>Partner with Us (landing)</td><td><code>/partner</code></td><td>Hero + card section + numbers band</td><td><span class="tag page">native page</span></td></tr>
+    <tr><td>Recruit our students</td><td><code>/partner/recruit</code></td><td>Short orientation + outbound links to the Center for Spartan Engineering (no duplicated fair dates or job posting)</td><td><span class="tag page">native page · links out</span></td></tr>
+    <tr><td>Sponsor research</td><td><code>/partner/research</code></td><td>Rich-text + terms list; links to Business Connect / OSP</td><td><span class="tag page">native page</span></td></tr>
+    <tr><td>Experiential learning</td><td><code>/partner/experiential</code></td><td>Card list (capstones, Design Day, competition teams, classroom)</td><td><span class="tag page">native page</span></td></tr>
+    <tr><td>Programs, scholarships &amp; student orgs</td><td><code>/partner/programs</code></td><td>Rich-text + categorized link list (orgs)</td><td><span class="tag page">native page</span></td></tr>
+    <tr><td>Donate equipment &amp; software</td><td><code>/partner/donate-equipment</code></td><td>Card list (needs catalog)</td><td><span class="tag page">native page</span></td></tr>
+    <tr><td>Capabilities &amp; expertise</td><td><code>/partner/capabilities</code></td><td>Card grid linking to 12 detail pages</td><td><span class="tag page">native page</span></td></tr>
+    <tr><td>Each capability (×12)</td><td><code>/partner/capabilities/{area}</code></td><td>Rich-text template: overview, what-we-can-do, facilities, contact</td><td><span class="tag page">native page</span></td></tr>
+    <tr><td>Records &amp; paperwork</td><td><code>/partner/records</code></td><td>Rich-text + document downloads (W-9, gift template, brand policy)</td><td><span class="tag page">native page</span></td></tr>
+    <tr><td>Outcomes</td><td><code>/partner/outcomes</code></td><td>Numbers band + tabbed sections (or stacked sections)</td><td><span class="tag comp">page + tabs component</span></td></tr>
+    <tr><td>Start a conversation</td><td><code>/partner/contact</code></td><td>Webform (routes by topic; company required)</td><td><span class="tag comp">Drupal Webform</span></td></tr>
+    <tr><td>Keyword search across the section</td><td>—</td><td>Drupal Search API scoped to <code>/partner/*</code>, or defer to site search</td><td><span class="tag defer">build or defer</span></td></tr>
+    <tr><td>"Your list" (save pages to share)</td><td>—</td><td>Client-side convenience; not native. Pilot later or omit at launch.</td><td><span class="tag defer">defer</span></td></tr>
+    <tr><td>"Understand our relationship" flow</td><td>via <code>/partner/contact</code></td><td>A topic on the contact webform; the compiled view stays in the gated workspace</td><td><span class="tag comp">Webform topic</span></td></tr>
+  </table>
+</section>
+
+<div class="note">
+  Notes for the web team: every "native page" is authorable by CFR staff in Drupal with existing components, no custom development. The recruiting page deliberately links out to the Center for Spartan Engineering rather than duplicating fair dates, job posting, or the co-op program, which the Center maintains. The placement, salary, and Michigan-employment figures shown in the numbers band now come from the Center's published reports (careers.egr.msu.edu/reports), which also resolves several illustrative figures from the concept; any remaining concept numbers (intern conversion, repeat-employer rate, per-department counts) still need real data before publication. Separating the company-facing recruiting entry into this section lets the "Careers" menu stop mixing students, companies, and employees.
+</div>
+
+<!-- FOOTER -->
+<footer class="msu-foot"><div class="wrap">
+  <div>Engineering Building · 428 S. Shaw Lane · East Lansing, MI 48824</div>
+  <div><a href="#">Contact</a> &nbsp;|&nbsp; <a href="#">Site Map</a> &nbsp;|&nbsp; <a href="#">Privacy</a> &nbsp;|&nbsp; <a href="#">Accessibility</a></div>
+  <div>SPARTANS WILL. · © Michigan State University</div>
+</div></footer>
+
+</body>
+</html>
