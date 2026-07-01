@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!--
+  Donate Equipment & Software — INTEGRATION PREVIEW inside the MSU Engineering theme (egrbs5).
+  SUPPLY-FIRST model: the public page makes the case (process, benefits, interest areas) and
+  drives one action — connect us with whoever manages end-of-life equipment/software, so we
+  can keep an open channel. No public "needs wishlist" (unmaintainable; companies won't browse it).
+  Approximates the live theme for planning with the web team. Not production CSS. Sample data only.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate Equipment &amp; Software | Partner with Us | College of Engineering | Michigan State University</title>
+<style>
+:root{
+  --msu-green:#18453B; --msu-green-d:#0F2E27; --msu-green-l:#2F6B5B;
+  --amber:#F2A900; --amber-d:#241A00;
+  --ink:#1A1A1A; --gray:#5B6770; --line:#D9DCD6; --bg:#FFFFFF; --bg-alt:#F3F5F2;
+  --sans:'Helvetica Neue',Arial,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55}
+a{color:var(--msu-green)}
+img{max-width:100%}
+.wrap{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+
+.preview-ribbon{background:repeating-linear-gradient(45deg,#241A00,#241A00 16px,#2E2200 16px,#2E2200 32px);color:#FFE3A3;font:600 12px/1.5 var(--mono);text-align:center;padding:7px 16px;letter-spacing:.04em}
+.preview-ribbon b{color:var(--amber)}
+
+.msu-util{background:var(--msu-green-d);color:#fff;font-size:13px}
+.msu-util .wrap{padding-top:8px;padding-bottom:8px;display:flex;justify-content:flex-end;gap:22px}
+.msu-util a{color:#fff;text-decoration:none;opacity:.92}
+.msu-util a:hover{opacity:1;text-decoration:underline}
+.msu-head{background:var(--msu-green);color:#fff}
+.msu-head .wrap{padding-top:18px;padding-bottom:18px;display:flex;align-items:center;gap:26px}
+.msu-logo{font-weight:800;font-size:20px;color:#fff;text-decoration:none;white-space:nowrap}
+.msu-logo span{display:block;font-weight:400;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.msu-nav{margin-left:auto;display:flex;gap:22px;align-items:center}
+.msu-nav a{color:#fff;text-decoration:none;font-size:15px;font-weight:600;padding:6px 2px;border-bottom:3px solid transparent}
+.msu-nav a:hover,.msu-nav a.current{border-bottom-color:var(--amber)}
+.msu-burger{display:none;margin-left:auto;background:transparent;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;width:40px}
+.msu-burger span{display:block;height:2.5px;background:#fff;border-radius:2px;transition:.2s}
+.msu-burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.msu-burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.msu-burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+@media(max-width:880px){
+  .msu-burger{display:flex}
+  .msu-head .wrap{flex-wrap:wrap}
+  .msu-nav{display:none;flex-direction:column;align-items:stretch;gap:0;width:100%;margin-left:0;order:3;margin-top:14px;border-top:1px solid rgba(255,255,255,.15)}
+  .msu-nav.open{display:flex}
+  .msu-nav a{padding:12px 2px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .msu-nav a:hover,.msu-nav a.current{border-bottom-color:rgba(255,255,255,.12);color:var(--amber)}
+  .msu-search{width:100%;margin-top:10px}
+}
+.msu-search{background:rgba(255,255,255,.14);border:none;color:#fff;border-radius:4px;padding:7px 12px;font-size:14px;width:120px}
+.msu-search::placeholder{color:rgba(255,255,255,.7)}
+.crumbs{background:var(--bg-alt);border-bottom:1px solid var(--line)}
+.crumbs .wrap{padding-top:11px;padding-bottom:11px;font-size:13px;color:var(--gray)}
+.jumpbar{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 4px rgba(15,46,39,.05)}
+.jumpbar .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.jumpbar a{font-size:13.5px;font-weight:600;color:var(--gray);text-decoration:none;padding:13px 14px;white-space:nowrap;border-bottom:3px solid transparent}
+.jumpbar a:hover{color:var(--msu-green)}
+.jumpbar a.jb-cta{margin-left:auto;color:var(--msu-green);font-weight:700}
+.jumpbar a.jb-cta:hover{color:var(--msu-green-d)}
+section[id]{scroll-margin-top:56px}
+.crumbs a{color:var(--msu-green);text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+
+.hero{position:relative;background:var(--msu-green);color:#fff;overflow:hidden}
+.hero .wrap{padding-top:44px;padding-bottom:46px;position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:40px;align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px}}
+.hero-main h1{max-width:none}
+.hero-aside{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:24px 26px}
+.ha-title{font:700 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#EAF1ED;margin-bottom:16px}
+.ha-steps{list-style:none;display:flex;flex-direction:column;gap:14px}
+.ha-steps li{display:flex;gap:13px;align-items:flex-start}
+.ha-n{flex:none;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;font:700 13px/1 var(--sans);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.ha-steps b{display:block;color:#fff;font-size:14.5px;line-height:1.3}
+.ha-steps span{display:block;color:#bcd3ca;font-size:12.5px;line-height:1.4;margin-top:2px}
+.ha-foot{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);font-size:12.5px;color:#9fc4b6;line-height:1.5}
+.hero .ey{font-size:13px;letter-spacing:.16em;text-transform:uppercase;opacity:.8;font-weight:700}
+.hero h1{font-size:44px;line-height:1.08;font-weight:800;margin:14px 0 16px;max-width:800px}
+.hero p{font-size:19px;max-width:720px;opacity:.94}
+.hero .cta-row{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.hero-contact{margin-top:28px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-left:4px solid var(--amber);border-radius:8px;padding:22px 26px}
+.hc-label{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#EAF1ED;margin-bottom:11px}
+.hc-name{font-size:22px;font-weight:800;color:#fff;line-height:1.1}
+.hc-role{font-size:13.5px;color:#cfe0d8;margin-top:4px}
+.hc-lines{margin-top:12px;font-size:16px;font-weight:700}
+.hc-lines a{color:#fff;text-decoration:none;border-bottom:2px solid rgba(255,255,255,.45)}
+.hc-lines a:hover{border-bottom-color:#fff}
+.hc-sep{color:rgba(255,255,255,.4);margin:0 10px}
+.hc-invite{margin-top:14px;font-size:14px;color:#cfe0d8;line-height:1.55}
+.hc-invite a{color:#fff;text-decoration:underline}
+.btn{display:inline-block;text-decoration:none;font-weight:700;font-size:15px;padding:13px 22px;border-radius:4px;cursor:pointer;border:none;font-family:var(--sans)}
+.btn-amber{background:var(--amber);color:var(--amber-d)}
+.btn-amber:hover{background:#ffc233}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)}
+.btn-ghost:hover{border-color:#fff}
+.btn-green{background:var(--msu-green);color:#fff}
+.btn-green:hover{background:var(--msu-green-d)}
+.btn-outline{background:#fff;color:var(--msu-green);border:1.5px solid var(--msu-green)}
+.btn-outline:hover{background:var(--bg-alt)}
+.hero:after{content:"";position:absolute;right:-80px;top:-80px;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,.05);z-index:1}
+
+.intro{padding-top:42px;padding-bottom:6px}
+.intro p{font-size:18px;max-width:840px;color:#333}
+.intro .pillars{margin-top:16px;font:600 13px/1.6 var(--mono);color:var(--msu-green-l);letter-spacing:.02em}
+
+.sec{padding-top:36px}
+.sec > .wrap > h2,.band h2{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--msu-green);font-weight:800;border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:20px}
+.sec.compact{padding-top:30px}
+.split{display:grid;grid-template-columns:1.15fr .85fr;gap:44px}
+@media(max-width:820px){.split{grid-template-columns:1fr;gap:30px}}
+.split h2{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--msu-green);font-weight:800;border-bottom:2px solid var(--line);padding-bottom:8px;margin-bottom:16px}
+.howlist{list-style:none;display:flex;flex-direction:column;gap:13px}
+.howlist li{display:flex;gap:13px;align-items:flex-start;font-size:14.5px;color:#333;line-height:1.5}
+.howlist .hn{flex:none;width:24px;height:24px;border-radius:50%;background:var(--msu-green);color:#fff;font:800 12px/1 var(--sans);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.howlist b{color:var(--ink)}
+.whylist{list-style:none;display:flex;flex-direction:column;gap:13px}
+.whylist li{font-size:14.5px;color:#555;line-height:1.5;padding-left:16px;position:relative}
+.whylist li:before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--msu-green)}
+.whylist b{color:var(--ink)}
+.areawrap{display:grid;grid-template-columns:1.6fr 1fr;gap:24px}
+@media(max-width:820px){.areawrap{grid-template-columns:1fr;gap:16px}}
+.acol{display:flex;flex-direction:column;gap:9px}
+.ak{font:700 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:3px;align-self:flex-start;margin-bottom:3px}
+.ak.eq{background:#E4EFE8;color:var(--msu-green)}
+.ak.sw{background:#EEE6F5;color:#6A3F95}
+.ai{font-size:13.5px;color:#555;line-height:1.45;padding-left:14px;border-left:2px solid var(--line)}
+.ai b{color:var(--ink)}
+.sec.details{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:40px;padding-bottom:38px}
+.details-h{border:none!important;padding-bottom:0!important;margin-bottom:4px!important}
+.detail-block{padding:18px 0;border-top:1px solid var(--line)}
+.detail-block:first-of-type{border-top:none}
+.detail-block h3{font-size:17px;font-weight:800;margin-bottom:7px;color:var(--ink)}
+.detail-block p{font-size:14px;color:#444;line-height:1.62;max-width:80ch}
+.detail-block .fineprint{font-size:12px;color:var(--gray);margin-top:8px}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;margin-top:12px}
+@media(max-width:640px){.mini-grid{grid-template-columns:1fr}}
+.mini-grid span{font-size:13.5px;color:#555;line-height:1.45}
+.mini-grid b{color:var(--ink)}
+.sec .sub{color:var(--gray);font-size:15px;max-width:840px;margin:-8px 0 20px}
+
+/* how it works — supply-first */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:880px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.steps{grid-template-columns:1fr}}
+.stp{border-left:3px solid var(--amber);padding:4px 0 4px 16px}
+.stp .n{font:700 13px var(--mono);color:var(--msu-green)}
+.stp h3{font-size:16px;font-weight:800;margin:5px 0 4px}
+.stp p{font-size:13.5px;color:var(--gray);line-height:1.5}
+
+/* benefits */
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:880px){.benefits{grid-template-columns:1fr}}
+.ben{border:1px solid var(--line);border-radius:6px;background:#fff;padding:22px 22px 20px}
+.ben .ic{width:42px;height:42px;border-radius:8px;background:#E4EFE8;display:flex;align-items:center;justify-content:center;color:var(--msu-green);margin-bottom:12px}
+.ben h3{font-size:18px;font-weight:800;margin-bottom:7px}
+.ben p{font-size:14px;color:var(--gray);line-height:1.55}
+
+/* interest areas — general, low-maintenance (NOT a live wishlist) */
+.areas{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:880px){.areas{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.areas{grid-template-columns:1fr}}
+.area{border-radius:6px;padding:14px 16px;background:var(--bg-alt);display:flex;gap:12px;align-items:flex-start}
+.area .bar{width:4px;align-self:stretch;border-radius:3px;background:var(--msu-green-l);flex:none}
+.area.sw .bar{background:#7A4F9E}
+.area h4{font-size:15.5px;font-weight:800;margin-bottom:3px}
+.area p{font-size:13px;color:var(--gray);line-height:1.5}
+.area .k{font:600 10.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:#9aa39d;margin-bottom:6px;display:block}
+.areas-note{font-size:13px;color:var(--gray);margin-top:14px;max-width:820px;line-height:1.55}
+
+/* arrangements strip */
+.band{background:var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:42px}
+.band .wrap{padding-top:38px;padding-bottom:38px}
+.arr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:880px){.arr-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.arr-grid{grid-template-columns:1fr}}
+.arr{background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px}
+.arr .h{font-size:16px;font-weight:800;margin-bottom:6px}
+.arr p{font-size:13.5px;color:var(--gray);line-height:1.5}
+
+/* tax / records pointer */
+.taxbox{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start}
+@media(max-width:880px){.taxbox{grid-template-columns:1fr}}
+/* what to expect */
+.expect{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+@media(max-width:880px){.expect{grid-template-columns:1fr}}
+.ex-lead{background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px 22px;display:flex;align-items:center}
+.ex-lead p{font-size:15px;color:#333;line-height:1.65;margin-bottom:0}
+.ex-lead b{color:var(--ink)}
+.ex-promise{display:flex;gap:11px;align-items:center;background:#E4EFE8;border:1px solid #BFDBCB;border-radius:8px;padding:15px 18px;font-size:14.5px;font-weight:600;color:var(--msu-green-d);line-height:1.5;margin-top:16px}
+.ex-check{background:var(--msu-green);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none;margin-top:1px}
+.ex-card{background:var(--bg-alt);border:1px solid var(--line);border-top:4px solid var(--amber);border-radius:8px;padding:20px 22px}
+.ex-k{font:700 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#8A6100;margin-bottom:9px}
+.ex-card h4{font-size:17px;font-weight:800;margin-bottom:8px}
+.ex-card p{font-size:13.5px;color:var(--gray);line-height:1.6}
+.taxbox .lead{background:var(--bg-alt);border:1px solid var(--line);border-left:4px solid var(--msu-green);border-radius:6px;padding:20px 22px}
+.taxbox .lead h3{font-size:18px;font-weight:800;margin-bottom:8px}
+.taxbox .lead p{font-size:14.5px;color:#333;line-height:1.6}
+.taxbox .side{border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+.taxbox .side h4{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--msu-green);margin-bottom:10px}
+.taxbox .side ul{list-style:none}
+.taxbox .side li{font-size:13.5px;color:#333;padding:7px 0 7px 16px;position:relative;border-bottom:1px solid #eee;line-height:1.5}
+.taxbox .side li:last-child{border-bottom:none}
+.taxbox .side li:before{content:"›";position:absolute;left:0;color:var(--msu-green);font-weight:800}
+.disc{margin-top:16px;font-size:12.5px;color:var(--gray);background:#FFF8EC;border:1px solid #F2E2BF;border-radius:6px;padding:12px 16px;line-height:1.55}
+
+/* the primary ask — connect us with the right person */
+.connect{background:linear-gradient(135deg,#18453B,#0F2E27);color:#fff;border-radius:10px;overflow:hidden}
+.connect .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:860px){.connect .cgrid{grid-template-columns:1fr}}
+.connect .copy{padding:34px 34px 30px}
+.connect .copy .ey{font:700 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#EAF1ED;margin-bottom:12px}
+.connect .copy h2{font-size:26px;font-weight:800;line-height:1.15;margin-bottom:12px;border:none;padding:0;color:#fff;text-transform:none;letter-spacing:0}
+.connect .copy p{font-size:15px;color:#cfe0d8;line-height:1.6;margin-bottom:12px;max-width:46ch}
+.connect .copy .who{font-size:13.5px;color:#9fc4b6;line-height:1.55}
+.connect .copy b{color:#fff}
+.connect .form{background:#fff;color:var(--ink);padding:30px 32px}
+.connect .form h3{font-size:17px;font-weight:800;margin-bottom:4px}
+.connect .form .fnote{font-size:12.5px;color:var(--gray);margin-bottom:16px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg .full{grid-column:1/-1}
+@media(max-width:520px){.fg{grid-template-columns:1fr}}
+.fg label{display:block;font-size:12.5px;font-weight:700;margin-bottom:5px}
+.fg label .opt{font-weight:400;color:var(--gray);font-size:11.5px}
+.fg input,.fg select,.fg textarea{width:100%;font:14px var(--sans);border:1px solid var(--line);border-radius:5px;padding:9px 11px;color:var(--ink)}
+.fg textarea{min-height:70px;resize:vertical}
+.fg select{-webkit-appearance:none;appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235B6770' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;padding-right:28px;cursor:pointer}
+.relay{grid-column:1/-1;background:var(--bg-alt);border:1px solid var(--line);border-radius:6px;padding:11px 13px;font-size:12.5px;color:var(--gray);line-height:1.5}
+.relay label{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:0}
+.relay input{width:auto;margin-top:2px}
+.wf-done{display:none;background:var(--bg-alt);border:1px solid var(--msu-green);border-radius:8px;padding:24px}
+.wf-done.show{display:block}
+.wf-done h3{color:var(--msu-green);font-size:18px;font-weight:800;margin-bottom:8px}
+.wf-done p{font-size:14px;color:#333;line-height:1.6}
+
+/* faculty note */
+.facnote{border:1px dashed var(--line);border-radius:8px;padding:18px 22px;background:var(--bg-alt);display:flex;gap:14px;align-items:flex-start}
+.facnote .tag{font:600 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#6A3F95;background:#EEE6F5;padding:5px 9px;border-radius:4px;white-space:nowrap;margin-top:1px}
+.facnote p{font-size:14px;color:#333;line-height:1.6}
+.facnote b{color:var(--ink)}
+
+/* footer */
+.msu-foot{background:var(--msu-green-d);color:#cfe0d8;margin-top:54px}
+.msu-foot .wrap{padding-top:30px;padding-bottom:30px;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.msu-foot a{color:#fff;text-decoration:none}
+
+/* integration notes */
+.intnotes{background:#0F2E27;color:#cfe0d8}
+.intnotes .wrap{padding-top:40px;padding-bottom:44px}
+.intnotes h2{color:#fff;font-size:20px;font-weight:800;margin-bottom:6px}
+.intnotes .s{font-size:14px;color:#9fc4b6;max-width:820px;margin-bottom:20px}
+.intnotes code{background:#1c4034;color:#cfe0d8;padding:2px 6px;border-radius:3px;font:600 12px var(--mono)}
+.maptable{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border-radius:6px;overflow:hidden}
+.maptable th,.maptable td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink)}
+.maptable th{background:var(--bg-alt);font:700 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--msu-green)}
+.maptable code{background:#eef2ef;color:var(--msu-green-d)}
+.mtag{display:inline-block;font:600 10.5px/1 var(--mono);padding:3px 7px;border-radius:3px}
+.mtag.page{background:#E4EFE8;color:var(--msu-green)}
+.mtag.comp{background:#FFF1D6;color:#8A6100}
+.mtag.gate{background:#E7E0F5;color:#5A3A8A}
+.mtag.defer{background:#ECECEC;color:#555}
+</style>
+</head>
+<body>
+
+<div class="preview-ribbon"><b>INTEGRATION PREVIEW</b> · Donate Equipment &amp; Software concept in an approximation of the MSU Engineering Drupal theme · Not the live site · Sample data</div>
+
+<div class="msu-util"><div class="wrap">
+  <a href="#">Current Students</a><a href="#">Future Students</a><a href="#">Directory</a><a href="#">Give</a>
+</div></div>
+
+<header class="msu-head"><div class="wrap">
+  <a class="msu-logo" href="#">College of Engineering<span>Michigan State University</span></a>
+  <button class="msu-burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav class="msu-nav" id="msuNav">
+    <a href="#">About</a><a href="#">Academics</a><a href="#">Admissions</a><a href="#">Research</a>
+    <a href="#" class="current">Partner with Us</a><a href="#">Careers</a><a href="#">Alumni</a>
+    <input class="msu-search" placeholder="Search">
+  </nav>
+</div></header>
+
+<div class="crumbs"><div class="wrap">
+  <a href="#">Home</a> &nbsp;›&nbsp; <a href="#">Partner with Us</a> &nbsp;›&nbsp; Donate Equipment &amp; Software
+</div></div>
+
+<nav class="jumpbar" aria-label="On this page"><div class="wrap">
+  <a href="#how">How it works</a>
+  <a href="#interest">Areas of interest</a>
+  <a href="#ways">Details</a>
+  <a href="#connect" class="jb-cta">Get in touch →</a>
+</div></nav>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap hero-grid">
+ <div class="hero-main">
+  <div class="ey">Partner with Us · For companies &amp; foundations</div>
+  <h1>Before you retire equipment or software, talk to us</h1>
+  <p>The instruments, hardware, and software your organization replaces each year can equip an MSU Engineering lab and start a Spartan's career — often with a tax benefit for you. The best time to tell us is before it's disposed of.</p>
+  <div class="hero-contact">
+    <div class="hc-label">Get in touch</div>
+    <div class="hc-name">[Your Name]</div>
+    <div class="hc-role">Associate Director, Corporate &amp; Foundation Relations · MSU College of Engineering</div>
+    <div class="hc-lines">
+      <a href="mailto:[you@msu.edu]">[you@msu.edu]</a>
+      <span class="hc-sep">·</span>
+      <a href="tel:[phone]">[517-XXX-XXXX]</a>
+    </div>
+    <p class="hc-invite">Reach out with a brief note about what your organization is retiring, and we'll follow up to see whether it's a fit for a lab. Prefer a form? <a href="#connect">One is available below</a>.</p>
+  </div>
+ </div>
+ <aside class="hero-aside" aria-label="What happens after you reach out">
+   <div class="ha-title">What happens after you reach out</div>
+   <ol class="ha-steps">
+     <li><span class="ha-n">1</span><div><b>You send a quick note</b><span>What you're retiring, or who handles it.</span></div></li>
+     <li><span class="ha-n">2</span><div><b>We reply within a few business days</b><span>A clear yes or no on fit — either way.</span></div></li>
+     <li><span class="ha-n">3</span><div><b>We coordinate the gift</b><span>Faculty match, pickup, and MSU's acknowledgment. You determine any claimed value.</span></div></li>
+   </ol>
+   <div class="ha-foot">There's nothing to browse and no obligation — a brief message is enough to begin.</div>
+ </aside>
+</div></section>
+
+<!-- INTRO -->
+<div class="intro wrap">
+  <p>Companies retire usable equipment and software on a regular cycle — a lab refresh, an office move, an end-of-lease return, a version upgrade. A great deal of it still has years of teaching and research life left. We'd like to be on the short list of places you consider before it leaves the building.</p>
+  <p class="pillars">Donations · educational discounts · cost-shares · equipment loans · software grants</p>
+</div>
+
+<!-- HOW IT WORKS + WHY (merged, compact) -->
+<section class="sec compact" id="how"><div class="wrap">
+  <div class="split">
+    <div class="split-l">
+      <h2>How it works</h2>
+      <ol class="howlist">
+        <li><span class="hn">1</span><div><b>Get in touch.</b> You handle retired equipment, or point us to whoever does — a quick note starts it.</div></li>
+        <li><span class="hn">2</span><div><b>Tell us what's coming available</b> before disposal. We reply with a clear yes or no within a few business days.</div></li>
+        <li><span class="hn">3</span><div><b>We coordinate acceptance.</b> Corporate &amp; Foundation Relations confirms a faculty home, arranges pickup, and manages MSU's gift-acceptance process and written acknowledgment. If you intend to claim a charitable deduction, your organization determines and substantiates the item's fair-market value.</div></li>
+        <li><span class="hn">4</span><div><b>We follow up periodically.</b> A brief check-in each cycle, so a future refresh is easy to flag when it comes.</div></li>
+      </ol>
+    </div>
+    <div class="split-r" id="why">
+      <h2>Why donate</h2>
+      <ul class="whylist">
+        <li><b>Impact you can see.</b> Your equipment goes into teaching labs and research, reaching students who'll graduate into your industry.</li>
+        <li><b>A potential tax benefit.</b> Gifts to MSU can carry a charitable deduction; a documented educational use generally supports favorable treatment.</li>
+        <li><b>Often simpler than disposal.</b> Responsible reuse instead of a disposal cost — and we coordinate pickup where we can.</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- INTEREST AREAS (condensed) -->
+<section class="sec compact" id="interest"><div class="wrap">
+  <h2>What we're generally interested in</h2>
+  <p class="sub">A general sense of where retired equipment and software tend to be useful — not a fixed list. If you're retiring something not shown here, it's still worth asking.</p>
+  <div class="areawrap">
+    <div class="acol"><span class="ak eq">Equipment</span>
+      <span class="ai"><b>Test &amp; measurement</b> — oscilloscopes, analyzers, power supplies, DAQ</span>
+      <span class="ai"><b>Machining &amp; fabrication</b> — mills, printers, robot arms, welding, CMMs</span>
+      <span class="ai"><b>Computing &amp; networking</b> — GPU/compute servers, switches, rack hardware</span>
+      <span class="ai"><b>Imaging &amp; microscopy</b> — microscopes, optical tables, characterization gear</span>
+      <span class="ai"><b>Materials &amp; mechanical test</b> — load frames, chambers, geotechnical equipment</span>
+    </div>
+    <div class="acol"><span class="ak sw">Software</span>
+      <span class="ai"><b>Engineering software &amp; licenses</b> — CAD/PLM, simulation/CAE, EDA, GIS, and data-science tools</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- THE DETAILS (quieter zone: ways to help + tax + expectations) -->
+<section class="sec details" id="ways"><div class="wrap">
+  <h2 class="details-h">Additional information</h2>
+  <p class="sub">Supporting detail on arrangements, tax treatment, and what we can accept. Review what's relevant, or contact us and we'll walk through it.</p>
+
+  <div class="detail-block" id="ways2">
+    <h3>More than one way to help</h3>
+    <p>If an outright donation isn't the right fit, we work with companies on the arrangement that is — and help build the internal case for it.</p>
+    <div class="mini-grid">
+      <span><b>Donate it</b> — outright gift, matched to a faculty use.</span>
+      <span><b>Educational discount</b> — academic pricing; often easiest to approve.</span>
+      <span><b>Cost-share</b> — a lab has some budget; you close the gap.</span>
+      <span><b>Loan or software grant</b> — loans, demos, time-limited grants.</span>
+    </div>
+  </div>
+
+  <div class="detail-block" id="tax">
+    <h3>Tax &amp; process</h3>
+    <p>When MSU puts a donated item to use in its teaching and research mission, that "related use" generally supports the most favorable deduction treatment for equipment gifts — the reason we confirm a faculty home before anything moves. <strong>Software gifts work differently</strong>; we'll walk those through directly. Determining and substantiating fair-market value is the donor's responsibility, not MSU's — for gifts above IRS thresholds this can require a qualified appraisal and IRS Form 8283. MSU University Advancement issues written acknowledgment of each gift, and the reference and gift-agreement template are available under <a href="#">Records &amp; paperwork</a>.</p>
+    <p class="fineprint">General information, not tax or legal advice. Please consult your own tax advisor and MSU University Advancement before filing.</p>
+  </div>
+
+  <div class="detail-block" id="expect">
+    <h3>What to expect</h3>
+    <p>We're grateful for every offer, and we want to be straight so the relationship is easy over time: <b>we can't always say yes.</b> Fit depends on current faculty need, space and power, condition, and a few compliance factors — a no is about timing and logistics, never a lack of appreciation. A few kinds of equipment carry ongoing costs (installation, service, facilities, staffing) that a gift alone doesn't cover; those can generally be accepted when they come with associated research or operating funding, and we'll flag that early. <b>Either way, you'll hear back with a clear yes or no within a few business days.</b></p>
+  </div>
+</div></section>
+
+<!-- PRIMARY ASK: connect us with the right person -->
+<section class="sec" id="connect"><div class="wrap">
+  <div class="connect"><div class="cgrid">
+    <div class="copy">
+      <div class="ey">Get in touch · or use this form</div>
+      <h2>Tell us what's coming available</h2>
+      <p>Prefer to send a few details rather than an email? Use this form — you don't need anything specific in mind. Tell us what you're retiring, or who handles it, and we'll open the conversation.</p>
+      <p class="who">Not sure who the right contact is? Send your best guess and we'll find the right door together. Either way, you'll hear back within a few business days.</p>
+    </div>
+    <div class="form">
+      <h3>Introduce us</h3>
+      <p class="fnote">Drupal Webform · routes to Corporate &amp; Foundation Relations · nothing is stored in this preview.</p>
+      <form id="wf" novalidate>
+        <div class="fg">
+          <div><label>Your name <span style="color:#b00">*</span></label><input type="text" placeholder="First and last name"></div>
+          <div><label>Organization <span style="color:#b00">*</span></label><input type="text" placeholder="Company or organization"></div>
+          <div class="full"><label>Your email <span style="color:#b00">*</span></label><input type="email" placeholder="you@company.com"></div>
+          <div class="full"><label>Who should we talk to about retired equipment / software? <span class="opt">— a name, a team, or "not sure"</span></label><input type="text" placeholder='e.g. "our IT asset management team" or "not sure — can you help me find them?"'></div>
+          <div class="full"><label>Anything coming up soon? <span class="opt">— optional</span></label><textarea placeholder="A refresh, move, or upgrade on the horizon, or the kinds of equipment/software you typically retire."></textarea></div>
+          <div class="relay">
+            <label><input type="checkbox" checked> It's fine for MSU to reach out to me periodically to stay in touch about future retirements.</label>
+          </div>
+          <div class="full"><button class="btn btn-green" type="submit">Send introduction</button></div>
+        </div>
+      </form>
+      <div class="wf-done" id="wfDone">
+        <h3>Thank you — sample confirmation</h3>
+        <p>In production this routes to Corporate &amp; Foundation Relations, who'll follow up to open a standing conversation. <strong>This preview stores and sends nothing.</strong></p>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="facnote" style="margin-top:22px">
+    <span class="tag">MSU staff</span>
+    <p><b>Faculty &amp; chairs:</b> equipment that companies flag as coming available is logged in an internal, NetID-gated workspace for you to review and claim — you don't post wishlists here. Watching for something specific? Tell Corporate &amp; Foundation Relations so we can keep an eye out when a company's refresh cycle comes around.</p>
+  </div>
+</div></section>
+
+<!-- INTEGRATION NOTES -->
+<section class="intnotes"><div class="wrap">
+  <h2>How this page maps to Drupal</h2>
+  <p class="s">Supply-first model: the public page at <code>/partner/donate-equipment</code> makes the case and drives one action — an introduction to a company's equipment-disposal contact. There's deliberately <strong>no public needs catalog</strong> (unmaintainable, and companies won't browse it). Incoming availability and company contacts live in a gated staff workspace.</p>
+  <table class="maptable">
+    <tr><th>Element on this page</th><th>Drupal home</th><th>Type</th></tr>
+    <tr><td>Hero, how-it-works, benefits, interest areas, arrangements</td><td>Native page content on <code>/partner/donate-equipment</code>, authored with existing components</td><td><span class="mtag page">native page</span></td></tr>
+    <tr><td>"Introduce us" contact form (name, org, disposal contact, opt-in to periodic outreach)</td><td>Drupal Webform routing to CFR; the periodic-contact opt-in is a simple checkbox field</td><td><span class="mtag comp">Drupal Webform</span></td></tr>
+    <tr><td>Interest areas (general categories)</td><td>Static content, not a data view — no per-need maintenance</td><td><span class="mtag page">native page</span></td></tr>
+    <tr><td>Tax reference PDF + gift-agreement template</td><td>Document downloads under <code>/partner/records</code>, owned by University Advancement</td><td><span class="mtag page">links to /partner/records</span></td></tr>
+    <tr><td>Incoming availability + company disposal contacts + check-in cadence</td><td>Gated staff workspace (NetID/SSO) under the Institutional Data Policy — a light CRM for equipment supply, not a public node</td><td><span class="mtag gate">gated workspace</span></td></tr>
+  </table>
+  <p class="s" style="margin-top:18px;color:#9fc4b6">Why the pivot: chairs and program directors report a public "needs wishlist" is unmaintainable and companies won't browse it. The reverse (supply-first) flow — cultivate the disposal contact, capture what's coming available before disposal, let faculty claim from that — is lower-maintenance and matches how these gifts actually happen. Open items unchanged: software valuation/deductibility needs Advancement's confirmation; the MBP 315 "two years" vs. IRS three-year Form 8282 discrepancy must be resolved before tax language is public; official wordmark and final theme components drop in per Brand Studio.</p>
+</div></section>
+
+<footer class="msu-foot"><div class="wrap">
+  <div>Engineering Building · 428 S. Shaw Lane · East Lansing, MI 48824</div>
+  <div><a href="#">Contact</a> &nbsp;|&nbsp; <a href="#">Site Map</a> &nbsp;|&nbsp; <a href="#">Privacy</a> &nbsp;|&nbsp; <a href="#">Accessibility</a></div>
+  <div>SPARTANS WILL. · © Michigan State University</div>
+</div></footer>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),nav=document.getElementById('msuNav');
+  if(burger&&nav)burger.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open?'true':'false');
+  });
+})();
+document.getElementById('wf').addEventListener('submit',function(e){
+  e.preventDefault();
+  this.style.display='none';
+  var d=document.getElementById('wfDone');d.classList.add('show');
+  d.scrollIntoView({behavior:'smooth',block:'center'});
+});
+</script>
+</body>
+</html>
