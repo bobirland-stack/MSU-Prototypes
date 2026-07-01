@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--
   MSU College of Engineering - Capstone Sponsorship Hub (DEMONSTRATION / CONCEPT MOCKUP)
@@ -11,7 +12,6 @@
 -->
 <html lang="en">
 <head>
-<meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sponsor a Capstone · MSU College of Engineering — Demo</title>
@@ -61,7 +61,8 @@ h1{font-size:clamp(32px,5vw,50px);font-weight:800;letter-spacing:-.02em;line-hei
 .logo-row{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:center;align-items:baseline}
 .logo-row span{font-weight:700;font-size:15px;color:#62716A;white-space:nowrap}
 .logos p.note{text-align:center;margin-top:18px;font-size:13.5px;color:var(--green);font-weight:500}
-.cards4{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:30px}
+.cards4{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px}
+@media (max-width:680px){.cards4{grid-template-columns:1fr}}
 .opt{border:1px solid var(--line);border-radius:12px;padding:22px 20px;background:#fff;display:flex;flex-direction:column;gap:8px}
 .opt h3{font-size:17px;font-weight:700}
 .opt p{font-size:14px;color:var(--muted);line-height:1.55}
@@ -89,6 +90,9 @@ h1{font-size:clamp(32px,5vw,50px);font-weight:800;letter-spacing:-.02em;line-hei
 .tl .x{font-size:12.5px;color:var(--muted);line-height:1.45;display:block;margin-top:2px}
 .tl-note{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.6;max-width:760px}
 .depts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:30px}
+.dept-group-label{margin-top:30px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:600}
+.dept-group-label .sub{display:block;margin-top:5px;font-family:'Archivo',sans-serif;font-size:13.5px;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:400;line-height:1.5}
+.dept-group-label + .depts{margin-top:14px}
 .dept{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff;display:flex;flex-direction:column}
 .dept h3{font-size:16px;font-weight:700}
 .dept .course{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);margin:3px 0 12px}
@@ -178,11 +182,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
   <div class="wrap">
     <a class="brand" href="#top">MSU Engineering <span>/ Capstone</span></a>
     <div class="navlinks">
+      <a class="link" href="#why">Why sponsor</a>
+      <a class="link" href="#departments">Departments</a>
+      <a class="link" href="#students">For students</a>
       <a class="link" href="#engage">Project examples</a>
+      <a class="link" href="#archive">Past projects</a>
       <a class="link" href="#how">How it works</a>
       <a class="link" href="#timeline">Timeline</a>
-      <a class="link" href="#departments">Departments</a>
-      <a class="link" href="#archive">Past projects</a>
       <a class="btn btn-solid" href="#inquire">Start an inquiry</a>
     </div>
   </div>
@@ -191,8 +197,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 <header class="hero" id="top">
   <div class="wrap">
     <p class="eyebrow">Michigan State University · College of Engineering</p>
-    <h1>Sponsor a senior design project.</h1>
-    <p class="sub">Each semester, teams of MSU engineering seniors complete one-semester projects for sponsoring organizations and present the results at Design Day. This page describes how sponsorship works, what past projects have looked like, and how to start.</p>
+    <h1>Put a team of MSU engineers on your problem.</h1>
+    <p class="sub">For $5,000, a team of senior engineering students spends a semester on a real problem from your organization — a fresh look at something worth exploring, and a way to become familiar to the engineers entering your field. They present the results at Design Day; you keep the work.</p>
     <div class="cta-row">
       <a class="btn btn-light" href="#inquire" style="background:#fff;color:var(--green)">Start a project inquiry</a>
       <a class="btn btn-light" href="#archive">Browse past projects</a>
@@ -201,7 +207,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
       <div class="stat"><div class="n">152</div><div class="l">Projects in this archive (Fall 2025–Spring 2026)</div></div>
       <div class="stat"><div class="n">89</div><div class="l">Sponsoring organizations in this archive</div></div>
       <div class="stat"><div class="n">32nd</div><div class="l">Year of Design Day</div></div>
-      <div class="stat"><div class="n">$5,000</div><div class="l">Representative project fee · pending confirmation</div></div>
+      <div class="stat"><div class="n">$5,000</div><div class="l">Project budget (funds student build costs) · pending confirmation</div></div>
     </div>
   </div>
 </header>
@@ -220,7 +226,133 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
   </div>
 </div>
 
-<section id="engage">
+<section id="why">
+  <div class="wrap">
+    <p class="kicker">Why sponsor</p>
+    <h2>What a sponsor gets out of it</h2>
+    <p class="lede">Beyond a finished deliverable, a capstone puts your work in front of more students than the team that builds it — these projects are presented at Design Day, used in classes, and known across the college. It's a low-cost way to become familiar to the engineers your industry will hire from.</p>
+    <div class="steps">
+      <div class="step">
+        <p class="num">01</p>
+        <h3>Workforce development</h3>
+        <p>Students graduate already familiar with the problems, tools, and standards your industry uses. Sponsoring is a small way to strengthen the talent pool you and your peers hire from.</p>
+      </div>
+      <div class="step">
+        <p class="num">02</p>
+        <h3>Fresh approaches, low-risk</h3>
+        <p>A strong senior team with faculty backing gives you room to explore — pursuing a promising idea, prototyping something speculative, or testing an assumption — with real engineering effort at modest cost. It's a low-risk way to investigate questions worth a closer look.</p>
+      </div>
+      <div class="step">
+        <p class="num">03</p>
+        <h3>Standing with future decision-makers</h3>
+        <p>Many of today's seniors go on to specify tools, choose vendors, and sign contracts, and the faculty who advise them come to know your company. Sponsoring is an early, low-key way to build those relationships.</p>
+      </div>
+      <div class="step">
+        <p class="num">04</p>
+        <h3>Familiarity across a cohort</h3>
+        <p>Capstone projects are presented at Design Day, referenced in classes, and often known by students before their senior year. That means your work reaches more students than the team on the project — many of whom you'll later see as applicants already familiar with the kind of problems you work on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="departments">
+  <div class="wrap">
+    <p class="kicker">Departments &amp; contacts</p>
+    <h2>Capstone programs by department</h2>
+    <p class="lede">Capstone runs across eight engineering departments, each with its own coordinator and focus areas. Company-sponsored projects are $5,000, which funds the student team's project budget — materials, prototyping, and other build costs — so the work isn't limited by what students can pay for themselves. If you're not sure which department fits, the inquiry form routes you to the right one.</p>
+    <p class="dept-group-label">Company-sponsored tracks<span class="sub">External organizations sponsor a project ($5,000); the inquiry path on this page applies to these departments.</span></p>
+    <div class="depts">
+      <div class="dept">
+        <h3>Computer Science &amp; Engineering</h3>
+        <p class="course">CSE 498 · fall &amp; spring</p>
+        <ul><li><b>$5,000</b> per project · <b>~5 students</b></li><li>Software, AI/ML, cloud, mobile, data</li></ul>
+        <p class="contact">cse-capstone@msu.edu</p>
+        <a class="dlink" href="#" onclick="return false">CSE capstone page →</a>
+      </div>
+      <div class="dept">
+        <h3>Mechanical Engineering</h3>
+        <p class="course">ME 481 · fall &amp; spring</p>
+        <ul><li><b>$5,000</b> per project · <b>4–5 students</b></li><li>Design, manufacturing, thermal, mobility</li></ul>
+        <p class="contact">me-capstone@msu.edu</p>
+        <a class="dlink" href="#" onclick="return false">ME capstone page →</a>
+      </div>
+      <div class="dept">
+        <h3>Electrical &amp; Computer Engineering</h3>
+        <p class="course">ECE 480 · fall &amp; spring</p>
+        <ul><li><b>$5,000</b> per project · <b>4–5 students</b></li><li>Embedded systems, sensors, power, RF</li></ul>
+        <p class="contact">ece-capstone@msu.edu</p>
+        <a class="dlink" href="#" onclick="return false">ECE capstone page →</a>
+      </div>
+      <div class="dept">
+        <h3>Applied Engineering Sciences</h3>
+        <p class="course">AES capstone · spring</p>
+        <ul><li><b>$5,000</b> per project · <b>4–5 students</b></li><li>Supply chain, operations, analytics</li></ul>
+        <p class="contact">aes-capstone@msu.edu</p>
+        <a class="dlink" href="#" onclick="return false">AES capstone page →</a>
+      </div>
+      <div class="dept">
+        <h3>Computational Mathematics, Science &amp; Engineering</h3>
+        <p class="course">CMSE 495 · fall &amp; spring</p>
+        <ul><li><b>$5,000</b> per project · <b>4–5 students</b></li><li>Data science, modeling, ML, visualization</li></ul>
+        <p class="contact">cmse-capstone@msu.edu</p>
+        <a class="dlink" href="#" onclick="return false">CMSE capstone page →</a>
+      </div>
+      <div class="dept">
+        <h3>Biosystems &amp; Agricultural Engineering</h3>
+        <p class="course">BE 485/487 · two-semester (fall–spring)</p>
+        <ul><li><b>$5,000</b> per project · <b>4–6 students</b></li><li>Food systems, bioprocessing, agricultural technology</li></ul>
+        <p class="contact">bae-capstone@msu.edu</p>
+        <a class="dlink" href="#" onclick="return false">BAE capstone page →</a>
+      </div>
+    </div>
+    <p class="dept-group-label">Predefined / department-set tracks<span class="sub">These departments run faculty- or competition-defined projects rather than external sponsorship, so the inquiry path above does not apply. Contact the coordinator directly.</span></p>
+    <div class="depts">
+      <div class="dept">
+        <h3>Civil &amp; Environmental Engineering</h3>
+        <p class="course">CE 495 · fall &amp; spring</p>
+        <ul><li>Predefined, department-set projects · <b>4–6 students</b></li><li>Infrastructure, structures, water, transportation</li></ul>
+        <p class="contact">cee-capstone@msu.edu</p>
+        <a class="dlink" href="#" onclick="return false">CEE capstone page →</a>
+      </div>
+      <div class="dept">
+        <h3>Chemical Engineering &amp; Materials Science</h3>
+        <p class="course">ChE 434 &amp; MSE 466 · fall &amp; spring</p>
+        <ul><li>Predefined projects (AIChE contest &amp; design studies)</li><li>Process design, materials, separations</li></ul>
+        <p class="contact">chems-capstone@msu.edu</p>
+        <a class="dlink" href="#" onclick="return false">ChEMS capstone page →</a>
+      </div>
+    </div>
+    <div class="inter-note"><b>Interdisciplinary projects.</b> Problems that span departments — for example, mechanical design with embedded software — can be supported by cross-department teams. Note this on the inquiry form, or contact the coordinators for each relevant department together.</div>
+  </div>
+</section>
+
+<section id="students">
+  <div class="wrap">
+    <p class="kicker">For students</p>
+    <h2>What students get out of it</h2>
+    <p class="lede">A sponsored capstone is the closest thing to professional practice that a degree offers. Students take responsibility for a real problem, a real client, and a result that has to work.</p>
+    <div class="steps">
+      <div class="step">
+        <p class="num">01</p>
+        <h3>A real, open-ended problem</h3>
+        <p>An open-ended, ambiguous problem from a real organization — scoping it, making engineering trade-offs, and owning the outcome over a full semester.</p>
+      </div>
+      <div class="step">
+        <p class="num">02</p>
+        <h3>Experience with a real client</h3>
+        <p>Working directly with a sponsor means managing expectations, presenting progress, and adapting to constraints and feedback — the professional skills coursework rarely teaches, learned on an actual engagement.</p>
+      </div>
+      <div class="step">
+        <p class="num">03</p>
+        <h3>Something to show for it</h3>
+        <p>A finished deliverable, a Design Day presentation, and a concrete project they can point to with employers — plus a clearer sense of how a particular industry actually works, and whether it fits them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="engage">
   <div class="wrap">
     <p class="kicker">Sponsored projects</p>
     <h2>Projects take many forms</h2>
@@ -251,6 +383,37 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
   </div>
 </section>
 
+<section id="archive" style="padding-bottom:72px">
+  <div class="wrap">
+    <p class="kicker">Past projects</p>
+    <h2>Project archive</h2>
+    <p class="lede">Every sponsored capstone project presented at Design Day in Fall 2025 and Spring 2026 — 152 projects from 89 organizations. Filter by department, term, topic, or sponsor. Select a project to read its description and copy a shareable link.</p>
+  </div>
+  <div class="toolbar">
+    <div class="wrap toolbar-inner">
+      <input type="search" id="q" placeholder="Search projects or sponsors" aria-label="Search projects">
+      <select id="dept" aria-label="Department"><option value="">All departments</option></select>
+      <select id="term" aria-label="Term"><option value="">All terms</option></select>
+      <select id="topic" aria-label="Topic"><option value="">All topics</option></select>
+      <input list="sponsors" id="sponsorf" placeholder="Sponsor" aria-label="Sponsor">
+      <datalist id="sponsors"></datalist>
+      <button class="clear" id="clear">clear</button>
+      <span class="count">showing <b id="shown">0</b> of <b id="total">0</b></span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden>
+      <p class="big">No projects match these filters</p>
+      <p>Broaden the search, or <button class="clear" id="clear2">clear all filters</button></p>
+    </div>
+    <div class="archive-foot">
+      <button class="more" id="more" hidden>Show more projects</button>
+      <a class="btn btn-solid" href="#inquire">Start a project inquiry</a>
+    </div>
+  </div>
+</section>
+
 <section class="alt" id="how">
   <div class="wrap">
     <p class="kicker">How it works</p>
@@ -262,12 +425,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
       <div class="step"><p class="num">04</p><h3>Design Day</h3><p>The team presents its results at Design Day and delivers final documentation.</p></div>
     </div>
     <div class="facts">
-      <span class="fact">1 semester (fall or spring)</span>
+      <span class="fact">Typically one semester</span>
       <span class="fact">4–6 students per team</span>
-      <span class="fact">$5,000 per project, all departments</span>
+      <span class="fact">$5,000 project budget</span>
       <span class="fact">~1 hr/week sponsor time</span>
       <span class="fact">Interdisciplinary teams available</span>
     </div>
+    <div class="inter-note"><b>This describes the single-semester, company-sponsored model.</b> A few tracks differ — BAE runs over two semesters, and Civil and Chemical Engineering use predefined department projects. See <a href="#departments" style="color:var(--green);font-weight:600">Departments</a> for how each one works.</div>
   </div>
 </section>
 
@@ -306,67 +470,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
   </div>
 </section>
 
-<section class="alt" id="departments">
-  <div class="wrap">
-    <p class="kicker">Departments &amp; contacts</p>
-    <h2>Capstone programs by department</h2>
-    <p class="lede">Sponsorship is $5,000 per project in every department. If you are not sure which department fits your project, submit the inquiry form and Corporate &amp; Foundation Relations will direct it.</p>
-    <div class="depts">
-      <div class="dept">
-        <h3>Computer Science &amp; Engineering</h3>
-        <p class="course">CSE 498 · fall &amp; spring</p>
-        <ul><li><b>$5,000</b> per project · <b>~5 students</b></li><li>Software, AI/ML, cloud, mobile, data</li></ul>
-        <p class="contact">[Coordinator name] · cse-capstone@msu.edu</p>
-        <a class="dlink" href="#" onclick="return false">CSE capstone page →</a>
-      </div>
-      <div class="dept">
-        <h3>Mechanical Engineering</h3>
-        <p class="course">ME 481 · fall &amp; spring</p>
-        <ul><li><b>$5,000</b> per project · <b>4–5 students</b></li><li>Design, manufacturing, thermal, mobility</li></ul>
-        <p class="contact">[Coordinator name] · me-capstone@msu.edu</p>
-        <a class="dlink" href="#" onclick="return false">ME capstone page →</a>
-      </div>
-      <div class="dept">
-        <h3>Electrical &amp; Computer Engineering</h3>
-        <p class="course">ECE 480 · fall &amp; spring</p>
-        <ul><li><b>$5,000</b> per project · <b>4–5 students</b></li><li>Embedded systems, sensors, power, RF</li></ul>
-        <p class="contact">[Coordinator name] · ece-capstone@msu.edu</p>
-        <a class="dlink" href="#" onclick="return false">ECE capstone page →</a>
-      </div>
-      <div class="dept">
-        <h3>Applied Engineering Sciences</h3>
-        <p class="course">AES capstone · spring</p>
-        <ul><li><b>$5,000</b> per project · <b>4–5 students</b></li><li>Supply chain, operations, analytics</li></ul>
-        <p class="contact">[Coordinator name] · aes-capstone@msu.edu</p>
-        <a class="dlink" href="#" onclick="return false">AES capstone page →</a>
-      </div>
-      <div class="dept">
-        <h3>Civil &amp; Environmental Engineering</h3>
-        <p class="course">[Course] · [semesters]</p>
-        <ul><li><b>$5,000</b> per project · <b>4–6 students</b></li><li>Infrastructure, structures, water, transportation</li></ul>
-        <p class="contact">[Coordinator name] · cee-capstone@msu.edu</p>
-        <a class="dlink" href="#" onclick="return false">CEE capstone page →</a>
-      </div>
-      <div class="dept">
-        <h3>Biosystems &amp; Agricultural Engineering</h3>
-        <p class="course">[Course] · [semesters]</p>
-        <ul><li><b>$5,000</b> per project · <b>4–6 students</b></li><li>Food systems, bioprocessing, agricultural technology</li></ul>
-        <p class="contact">[Coordinator name] · bae-capstone@msu.edu</p>
-        <a class="dlink" href="#" onclick="return false">BAE capstone page →</a>
-      </div>
-      <div class="dept">
-        <h3>Chemical Engineering &amp; Materials Science</h3>
-        <p class="course">[Course] · [semesters]</p>
-        <ul><li><b>$5,000</b> per project · <b>4–6 students</b></li><li>Process design, materials, separations</li></ul>
-        <p class="contact">[Coordinator name] · chems-capstone@msu.edu</p>
-        <a class="dlink" href="#" onclick="return false">ChEMS capstone page →</a>
-      </div>
-    </div>
-    <div class="inter-note"><b>Interdisciplinary projects.</b> Problems that span departments — for example, mechanical design with embedded software — can be supported by cross-department teams. Note this on the inquiry form, or contact the coordinators for each relevant department together.</div>
-  </div>
-</section>
-
-<section id="legal">
+<section class="alt" id="legal">
   <div class="wrap">
     <p class="kicker">Agreements &amp; intellectual property</p>
     <h2>For your legal and procurement teams</h2>
@@ -379,53 +483,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
     </div>
   </div>
 </section>
-
-<section class="alt" id="archive" style="padding-bottom:72px">
-  <div class="wrap">
-    <p class="kicker">Past projects</p>
-    <h2>Project archive</h2>
-    <p class="lede">Every sponsored capstone project presented at Design Day in Fall 2025 and Spring 2026 — 152 projects from 89 organizations. Filter by department, term, topic, or sponsor. Select a project to read its description and copy a shareable link.</p>
-  </div>
-  <div class="toolbar">
-    <div class="wrap toolbar-inner">
-      <input type="search" id="q" placeholder="Search projects or sponsors" aria-label="Search projects">
-      <select id="dept" aria-label="Department"><option value="">All departments</option></select>
-      <select id="term" aria-label="Term"><option value="">All terms</option></select>
-      <select id="topic" aria-label="Topic"><option value="">All topics</option></select>
-      <input list="sponsors" id="sponsorf" placeholder="Sponsor" aria-label="Sponsor">
-      <datalist id="sponsors"></datalist>
-      <button class="clear" id="clear">clear</button>
-      <span class="count">showing <b id="shown">0</b> of <b id="total">0</b></span>
-    </div>
-  </div>
-  <div class="wrap">
-    <div class="grid" id="grid"></div>
-    <div class="empty" id="empty" hidden>
-      <p class="big">No projects match these filters</p>
-      <p>Broaden the search, or <button class="clear" id="clear2">clear all filters</button></p>
-    </div>
-    <div class="archive-foot">
-      <button class="more" id="more" hidden>Show more projects</button>
-      <a class="btn btn-solid" href="#inquire">Start a project inquiry</a>
-    </div>
-  </div>
-</section>
-
-<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="m-title">
-  <div class="modal">
-    <span class="chip" id="m-chip"></span>
-    <h3 id="m-title"></h3>
-    <p class="sp" id="m-sponsor"></p>
-    <p class="mt" id="m-meta"></p>
-    <p class="syn" id="m-syn"></p>
-    <p class="ph">In a full implementation, this page would also include project photos, the student team, the faculty facilitator, sponsor information, and final outcome notes — drawn from the same content used to produce the Design Day program — at a permanent URL with link-preview metadata for sharing on LinkedIn and other platforms.</p>
-    <div class="row">
-      <button class="btn btn-solid" id="m-copy">Copy share link</button>
-      <button class="btn btn-ghost" id="m-close">Close</button>
-      <span class="copied" id="m-copied"></span>
-    </div>
-  </div>
-</div>
 
 <div class="linkband">
   <div class="wrap">
@@ -463,15 +520,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
           <option>Other</option>
         </select>
       </div>
-      <div class="full"><label>Departments of interest <span style="font-weight:400;color:var(--muted)">(select any that apply)</span></label>
+      <div class="full"><label>Departments of interest <span style="font-weight:400;color:var(--muted)">(company-sponsored tracks; select any that apply)</span></label>
         <div class="checks">
           <label><input type="checkbox"> Computer Science</label>
           <label><input type="checkbox"> Mechanical</label>
           <label><input type="checkbox"> Electrical &amp; Computer</label>
           <label><input type="checkbox"> Applied Engineering Sciences</label>
-          <label><input type="checkbox"> Civil &amp; Environmental</label>
+          <label><input type="checkbox"> Computational Math, Science &amp; Eng (CMSE)</label>
           <label><input type="checkbox"> Biosystems &amp; Agricultural</label>
-          <label><input type="checkbox"> Chemical &amp; Materials</label>
           <label><input type="checkbox"> Undecided / interdisciplinary</label>
         </div>
       </div>
@@ -495,6 +551,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
     </div>
   </div>
 </section>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="modal">
+    <span class="chip" id="m-chip"></span>
+    <h3 id="m-title"></h3>
+    <p class="sp" id="m-sponsor"></p>
+    <p class="mt" id="m-meta"></p>
+    <p class="syn" id="m-syn"></p>
+    <p class="ph">In a full implementation, this page would also include project photos, the student team, the faculty facilitator, sponsor information, and final outcome notes — drawn from the same content used to produce the Design Day program — at a permanent URL with link-preview metadata for sharing on LinkedIn and other platforms.</p>
+    <div class="row">
+      <button class="btn btn-solid" id="m-copy">Copy share link</button>
+      <button class="btn btn-ghost" id="m-close">Close</button>
+      <span class="copied" id="m-copied"></span>
+    </div>
+  </div>
 
 <footer>
   <div class="wrap">
