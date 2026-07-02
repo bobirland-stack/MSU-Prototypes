@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research workspace · MSU × ACME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#11332B; --spartan:#18453B; --moss:#3E6B5C; --moss2:#6E8A80;
+  --paper:#F4F6F3; --card:#FFFFFF; --rail:#0E2A23;
+  --line:#E2E8E1; --line2:#D2DCD3; --ink:#16201C; --ink2:#5A6B63;
+  --ink3:#8A988F;
+  --amber:#F2A900; --amber-dk:#7A5600; --amber-bg:#FFF6E0;
+  --blue:#2F6FB0; --blue-bg:#EAF2FA; --blue-ln:#C4DCEF;
+  --grn-bg:#E7F1EB; --grn-ln:#BFD8CB;
+  --mono:'IBM Plex Mono',monospace; --sans:'Archivo',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--spartan)}
+button{font-family:inherit;cursor:pointer;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.mono{font-family:var(--mono)}
+
+/* ---- demo bar ---- */
+#demobar{background:#1C1403;color:#FFD98A;font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;text-align:center;padding:6px 16px;line-height:1.4}
+#demobar b{color:var(--amber);font-weight:600}
+
+/* ---- app shell ---- */
+.app{display:grid;grid-template-columns:232px 1fr;min-height:100vh;transition:grid-template-columns .22s ease}
+.app.railclosed{grid-template-columns:60px 1fr}
+@media(max-width:880px){
+  .app,.app.railclosed{grid-template-columns:1fr}
+}
+
+/* rail */
+.rail{background:var(--rail);color:#CFE0D7;padding:0;position:sticky;top:0;align-self:start;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.rail-top{padding:18px 18px 14px;border-bottom:1px solid #1C4339}
+.rail-mark{display:flex;align-items:center;gap:9px;min-width:0}
+.rail-logo{width:26px;height:26px;border-radius:6px;background:var(--amber);color:#1C1403;display:grid;place-items:center;font:800 .9rem/1 var(--sans);flex:none}
+.rail-co{font:700 .92rem/1.1 var(--sans);color:#fff;white-space:nowrap}
+.rail-sub{font:500 .62rem/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--moss2);margin-top:3px;white-space:nowrap}
+.nav{padding:12px 10px;display:flex;flex-direction:column;gap:1px;flex:1}
+.nav a,.nav button{display:flex;align-items:center;gap:11px;padding:8px 10px;border-radius:7px;color:#B6CBC1;text-decoration:none;font-size:.84rem;font-weight:500;white-space:nowrap;position:relative;width:100%;border:none;background:none;text-align:left;font-family:inherit;cursor:pointer}
+.nav a:hover,.nav button:hover{background:#173A30;color:#fff}
+.nav a.on,.nav button.on{background:#1F4A3D;color:#fff}
+.nav a svg,.nav button svg{width:17px;height:17px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7}
+.nav a .lbl,.nav button .lbl{flex:1;min-width:0;overflow:hidden}
+.nav a .dot,.nav button .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);flex:none;opacity:0}
+.nav a.alert .dot,.nav button.alert .dot{opacity:1}
+.nav .grp{font:600 .58rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--moss2);padding:14px 12px 6px;white-space:nowrap}
+.rail-foot{padding:14px 18px;border-top:1px solid #1C4339;font:500 .62rem/1.5 var(--mono);color:var(--moss2);letter-spacing:.03em;white-space:nowrap}
+.footlink{background:none;border:none;padding:0;margin-top:4px;font:inherit;color:#B6CBC1;cursor:pointer;text-decoration:underline}
+.footlink:hover{color:#fff}
+.app.railclosed .footlink{display:none}
+
+/* collapsed (desktop icon strip): hide text, center icons, show alert dot as a corner pip */
+.app.railclosed .rail-co,
+.app.railclosed .rail-sub,
+.app.railclosed .nav a .lbl,.app.railclosed .nav button .lbl,
+.app.railclosed .nav .grp,
+.app.railclosed .rail-foot,
+.app.railclosed .nav a .dot,.app.railclosed .nav button .dot{display:none}
+.app.railclosed .rail-top{padding:18px 0 14px}
+.app.railclosed .rail-mark{justify-content:center}
+.app.railclosed .nav{padding:12px 8px}
+.app.railclosed .nav a,.app.railclosed .nav button{justify-content:center;padding:10px 0}
+.app.railclosed .nav a.alert::after,.app.railclosed .nav button.alert::after{content:"";position:absolute;top:6px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--amber)}
+
+/* rail toggle button (lives in topbar) */
+.railtoggle{flex:none;width:34px;height:34px;border:1px solid var(--line);background:var(--card);border-radius:8px;display:grid;place-items:center;color:var(--ink2)}
+.railtoggle:hover{background:var(--paper);color:var(--ink)}
+.railtoggle svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+/* mobile: rail becomes an off-canvas drawer */
+.scrim{display:none;position:fixed;inset:0;background:rgba(8,20,16,.45);z-index:40}
+@media(max-width:880px){
+  .rail{position:fixed;top:0;left:0;width:248px;height:100dvh;z-index:50;
+        transform:translateX(-100%);transition:transform .24s ease;box-shadow:0 0 40px rgba(0,0,0,.3)}
+  .app.draweropen .rail{transform:translateX(0)}
+  .app.draweropen .scrim{display:block}
+  /* collapsed-state desktop rules must not hide drawer labels on mobile */
+  .app.railclosed .rail-co,.app.railclosed .rail-sub,.app.railclosed .nav a .lbl,.app.railclosed .nav button .lbl,
+  .app.railclosed .nav .grp,.app.railclosed .rail-foot,.app.railclosed .nav a .dot{display:revert}
+  .app.railclosed .nav a,.app.railclosed .nav button{justify-content:flex-start;padding:8px 10px}
+  .app.railclosed .nav a.alert::after,.app.railclosed .nav button.alert::after{content:none}
+  .app.railclosed .rail-top{padding:18px 18px 14px}
+  .app.railclosed .nav{padding:12px 10px}
+}
+@media(prefers-reduced-motion:reduce){.app,.rail{transition:none}}
+
+/* main column */
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{background:var(--card);border-bottom:1px solid var(--line);padding:0 26px;display:flex;align-items:center;gap:14px;height:54px;position:sticky;top:0;z-index:5}
+.topbar h1{font-size:.98rem;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.topbar .crumb{font:500 .72rem/1 var(--mono);letter-spacing:.05em;color:var(--ink3);text-transform:uppercase}
+.topbar .spacer{flex:1}
+.who-am-i{display:flex;align-items:center;gap:8px;font-size:.76rem;color:var(--ink2)}
+.who-am-i .av{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font:700 .66rem/1 var(--sans)}
+@media(max-width:560px){.who-am-i .nm{display:none}}
+
+/* status band: calm summary, sits on paper like the rest of the page */
+.statband{background:var(--card);border-bottom:1px solid var(--line);padding:18px 26px 20px}
+.statband .lede{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.statband .lede .big{font:600 1.02rem/1.3 var(--sans);letter-spacing:-.01em;color:var(--ink)}
+.statband .lede .sub{font:500 .76rem/1.3 var(--sans);color:var(--ink2)}
+.statrow{display:flex;gap:10px;flex-wrap:wrap}
+.stat{flex:1;min-width:138px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-family:inherit;text-align:left;cursor:pointer;display:block}
+.stat:hover{border-color:var(--moss2);background:#EFF3EE}
+.stat.turn:hover{background:#DDEBE2}
+.stat .k,.stat .v,.stat .tag{display:block}
+.stat .v{display:flex}
+.stat .k{font:500 .6rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+.stat .v{font:600 1.18rem/1.15 var(--sans);letter-spacing:-.01em;margin-top:5px;display:flex;align-items:baseline;gap:5px;color:var(--ink)}
+.stat .v small{font:500 .62rem/1 var(--mono);color:var(--ink2);letter-spacing:.03em}
+.stat .tag{display:inline-block;margin-top:7px;font:500 .62rem/1.3 var(--mono);letter-spacing:.02em;color:var(--ink2)}
+/* "your turn" gets a quiet green accent, not an amber alarm */
+.stat.turn{background:var(--grn-bg);border-color:var(--grn-ln)}
+.stat.turn .v{color:var(--spartan)}
+.stat.turn .tag{color:var(--moss)}
+
+/* content */
+.content{padding:24px 26px 70px;max-width:1080px;width:100%}
+@media(max-width:560px){
+  .content{padding:18px 16px 60px}.statband{padding:14px 16px 16px}.topbar{padding:0 16px}
+  .miniact,.follow{padding:10px 14px}.follow.sm{padding:10px}
+  .nav a,.nav button{padding:11px 12px}
+  .dig-item{padding:15px}
+  .composer .btn{padding:11px 16px}
+}
+#demobar .db-short{display:none}
+@media(max-width:560px){#demobar .db-long{display:none}#demobar .db-short{display:inline}}
+
+.sec{margin-top:30px}
+.sec:first-child{margin-top:6px}
+.sec-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sec-h h2{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);font-family:var(--mono)}
+.sec-h .count{font:600 .62rem/1 var(--mono);background:var(--line);color:var(--ink2);border-radius:20px;padding:3px 8px}
+.sec-h .rule{flex:1;height:1px;background:var(--line)}
+.sec-note{font-size:.8rem;color:var(--ink2);margin:-4px 0 14px;max-width:680px}
+
+.asof{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--ink3);margin-top:10px}
+.verify{font-family:var(--mono);font-size:.58rem;letter-spacing:.05em;background:var(--amber-bg);color:var(--amber-dk);border-radius:4px;padding:2px 6px;text-transform:uppercase;vertical-align:middle;white-space:nowrap}
+
+/* card + table-ish rows */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:12px 16px;border-top:1px solid var(--line)}
+.row:first-child{border-top:none}
+.row .src{font-family:var(--mono);font-size:.6rem;letter-spacing:.07em;color:var(--moss);text-transform:uppercase;font-weight:600;min-width:96px;flex:none}
+.row .who{font-size:.85rem;font-weight:500;flex:1;min-width:200px}
+.row .who .sub{display:block;color:var(--ink2);font-weight:400;font-size:.78rem;margin-top:2px}
+
+/* chips */
+.chip{font:600 .6rem/1 var(--mono);letter-spacing:.05em;padding:5px 9px;border-radius:5px;text-transform:uppercase;white-space:nowrap}
+.chip-ok{background:var(--grn-bg);color:var(--spartan)}
+.chip-done{background:#EEF1EE;color:var(--ink2)}
+.chip-quiet{background:#EEF1EE;color:var(--ink2)}
+.chip-wait{background:#F1ECF6;color:#6B3E7E}
+.chip-turn{background:var(--amber-bg);color:var(--amber-dk);border:1px solid var(--amber)}
+.tag{font:500 .6rem/1.3 var(--mono);letter-spacing:.04em;color:var(--ink2);background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:3px 8px;white-space:nowrap}
+.tag.warn{background:var(--amber-bg);border-color:var(--amber);color:var(--amber-dk);font-weight:600}
+
+/* terms reference grid */
+.terms{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+@media(max-width:620px){.terms{grid-template-columns:1fr}}
+.term{background:var(--card);padding:14px 16px}
+.term .k{font:600 .6rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--moss);margin-bottom:6px}
+.term .v{font-size:.82rem;color:var(--ink);line-height:1.45}
+.term .v b{font-weight:600}
+
+/* impact metrics */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:720px){.metrics{grid-template-columns:repeat(2,1fr)}}
+.metric{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:15px 16px}
+.metric .n{font:700 1.7rem/1 var(--sans);letter-spacing:-.03em}
+.metric .l{font-size:.76rem;color:var(--ink2);margin-top:7px;line-height:1.35}
+.metric .src{font:500 .56rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-top:9px}
+
+/* agreement tracker */
+.agr{padding:16px;border-top:1px solid var(--line)}
+.agr:first-child{border-top:none}
+.agr-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.agr .src{font-family:var(--mono);font-size:.6rem;letter-spacing:.07em;color:var(--moss);text-transform:uppercase;font-weight:600;background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:3px 7px}
+.agr-name{flex:1;min-width:200px;font-size:.86rem;font-weight:600}
+.track{position:relative;display:flex;margin:18px 2px 8px;padding:0 2px}
+.track:before{content:"";position:absolute;left:6%;right:6%;top:7px;height:2px;background:var(--line2)}
+.track .fill{position:absolute;left:6%;top:7px;height:2px;background:var(--moss)}
+.tseg{flex:1;text-align:center;position:relative;z-index:1}
+.tseg i{display:block;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--line2);margin:1px auto 7px}
+.tseg.done i{border-color:var(--moss);background:var(--moss)}
+.tseg.added i{border-style:dashed}
+.tseg.added b{font-style:italic}
+.track.cAcme .tseg.now i{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px var(--blue-bg)}
+.track.cMsu .tseg.now i{border-color:var(--spartan);background:#fff;box-shadow:0 0 0 3px var(--grn-bg)}
+.tseg b{font:500 .58rem/1.2 var(--mono);letter-spacing:.02em;color:var(--ink3);display:block}
+.tseg.now b,.tseg.done b{color:var(--ink2)}
+.agr-meta{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin-top:4px}
+.agr-office{font:600 .6rem/1.3 var(--mono);letter-spacing:.03em;color:var(--spartan);background:var(--grn-bg);border:1px solid var(--grn-ln);border-radius:5px;padding:3px 8px}
+.agr-since{font:500 .6rem/1.3 var(--mono);letter-spacing:.03em;color:var(--ink2)}
+.agr-est{font:500 .6rem/1.3 var(--mono);letter-spacing:.03em;color:var(--ink2);background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:3px 8px}
+.agr-next{font-size:.78rem;color:var(--ink2);margin-top:8px}
+.agr-next b{color:var(--ink);font-weight:600}
+.agr-update{background:none;border:1px solid var(--line2);border-radius:7px;padding:6px 11px;margin-top:10px;font:600 .72rem/1 var(--sans);color:var(--moss)}
+.agr-update:hover{background:var(--paper);color:var(--spartan)}
+.court-key{display:flex;gap:16px;flex-wrap:wrap;padding:11px 16px;border-top:1px solid var(--line);background:var(--paper);font:500 .6rem/1 var(--mono);letter-spacing:.04em;color:var(--ink2)}
+.court-key span{display:inline-flex;align-items:center;gap:6px}
+.court-key i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+/* redline ledger */
+.ledger{position:relative}
+.ledger .row{align-items:flex-start}
+.ledger .ver{font:600 .82rem/1.3 var(--sans)}
+.ledger .ver .d{display:block;font:500 .68rem/1.3 var(--mono);color:var(--ink2);margin-top:2px}
+
+/* two-col grid for waiting/etc on wide screens */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+
+/* request composer */
+.composer{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:14px 16px;border-top:1px solid var(--line);background:var(--paper)}
+.composer label{font:600 .62rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.sel,.inp{border:1px solid var(--line2);border-radius:7px;padding:8px 10px;font:inherit;font-size:.82rem;background:var(--card)}
+.inp{flex:1;min-width:200px}
+.btn{border:1px solid var(--spartan);background:var(--spartan);color:#fff;border-radius:7px;padding:8px 14px;font-size:.8rem;font-weight:600}
+.btn:hover{background:#103027}
+.btn.ghost{background:none;color:var(--spartan)}
+.btn.ghost:hover{background:var(--grn-bg)}
+
+/* ===== multi-view router ===== */
+.view{display:none}
+.view.active{display:block;animation:viewin .18s ease}
+@keyframes viewin{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.view.active{animation:none}}
+
+/* back link (agreement detail) */
+.backlink{display:inline-flex;align-items:center;gap:7px;font:600 .74rem/1 var(--sans);color:var(--moss);background:none;border:1px solid var(--line2);border-radius:7px;padding:7px 12px;margin-bottom:16px}
+.backlink:hover{background:var(--paper);color:var(--spartan)}
+.backlink svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* clickable agreement rows in master list */
+.agr.tap{cursor:pointer}
+.agr.tap:hover{background:var(--paper)}
+.agr-open{font:600 .68rem/1 var(--mono);letter-spacing:.04em;color:var(--moss);display:inline-flex;align-items:center;gap:5px}
+.agr-open svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* detail header */
+.dhead{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.dhead .dh-main{flex:1;min-width:240px}
+.dhead h2{font-size:1.12rem;font-weight:700;letter-spacing:-.01em;line-height:1.25}
+.dhead .dh-sub{font-size:.82rem;color:var(--ink2);margin-top:5px}
+
+/* labeled key/value strip */
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-top:14px}
+.kv .cell{background:var(--card);padding:12px 14px}
+.kv .cell .k{font:600 .58rem/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--moss);margin-bottom:6px}
+.kv .cell .v{font-size:.84rem;font-weight:500;color:var(--ink)}
+
+/* milestone list */
+.mile{display:flex;gap:13px;padding:13px 16px;border-top:1px solid var(--line);align-items:flex-start}
+.mile:first-child{border-top:none}
+.mile .mk{margin-top:2px;width:15px;height:15px;border-radius:50%;border:2px solid var(--line2);flex:none}
+.mile.done .mk{background:var(--moss);border-color:var(--moss)}
+.mile.now .mk{border-color:var(--spartan);box-shadow:0 0 0 3px var(--grn-bg)}
+.mile .mt{flex:1;min-width:0}
+.mile .mt b{font-size:.85rem;font-weight:600}
+.mile .mt .ms{display:block;font-size:.78rem;color:var(--ink2);margin-top:2px}
+.mile .md{font:500 .62rem/1.3 var(--mono);color:var(--ink2);white-space:nowrap}
+
+/* digest (overview "needs attention") */
+.digest{display:flex;flex-direction:column;gap:8px}
+.dig-item{display:flex;align-items:center;gap:12px;padding:13px 15px;background:var(--card);border:1px solid var(--line);border-radius:10px;width:100%;text-align:left}
+.dig-item:hover{border-color:var(--line2);background:var(--paper)}
+.dig-item .di-ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none;background:var(--grn-bg);color:var(--spartan)}
+.dig-item.act .di-ic{background:var(--amber-bg);color:var(--amber-dk)}
+.dig-item .di-ic svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
+.dig-item .di-t{flex:1;min-width:0}
+.dig-item .di-t b{font-size:.86rem;font-weight:600;display:block}
+.dig-item .di-t span{font-size:.78rem;color:var(--ink2)}
+.dig-item .di-go{font:600 .66rem/1 var(--mono);letter-spacing:.04em;color:var(--moss);white-space:nowrap}
+
+/* people cards */
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.person{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+.person .pn{font-size:.88rem;font-weight:600}
+.person .pr{font-size:.76rem;color:var(--ink2);margin-top:2px}
+.person .pt{font:500 .6rem/1.3 var(--mono);letter-spacing:.03em;color:var(--moss);margin-top:8px;display:inline-block}
+
+/* ===== email digest preview ===== */
+.mailwrap{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--card)}
+.mailhead{padding:14px 18px;border-bottom:1px solid var(--line);background:var(--paper)}
+.mailhead .msub{font-size:.95rem;font-weight:700;margin-bottom:8px}
+.mailhead .mh{display:flex;gap:10px;font-size:.76rem;margin-top:3px}
+.mailhead .mh .k{font:600 .6rem/1.5 var(--mono);letter-spacing:.06em;color:var(--ink2);text-transform:uppercase;min-width:52px}
+.mailhead .mh .v{color:var(--ink)}
+.mailbody{padding:18px;font-size:.85rem;line-height:1.6;color:var(--ink)}
+.mailbody h4{font:600 .64rem/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--moss);margin:16px 0 7px}
+.mailbody h4:first-child{margin-top:0}
+.mailbody p{margin:0 0 8px}
+.mailbody .mrow{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.83rem}
+.mailbody .mrow:last-of-type{border-bottom:none}
+.mailbody .mrow .ml{font-weight:600;min-width:92px;flex:none}
+.mailfoot{padding:12px 18px;border-top:1px solid var(--line);font:500 .64rem/1.6 var(--mono);letter-spacing:.02em;color:var(--ink2);background:var(--paper)}
+
+.linkbtn{background:none;border:none;font:inherit;font-size:.85rem;font-weight:500;color:var(--ink);text-align:left;cursor:pointer;flex:1;min-width:0;padding:0}
+.linkbtn:hover{color:var(--spartan);text-decoration:underline}
+
+/* ===== follow control ===== */
+.follow{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line2);background:var(--card);border-radius:20px;padding:5px 12px 5px 10px;font:600 .72rem/1 var(--sans);color:var(--moss)}
+.follow:hover{background:var(--paper);border-color:var(--moss)}
+.follow svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.9}
+.follow.on{background:var(--spartan);border-color:var(--spartan);color:#fff}
+.follow.on svg{fill:#fff;stroke:#fff}
+.follow .ftxt{white-space:nowrap}
+.follow.sm{padding:6px;border-radius:8px}
+.follow.sm .ftxt{display:none}
+.follow.sm svg{width:15px;height:15px}
+
+/* small action button row */
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.miniact{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line2);background:var(--card);border-radius:8px;padding:6px 11px;font:600 .72rem/1 var(--sans);color:var(--ink2)}
+.miniact:hover{background:var(--paper);color:var(--ink);border-color:var(--moss2)}
+.miniact svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+/* ===== activity feed ===== */
+.feed{display:flex;flex-direction:column}
+.feed-item{display:flex;gap:12px;padding:12px 8px;border:none;border-top:1px solid var(--line);background:none;width:100%;text-align:left;cursor:pointer;font-family:inherit;border-radius:0}
+.feed-item:hover{background:var(--paper)}
+.feed-item:first-child{border-top:none}
+.feed-item.milestone{background:var(--grn-bg);border-radius:8px;border-top:none;margin:4px 0}
+.feed-item.milestone:hover{background:#DDEBE2}
+.feed-ic{width:18px;height:18px;border-radius:50%;background:var(--spartan);color:#fff;display:grid;place-items:center;flex:none;margin-top:2px}
+.feed-ic svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:2.4}
+.feed-dot{width:9px;height:9px;border-radius:50%;flex:none;margin-top:5px;background:var(--moss2)}
+.feed-item.followed .feed-dot{background:var(--amber)}
+.feed-body{flex:1;min-width:0}
+.feed-body .ft{font-size:.84rem;font-weight:500;color:var(--ink)}
+.feed-body .ft b{font-weight:700}
+.feed-body .fm{font:500 .62rem/1.3 var(--mono);letter-spacing:.03em;color:var(--ink2);margin-top:3px}
+.feed-followtag{font:600 .58rem/1 var(--mono);letter-spacing:.05em;color:var(--amber-dk);background:var(--amber-bg);border-radius:4px;padding:3px 7px;white-space:nowrap;align-self:flex-start;margin-top:3px}
+.feed-empty{font-size:.82rem;color:var(--ink2);padding:14px 4px}
+
+/* ===== bilateral milestone moment ===== */
+.moment{display:flex;gap:14px;align-items:center;background:linear-gradient(180deg,var(--grn-bg),var(--card));border:1px solid var(--grn-ln);border-radius:12px;padding:16px 18px;margin-top:6px}
+.moment .mo-ic{width:40px;height:40px;border-radius:10px;background:var(--spartan);color:#fff;display:grid;place-items:center;flex:none}
+.moment .mo-ic svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.9}
+.moment .mo-t b{font-size:.95rem;font-weight:700;display:block}
+.moment .mo-t span{font-size:.82rem;color:var(--ink2)}
+.moment .mo-both{font:600 .58rem/1 var(--mono);letter-spacing:.05em;color:var(--moss);text-transform:uppercase;margin-top:6px;display:inline-flex;align-items:center;gap:6px}
+
+/* ===== toast ===== */
+#toasts{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;display:flex;flex-direction:column;gap:8px;width:min(420px,calc(100vw - 32px))}
+.toast{background:var(--forest);color:#fff;border-radius:10px;padding:12px 14px;box-shadow:0 8px 30px rgba(8,20,16,.28);display:flex;gap:11px;align-items:flex-start;animation:toastin .22s ease}
+.toast .tk{width:22px;height:22px;border-radius:6px;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none;margin-top:1px}
+.toast .tk svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2}
+.toast .tt{flex:1;font-size:.82rem;line-height:1.4}
+.toast .tt b{font-weight:700}
+.toast .tx{font:500 .62rem/1 var(--mono);color:#BFD4CB;background:none;border:none;padding:2px;cursor:pointer}
+@keyframes toastin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.toast{animation:none}}
+
+/* ===== export sheet (print-scoped artifact) ===== */
+.exportdoc{display:none}
+
+/* ===== PRINT: only the export artifact, fully governed ===== */
+@media print{
+  body{background:#fff}
+  #demobar,.rail,.scrim,.topbar,.statband,#toasts,.follow,.actions,.backlink{display:none !important}
+  .app,.app.railclosed{display:block}
+  .main{display:block}
+  .view{display:none !important}
+  .content{padding:0;max-width:none}
+  .exportdoc{display:block !important;padding:0}
+  .exp-mark{display:flex;align-items:center;gap:10px;border-bottom:2px solid var(--spartan);padding-bottom:12px;margin-bottom:6px}
+  .exp-logo{width:30px;height:30px;border-radius:7px;background:var(--spartan);color:#fff;display:grid;place-items:center;font:800 1rem/1 var(--sans)}
+  .exp-mark .exp-h{font:700 1rem/1.2 var(--sans)}
+  .exp-mark .exp-s{font:500 .68rem/1.2 var(--mono);letter-spacing:.06em;color:var(--ink2);text-transform:uppercase}
+  .exp-banner{background:#1C1403;color:#FFD98A;font:600 .62rem/1.4 var(--mono);letter-spacing:.03em;padding:7px 10px;border-radius:5px;margin:10px 0}
+  .exp-gov{border:1px solid var(--line2);border-radius:7px;padding:10px 12px;margin:12px 0;font:500 .72rem/1.5 var(--sans);color:var(--ink2)}
+  .exp-gov b{color:var(--ink)}
+  .exportdoc h2{font-size:1.15rem;margin:14px 0 4px}
+  .exportdoc h3{font:600 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--moss);margin:16px 0 8px}
+  .exportdoc .erow{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:.82rem}
+  .exportdoc .erow .el{font-weight:600;min-width:130px;color:var(--ink)}
+  .exportdoc .efoot{margin-top:18px;padding-top:10px;border-top:1px solid var(--line2);font:500 .64rem/1.5 var(--mono);color:var(--ink3)}
+  @page{margin:18mm}
+}
+
+</style>
+
+</head>
+<body>
+
+<div id="demobar">
+  <span class="db-long"><b>DEMONSTRATION ONLY</b> · Not affiliated with, endorsed by, or an official property of Michigan State University · Fictional company (ACME) and illustrative data · For internal evaluation only</span>
+  <span class="db-short"><b>PROTOTYPE</b> · Not an official MSU page · Fictional data</span>
+</div>
+
+<div id="toasts" aria-live="polite" aria-atomic="false"></div>
+<div class="exportdoc" id="exportDoc" aria-hidden="true"></div>
+
+<div class="app" id="app">
+
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+
+  <!-- ===== LEFT RAIL ===== -->
+  <aside class="rail" id="rail">
+    <div class="rail-top">
+      <div class="rail-mark">
+        <span class="rail-logo">A</span>
+        <div>
+          <div class="rail-co">ACME × MSU</div>
+          <div class="rail-sub">Research workspace</div>
+        </div>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Workspace sections">
+      <span class="grp">This relationship</span>
+      <button type="button" data-view="overview" aria-label="Overview" title="Overview" class="on"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="lbl">Overview</span><span class="dot"></span></button>
+      <button type="button" data-view="agreements" aria-label="Agreements" title="Agreements" class="alert"><svg viewBox="0 0 24 24"><path d="M14 3v5h5"/><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M9 13h6M9 17h4"/></svg><span class="lbl">Agreements</span><span class="dot"></span></button>
+      <button type="button" data-view="work" aria-label="Active work" title="Active work"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="lbl">Active work</span><span class="dot"></span></button>
+      <button type="button" data-view="pubs" aria-label="Publication review" title="Publication review" class="alert"><svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h11l3 3v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2z"/><path d="M8 8h6M8 12h8"/></svg><span class="lbl">Publication review</span><span class="dot"></span></button>
+      <span class="grp">Coordinate</span>
+      <button type="button" data-view="requests" aria-label="Requests" title="Requests"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="lbl">Requests</span><span class="dot"></span></button>
+      <button type="button" data-view="email" aria-label="Notifications" title="Notifications"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="lbl">Notifications</span><span class="dot"></span></button>
+      <span class="grp">Reference</span>
+      <button type="button" data-view="terms" aria-label="Standard terms" title="Standard terms"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/><path d="M16 3h5v5"/><path d="M21 3 10 14"/></svg><span class="lbl">Standard terms</span><span class="dot"></span></button>
+      <button type="button" data-view="governance" aria-label="Access and records" title="Access and records"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V6z"/></svg><span class="lbl">Access &amp; records</span><span class="dot"></span></button>
+      <button type="button" data-view="about" aria-label="About" title="About"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 12v4"/></svg><span class="lbl">About</span><span class="dot"></span></button>
+    </nav>
+    <div class="rail-foot">
+      Updated by the owning office<br>on every turn<br>
+      <span style="color:var(--moss2)">AS OF JUN 9, 2026</span><br>
+      <button class="footlink" data-go="about">About this workspace</button>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main">
+    <header class="topbar">
+      <button class="railtoggle" id="railToggle" aria-label="Toggle menu" aria-expanded="true" aria-controls="rail">
+        <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <span class="crumb">Workspace</span>
+      <h1>Overview</h1>
+      <span class="spacer"></span>
+      <span class="who-am-i"><span class="av">RC</span> <span class="nm">R. Chen · ACME (sponsored access)</span></span>
+    </header>
+
+
+    <!-- ============ VIEWS ============ -->
+
+    <!-- ===== OVERVIEW ===== -->
+    <section class="view active" data-view="overview">
+      <div class="statband" role="group" aria-label="Where things stand">
+        <div class="lede">
+          <span class="big">Two items are with your team; everything else is moving.</span>
+        </div>
+        <div class="statrow">
+          <button class="stat turn" data-go="agreements" aria-label="1 agreement with your team. Open agreements."><span class="k">With your team</span><span class="v">1 <small>agreement</small></span><span class="tag">Teaming · 9 days</span></button>
+          <button class="stat" data-go="agreements" aria-label="1 agreement with MSU. Open agreements."><span class="k">With MSU</span><span class="v">1 <small>agreement</small></span><span class="tag">SRA · 2 days</span></button>
+          <button class="stat turn" data-go="pubs" aria-label="One paper in your review, 20 days left. Open publication review."><span class="k">Paper in your review</span><span class="v">20 <small>days left</small></span><span class="tag">Window open, no rush</span></button>
+          <button class="stat" data-go="requests" aria-label="1 request in progress. Open requests."><span class="k">Open requests</span><span class="v">1 <small>in progress</small></span><span class="tag">Owner named</span></button>
+          <button class="stat" data-go="work" aria-label="Next milestone June 13, export review with MSU. Open active work."><span class="k">Next milestone</span><span class="v">Jun 13</span><span class="tag">Export review · MSU</span></button>
+        </div>
+      </div>
+
+      <div class="content">
+        <section class="sec" style="margin-top:6px">
+          <div class="sec-h"><h2>What needs you</h2><span class="rule"></span></div>
+          <div class="digest">
+            <button class="dig-item act" data-go="agreements"><span class="di-ic"><svg viewBox="0 0 24 24"><path d="M14 3v5h5"/><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></span><span class="di-t"><b>Teaming agreement is on your desk</b><span>v4 with ACME legal for 9 days · returning it keeps the Q4 solicitation on track</span></span><span class="di-go">Open →</span></button>
+            <button class="dig-item act" data-go="work"><span class="di-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="di-t"><b>Certificate of insurance is outstanding</b><span>Needed for testbed site access · 12 days open</span></span><span class="di-go">Open →</span></button>
+            <button class="dig-item" data-go="pubs"><span class="di-ic"><svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h11l3 3v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2z"/></svg></span><span class="di-t"><b>One paper in your review window</b><span>20 days left · no action needed unless you have comments</span></span><span class="di-go">Open →</span></button>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-h"><h2>What changed</h2><span class="rule"></span></div>
+          <p class="sec-note">Open an update to go to it. Following moves an item’s updates to the top and, in production, to your inbox.</p>
+          <div class="panel" style="padding:6px 14px"><div class="feed" id="activityFeed"></div></div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-h"><h2>Upcoming</h2><span class="rule"></span><span class="verify">planning estimates, not commitments</span></div>
+          <div class="panel">
+            <div class="row"><span class="src">JUL 1</span><span class="who">Teaming agreement target execution<span class="sub">Keeps the Q4 federal solicitation in reach</span></span><span class="tag">OSP</span></div>
+            <div class="row"><span class="src">LATE AUG</span><span class="who">SRA execution · thermal study expansion begins<span class="sub">Expanded scope starts on signature</span></span><span class="tag">Business Connect</span></div>
+            <div class="row"><span class="src">DEC</span><span class="who">Annual partnership review<span class="sub">Joint look at outcomes and what to pursue next year · the export below feeds it</span></span><span class="tag">Both teams</span></div>
+            <div class="row"><span class="src">MAR 2028</span><span class="who">NDA renewal decision<span class="sub">Current NDA runs through March 2028</span></span><span class="tag">Business Connect</span></div>
+          </div>
+          <div class="actions">
+            <button class="miniact" data-ics><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Add these dates to your calendar (.ics)</button>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-h"><h2>Outcomes</h2><span class="rule"></span></div>
+          <p class="sec-note">For either team’s internal reporting.</p>
+          <div class="metrics">
+            <div class="metric"><div class="n">4</div><div class="l">peer-reviewed publications, 2 co-authored with ACME engineers</div><div class="src">Publication records</div></div>
+            <div class="metric"><div class="n">3</div><div class="l">students hired by ACME from project teams</div><div class="src">Employer relations</div></div>
+            <div class="metric"><div class="n">1</div><div class="l">invention disclosure, in evaluation</div><div class="src">MSU Technologies</div></div>
+            <div class="metric"><div class="n">$2.1M</div><div class="l">joint work cited in 2 federal proposals</div><div class="src">Business Connect · OSP</div></div>
+          </div>
+          <div class="actions">
+            <button class="miniact" data-export="impact"><svg viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg> Export partnership review</button>
+            <button class="miniact" data-copy="impact"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy the numbers</button>
+          </div>
+          <div class="asof">LAST THREE YEARS · AS OF JUN 9, 2026 · ILLUSTRATIVE</div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== AGREEMENTS (master list) ===== -->
+    <section class="view" data-view="agreements">
+      <div class="content">
+        <section class="sec" style="margin-top:6px">
+          <div class="sec-h"><h2>Agreements</h2><span class="count">3</span><span class="rule"></span></div>
+          <p class="sec-note">Industry-funded agreements are owned by Business Connect; federal and non-profit by OSP. An MSU turn typically runs two to four weeks; company turns vary. Dates are planning estimates, not commitments. <span class="verify">typical pace illustrative</span></p>
+          <div class="panel">
+            <div id="agrTracker"></div>
+            <div class="court-key">
+              <span><i style="background:var(--spartan)"></i> MSU's desk</span>
+              <span><i style="background:var(--blue)"></i> ACME's desk</span>
+              <span><i style="background:var(--moss2)"></i> complete</span>
+            </div>
+          </div>
+          <div class="asof">UPDATED BY THE OWNING OFFICE ON EVERY TURN · AS OF JUN 9, 2026</div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== AGREEMENT DETAIL ===== -->
+    <section class="view" data-view="agreement-detail">
+      <div class="content">
+        <button class="backlink" data-go="agreements"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> All agreements</button>
+        <div id="agrDetail"></div>
+      </div>
+    </section>
+
+    <!-- ===== ACTIVE WORK ===== -->
+    <section class="view" data-view="work">
+      <div class="content">
+        <section class="sec" style="margin-top:6px">
+          <div class="sec-h"><h2>Active work</h2><span class="rule"></span></div>
+          <div class="kv">
+            <div class="cell"><div class="k">Project</div><div class="v">Thermal management study</div></div>
+            <div class="cell"><div class="k">Lab</div><div class="v">Reyes lab · Mechanical Engineering</div></div>
+            <div class="cell"><div class="k">Status</div><div class="v">On track</div></div>
+            <div class="cell"><div class="k">Next report</div><div class="v">Quarterly · Jul 15</div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-h"><h2>Milestones</h2><span class="rule"></span></div>
+          <div class="panel">
+            <div class="mile done"><span class="mk"></span><span class="mt"><b>Kickoff and scope lock</b><span class="ms">Statement of work agreed, instrumentation list final</span></span><span class="md">MAR 2026</span></div>
+            <div class="mile done"><span class="mk"></span><span class="mt"><b>Instrumentation install · EB bay 2</b><span class="ms">Test rig commissioned and calibrated</span></span><span class="md">JUN 2026</span></div>
+            <div class="mile done"><span class="mk"></span><span class="mt"><b>Interim dataset delivered</b><span class="ms">First thermal runs shared with ACME engineers</span></span><span class="md">MAY 30</span></div>
+            <div class="mile now"><span class="mk"></span><span class="mt"><b>Quarterly report</b><span class="ms">Q2 progress, results to date, next-quarter plan</span></span><span class="md">JUL 15</span></div>
+            <div class="mile"><span class="mk"></span><span class="mt"><b>Scope expansion under new SRA</b><span class="ms">Begins once the sponsored research agreement executes</span></span><span class="md">EST. SEP</span></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="cols">
+            <div>
+              <div class="sec-h"><h2>Tasks</h2><span class="rule"></span></div>
+              <div class="panel" id="taskList"></div>
+              <p class="asof">ASSIGNMENT STAYS WITHIN EACH SIDE · A HANDOFF ALERTS THE OTHER SIDE’S PARTICIPANTS · FLAGS ONLY PAST AN AGREED DATE, BOTH DIRECTIONS</p>
+            </div>
+            <div>
+              <div class="sec-h"><h2>Account</h2><span class="rule"></span></div>
+              <div class="panel">
+                <div class="row"><span class="src">Budget</span><span class="who">Thermal study</span><span class="tag">$180,000</span></div>
+                <div class="row"><span class="src">Invoiced</span><span class="who">To date</span><span class="tag">$95,000</span></div>
+                <div class="row"><span class="src">Next</span><span class="who">Upcoming invoice</span><span class="tag">Jul 1</span></div>
+              </div>
+              <p class="asof">RENDERED FROM CGA · POST-AWARD FINANCE · ILLUSTRATIVE</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-h"><h2>Project team</h2><span class="rule"></span></div>
+          <p class="sec-note">Under MSU policy, students own IP created for coursework and may decline any NDA or assignment with no penalty; being named or introduced is their choice.</p>
+          <div class="people">
+            <div class="person"><div class="pn">Dr. Elena Reyes</div><div class="pr">Principal investigator · Mechanical Engineering</div><span class="pt">FACULTY LEAD</span></div>
+            <div class="person"><div class="pn">Graduate researcher</div><div class="pr">PhD candidate · thermal modeling</div><span class="pt">NAMED BY CHOICE</span></div>
+            <div class="person"><div class="pn">Graduate researcher</div><div class="pr">MS candidate · instrumentation</div><span class="pt">NAMED BY CHOICE</span></div>
+            <div class="person"><div class="pn">Undergraduate</div><div class="pr">Senior · data analysis</div><span class="pt">NAMED BY CHOICE</span></div>
+          </div>
+          <p class="asof">Mock interviews and team visits route through Employer Relations · use a request</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== PUBLICATION REVIEW ===== -->
+    <section class="view" data-view="pubs">
+      <div class="content">
+        <section class="sec" style="margin-top:6px">
+          <div class="sec-h"><h2>Publication review</h2><span class="rule"></span></div>
+          <p class="sec-note">30-day review before submission, extendable up to 60 more days for patent filing. Silence clears at the deadline.</p>
+          <div class="panel">
+            <div class="row"><span class="src">In review</span><span class="who">"Adaptive thermal control for high-density assemblies"<span class="sub">Sent to you Jun 2 · clears automatically Jul 2 if you raise nothing</span></span><span class="chip chip-turn">Your review · 20 days left</span></div>
+            <div class="row"><span class="src">Cleared</span><span class="who">Conference abstract · automation line balancing<span class="sub">No changes requested</span></span><span class="tag">Cleared May 12</span></div>
+            <div class="row"><span class="src">Hold</span><span class="who">Sensor packaging method paper<span class="sub">Held while a patent application is prepared</span></span><span class="tag warn">Patent hold through Aug 9</span></div>
+          </div>
+          <div class="actions" id="pubActions"></div>
+        </section>
+        <section class="sec">
+          <div class="sec-h"><h2>What each state means</h2><span class="rule"></span></div>
+          <div class="terms">
+            <div class="term"><div class="k">In review</div><div class="v">You have the manuscript. Raise comments or a patent concern before the window closes, or it clears on its own.</div></div>
+            <div class="term"><div class="k">Cleared</div><div class="v">The window passed or you signed off. The authors may submit.</div></div>
+            <div class="term"><div class="k">Hold</div><div class="v">A short, defined extension to let a patent application be filed. Capped, not open-ended.</div></div>
+            <div class="term"><div class="k">After clearance</div><div class="v">Results are publishable, always.</div></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== REQUESTS ===== -->
+    <section class="view" data-view="requests">
+      <div class="content">
+        <section class="sec" style="margin-top:6px">
+          <div class="sec-h"><h2>Requests</h2><span class="rule"></span></div>
+          <div class="panel">
+            <div id="ticketList"></div>
+            <div class="composer">
+              <label for="tType">New</label>
+              <select class="sel" id="tType" aria-label="Request type">
+                <option>Start an NDA</option><option>Amend project scope</option><option>Add personnel</option>
+                <option>Data or equipment access</option><option>Question for the contracts office</option>
+              </select>
+              <input class="inp" id="tDesc" placeholder="One line: what do you need?">
+              <button class="btn" id="tOpen">Open request</button>
+            </div>
+          </div>
+          <p class="asof">Named owner within two business days · AS OF JUN 9, 2026 · ILLUSTRATIVE</p>
+          <div class="actions">
+            <button class="miniact" data-export="requests"><svg viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg> Export request log</button>
+            <button class="miniact" data-copy="requests"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy open requests</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== NOTIFICATIONS ===== -->
+    <section class="view" data-view="email">
+      <div class="content">
+        <section class="sec" style="margin-top:6px">
+          <div class="sec-h"><h2>Delivery</h2><span class="rule"></span></div>
+          <div class="panel">
+            <div class="row"><span class="src">Turn notice</span><span class="who">When an agreement changes desks<span class="sub">Full update in the email · named participants on both sides</span></span><span class="chip chip-ok">On</span></div>
+            <div class="row"><span class="src">Completion</span><span class="who">When a task or turn completes<span class="sub">Sent to both sides</span></span><span class="chip chip-ok">On</span></div>
+            <div class="row"><span class="src">Handoff</span><span class="who">When work moves to your side<span class="sub">Sent to your side’s participants · assignment happens within your side</span></span><span class="chip chip-ok">On</span></div>
+            <div class="row"><span class="src">Digest</span><span class="who">Monthly summary<span class="sub">First business day · with your team, what changed, upcoming</span></span><span class="chip chip-ok">On</span></div>
+          </div>
+          <p class="asof">DELIVERY SETTINGS ARE FIXED IN THIS PROTOTYPE · PRODUCTION SENDS AUTOMATICALLY</p>
+        </section>
+
+        <section class="sec">
+          <div class="sec-h"><h2>Following</h2><span class="rule"></span></div>
+          <div class="panel" id="followList"></div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-h"><h2>June digest</h2><span class="rule"></span><span class="verify">preview</span></div>
+          <div class="mailwrap">
+            <div class="mailhead">
+              <div class="msub">MSU × ACME · 2 items with your team · June update</div>
+              <div class="mh"><span class="k">From</span><span class="v">MSU × ACME research workspace</span></div>
+              <div class="mh"><span class="k">To</span><span class="v">R. Chen and the named ACME participants</span></div>
+            </div>
+            <div class="mailbody">
+              <p>Two items are with your team; everything else is moving.</p>
+              <h4>With your team</h4>
+              <div class="mrow"><span class="ml">Teaming</span><span>v4 is with ACME legal, 9 days. Next: return v4 to keep the Q4 solicitation in reach. Owning office: OSP.</span></div>
+              <div class="mrow"><span class="ml">One paper</span><span>"Adaptive thermal control" is in your review window, 20 days left; silence clears it Jul 2.</span></div>
+              <h4>What changed</h4>
+              <div class="mrow"><span class="ml">Jun 9</span><span>Sponsored research agreement reached intake; Business Connect drafting, first draft to you by Jun 16.</span></div>
+              <div class="mrow"><span class="ml">Jun 5</span><span>Request #1042 (add summer intern) moved to in progress, owner Business Connect.</span></div>
+              <div class="mrow"><span class="ml">Jun 2</span><span>MSU returned v3 of the teaming agreement: accepted the liability cap, countered on IP §4.</span></div>
+              <h4>Upcoming</h4>
+              <div class="mrow"><span class="ml">Jul 1</span><span>Teaming execution target (planning estimate, not a commitment).</span></div>
+              <div class="mrow"><span class="ml">Late Aug</span><span>SRA execution; expanded thermal scope begins on signature.</span></div>
+              <div class="mrow"><span class="ml">Dec</span><span>Annual partnership review; the outcomes export feeds it.</span></div>
+            </div>
+            <div class="mailfoot">Sent to named participants on both sides. In production, replying opens a request. PROTOTYPE · fictional data · illustrative.</div>
+          </div>
+          <div class="actions">
+            <button class="miniact" data-copy="digest"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy as email</button>
+            <button class="miniact" data-export="digest"><svg viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg> Export digest</button>
+            <button class="miniact" data-ics><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Key dates to your calendar (.ics)</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== STANDARD TERMS ===== -->
+    <section class="view" data-view="terms">
+      <div class="content">
+        <section class="sec" style="margin-top:6px">
+          <div class="sec-h"><h2>Standard terms</h2><span class="rule"></span><span class="verify">illustrative · verify against current MSU policy</span></div>
+          <p class="sec-note">Defaults for industry-sponsored research agreements. Individual agreements may vary; each agreement’s detail lists its own terms.</p>
+          <div class="terms">
+            <div class="term"><div class="k">Publication</div><div class="v">A <b>30-day</b> review window before submission, extendable up to <b>60 more days</b> to file patents. Results are publishable after that, always.</div></div>
+            <div class="term"><div class="k">Intellectual property</div><div class="v">MSU keeps its background IP. Sponsored-project inventions follow a standard <b>option-to-license</b> path, negotiated by MSU Technologies.</div></div>
+            <div class="term"><div class="k">Indirect costs</div><div class="v">Charged at the <b>federally negotiated rate</b>.</div></div>
+            <div class="term"><div class="k">Signature</div><div class="v">Faculty do not sign. The authorized office commits MSU: <b>Business Connect</b> for industry-funded work, <b>OSP</b> for federal and non-profit.</div></div>
+            <div class="term"><div class="k">Student IP</div><div class="v">Students own the IP they create for coursework and may decline any NDA or assignment with no academic penalty.</div></div>
+            <div class="term"><div class="k">Confidentiality</div><div class="v">Information you mark confidential when you share it is handled under Michigan's <b>CRIIA</b>. Flag it at the time, not after.</div></div>
+          </div>
+        </section>
+
+        <section class="sec">
+          <div class="sec-h"><h2>Process templates</h2><span class="rule"></span><span class="verify">illustrative</span></div>
+          <p class="sec-note">The owning office selects a template at intake and may add steps for scope, such as export review or a security addendum. The signature step cannot be removed. Each agreement shows its own path.</p>
+          <div class="panel">
+            <div class="row"><span class="src">Industry SRA</span><span class="who">Intake · MSU draft · Company review · MSU final · Signature</span><span class="tag">Business Connect</span></div>
+            <div class="row"><span class="src">Federal teaming</span><span class="who">Intake · MSU draft · Company review · MSU final · Signature<span class="sub">Export review added when scope requires</span></span><span class="tag">OSP</span></div>
+            <div class="row"><span class="src">NDA short form</span><span class="who">Intake · Exchange · Signature</span><span class="tag">Either office</span></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== ACCESS & RECORDS ===== -->
+    <section class="view" data-view="governance">
+      <div class="content">
+        <section class="sec" style="margin-top:6px">
+          <div class="sec-h"><h2>Access &amp; records</h2><span class="rule"></span></div>
+          <div class="gov">
+            <h3>Who can see this</h3>
+            <p>Named participants from each side, chosen by each side. MSU participants sign in with NetID; named ACME participants use a <b>sponsored MSU affiliate login</b>, requested by their MSU contact and reviewed annually, so access lapses by default. Working documents live here; MSU-side strategy does not.</p>
+            <h3 style="margin-top:14px">Without an account</h3>
+            <p>Turn updates are emailed in full to named participants. Key dates export as calendar files. Any component exports as a stamped, point-in-time snapshot for colleagues without accounts.</p>
+            <h3 style="margin-top:14px">What's shared, and what's public record</h3>
+            <p>Information marked confidential at the time it is shared is handled under Michigan’s <b>CRIIA</b>; flag it when you send it, not after. MSU’s own records, including executed terms, budgets, and invoices, may be subject to the Michigan Freedom of Information Act. <span class="verify">illustrative · verify with MSU FOIA office and General Counsel</span></p>
+          </div>
+          <div class="kv">
+            <div class="cell"><div class="k">MSU sign-in</div><div class="v">NetID + Okta MFA</div></div>
+            <div class="cell"><div class="k">Company sign-in</div><div class="v">Sponsored affiliate login</div></div>
+            <div class="cell"><div class="k">Access review</div><div class="v">Annual · lapses by default</div></div>
+            <div class="cell"><div class="k">Confidential data</div><div class="v">Protected under CRIIA when flagged</div></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="view" data-view="about">
+      <div class="content">
+        <section class="sec" style="margin-top:6px">
+          <div class="sec-h"><h2>About this workspace</h2><span class="rule"></span></div>
+          <div class="panel">
+            <div class="row"><span class="src">What this is</span><span class="who">A shared record for the MSU × ACME research relationship: agreements, active work, publication review, and requests.</span></div>
+            <div class="row"><span class="src">Who sees it</span><span class="who">Named participants from each side, chosen by each side.</span></div>
+            <div class="row"><span class="src">How status moves</span><span class="who">Work sits on one side’s desk at a time; the owning office updates on every turn. Tasks are assigned within each side; a handoff alerts the other side’s participants.</span></div>
+            <div class="row"><span class="src">What arrives by email</span><span class="who">Turn notices, completions, handoffs, and a monthly digest, sent in full to named participants.</span></div>
+            <div class="row"><span class="src">Run by</span><span class="who">MSU: A. Rivera, relationship manager, College of Engineering. ACME: R. Chen, university programs.</span></div>
+            <div class="row"><span class="src">Help</span><span class="who">Open a request; a named owner responds within two business days.</span></div>
+          </div>
+          <p class="asof">PROTOTYPE · NOT AN OFFICIAL MSU PAGE · FICTIONAL COMPANY AND ILLUSTRATIVE DATA</p>
+        </section>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+/* ====== SHARED DATA ====== */
+var AGREEMENTS = [
+  {id:'nda', src:'NDA', name:'Mutual NDA \u00b7 ACME corporate', office:'BUSINESS CONNECT',
+   stages:['Intake','Exchange','Signature'], template:'NDA SHORT FORM', stage:3, court:'done',
+   since:'EXECUTED MAR 2026 \u00b7 THROUGH MAR 2028', est:'', next:'Nothing required from either side', canUpdate:false,
+   summary:'A standard two-way confidentiality agreement covering exploratory discussions. Fully executed and in force.',
+   terms:[['Process','NDA short form \u00b7 3 steps'],['Term','Two years from execution \u00b7 through March 2028'],['Scope','Mutual \u00b7 covers both parties\u2019 disclosures'],['Survival','Confidentiality obligations survive 3 years past expiry']],
+   ledger:[['MAR 2026','Executed','Both signatures in place',null]]},
+  {id:'teaming', src:'TEAMING', name:'Teaming agreement \u00b7 AV testbed federal proposal', office:'OSP \u00b7 FEDERAL PRIME',
+   stages:['Intake','MSU draft','Company review','Export review','MSU final','Signature'], template:'FEDERAL TEAMING \u00b7 +EXPORT REVIEW', added:3, stage:3, court:'acme',
+   since:'In company review since May 27', est:'EST. JUL 1 \u00b7 Q4 SOLICITATION TARGET', next:'ACME returns v4', canUpdate:true,
+   summary:'Defines how MSU and ACME will jointly pursue a federal solicitation: roles, data rights, and how a resulting award would be split. Because the ultimate funding is federal, OSP owns this one.',
+   terms:[['Process','Federal teaming \u00b7 6 steps \u00b7 export review added at intake'],['Owning office','OSP \u00b7 federal prime funding'],['Purpose','Joint pursuit of Q4 federal solicitation'],['Data rights','Government-purpose rights per the solicitation'],['Open point','Liability cap settled; IP \u00a74 still in negotiation']],
+   ledger:[['MAY 14','v1 \u00b7 MSU first draft','Initial terms circulated','MSU \u2192 ACME'],
+           ['MAY 27','v2 \u00b7 ACME redlines','Liability cap, IP \u00a74','ACME \u2192 MSU'],
+           ['JUN 2','v3 \u00b7 MSU response','Accepted cap language, counter on \u00a74','MSU \u2192 ACME'],
+           ['NOW','v4 \u00b7 awaiting ACME','The current turn',null]]},
+  {id:'sra', src:'SRA', name:'Sponsored research agreement \u00b7 thermal study expansion', office:'BUSINESS CONNECT \u00b7 INDUSTRY-FUNDED',
+   stages:['Intake','MSU draft','Company review','MSU final','Signature'], template:'INDUSTRY SRA', stage:2, court:'msu',
+   since:'In MSU review since Jun 9', est:'EST. LATE AUG', next:'First draft to ACME by Jun 16', canUpdate:true,
+   summary:'Funds an expansion of the thermal study with ACME as the direct industry sponsor. Industry funding means Business Connect owns the contract, and the standard MSU research terms apply.',
+   terms:[['Process','Industry SRA \u00b7 5 steps \u00b7 standard'],['Owning office','Business Connect \u00b7 industry-funded'],['Publication','30-day review, extendable up to 60 to file patents'],['IP','MSU retains; option-to-license via MSU Technologies'],['Indirect','Federally negotiated rate']],
+   ledger:[['JUN 9','Intake','Request received, drafting started','ACME \u2192 MSU'],
+           ['NEXT','v1 \u00b7 MSU draft','First draft to ACME by Jun 16',null]]}
+];
+function courtCls(c){ return c==='acme'?'cAcme':(c==='msu'?'cMsu':''); }
+function courtLabel(c){ return c==='acme'?'ACME\u2019s desk':(c==='msu'?'MSU\u2019s desk':'Complete'); }
+function courtChip(c){ return c==='acme'?'chip-turn':(c==='msu'?'chip-ok':'chip-done'); }
+
+/* ====== FOLLOW + DELIGHT + EXPORT MODULE ====== */
+var ASOF = 'June 9, 2026';
+/* in-session follow set (browser storage is unavailable in this prototype) */
+var FOLLOWS = {};
+/* activity feed seed: [key, text, meta] where key matches a followable thing */
+var ACTIVITY = [
+  ['agr:teaming', 'MSU returned <b>v3</b> of the teaming agreement', 'Jun 2 \u00b7 accepted the liability cap, countered on IP \u00a74'],
+  ['pub:adaptive', 'A paper entered <b>your review window</b>', 'Jun 2 \u00b7 "Adaptive thermal control" \u00b7 20 days left'],
+  ['agr:sra', 'The sponsored research agreement <b>reached intake</b>', 'Jun 9 \u00b7 Business Connect drafting, first draft by Jun 16'],
+  ['req:1042', 'Request <b>#1042</b> moved to in progress', 'Jun 5 \u00b7 add summer intern \u00b7 owner Business Connect'],
+  ['agr:nda', 'The mutual NDA was <b>fully executed</b>', 'Mar 2026 \u00b7 in force through March 2028 \u00b7 both teams notified', 'milestone']
+];
+
+function followBtnHTML(key, what){
+  var on = !!FOLLOWS[key];
+  return '<button class="follow'+(on?' on':'')+'" data-follow="'+key+'" aria-pressed="'+(on?'true':'false')+'">'
+    + '<svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>'
+    + '<span class="ftxt">'+(on?'Following':'Follow')+(what?'':'')+'</span></button>';
+}
+
+function toast(title, body){
+  var host = document.getElementById('toasts'); if(!host) return;
+  var t = document.createElement('div'); t.className='toast'; t.setAttribute('role','status');
+  t.innerHTML = '<span class="tk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>'
+    + '<span class="tt"><b>'+title+'</b>'+(body?'<br>'+body:'')+'</span>'
+    + '<button class="tx" aria-label="Dismiss">Dismiss</button>';
+  host.appendChild(t);
+  var kill = function(){ if(t.parentNode) t.parentNode.removeChild(t); };
+  t.querySelector('.tx').addEventListener('click', kill);
+  setTimeout(kill, 5200);
+}
+
+function toggleFollow(key, label){
+  var nowOn = !FOLLOWS[key];
+  FOLLOWS[key] = nowOn;
+  // update any follow buttons for this key on screen
+  document.querySelectorAll('[data-follow="'+key+'"]').forEach(function(b){
+    b.classList.toggle('on', nowOn);
+    b.setAttribute('aria-pressed', nowOn?'true':'false');
+    var t = b.querySelector('.ftxt'); if(t) t.textContent = nowOn?'Following':'Follow';
+  });
+  if(nowOn){
+    toast('Following ' + (label||'this thread'),
+          'Its updates move to the top of Overview and, in production, to your inbox.');
+  }
+  renderFeed();
+  renderFollowing();
+}
+
+function renderFeed(){
+  var host = document.getElementById('activityFeed'); if(!host) return;
+  // followed items first, then the rest, preserving order within each group
+  var followed = ACTIVITY.filter(function(a){ return FOLLOWS[a[0]]; });
+  var rest = ACTIVITY.filter(function(a){ return !FOLLOWS[a[0]]; });
+  var ordered = followed.concat(rest);
+  host.innerHTML = ordered.map(function(a){
+    var isF = !!FOLLOWS[a[0]];
+    var isM = a[3]==='milestone';
+    var lead = isM
+      ? '<span class="feed-ic"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>'
+      : '<span class="feed-dot"></span>';
+    return '<button class="feed-item'+(isF?' followed':'')+(isM?' milestone':'')+'" data-key="'+a[0]+'" title="Open">'
+      + lead
+      + '<span class="feed-body"><span class="ft" style="display:block">'+a[1]+'</span><span class="fm" style="display:block">'+a[2]+'</span></span>'
+      + (isF?'<span class="feed-followtag">FOLLOWING</span>':'')
+      + '</button>';
+  }).join('');
+}
+
+/* ---- export: build a governed, print-ready artifact, then print ---- */
+function govBlock(confidentiality){
+  return '<div class="exp-banner">PROTOTYPE \u2014 NOT AN OFFICIAL MSU DOCUMENT \u00b7 ILLUSTRATIVE DATA</div>'
+    + '<div class="exp-gov">'
+    + '<b>For review by parties without a workspace account.</b> This is a point-in-time snapshot exported from the MSU\u2013ACME research workspace. '
+    + 'Confidentiality basis: <b>'+confidentiality+'</b> '
+    + 'MSU\u2019s own contract and financial records may be subject to the Michigan Freedom of Information Act; this snapshot does not change what is or is not a public record. '
+    + 'Verify all terms against the executed agreement and current MSU policy.'
+    + '</div>';
+}
+function expHeader(title){
+  return '<div class="exp-mark"><span class="exp-logo">M</span><div><div class="exp-h">MSU \u00d7 ACME \u00b7 Research workspace</div>'
+    + '<div class="exp-s">'+title+'</div></div></div>';
+}
+function expFooter(){
+  return '<div class="efoot">Exported '+ASOF+' \u00b7 status as maintained by the owning office \u00b7 '
+    + 'a snapshot, not a live record \u00b7 prototype for evaluation only</div>';
+}
+
+function buildExport(key){
+  var doc = document.getElementById('exportDoc'); if(!doc) return false;
+  if(key.indexOf('agr:')===0){
+    var a = AGREEMENTS.filter(function(x){return x.id===key.slice(4);})[0]; if(!a) return false;
+    var conf = (a.id==='nda')
+      ? 'mutual NDA; treat all content as confidential.'
+      : 'company information designated confidential at the time of sharing is handled under Michigan\u2019s CRIIA.';
+    var terms = a.terms.map(function(t){ return '<div class="erow"><span class="el">'+t[0]+'</span><span>'+t[1]+'</span></div>'; }).join('');
+    var ledger = a.ledger.map(function(l){
+      var who = l[3] ? (' \u00b7 '+l[3]) : ' \u00b7 current turn';
+      return '<div class="erow"><span class="el">'+l[0]+'</span><span>'+l[1]+(l[2]?' \u2014 '+l[2]:'')+who+'</span></div>';
+    }).join('');
+    doc.innerHTML = expHeader('Agreement summary for review')
+      + govBlock(conf)
+      + '<h2>'+a.name+'</h2>'
+      + '<div class="erow"><span class="el">Owning office</span><span>'+a.office+'</span></div>'
+      + '<div class="erow"><span class="el">Status</span><span>'+courtLabel(a.court)+' \u00b7 '+a.since+'</span></div>'
+      + '<div class="erow"><span class="el">Next step</span><span>'+a.next+'</span></div>'
+      + '<p style="font-size:.85rem;margin:12px 0 0;color:#16201C">'+a.summary+'</p>'
+      + '<h3>Terms in this agreement</h3>'+terms
+      + '<h3>Turn history</h3>'+ledger
+      + expFooter();
+    return true;
+  }
+  if(key==='impact'){
+    doc.innerHTML = expHeader('Partnership review \u00b7 outcomes summary')
+      + govBlock('aggregate outcomes only; no company-confidential information is included.')
+      + '<h2>MSU \u00d7 ACME \u00b7 outcomes</h2>'
+      + '<p style="font-size:.85rem;margin:8px 0 0;color:#16201C">Prepared for internal reporting by either team. Figures cover the last three years and are maintained by the offices named on each line.</p>'
+      + '<h3>Outcomes</h3>'
+      + '<div class="erow"><span class="el">4 publications</span><span>peer-reviewed, 2 co-authored with ACME engineers \u2014 publication records</span></div>'
+      + '<div class="erow"><span class="el">3 hires</span><span>students hired by ACME from project teams \u2014 employer relations</span></div>'
+      + '<div class="erow"><span class="el">1 disclosure</span><span>invention disclosure in evaluation \u2014 MSU Technologies</span></div>'
+      + '<div class="erow"><span class="el">$2.1M cited</span><span>joint work cited in 2 federal proposals \u2014 Business Connect \u00b7 OSP</span></div>'
+      + '<h3>Upcoming (planning estimates, not commitments)</h3>'
+      + '<div class="erow"><span class="el">Jul 1</span><span>Teaming agreement target execution \u2014 keeps the Q4 federal solicitation in reach</span></div>'
+      + '<div class="erow"><span class="el">Late Aug</span><span>SRA execution \u2014 thermal study expansion begins on signature</span></div>'
+      + '<div class="erow"><span class="el">Dec</span><span>Annual partnership review \u2014 joint look at outcomes and next year</span></div>'
+      + '<div class="erow"><span class="el">Mar 2028</span><span>NDA renewal decision</span></div>'
+      + expFooter();
+    return true;
+  }
+  if(key==='digest'){
+    doc.innerHTML = expHeader('Monthly digest \u00b7 as delivered by email')
+      + govBlock('the digest contains status and dates only; documents stay in the workspace.')
+      + '<h2>MSU \u00d7 ACME \u00b7 June update</h2>'
+      + '<p style="font-size:.85rem;margin:8px 0 0;color:#16201C">Two items are with your team; everything else is moving.</p>'
+      + '<h3>With your team</h3>'
+      + '<div class="erow"><span class="el">Teaming</span><span>v4 with ACME legal, 9 days \u2014 next: return v4 \u00b7 owning office OSP</span></div>'
+      + '<div class="erow"><span class="el">One paper</span><span>"Adaptive thermal control" in your review, 20 days left \u2014 silence clears Jul 2</span></div>'
+      + '<h3>What changed</h3>'
+      + '<div class="erow"><span class="el">Jun 9</span><span>SRA reached intake \u2014 Business Connect drafting, first draft by Jun 16</span></div>'
+      + '<div class="erow"><span class="el">Jun 5</span><span>Request #1042 in progress \u2014 owner Business Connect</span></div>'
+      + '<div class="erow"><span class="el">Jun 2</span><span>MSU returned v3 of the teaming agreement</span></div>'
+      + '<h3>Upcoming (planning estimates, not commitments)</h3>'
+      + '<div class="erow"><span class="el">Jul 1</span><span>Teaming execution target</span></div>'
+      + '<div class="erow"><span class="el">Late Aug</span><span>SRA execution; expanded scope begins</span></div>'
+      + '<div class="erow"><span class="el">Dec</span><span>Annual partnership review</span></div>'
+      + expFooter();
+    return true;
+  }
+  if(key==='requests'){
+    var rows = TICKETS.map(function(k){
+      return '<div class="erow"><span class="el">#'+k.id+' \u00b7 '+k.st+'</span><span>'+k.t+' \u2014 owner '+k.own+' \u00b7 '+k.d+'</span></div>';
+    }).join('');
+    doc.innerHTML = expHeader('Request log for review')
+      + govBlock('coordination records; may reference confidential matters. Treat as need-to-know.')
+      + '<h2>Open and recent requests</h2>'+rows
+      + expFooter();
+    return true;
+  }
+  if(key==='pub'){
+    doc.innerHTML = expHeader('Publication review status')
+      + govBlock('pre-publication manuscripts are confidential until cleared.')
+      + '<h2>Publication review</h2>'
+      + '<div class="erow"><span class="el">In review</span><span>"Adaptive thermal control for high-density assemblies" \u2014 sent Jun 2, clears Jul 2 absent comment</span></div>'
+      + '<div class="erow"><span class="el">Cleared</span><span>Conference abstract, automation line balancing \u2014 cleared May 12</span></div>'
+      + '<div class="erow"><span class="el">Hold</span><span>Sensor packaging method paper \u2014 patent hold through Aug 9</span></div>'
+      + expFooter();
+    return true;
+  }
+  return false;
+}
+function doExport(key){
+  if(buildExport(key)){
+    toast('Preparing a print copy', 'Stamped with the owning office, as-of date, and confidentiality basis.');
+    setTimeout(function(){ window.print(); }, 350);
+  }
+}
+
+/* ---- tasks: same-side assignment, cross-side handoff to the group ---- */
+var ACME_PEOPLE = ['R. Chen','J. Alvarez \u00b7 legal','P. Nakamura \u00b7 engineering'];
+var TASKS = [
+  {id:'coi', t:'Certificate of insurance for the testbed site', side:'acme', assignee:'', note:'Open 12 days', st:'open'},
+  {id:'export', t:'Export determination \u00b7 Sentinel scoping', side:'msu', assignee:'K. Osei \u00b7 Export Control', note:'Due Jun 13', st:'open'}
+];
+function renderTasks(){
+  var host = document.getElementById('taskList'); if(!host) return;
+  host.innerHTML = TASKS.map(function(k){
+    var chip = k.st==='done' ? '<span class="chip chip-done">Done</span>'
+      : (k.side==='acme' ? '<span class="chip chip-turn">On ACME</span>' : '<span class="chip chip-ok">On MSU</span>');
+    var sub = k.st==='done' ? 'Completed \u00b7 both sides notified'
+      : (k.assignee ? 'Assignee: '+k.assignee : (k.side==='acme' ? 'Unassigned' : 'Assigned within MSU'));
+    var controls = '';
+    if(k.st==='open' && k.side==='acme'){
+      var opts = '<option value="">Assign to\u2026</option>' + ACME_PEOPLE.map(function(p){
+        return '<option'+(k.assignee===p?' selected':'')+'>'+p+'</option>'; }).join('');
+      controls = '<select class="sel" data-task-assign="'+k.id+'" aria-label="Assign task">'+opts+'</select>'
+        + '<button class="miniact" data-task-done="'+k.id+'">Done</button>'
+        + '<button class="miniact" data-task-hand="'+k.id+'">Hand to MSU</button>';
+    } else if(k.st==='open'){
+      controls = '<span class="tag">'+k.note+'</span>';
+    }
+    return '<div class="row"><span class="who">'+k.t+'<span class="sub">'+sub+'</span></span>'+controls+chip+'</div>';
+  }).join('');
+}
+function findTask(id){ return TASKS.filter(function(k){return k.id===id;})[0]; }
+
+/* ---- following list (Notifications view) ---- */
+var FOLLOW_DISPLAY = {'agr:nda':'Mutual NDA','agr:teaming':'Teaming agreement','agr:sra':'Sponsored research agreement',
+  'pub:adaptive':'\u201cAdaptive thermal control\u201d review window',
+  'req:1042':'Request #1042 \u00b7 add summer intern','req:1038':'Request #1038 \u00b7 badge access','req:1043':'Request #1043'};
+function renderFollowing(){
+  var host = document.getElementById('followList'); if(!host) return;
+  var keys = Object.keys(FOLLOWS).filter(function(k){ return FOLLOWS[k]; });
+  if(!keys.length){
+    host.innerHTML = '<div class="feed-empty">Not following anything yet. Follow an agreement, paper, or request to get its updates here and, in production, by email.</div>';
+    return;
+  }
+  var TYPE = function(k){ return k.indexOf('agr:')===0?'Agreement':(k.indexOf('pub:')===0?'Paper':'Request'); };
+  host.innerHTML = keys.map(function(k){
+    return '<div class="row"><span class="src">'+TYPE(k)+'</span>'
+      + '<button class="linkbtn" data-openkey="'+k+'">'+(FOLLOW_DISPLAY[k]||k)+'</button>'
+      + '<button class="miniact" data-follow="'+k+'" aria-label="Unfollow '+(FOLLOW_DISPLAY[k]||k)+'">Unfollow</button></div>';
+  }).join('');
+}
+
+/* ---- calendar file: key dates as .ics, no login needed ---- */
+function buildICS(){
+  var events = [
+    ['20260701','Teaming agreement target execution \u00b7 MSU \u00d7 ACME','Planning estimate, not a commitment. Owning office: OSP.'],
+    ['20260702','Publication review window closes \u00b7 Adaptive thermal control','Silence clears the paper on this date; raise comments before then.'],
+    ['20260825','SRA execution target \u00b7 thermal study expansion','Planning estimate. Expanded scope begins on signature. Owning office: Business Connect.'],
+    ['20261215','Annual partnership review \u00b7 MSU \u00d7 ACME','Joint look at outcomes and next year. The partnership review export feeds this.'],
+    ['20280301','NDA renewal decision \u00b7 MSU \u00d7 ACME','Current NDA runs through March 2028.']
+  ];
+  var out = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//MSU-ACME workspace prototype//EN\r\n';
+  events.forEach(function(ev,i){
+    out += 'BEGIN:VEVENT\r\nUID:msu-acme-proto-'+i+'@example.invalid\r\nDTSTAMP:20260609T120000Z\r\n'
+      + 'DTSTART;VALUE=DATE:'+ev[0]+'\r\nSUMMARY:'+ev[1]+' [PROTOTYPE]\r\n'
+      + 'DESCRIPTION:'+ev[2]+' Prototype \u2014 not an official MSU record.\r\nEND:VEVENT\r\n';
+  });
+  out += 'END:VCALENDAR\r\n';
+  return out;
+}
+function downloadICS(){
+  try{
+    var blob = new Blob([buildICS()], {type:'text/calendar'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'msu-acme-key-dates.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1200);
+    toast('Calendar file ready', 'Five key dates, each labeled a prototype.');
+  }catch(e){
+    toast('Download not available in this preview', 'In production these dates arrive as calendar invites.');
+  }
+}
+
+/* ---- copy a short, governed status snippet ---- */
+function copyText(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ toast('Copied to clipboard','Includes the prototype label.'); },
+      function(){ toast('Copy not available here','Select the text manually to copy.'); });
+  } else {
+    toast('Copy not available here','Select the text manually to copy.');
+  }
+}
+function buildSnippet(key){
+  if(key.indexOf('agr:')===0){
+    var a = AGREEMENTS.filter(function(x){return x.id===key.slice(4);})[0]; if(!a) return '';
+    return '[PROTOTYPE \u2014 not an official MSU document]\n'
+      + a.name + '\n'
+      + 'Owning office: ' + a.office + '\n'
+      + 'Status: ' + courtLabel(a.court) + ' \u00b7 ' + a.since + '\n'
+      + 'Next: ' + a.next + '\n'
+      + 'As of ' + ASOF + ' \u00b7 verify against the executed agreement.';
+  }
+  if(key==='digest'){
+    return 'Subject: MSU \u00d7 ACME \u00b7 2 items with your team \u00b7 June update\n\n'
+      + '[PROTOTYPE \u2014 not an official MSU document]\n\n'
+      + 'Two items are with your team; everything else is moving.\n\n'
+      + 'WITH YOUR TEAM\n'
+      + '\u00b7 Teaming agreement: v4 with ACME legal, 9 days. Next: return v4. Owning office: OSP.\n'
+      + '\u00b7 Paper "Adaptive thermal control": in your review, 20 days left; silence clears Jul 2.\n\n'
+      + 'WHAT CHANGED\n'
+      + '\u00b7 Jun 9: SRA reached intake; Business Connect drafting, first draft by Jun 16.\n'
+      + '\u00b7 Jun 5: Request #1042 in progress, owner Business Connect.\n'
+      + '\u00b7 Jun 2: MSU returned v3 of the teaming agreement.\n\n'
+      + 'UPCOMING (planning estimates, not commitments)\n'
+      + '\u00b7 Jul 1: teaming execution target \u00b7 Late Aug: SRA execution \u00b7 Dec: annual partnership review.\n\n'
+      + 'As of '+ASOF+'. Status and dates only; documents stay in the workspace.';
+  }
+  if(key==='impact'){
+    return '[PROTOTYPE \u2014 not an official MSU document]\n'
+      + 'MSU \u00d7 ACME \u00b7 outcomes, last three years (as of '+ASOF+'):\n'
+      + '\u00b7 4 peer-reviewed publications (2 co-authored with ACME engineers)\n'
+      + '\u00b7 3 students hired by ACME from project teams\n'
+      + '\u00b7 1 invention disclosure in evaluation\n'
+      + '\u00b7 $2.1M of joint work cited in 2 federal proposals\n'
+      + 'Sources: publication records, employer relations, MSU Technologies, Business Connect/OSP.';
+  }
+  if(key==='requests'){
+    var lines = TICKETS.map(function(k){ return '#'+k.id+' ['+k.st+'] '+k.t+' \u2014 owner '+k.own; }).join('\n');
+    return '[PROTOTYPE \u2014 not an official MSU document]\nOpen and recent requests (as of '+ASOF+'):\n'+lines;
+  }
+  return '';
+}
+
+
+/* ====== AGREEMENT TRACKER (master list) ====== */
+function renderTracker(){
+  var host = document.getElementById('agrTracker'); if(!host) return;
+  var out='';
+  AGREEMENTS.forEach(function(a){
+    var n = a.stages.length;
+    var fill = (a.court==='done') ? 94 : (6 + (a.stage-1)*(88/(n-1)));
+    var segs='';
+    for(var i=0;i<n;i++){
+      var st = (a.court==='done'||i<a.stage-1) ? 'done' : (i===a.stage-1 ? 'now' : '');
+      if(a.added===i) st += ' added';
+      segs += '<div class="tseg '+st+'"><i></i><b>'+a.stages[i]+'</b></div>';
+    }
+    out += '<div class="agr tap" tabindex="0" role="button" data-agr="'+a.id+'" aria-label="Open '+a.name+'">'
+      + '<div class="agr-top"><span class="src">'+a.src+'</span><span class="agr-name">'+a.name+'</span>'
+      + '<span class="chip '+courtChip(a.court)+'">'+courtLabel(a.court)+'</span></div>'
+      + '<div class="track '+courtCls(a.court)+'"><span class="fill" style="width:'+fill+'%"></span>'+segs+'</div>'
+      + '<div class="agr-meta">'
+      + (a.office?'<span class="agr-office">'+a.office+'</span>':'')
+      + '<span class="tag">'+a.template+'</span>'
+      + '<span class="agr-since">'+a.since+'</span>'
+      + (a.est?'<span class="agr-est">'+a.est+'</span>':'')
+      + '</div>'
+      + '<div class="agr-next">Next: <b>'+a.next+'</b> <span class="agr-open">\u00b7 open <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span></div>'
+      + '</div>';
+  });
+  host.innerHTML = out;
+}
+
+/* ====== AGREEMENT DETAIL ====== */
+function renderDetail(id){
+  var a = AGREEMENTS.filter(function(x){return x.id===id;})[0];
+  var host = document.getElementById('agrDetail'); if(!a||!host) return;
+  window.__agrTitle = a.name.split(' \u00b7 ')[0];
+  var n = a.stages.length;
+  var fill = (a.court==='done') ? 94 : (6 + (a.stage-1)*(88/(n-1)));
+  var segs='';
+  for(var i=0;i<n;i++){
+    var st = (a.court==='done'||i<a.stage-1) ? 'done' : (i===a.stage-1 ? 'now' : '');
+    if(a.added===i) st += ' added';
+    segs += '<div class="tseg '+st+'"><i></i><b>'+a.stages[i]+'</b></div>';
+  }
+  var terms = a.terms.map(function(t){
+    return '<div class="cell"><div class="k">'+t[0]+'</div><div class="v">'+t[1]+'</div></div>';
+  }).join('');
+  var ledger = a.ledger.map(function(l){
+    var dir = l[3] ? '<span class="tag">'+l[3]+'</span>' : '<span class="chip chip-turn">The current turn</span>';
+    var sub = l[2] ? '<span class="sub">'+l[2]+'</span>' : '';
+    return '<div class="row"><span class="src">'+l[0]+'</span><span class="who ver">'+l[1]+sub+'</span>'+dir+'</div>';
+  }).join('');
+  host.innerHTML =
+      '<div class="dhead"><div class="dh-main"><h2>'+a.name+'</h2><div class="dh-sub">'+a.summary+'</div></div>'
+    + '<span class="chip '+courtChip(a.court)+'">'+courtLabel(a.court)+'</span></div>'
+    + '<div class="actions">'
+    + followBtnHTML('agr:'+a.id, 'this agreement')
+    + '<button class="miniact" data-export="agr:'+a.id+'"><svg viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg> Export for review</button>'
+    + '<button class="miniact" data-copy="agr:'+a.id+'"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy status</button>'
+    + '</div>'
+    + '<div class="panel" style="margin-top:14px;padding:4px 4px 10px"><div class="agr" style="border:none">'
+    + '<div class="track '+courtCls(a.court)+'"><span class="fill" style="width:'+fill+'%"></span>'+segs+'</div>'
+    + '<div class="agr-meta">'+(a.office?'<span class="agr-office">'+a.office+'</span>':'')+'<span class="tag">'+a.template+'</span>'
+    + '<span class="agr-since">'+a.since+'</span>'+(a.est?'<span class="agr-est">'+a.est+'</span>':'')+'</div>'
+    + '<div class="agr-next">Next: <b>'+a.next+'</b></div>'
+    + (a.canUpdate?'<button class="agr-update" data-updnote>+ Add an update from your side</button>':'')
+    + '</div></div>'
+    + '<section class="sec"><div class="sec-h"><h2>Terms in this agreement</h2><span class="rule"></span></div>'
+    + '<div class="kv">'+terms+'</div></section>'
+    + '<section class="sec"><div class="sec-h"><h2>Turn history</h2><span class="rule"></span></div>'
+    + '<p class="sec-note">Every version and who held it. In production each turn carries the document itself, so both sides always know which version is real.</p>'
+    + '<div class="panel ledger">'+ledger+'</div></section>';
+}
+
+/* ====== REQUESTS ====== */
+var TICKETS = [
+  {id:1042, t:'Add summer intern to the thermal project team', st:'IN PROGRESS', own:'BUSINESS CONNECT', d:'OPENED JUN 5'},
+  {id:1038, t:'Badge access \u00b7 EB instrumentation bay', st:'DONE', own:'FACILITIES', d:'CLOSED JUN 2'}
+];
+function ticketCls(st){ return st==='DONE'?'chip-done':(st==='NEW'?'chip-wait':'chip-quiet'); }
+function renderTickets(){
+  var el = document.getElementById('ticketList'); if(!el) return;
+  el.innerHTML = '';
+  TICKETS.forEach(function(k){
+    var key='req:'+k.id, on=!!FOLLOWS[key];
+    var r = document.createElement('div'); r.className='row';
+    r.innerHTML = '<span class="src">#'+k.id+'</span>'
+      + '<span class="who">'+k.t+'<span class="sub">Owner: '+k.own+' \u00b7 '+k.d+'</span></span>'
+      + '<button class="follow sm'+(on?' on':'')+'" data-follow="'+key+'" aria-pressed="'+(on?'true':'false')+'" aria-label="Follow request '+k.id+'" title="Follow updates">'
+      + '<svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="ftxt"></span></button>'
+      + '<span class="chip '+ticketCls(k.st)+'">'+k.st+'</span>';
+    el.appendChild(r);
+  });
+}
+
+/* ====== VIEW ROUTER ====== */
+(function(){
+  var app = document.getElementById('app');
+  var h1 = document.querySelector('.topbar h1');
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav [data-view]'));
+  var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
+  var main = document.querySelector('.main');
+  var TITLES = {overview:'Overview', agreements:'Agreements', 'agreement-detail':'Agreement',
+                work:'Active work', pubs:'Publication review', requests:'Requests', email:'Notifications',
+                terms:'Standard terms', governance:'Access & records', about:'About'};
+  // which nav item highlights for a given view (detail maps to agreements)
+  var NAVFOR = {overview:'overview', agreements:'agreements', 'agreement-detail':'agreements',
+                work:'work', pubs:'pubs', requests:'requests', email:'email', terms:'terms', governance:'governance', about:'about'};
+
+  var crumb = document.querySelector('.topbar .crumb');
+  function show(view){
+    views.forEach(function(v){ v.classList.toggle('active', v.getAttribute('data-view')===view); });
+    navLinks.forEach(function(l){ l.classList.toggle('on', l.getAttribute('data-view')===NAVFOR[view]); });
+    if(h1){
+      h1.textContent = (view==='agreement-detail' && window.__agrTitle) ? window.__agrTitle : (TITLES[view] || 'Workspace');
+    }
+    if(crumb){
+      crumb.textContent = (view==='agreement-detail') ? 'Workspace \u00b7 Agreements' : 'Workspace';
+    }
+    if(main) main.scrollTop = 0;
+    if(window.scrollTo){ try{ window.scrollTo(0,0); }catch(e){} }
+  }
+
+  // nav clicks
+  navLinks.forEach(function(l){
+    l.addEventListener('click', function(e){ e.preventDefault(); show(l.getAttribute('data-view')); });
+  });
+  // any element with data-go navigates (digest items, back link)
+  document.addEventListener('click', function(e){
+    var go = e.target.closest && e.target.closest('[data-go]');
+    if(go){ e.preventDefault(); show(go.getAttribute('data-go')); }
+  });
+  // agreement row -> detail
+  function openAgr(el){ var id = el.getAttribute('data-agr'); renderDetail(id); show('agreement-detail'); }
+  document.addEventListener('click', function(e){
+    var row = e.target.closest && e.target.closest('.agr.tap');
+    if(row) openAgr(row);
+  });
+  document.addEventListener('keydown', function(e){
+    if((e.key==='Enter'||e.key===' ') && e.target.classList && e.target.classList.contains('agr') && e.target.classList.contains('tap')){
+      e.preventDefault(); openAgr(e.target);
+    }
+  });
+
+  // initial render
+  renderTracker();
+  renderTickets();
+  renderFeed();
+  renderFollowing();
+  renderTasks();
+
+  // publication review actions (follow the open window + export/copy)
+  var pubActions = document.getElementById('pubActions');
+  if(pubActions){
+    pubActions.innerHTML = followBtnHTML('pub:adaptive','')
+      + '<button class="miniact" data-export="pub"><svg viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg> Export review status</button>';
+  }
+
+  // labels for friendly toasts
+  var FOLLOW_LABELS = {'agr:nda':'the mutual NDA','agr:teaming':'the teaming agreement','agr:sra':'the sponsored research agreement','pub:adaptive':'this paper\u2019s review window','req:1042':'request #1042','req:1038':'request #1038','req:1043':'request #1043'};
+
+  // delegated handlers: follow, export, copy, feed deep-links, prototype notes
+  function goKey(k){
+    if(k.indexOf('agr:')===0){ renderDetail(k.slice(4)); show('agreement-detail'); }
+    else if(k.indexOf('pub:')===0){ show('pubs'); }
+    else if(k.indexOf('req:')===0){ show('requests'); }
+    else if(k.indexOf('task:')===0){ show('work'); }
+  }
+  document.addEventListener('click', function(e){
+    var fb = e.target.closest && e.target.closest('[data-follow]');
+    if(fb){ var k = fb.getAttribute('data-follow'); toggleFollow(k, FOLLOW_LABELS[k]); return; }
+    var ex = e.target.closest && e.target.closest('[data-export]');
+    if(ex){ doExport(ex.getAttribute('data-export')); return; }
+    var cp = e.target.closest && e.target.closest('[data-copy]');
+    if(cp){ var s = buildSnippet(cp.getAttribute('data-copy')); if(s) copyText(s); return; }
+    var ic = e.target.closest && e.target.closest('[data-ics]');
+    if(ic){ downloadICS(); return; }
+    var un = e.target.closest && e.target.closest('[data-updnote]');
+    if(un){ toast('Not wired in this prototype', 'In production this posts a note visible to both sides.'); return; }
+    var td = e.target.closest && e.target.closest('[data-task-done]');
+    if(td){
+      var k1 = findTask(td.getAttribute('data-task-done'));
+      if(k1){ k1.st='done';
+        ACTIVITY.unshift(['task:'+k1.id, 'Task completed: <b>'+k1.t+'</b>', 'Just now \u00b7 ACME']);
+        renderTasks(); renderFeed();
+        toast('Task completed', 'Both sides are notified.');
+      }
+      return;
+    }
+    var th = e.target.closest && e.target.closest('[data-task-hand]');
+    if(th){
+      var k2 = findTask(th.getAttribute('data-task-hand'));
+      if(k2){ k2.side='msu'; k2.assignee=''; k2.note='Handed today';
+        ACTIVITY.unshift(['task:'+k2.id, 'Handed to MSU: <b>'+k2.t+'</b>', 'Just now \u00b7 MSU\u2019s participants alerted']);
+        renderTasks(); renderFeed();
+        toast('Handed to MSU', 'MSU\u2019s participants are alerted; they assign it within MSU.');
+      }
+      return;
+    }
+    var ok2 = e.target.closest && e.target.closest('[data-openkey]');
+    if(ok2){ goKey(ok2.getAttribute('data-openkey')); return; }
+    var fi = e.target.closest && e.target.closest('.feed-item[data-key]');
+    if(fi){ goKey(fi.getAttribute('data-key')); return; }
+  });
+
+  document.getElementById('tOpen').onclick = function(){
+    var d = document.getElementById('tDesc');
+    var txt = d.value.trim(); if(!txt) return;
+    TICKETS.unshift({id:1043, t:document.getElementById('tType').value+' \u00b7 '+txt, st:'NEW', own:'ASSIGNING', d:'OPENED JUN 9'});
+    d.value=''; renderTickets();
+    toast('Request opened', 'A named owner is assigned within two business days.');
+  };
+  show('overview');
+
+  // expose for the drawer-close handler
+  window.__show = show;
+})();
+
+/* ====== RAIL: collapse on desktop, drawer on mobile ====== */
+(function(){
+  var app = document.getElementById('app');
+  var btn = document.getElementById('railToggle');
+  var scrim = document.getElementById('scrim');
+  var MOBILE = function(){
+    if(window.matchMedia){ return window.matchMedia('(max-width:880px)').matches; }
+    return window.innerWidth <= 880;
+  };
+  function setExpanded(isOpen){ btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false'); }
+  function toggle(){
+    if(MOBILE()){
+      var open = app.classList.toggle('draweropen');
+      setExpanded(open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    } else {
+      var closed = app.classList.toggle('railclosed');
+      setExpanded(!closed);
+    }
+  }
+  function closeDrawer(){
+    if(app.classList.contains('draweropen')){
+      app.classList.remove('draweropen');
+      setExpanded(false);
+      document.body.style.overflow = '';
+    }
+  }
+  btn.addEventListener('click', toggle);
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('change', function(e){
+    var sel = e.target.closest && e.target.closest('[data-task-assign]');
+    if(sel){
+      var k = findTask(sel.getAttribute('data-task-assign'));
+      if(k && sel.value){ k.assignee = sel.value; renderTasks();
+        toast('Assigned to '+sel.value, 'Visible to both sides; assignment stays within ACME.');
+      }
+    }
+  });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeDrawer(); });
+  document.querySelectorAll('.nav a,.nav button,.rail-foot [data-go]').forEach(function(a){
+    a.addEventListener('click', function(){ if(MOBILE()) closeDrawer(); });
+  });
+  var wasMobile = MOBILE();
+  window.addEventListener('resize', function(){
+    var nowMobile = MOBILE();
+    if(nowMobile !== wasMobile){
+      app.classList.remove('draweropen','railclosed');
+      document.body.style.overflow = '';
+      setExpanded(true);
+      wasMobile = nowMobile;
+    }
+  });
+})();
+
+</script>
+</body>
+</html>
