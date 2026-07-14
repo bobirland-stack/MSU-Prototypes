@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spartan Impact — Interactive Demo</title>
+<style>
+/* ============================================================
+   SPARTAN IMPACT — Unified interactive demo (single app).
+   One hub, real navigation, multiple donors & gifts.
+   Two worlds: INTERNAL (Teams feed + rollup) and
+   EXTERNAL (donor gallery -> individual donor pages).
+   Everything is data-driven from the DONORS array so
+   "multiple records" is real depth, not hardcoded scenes.
+   Palette + type reused from the standalone mocks so the
+   family reads as one system.
+   ============================================================ */
+:root{
+  --stone-050:#f6f5f2;--stone-100:#ecebe6;--stone-200:#dcdad2;--stone-400:#a8a599;--stone-600:#6b6a61;
+  --ink:#21201b;--pine:#0e2e21;--spartan:#18453B;--spartan-lift:#1f5a4c;
+  --bronze:#8a6d3b;--bronze-lift:#a9884f;--paper:#fbfaf7;--gold-wash:#f3ecdc;--wash:#eef4f1;
+  --teams-purple:#5b5fc7;--good:#237b4b;
+  --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --sans:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --rule:1px solid var(--stone-200);
+  --gutter:clamp(1.1rem,4vw,3.25rem);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;}}
+body{font-family:var(--serif);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+.sans{font-family:var(--sans);}
+button{font-family:inherit;cursor:pointer;}
+.hidden{display:none!important;}
+
+/* ---------------- Global top nav ---------------- */
+.topnav{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:2px solid var(--spartan);}
+.topnav .inner{max-width:1180px;margin:0 auto;padding:0.7rem var(--gutter);display:flex;align-items:center;gap:1rem;}
+.brand-mark{display:flex;align-items:baseline;gap:0.55rem;cursor:pointer;background:none;border:none;padding:0;}
+.brand-mark .msu{font-family:var(--sans);font-weight:800;color:var(--spartan);font-size:1rem;letter-spacing:0.01em;}
+.brand-mark .dot{color:var(--stone-400);}
+.brand-mark .prod{font-family:var(--sans);letter-spacing:0.14em;text-transform:uppercase;font-size:0.72rem;color:var(--stone-600);}
+.nav-tabs{margin-left:auto;display:flex;gap:0.35rem;}
+.nav-tab{font-family:var(--sans);font-size:0.82rem;font-weight:600;color:var(--stone-600);background:none;border:1px solid transparent;border-radius:7px;padding:0.4rem 0.85rem;}
+.nav-tab:hover{background:var(--stone-100);}
+.nav-tab.active{background:var(--spartan);color:#fff;}
+@media (max-width:620px){.nav-tab{padding:0.35rem 0.6rem;font-size:0.76rem;}.brand-mark .prod{display:none;}}
+
+/* persistent disclaimer bar — unmissable, always on top */
+.disclaimer-bar{background:#2b2a26;color:#f1efe9;font-family:var(--sans);font-size:0.74rem;line-height:1.4;text-align:center;padding:0.5rem 1rem;letter-spacing:0.01em;position:relative;z-index:120;}
+.disclaimer-bar b{color:#f6d68a;font-weight:700;}
+.disclaimer-bar .sep{opacity:0.4;margin:0 0.5rem;}
+@media (max-width:620px){.disclaimer-bar{font-size:0.68rem;padding:0.45rem 0.8rem;}.disclaimer-bar .sep{display:none;}.disclaimer-bar .m2{display:block;margin-top:0.15rem;}}
+
+/* concept badge in masthead */
+.concept-badge{font-family:var(--sans);font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--bronze);background:var(--gold-wash);border:1px solid #e6d6b8;border-radius:4px;padding:0.15rem 0.4rem;margin-left:0.5rem;}
+@media (max-width:620px){.concept-badge{display:none;}}
+
+/* generic view padding */
+.view{max-width:1180px;margin:0 auto;padding:var(--gutter);}
+.view-wide{max-width:100%;padding:0;}
+
+/* ================= HOME ================= */
+.home-hero{background:radial-gradient(120% 100% at 75% 0%,#2a5749 0%,#16382c 45%,#0c261c 100%);color:#fff;position:relative;overflow:hidden;}
+.home-hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(80% 80% at 70% 15%,#000,transparent 72%);}
+.home-hero .inner{position:relative;max-width:1180px;margin:0 auto;padding:clamp(3rem,8vw,6rem) var(--gutter);}
+.home-hero .eyebrow{font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--bronze-lift);}
+.home-hero h1{font-size:clamp(2rem,5vw,3.6rem);line-height:1.05;font-weight:500;letter-spacing:-0.015em;margin-top:0.9rem;max-width:20ch;text-wrap:balance;}
+.home-hero h1 em{font-style:italic;color:#e9dcc0;}
+.home-hero .lede{margin-top:1.3rem;max-width:52ch;font-size:1.1rem;color:rgba(255,255,255,0.84);}
+.home-hero .one-idea{margin-top:1.8rem;font-family:var(--sans);font-size:0.86rem;color:rgba(255,255,255,0.7);border-left:2px solid var(--bronze-lift);padding-left:1rem;max-width:48ch;line-height:1.6;}
+
+.paths{max-width:1180px;margin:0 auto;padding:clamp(2rem,5vw,3.5rem) var(--gutter);display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+@media (max-width:780px){.paths{grid-template-columns:1fr;}}
+
+/* origin -> two outcomes flow */
+.origin-flow{grid-column:1/-1;display:grid;grid-template-columns:auto auto 1fr;gap:1rem;align-items:center;padding:1.4rem 1.5rem;background:#fff;border:var(--rule);border-radius:12px;margin-bottom:-0.5rem;}
+@media (max-width:820px){.origin-flow{grid-template-columns:1fr;gap:0.8rem;}.of-split{transform:rotate(90deg);justify-self:center;}}
+.of-node{border-radius:9px;padding:0.9rem 1.1rem;}
+.of-node.origin{background:var(--stone-050);border:var(--rule);min-width:200px;}
+.of-k{font-family:var(--sans);font-size:0.64rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--bronze);}
+.of-v{font-size:1.05rem;font-weight:600;margin-top:0.25rem;color:var(--pine);}
+.of-d{font-family:var(--sans);font-size:0.74rem;color:var(--stone-600);margin-top:0.2rem;}
+.of-split{display:flex;align-items:center;justify-content:center;}
+.of-arrow{font-size:1.4rem;color:var(--bronze-lift);}
+.of-outs{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;}
+@media (max-width:560px){.of-outs{grid-template-columns:1fr;}}
+.of-node.out{color:#fff;}
+.of-node.internal-node{background:linear-gradient(135deg,var(--teams-purple),#4044a8);}
+.of-node.external-node{background:linear-gradient(135deg,var(--spartan),var(--spartan-lift));}
+.of-node.out .of-k{color:rgba(255,255,255,0.8);}
+.of-node.out .of-v{color:#fff;}
+.of-node.out .of-d{color:rgba(255,255,255,0.85);}
+.path{border:var(--rule);border-radius:12px;overflow:hidden;background:#fff;text-align:left;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;}
+.path:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(24,69,59,0.12);}
+.path .band{padding:1.4rem 1.5rem;color:#fff;}
+.path.internal .band{background:linear-gradient(120deg,var(--teams-purple),#4044a8);}
+.path.external .band{background:linear-gradient(120deg,var(--spartan),var(--spartan-lift));}
+.path .band .k{font-family:var(--sans);font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;opacity:0.9;}
+.path .band .t{font-size:1.5rem;font-weight:500;margin-top:0.3rem;}
+.path .body{padding:1.4rem 1.5rem;flex:1;display:flex;flex-direction:column;gap:0.7rem;}
+.path .body p{font-size:0.98rem;color:var(--stone-600);}
+.path .body ul{list-style:none;display:flex;flex-direction:column;gap:0.4rem;margin-top:0.2rem;}
+.path .body li{font-family:var(--sans);font-size:0.84rem;color:var(--ink);padding-left:1.2rem;position:relative;}
+.path .body li::before{content:"→";position:absolute;left:0;color:var(--bronze);}
+.path .go{margin-top:auto;font-family:var(--sans);font-weight:700;font-size:0.86rem;color:var(--spartan);display:inline-flex;align-items:center;gap:0.4rem;padding-top:0.6rem;}
+.path.internal .go{color:var(--teams-purple);}
+
+.home-note{max-width:1180px;margin:0 auto 3rem;padding:0 var(--gutter);}
+.home-note .card{background:var(--stone-050);border:var(--rule);border-radius:10px;padding:1.1rem 1.3rem;font-family:var(--sans);font-size:0.82rem;color:var(--stone-600);line-height:1.6;}
+.home-note .card b{color:var(--ink);}
+
+/* ================= INTERNAL: sub-nav ================= */
+.subnav{background:var(--stone-050);border-bottom:var(--rule);}
+.subnav .inner{max-width:1180px;margin:0 auto;padding:0.5rem var(--gutter);display:flex;gap:0.4rem;align-items:center;}
+.subnav .lbl{font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--stone-400);margin-right:0.4rem;}
+.subtab{font-family:var(--sans);font-size:0.8rem;font-weight:600;color:var(--stone-600);background:#fff;border:var(--rule);border-radius:6px;padding:0.35rem 0.75rem;}
+.subtab.active{background:var(--spartan);color:#fff;border-color:var(--spartan);}
+
+/* ===== Teams mock ===== */
+.teams{max-width:920px;margin:1.5rem auto;background:#f5f5f5;border-radius:10px;box-shadow:0 14px 40px rgba(30,30,50,.18);overflow:hidden;border:1px solid #cfcfd8;}
+.teams-top{height:42px;background:var(--teams-purple);display:flex;align-items:center;gap:0.5rem;padding:0 0.9rem;color:#fff;}
+.teams-top .dots{display:flex;gap:5px;}
+.teams-top .dots span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);}
+.teams-top .search{flex:1;max-width:340px;margin:0 auto;height:24px;border-radius:5px;background:rgba(255,255,255,.22);display:flex;align-items:center;padding:0 0.6rem;font-size:0.74rem;color:rgba(255,255,255,.85);font-family:var(--sans);}
+.teams-body{display:grid;grid-template-columns:190px 1fr;min-height:560px;}
+@media (max-width:640px){.teams-body{grid-template-columns:1fr;}.t-rail{display:none;}}
+.t-rail{background:#ebebeb;border-right:1px solid #dcdce0;padding:0.8rem 0.55rem;font-family:var(--sans);}
+.t-rail .rh{font-size:0.7rem;font-weight:700;color:var(--stone-600);text-transform:uppercase;letter-spacing:0.06em;padding:0.3rem 0.5rem 0.5rem;}
+.t-chan{display:flex;align-items:center;gap:0.45rem;padding:0.4rem 0.5rem;border-radius:5px;font-size:0.82rem;color:var(--ink);}
+.t-chan .h{color:var(--stone-600);font-weight:700;}
+.t-chan.active{background:#fff;font-weight:600;box-shadow:inset 2px 0 0 var(--teams-purple);}
+.t-chan.muted{color:var(--stone-600);}
+.t-chan .badge{margin-left:auto;background:var(--teams-purple);color:#fff;font-size:0.62rem;font-weight:700;border-radius:999px;padding:0.02rem 0.38rem;}
+.t-main{background:#fff;display:flex;flex-direction:column;}
+.t-head{padding:0.75rem 1.1rem;border-bottom:1px solid #e0e0e0;font-family:var(--sans);}
+.t-head .t{font-size:0.98rem;font-weight:700;display:flex;align-items:center;gap:0.4rem;}
+.t-head .t .h{color:var(--stone-600);}
+.t-head .s{font-size:0.74rem;color:var(--stone-600);margin-top:0.1rem;}
+.t-feed{padding:1rem;display:flex;flex-direction:column;gap:0.9rem;font-family:var(--sans);}
+.t-sys{display:flex;gap:0.65rem;align-items:flex-start;}
+.si-av{width:32px;height:32px;border-radius:7px;flex:none;background:linear-gradient(135deg,var(--spartan),var(--spartan-lift));display:grid;place-items:center;color:#fff;font-weight:800;font-size:0.66rem;}
+.t-sys .meta{font-size:0.78rem;color:var(--stone-600);}
+.t-sys .meta b{color:var(--ink);font-weight:600;}
+.t-sys .meta .apptag{background:#eef;color:var(--teams-purple);font-weight:700;font-size:0.6rem;padding:0.02rem 0.32rem;border-radius:3px;margin-left:0.3rem;text-transform:uppercase;}
+
+/* adaptive card (generated per gift) */
+.acard{background:#fff;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;max-width:540px;box-shadow:0 1px 2px rgba(0,0,0,.05);}
+.acard.pending{border:1px dashed var(--bronze-lift);}
+.acard .draft{background:#faf4e8;border-bottom:1px solid #ecdcbf;padding:0.4rem 1.05rem;font-size:0.66rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--bronze);}
+.acard.posted .draft{display:none;}
+.acard .abanner{padding:0.85rem 1.05rem 0.95rem;color:#fff;position:relative;overflow:hidden;background:linear-gradient(120deg,var(--spartan),var(--spartan-lift));}
+.acard .abanner.capital{background:linear-gradient(120deg,#3a3d8f,#5b5fc7);} /* subtle variety by type */
+.acard .abanner::after{content:"";position:absolute;right:-30px;top:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%);}
+.acard .kick{font-size:0.64rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--bronze-lift);}
+.acard .impact{font-size:1.16rem;line-height:1.3;font-weight:600;margin-top:0.45rem;position:relative;z-index:1;text-wrap:balance;}
+.acard .impact .hl{color:#f3e6c8;}
+.acard .abody{padding:0.9rem 1.05rem 0.4rem;}
+.acard .row2{display:flex;flex-wrap:wrap;gap:0.4rem 1.5rem;margin-bottom:0.8rem;}
+.acard .kv .k{font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--stone-600);}
+.acard .kv .v{font-size:0.9rem;margin-top:0.08rem;}
+.acard .kv .v.amt{font-weight:600;}
+.acard .kv .v .note{font-weight:400;color:var(--stone-600);font-size:0.7rem;}
+.acard .tl{display:flex;align-items:center;gap:0.5rem;margin:0.1rem 0 0.8rem;}
+.acard .tchip{display:inline-flex;align-items:center;gap:0.32rem;font-size:0.64rem;font-weight:600;padding:0.16rem 0.48rem;border-radius:999px;}
+.acard .tchip.t1{background:#e7f0ec;color:#1c5544;border:1px solid #cadfd6;}
+.acard .tchip.t2{background:#f0ecdf;color:#6b5620;border:1px solid #e0d6bd;}
+.acard .tchip .d{width:6px;height:6px;border-radius:50%;}
+.acard .tchip.t1 .d{background:#2f8163;}.acard .tchip.t2 .d{background:var(--bronze-lift);}
+.acard .how{font-family:var(--sans);font-size:0.72rem;font-weight:600;color:var(--teams-purple);text-decoration:none;background:#eef;border:1px solid #dcdcf5;border-radius:999px;padding:0.18rem 0.6rem;transition:background .15s;}
+.acard .how:hover{background:#e2e2fb;text-decoration:none;}
+.acard .fr{display:flex;align-items:center;gap:0.6rem;padding:0.65rem 0;border-top:1px solid #e0e0e0;}
+.acard .fr .pf{width:28px;height:28px;border-radius:50%;flex:none;background:linear-gradient(135deg,#7a86c9,#5b5fc7);color:#fff;display:grid;place-items:center;font-weight:700;font-size:0.7rem;}
+.acard .fr .fn{font-size:0.84rem;font-weight:600;}
+.acard .fr .role{font-size:0.7rem;color:var(--stone-600);}
+.acard .fr .ms{margin-left:auto;font-size:0.66rem;font-weight:600;color:var(--spartan);background:#e7f0ec;border:1px solid #cadfd6;border-radius:999px;padding:0.15rem 0.5rem;}
+.acard .appr{background:#faf9f5;border-top:1px solid #e0e0e0;padding:0.65rem 1.05rem;display:flex;align-items:center;gap:0.55rem;flex-wrap:wrap;}
+.acard .appr.approved{background:#f1f7f3;}
+.acard .appr .st{font-size:0.72rem;font-weight:600;display:flex;align-items:center;gap:0.35rem;color:var(--bronze);}
+.acard .appr .st.ok{color:var(--good);}
+.acard .appr .by{font-size:0.7rem;color:var(--stone-600);}
+.acard .appr .acts{margin-left:auto;display:flex;gap:0.4rem;}
+.mini-btn{font-family:var(--sans);font-size:0.74rem;font-weight:600;border-radius:5px;padding:0.35rem 0.7rem;border:1px solid #e0e0e0;background:#fff;color:var(--ink);}
+.mini-btn.primary{background:var(--teams-purple);border-color:var(--teams-purple);color:#fff;}
+.rxrow{display:flex;gap:0.35rem;padding:0.4rem 0 0 3.6rem;}
+.rx{font-size:0.7rem;background:#f0f0f4;border:1px solid #e2e2ea;border-radius:999px;padding:0.12rem 0.48rem;color:#444;font-family:var(--sans);}
+.rx b{color:var(--ink);}
+
+.teamsnote{max-width:920px;margin:0 auto 2rem;font-family:var(--sans);font-size:0.78rem;color:var(--stone-600);text-align:center;background:#fff;border:var(--rule);border-radius:8px;padding:0.85rem 1.1rem;line-height:1.6;}
+.teamsnote b{color:var(--ink);}
+
+/* ===== Rollup (dashboard) ===== */
+.rollup-wrap{max-width:1120px;margin:1.5rem auto;padding:0 var(--gutter);}
+.rollup-banner{background:#faf4e8;border:1px solid #ecdcbf;border-radius:10px;color:#6b5620;font-family:var(--sans);font-size:0.78rem;text-align:center;padding:0.6rem 1rem;line-height:1.5;margin-bottom:1rem;}
+.rollup-banner b{color:#4a3c16;}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin-bottom:1rem;}
+@media (max-width:820px){.kpis{grid-template-columns:1fr 1fr;}}
+.kpi{background:#fff;border:var(--rule);border-radius:8px;padding:1rem 1.1rem;font-family:var(--sans);}
+.kpi.hero{background:linear-gradient(155deg,var(--spartan),var(--spartan-lift));color:#fff;border:none;}
+.kpi .lab{font-size:0.7rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--stone-600);font-weight:600;}
+.kpi.hero .lab{color:rgba(255,255,255,.85);}
+.kpi .val{font-size:2.1rem;font-weight:700;letter-spacing:-0.02em;line-height:1.05;margin-top:0.25rem;}
+.kpi .val small{font-size:0.95rem;font-weight:500;color:var(--stone-600);}
+.kpi.hero .val small{color:rgba(255,255,255,.8);}
+.kpi .delta{font-size:0.74rem;margin-top:0.3rem;color:var(--good);font-weight:600;}
+.kpi.hero .delta{color:#a9e9c3;}
+.kpi .sub{font-size:0.74rem;color:var(--stone-600);margin-top:0.3rem;}
+.kpi.hero .sub{color:rgba(255,255,255,.8);}
+.rgrid{display:grid;grid-template-columns:1.5fr 1fr;gap:0.8rem;}
+@media (max-width:900px){.rgrid{grid-template-columns:1fr;}}
+.rcard{background:#fff;border:var(--rule);border-radius:8px;padding:1rem 1.1rem;font-family:var(--sans);}
+.rcard+.rcard{margin-top:0.8rem;}
+.rcard h3{font-size:0.92rem;font-weight:600;margin-bottom:0.1rem;}
+.rcard .hint{font-size:0.74rem;color:var(--stone-600);margin-bottom:0.8rem;}
+.bars{display:flex;flex-direction:column;gap:0.65rem;}
+.brow{display:grid;grid-template-columns:120px 1fr 58px;gap:0.65rem;align-items:center;}
+.brow .bl{font-size:0.8rem;}
+.btrack{height:20px;background:var(--wash);border-radius:5px;overflow:hidden;}
+.bfill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--spartan),var(--spartan-lift));}
+.bfill.b2{background:linear-gradient(90deg,var(--bronze),var(--bronze-lift));}
+.bfill.b3{background:linear-gradient(90deg,#3a6f5f,#4f8a78);}
+.bval{font-size:0.8rem;font-weight:600;text-align:right;}
+.goal{margin-top:0.2rem;}
+.goal .gt{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.45rem;}
+.goal .gt .l{font-size:0.8rem;color:var(--stone-600);}
+.goal .gt .c{font-size:1.1rem;font-weight:700;color:var(--spartan);}
+.goal .gt .c small{color:var(--stone-600);font-weight:500;font-size:0.78rem;}
+.gtrack{height:13px;background:var(--wash);border-radius:8px;overflow:hidden;}
+.gfill{height:100%;background:linear-gradient(90deg,var(--spartan),var(--spartan-lift));border-radius:8px;}
+.gmarks{display:flex;justify-content:space-between;margin-top:0.3rem;font-size:0.66rem;color:var(--stone-400);}
+.mslist{display:flex;flex-direction:column;}
+.msrow{display:flex;gap:0.7rem;padding:0.65rem 0;border-bottom:1px solid #e0e0e0;align-items:flex-start;}
+.msrow:last-child{border-bottom:none;}
+.msrow .ic{width:28px;height:28px;border-radius:7px;flex:none;display:grid;place-items:center;font-size:0.85rem;}
+.msrow .ic.gold{background:#f4ecd9;}.msrow .ic.green{background:var(--wash);}
+.msrow .b .t{font-size:0.84rem;line-height:1.35;}
+.msrow .b .m{font-size:0.7rem;color:var(--stone-600);margin-top:0.12rem;}
+.msrow .tag{margin-left:auto;font-size:0.64rem;font-weight:600;color:var(--spartan);background:var(--wash);border:1px solid #cfe0d9;border-radius:999px;padding:0.12rem 0.48rem;white-space:nowrap;}
+.rfoot{margin-top:1rem;font-family:var(--sans);font-size:0.72rem;color:var(--stone-600);line-height:1.6;background:#fff;border:var(--rule);border-radius:8px;padding:0.8rem 1rem;}
+.rfoot b{color:var(--ink);}
+
+/* ================= EXTERNAL: donor gallery ================= */
+.gal-head{padding:clamp(2rem,5vw,3rem) var(--gutter) 1.5rem;max-width:1180px;margin:0 auto;}
+.gal-head .eyebrow{font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--bronze);}
+.gal-head h2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:500;letter-spacing:-0.01em;margin-top:0.6rem;}
+.gal-head p{margin-top:0.8rem;max-width:60ch;font-size:1.05rem;color:var(--stone-600);}
+.gal-grid{max-width:1180px;margin:0 auto;padding:0 var(--gutter) 3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+@media (max-width:900px){.gal-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:600px){.gal-grid{grid-template-columns:1fr;}}
+.dcard{border:var(--rule);border-radius:12px;overflow:hidden;background:#fff;text-align:left;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s;}
+.dcard:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(24,69,59,0.12);}
+.dcard .dc-top{padding:1.2rem 1.3rem;color:#fff;position:relative;overflow:hidden;min-height:118px;display:flex;flex-direction:column;justify-content:flex-end;}
+.dcard .dc-top::after{content:"";position:absolute;right:-24px;top:-24px;width:110px;height:110px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);}
+.dcard .dc-type{font-family:var(--sans);font-size:0.64rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;opacity:0.9;position:relative;z-index:1;}
+.dcard .dc-name{font-size:1.3rem;font-weight:500;margin-top:0.25rem;position:relative;z-index:1;}
+.dcard .dc-body{padding:1.1rem 1.3rem;flex:1;display:flex;flex-direction:column;gap:0.6rem;}
+.dcard .dc-impact{font-size:0.98rem;color:var(--ink);line-height:1.4;}
+.dcard .dc-impact b{color:var(--spartan);}
+.dcard .dc-stats{display:flex;gap:1.1rem;margin-top:0.2rem;flex-wrap:wrap;}
+.dcard .dc-stat .n{font-size:1.25rem;font-weight:600;color:var(--pine);line-height:1;}
+.dcard .dc-stat .l{font-family:var(--sans);font-size:0.66rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--stone-600);margin-top:0.2rem;}
+.dcard .dc-go{margin-top:auto;font-family:var(--sans);font-weight:700;font-size:0.82rem;color:var(--spartan);display:inline-flex;align-items:center;gap:0.4rem;padding-top:0.6rem;border-top:var(--rule);}
+.dcard .dc-posture{font-family:var(--sans);font-size:0.66rem;color:var(--stone-400);}
+
+/* individual donor page rendered into #donorPage */
+.dp{max-width:100%;}
+.dp-back{max-width:1080px;margin:0 auto;padding:1rem var(--gutter) 0;}
+.dp-back button{font-family:var(--sans);font-size:0.82rem;font-weight:600;color:var(--spartan);background:none;border:none;display:inline-flex;align-items:center;gap:0.4rem;}
+.dp-back button:hover{text-decoration:underline;}
+
+.dp-hero{position:relative;overflow:hidden;margin-top:1rem;}
+.dp-hero.capital{background:linear-gradient(180deg,rgba(14,46,33,0) 0%,rgba(14,46,33,.5) 60%,rgba(14,46,33,.92) 100%),radial-gradient(120% 90% at 70% 10%,#2a5749,#16382c 46%,#0c261c);color:#fff;}
+.dp-hero.capital::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(80% 70% at 72% 20%,#000,transparent 72%);}
+.dp-hero.scholarship{background:linear-gradient(180deg,#fbfaf7,#f4efe4);border-bottom:var(--rule);}
+.dp-hero .inner{position:relative;max-width:1080px;margin:0 auto;padding:clamp(2.6rem,7vw,5rem) var(--gutter);}
+.dp-hero.scholarship .inner{display:grid;grid-template-columns:1.25fr 0.75fr;gap:clamp(1.5rem,4vw,3rem);align-items:center;}
+@media (max-width:780px){.dp-hero.scholarship .inner{grid-template-columns:1fr;}}
+.dp-hero .eyebrow{font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;}
+.dp-hero.capital .eyebrow{color:var(--bronze-lift);}
+.dp-hero.scholarship .eyebrow{color:var(--bronze);}
+.dp-hero h1{font-size:clamp(1.9rem,4.6vw,3.3rem);line-height:1.06;font-weight:500;letter-spacing:-0.015em;margin-top:0.85rem;text-wrap:balance;}
+.dp-hero.capital h1{max-width:20ch;}
+.dp-hero h1 em{font-style:italic;}
+.dp-hero.capital h1 em{color:#e9dcc0;}
+.dp-hero.scholarship h1 em{color:var(--spartan);}
+.dp-hero .sub{margin-top:1.2rem;max-width:44ch;font-size:1.06rem;}
+.dp-hero.capital .sub{color:rgba(255,255,255,.82);}
+.dp-hero.scholarship .sub{color:var(--stone-600);}
+.dp-hero .metarow{margin-top:2rem;display:flex;flex-wrap:wrap;gap:1.5rem 3rem;}
+.dp-hero.capital .metarow{border-top:1px solid rgba(255,255,255,.16);padding-top:1.4rem;}
+.dp-hero .metarow .st .n{font-size:1.7rem;font-weight:600;line-height:1;}
+.dp-hero .metarow .st .l{font-family:var(--sans);font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.4rem;}
+.dp-hero.capital .metarow .st .l{color:rgba(255,255,255,.7);}
+.dp-hero.scholarship .metarow .st .l{color:var(--stone-600);}
+.dp-hero.scholarship .metarow .st .n{color:var(--pine);}
+
+/* engine ring for scholarship hero */
+.ring-wrap{display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
+.ring{position:relative;width:190px;height:190px;border-radius:50%;background:conic-gradient(from -90deg,var(--spartan) 0deg 62deg,#fff 62deg 68deg,var(--spartan-lift) 68deg 152deg,#fff 152deg 158deg,var(--spartan) 158deg 242deg,#fff 242deg 248deg,var(--spartan-lift) 248deg 332deg,#fff 332deg 338deg,var(--spartan) 338deg 360deg);display:grid;place-items:center;box-shadow:0 16px 36px rgba(24,69,59,.22),inset 0 0 0 9px rgba(255,255,255,.9),inset 0 0 0 10px var(--stone-200);}
+.ring::before{content:"";position:absolute;inset:24px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fff,#f6f2e8);}
+.ring .inn{position:relative;z-index:1;text-align:center;}
+.ring .inn .big{font-size:2.4rem;font-weight:600;color:var(--spartan);line-height:1;}
+.ring .inn .sm{font-family:var(--sans);font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--bronze);margin-top:0.3rem;}
+.ring-wrap .cap{font-family:var(--sans);font-size:0.74rem;color:var(--stone-600);}
+
+.dp-sec{padding:clamp(2.5rem,6vw,4.5rem) 0;}
+.dp-sec .inner{max-width:1080px;margin:0 auto;padding-inline:var(--gutter);}
+.dp-sec.dark{background:var(--pine);color:#fff;}
+.dp-sec.stone{background:var(--stone-050);border-block:var(--rule);}
+.sh{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;}
+.sh .num{font-family:var(--sans);font-weight:700;font-size:0.8rem;letter-spacing:0.1em;color:var(--bronze);border:1px solid var(--stone-200);border-radius:999px;padding:0.25rem 0.7rem;}
+.dp-sec.dark .sh .num{border-color:rgba(255,255,255,.25);color:var(--bronze-lift);}
+.sh h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:500;letter-spacing:-0.01em;line-height:1.1;}
+.dp-sec.dark h2{color:#fff;}
+
+/* tier legend + metrics (shared) */
+.tleg{display:flex;flex-wrap:wrap;gap:0.5rem 1.3rem;align-items:center;margin-bottom:1.6rem;padding:0.7rem 0.9rem;background:#fff;border:var(--rule);border-radius:6px;font-family:var(--sans);font-size:0.75rem;color:var(--stone-600);}
+.tleg .lw{font-weight:600;color:var(--ink);}
+.tleg .it{display:inline-flex;align-items:center;gap:0.4rem;}
+.tleg .d{width:8px;height:8px;border-radius:50%;}
+.tleg .hint{margin-left:auto;font-style:italic;color:var(--stone-400);}
+@media (max-width:620px){.tleg .hint{margin-left:0;flex-basis:100%;}}
+.mrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+@media (max-width:780px){.mrow{grid-template-columns:1fr;}}
+.metric{background:#fff;border:var(--rule);border-radius:8px;padding:1.4rem 1.3rem 1.1rem;display:flex;flex-direction:column;gap:0.5rem;}
+.metric.feature{background:linear-gradient(160deg,var(--spartan),var(--spartan-lift));color:#fff;border:none;}
+.metric .frame{font-family:var(--sans);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--bronze);}
+.metric.feature .frame{color:var(--gold-wash);}
+.metric .n{font-size:2.7rem;font-weight:600;letter-spacing:-0.02em;line-height:0.95;color:var(--pine);}
+.metric.feature .n{color:#fff;}
+.metric .n small{font-size:1.05rem;font-weight:500;color:var(--stone-600);}
+.metric.feature .n small{color:var(--gold-wash);}
+.metric .cap{font-size:0.98rem;}
+.metric.feature .cap{color:rgba(255,255,255,.9);}
+.tier{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--sans);font-size:0.68rem;letter-spacing:0.03em;padding:0.2rem 0.55rem;border-radius:999px;border:1px solid transparent;cursor:pointer;user-select:none;margin-top:0.2rem;align-self:flex-start;background:none;}
+.tier .d{width:7px;height:7px;border-radius:50%;}
+.tier .car{font-size:0.6rem;opacity:0.7;transition:transform .2s;display:inline-block;}
+.tier[aria-expanded="true"] .car{transform:rotate(90deg);}
+.tier.t1{background:#e7f0ec;color:#1c5544;border-color:#cadfd6;}.tier.t1 .d{background:#2f8163;}
+.tier.t1.dk{background:rgba(255,255,255,.16);color:#eaf5ef;border-color:rgba(255,255,255,.3);}.tier.t1.dk .d{background:#7fce9f;}
+.tier.t2{background:#f0ecdf;color:#6b5620;border-color:#e0d6bd;}.tier.t2 .d{background:var(--bronze-lift);}
+.tier.t3{background:#efece9;color:#6b6a61;border-color:var(--stone-200);}.tier.t3 .d{background:var(--stone-400);}
+.method{font-family:var(--sans);font-size:0.82rem;line-height:1.55;color:var(--stone-600);background:var(--stone-050);border:var(--rule);border-radius:5px;padding:0 0.9rem;max-height:0;overflow:hidden;transition:max-height .28s ease,padding .28s ease,margin .2s ease;}
+.method.dk{color:rgba(255,255,255,.85);background:rgba(0,0,0,.16);border-color:rgba(255,255,255,.18);}
+.method.open{max-height:260px;padding:0.8rem 0.9rem;margin-top:0.6rem;}
+.method b{color:var(--ink);font-weight:600;}.method.dk b{color:#fff;}
+.method .src{display:block;margin-top:0.5rem;color:var(--stone-400);font-size:0.76rem;}.method.dk .src{color:rgba(255,255,255,.55);}
+
+/* narrative + plaque (capital) */
+.narr-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start;}
+@media (max-width:760px){.narr-grid{grid-template-columns:1fr;}}
+.prose p{font-size:1.12rem;margin-bottom:1.1rem;}
+.prose p.lead{font-size:1.28rem;line-height:1.5;color:var(--pine);}
+.prose .pull{font-size:1.45rem;line-height:1.35;font-style:italic;color:var(--spartan);border-left:3px solid var(--bronze);padding-left:1.15rem;margin:1.8rem 0;}
+.plaque{background:linear-gradient(150deg,#6f5a30,#93763f 40%,#7a6234);color:#fdf6e6;border-radius:4px;padding:1.5rem 1.4rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),inset 0 -2px 6px rgba(0,0,0,.35),0 12px 30px rgba(40,30,10,.22);position:relative;}
+.plaque::after{content:"";position:absolute;inset:6px;border:1px solid rgba(253,246,230,.35);border-radius:2px;}
+.plaque .pk{font-family:var(--sans);font-size:0.64rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(253,246,230,.75);}
+.plaque .pn{font-size:1.45rem;line-height:1.2;margin-top:0.45rem;font-weight:500;}
+.plaque .pd{font-family:var(--sans);font-size:0.8rem;margin-top:0.8rem;color:rgba(253,246,230,.9);line-height:1.5;}
+.plaque .pe{margin-top:1rem;padding-top:0.8rem;border-top:1px solid rgba(253,246,230,.3);font-family:var(--sans);font-size:0.7rem;letter-spacing:0.07em;text-transform:uppercase;color:rgba(253,246,230,.8);}
+.facts{margin-top:1.3rem;border-top:var(--rule);}
+.fact{display:flex;justify-content:space-between;gap:1rem;padding:0.8rem 0;border-bottom:var(--rule);}
+.fact .k{font-family:var(--sans);font-size:0.76rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--stone-600);}
+.fact .v{font-size:1rem;text-align:right;}
+
+/* student block (scholarship) */
+.stu-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;}
+@media (max-width:780px){.stu-grid{grid-template-columns:1fr;}}
+.portrait{aspect-ratio:4/5;border-radius:10px;overflow:hidden;position:relative;background:linear-gradient(160deg,#2a5749,#16382c);display:grid;place-items:center;box-shadow:0 16px 40px rgba(24,69,59,.2);}
+.portrait .mono{font-family:var(--serif);font-size:5rem;color:rgba(255,255,255,.9);font-weight:500;}
+.portrait .pl{position:absolute;bottom:0;left:0;right:0;padding:0.85rem 1rem;background:linear-gradient(0deg,rgba(0,0,0,.5),transparent);font-family:var(--sans);font-size:0.72rem;color:#fff;}
+.consent{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--sans);font-size:0.66rem;letter-spacing:0.04em;color:var(--spartan);background:#e7f0ec;border:1px solid #cadfd6;border-radius:999px;padding:0.2rem 0.55rem;margin-bottom:1rem;}
+.stu-grid blockquote{font-size:1.45rem;line-height:1.4;font-style:italic;color:var(--pine);margin:0.4rem 0 1.1rem;}
+.stu-grid .attrib{font-family:var(--sans);font-size:0.9rem;color:var(--stone-600);}
+.stu-grid .attrib b{color:var(--ink);}
+.stu-grid .snote{margin-top:1.1rem;font-size:1rem;color:var(--stone-600);}
+
+/* perpetuity flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0.7rem;margin-top:1.6rem;}
+@media (max-width:780px){.flow{grid-template-columns:1fr 1fr;}}
+.step{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:1.1rem 1rem;position:relative;}
+.step .k{font-family:var(--sans);font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--bronze-lift);}
+.step .v{font-size:1.5rem;font-weight:600;margin-top:0.35rem;}
+.step .d{font-family:var(--sans);font-size:0.76rem;color:rgba(255,255,255,.7);margin-top:0.25rem;line-height:1.4;}
+.step .ar{position:absolute;right:-0.5rem;top:50%;transform:translateY(-50%);color:var(--bronze-lift);z-index:2;}
+@media (max-width:780px){.step .ar{display:none;}}
+.fnote{margin-top:1.5rem;font-size:1.12rem;line-height:1.5;}
+.fnote strong{color:var(--gold-wash);}
+
+/* lifetime ledger (shared) */
+.ledger{border-top:var(--rule);margin-top:1.3rem;}
+.dp-sec.dark .ledger{border-top:1px solid rgba(255,255,255,.18);}
+.lr{display:grid;grid-template-columns:7rem 1fr auto;gap:1.1rem;align-items:baseline;padding:1rem 0;border-bottom:var(--rule);}
+.dp-sec.dark .lr{border-bottom:1px solid rgba(255,255,255,.14);}
+@media (max-width:640px){.lr{grid-template-columns:1fr auto;gap:0.3rem 1rem;}.lr .yr{grid-column:1/-1;margin-bottom:0.1rem;}.lr .desc{grid-column:1;}.lr .amt{grid-column:2;grid-row:2;text-align:right;font-weight:600;white-space:nowrap;}}
+.lr .yr{font-family:var(--sans);font-weight:700;font-size:0.88rem;color:var(--bronze);}
+.dp-sec.dark .lr .yr{color:var(--bronze-lift);}
+.lr .desc .t{font-size:1.04rem;}
+.lr .desc .d{font-family:var(--sans);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.04em;margin-top:0.1rem;color:var(--stone-400);}
+.dp-sec.dark .lr .desc .d{color:rgba(255,255,255,.6);}
+.lr .amt{font-variant-numeric:tabular-nums;font-size:1rem;}
+.lt{display:flex;justify-content:space-between;align-items:baseline;padding-top:1.3rem;gap:1rem;flex-wrap:wrap;}
+.lt .lab .eyebrow{font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--bronze);}
+.dp-sec.dark .lt .lab .eyebrow{color:var(--bronze-lift);}
+.lt .lab .big{font-size:1.4rem;font-weight:500;margin-top:0.3rem;}
+.dp-sec.dark .lt .lab .big{color:#fff;}
+.lt .amt{font-size:1.65rem;font-weight:600;}
+.cumu{margin-top:2rem;padding:1.4rem 1.5rem;border-radius:8px;font-size:1.18rem;line-height:1.5;}
+.dp-sec.dark .cumu{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);}
+.dp-sec:not(.dark) .cumu{background:var(--gold-wash);border:1px solid #e6dcc4;}
+.cumu strong{color:var(--gold-wash);}
+.dp-sec:not(.dark) .cumu strong{color:var(--spartan);}
+.realized{display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.9rem;font-family:var(--sans);font-size:0.74rem;}
+.dp-sec.dark .realized{color:rgba(255,255,255,.7);}
+.dp-sec:not(.dark) .realized{color:var(--stone-600);}
+.realized .tick{color:#7fce9f;}
+.dp-sec:not(.dark) .realized .tick{color:#2f8163;}
+
+/* forward */
+.fwd .inner{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;}
+@media (max-width:780px){.fwd .inner{grid-template-columns:1fr;}}
+.fwd h2{margin-bottom:1rem;}
+.fwd p{font-size:1.12rem;max-width:50ch;margin-bottom:1rem;}
+.fwd .subp{color:var(--stone-600);font-size:1rem;}
+.ctacard{background:var(--spartan);color:#fff;border-radius:10px;padding:1.9rem 1.7rem;}
+.ctacard .q{font-size:1.26rem;line-height:1.4;font-style:italic;color:var(--gold-wash);}
+.ctacard .who{margin-top:1.3rem;padding-top:1.15rem;border-top:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:0.85rem;}
+.ctacard .av{width:44px;height:44px;border-radius:50%;flex:none;background:linear-gradient(135deg,var(--bronze-lift),var(--bronze));display:grid;place-items:center;font-family:var(--sans);font-weight:700;}
+.ctacard .who .n{font-family:var(--sans);font-weight:600;font-size:0.9rem;}
+.ctacard .who .r{font-family:var(--sans);font-size:0.76rem;color:rgba(255,255,255,.75);}
+
+.dp-foot{background:#fff;border-top:var(--rule);padding:2.4rem 0;}
+.dp-foot .inner{max-width:1080px;margin:0 auto;padding-inline:var(--gutter);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;align-items:center;}
+.dp-foot .note{font-family:var(--sans);font-size:0.76rem;color:var(--stone-600);max-width:52ch;line-height:1.6;}
+.dp-foot .mk{font-family:var(--sans);font-weight:800;color:var(--spartan);}
+
+/* guided hint chips — orient the clicker on what's interactive */
+.hintchip{display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--sans);font-size:0.74rem;font-weight:600;color:var(--spartan);background:var(--wash);border:1px solid #cfe0d9;border-radius:999px;padding:0.3rem 0.7rem;}
+.hintchip .pulse{width:7px;height:7px;border-radius:50%;background:var(--good);position:relative;}
+.hintchip .pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--good);opacity:0.5;animation:pulse 1.8s ease-out infinite;}
+@keyframes pulse{0%{transform:scale(0.8);opacity:0.6;}100%{transform:scale(2.2);opacity:0;}}
+@media (prefers-reduced-motion:reduce){.hintchip .pulse::after{animation:none;}}
+.hintbar{max-width:920px;margin:1.25rem auto 0;padding:0 var(--gutter);display:flex;justify-content:center;}
+.hintbar-gal{max-width:1180px;margin:0 auto 0.5rem;padding:0 var(--gutter);display:flex;justify-content:flex-start;}
+</style>
+</head>
+<body>
+
+<!-- ============ PERSISTENT DISCLAIMER ============ -->
+<div class="disclaimer-bar">
+  <b>Independent concept demo.</b><span class="sep">·</span><span class="m2">Not affiliated with, endorsed by, or an official product of Michigan State University. MSU is referenced illustratively; all donors, gifts, figures, and quotes are fictional.</span>
+</div>
+
+<!-- ============ TOP NAV ============ -->
+<nav class="topnav">
+  <div class="inner">
+    <button class="brand-mark" onclick="go('home')">
+      <span class="msu">Spartan Impact</span>
+      <span class="concept-badge">Concept Demo</span>
+    </button>
+    <div class="nav-tabs">
+      <button class="nav-tab" data-nav="home" onclick="go('home')">Overview</button>
+      <button class="nav-tab" data-nav="internal" onclick="go('internal')">Internal</button>
+      <button class="nav-tab" data-nav="external" onclick="go('external')">Donor View</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HOME ============ -->
+<section id="view-home" class="view-section">
+  <div class="home-hero">
+    <div class="inner">
+      <p class="eyebrow">Interactive Demo</p>
+      <h1>One system, from a single gift, that <em>celebrates the win and honors the donor.</em></h1>
+      <p class="lede">Two fields already captured at gift entry — gift type and amount — become an internal celebration for the team and a lifetime impact story for the donor. Explore both sides below.</p>
+      <p class="one-idea">A pair of fields, entered once, does triple duty: a celebration for the fundraiser, a coaching moment for the manager, a lasting record for the donor. No new work — the same data, working harder.</p>
+    </div>
+  </div>
+
+  <div class="paths">
+    <div class="origin-flow">
+      <div class="of-node origin">
+        <div class="of-k">One origin</div>
+        <div class="of-v">A gift closes in Salesforce</div>
+        <div class="of-d">Gift type + amount — already entered</div>
+      </div>
+      <div class="of-split" aria-hidden="true">
+        <span class="of-arrow">→</span>
+      </div>
+      <div class="of-outs">
+        <div class="of-node out internal-node">
+          <div class="of-k">Internally</div>
+          <div class="of-v">A celebration, in Teams</div>
+          <div class="of-d">"Funded 5 Spartans" — not "closed $90K"</div>
+        </div>
+        <div class="of-node out external-node">
+          <div class="of-k">For the donor</div>
+          <div class="of-v">A lifetime impact story</div>
+          <div class="of-d">"Since 1998, you've funded 63 Spartans"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="paths">
+    <button class="path internal" onclick="go('internal')">
+      <div class="band">
+        <div class="k">Where the team lives</div>
+        <div class="t">The Internal Experience</div>
+      </div>
+      <div class="body">
+        <p>The moment a gift closes in Salesforce, the win arrives where fundraisers already work — in Teams. The impact leads; the dollars come second.</p>
+        <ul>
+          <li>Live recognition cards across gift types</li>
+          <li>Manager review before anything posts wide</li>
+          <li>A team rollup delivered in the same feed</li>
+        </ul>
+        <span class="go">Explore the internal side →</span>
+      </div>
+    </button>
+
+    <button class="path external" onclick="go('external')">
+      <div class="band">
+        <div class="k">What the donor receives</div>
+        <div class="t">The Donor View</div>
+      </div>
+      <div class="body">
+        <p>The strategic centerpiece: a stewardship experience that shows each donor the cumulative human impact of a lifetime of giving — sent to them, not a portal to log into.</p>
+        <ul>
+          <li>Multiple donors across gift types</li>
+          <li>Confidence tiers you can tap to verify</li>
+          <li>The lifetime "since 1998" story that changes everything</li>
+        </ul>
+        <span class="go">Explore the donor view →</span>
+      </div>
+    </button>
+  </div>
+
+  <div class="home-note">
+    <div class="card">
+      <b>About this demo.</b> Every figure is a realistic placeholder; real MSU constants (like the 4.4% programmatic spending rate) and actual gift data would replace them before anything reaches a donor. Donors, gifts, and student quotes are fictional stand-ins for the consent-gated real thing. Everything here is clickable — move between the two experiences using the tabs above, and tap the confidence tiers on any donor page to see how each number is computed. This interactive prototype was itself built quickly, which is the point: with AI-assisted development, a real working version of the internal side can be built and validated against actual gifts in days, not months. The build is not the hard part. Getting the numbers blessed by the offices that own them, and running a pilot long enough to see real gifts flow through, are what take real time.
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTERNAL ============ -->
+<section id="view-internal" class="view-section hidden">
+  <div class="subnav">
+    <div class="inner">
+      <span class="lbl">Internal</span>
+      <button class="subtab" data-sub="feed" onclick="setInternal('feed')">Wins feed (Teams)</button>
+      <button class="subtab" data-sub="rollup" onclick="setInternal('rollup')">Team rollup</button>
+    </div>
+  </div>
+
+  <!-- FEED -->
+  <div id="internal-feed">
+    <div class="hintbar">
+      <span class="hintchip"><span class="pulse"></span> Try it: the top card is a draft — approve, hold, or edit it below</span>
+    </div>
+    <div class="teams">
+      <div class="teams-top">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="search">Search</div>
+      </div>
+      <div class="teams-body">
+        <nav class="t-rail">
+          <div class="rh">Engineering Development</div>
+          <div class="t-chan muted"><span class="h">#</span> general</div>
+          <div class="t-chan active"><span class="h">#</span> wins &amp; impact <span class="badge" id="feedBadge">3</span></div>
+          <div class="t-chan muted"><span class="h">#</span> pipeline</div>
+          <div class="t-chan muted"><span class="h">#</span> events</div>
+          <div class="rh" style="margin-top:0.7rem;">Direct messages</div>
+          <div class="t-chan muted">Jordan Rivera</div>
+          <div class="t-chan muted">Priya Anand</div>
+        </nav>
+        <div class="t-main">
+          <div class="t-head">
+            <div class="t"><span class="h">#</span> wins &amp; impact</div>
+            <div class="s">Celebrating what our donors make possible · 24 members</div>
+          </div>
+          <div class="t-feed" id="teamsFeed"><!-- cards injected --></div>
+        </div>
+      </div>
+    </div>
+    <div class="teamsnote">
+      <b>What to notice:</b> the impact line is always the headline — dollars are secondary and labeled <b>committed</b> when not fully received. Each card shows its confidence tier. The top card is a <b>draft only the manager sees</b> — try Approve, Hold, or Edit. Recognition ties to <b>milestones</b>, never a dollar leaderboard.
+    </div>
+  </div>
+
+  <!-- ROLLUP -->
+  <div id="internal-rollup" class="hidden">
+    <div class="rollup-wrap">
+      <div class="rollup-banner">
+        This view illustrates the <b>rollup content</b>. In the build it ships as a <b>periodic card in the Teams/Outlook feed</b> — not a standalone web app. Delivery, not destination.
+      </div>
+      <div class="kpis">
+        <div class="kpi hero"><div class="lab">Spartans funded this year</div><div class="val">83</div><div class="delta">▲ 19 vs. last year</div><div class="sub">Across scholarships &amp; fellowships</div></div>
+        <div class="kpi"><div class="lab">Endowed in perpetuity</div><div class="val">6<small> funds</small></div><div class="delta">▲ 2 vs. last year</div><div class="sub">Gifts that recur every year, forever</div></div>
+        <div class="kpi"><div class="lab">Gifts booked</div><div class="val">214</div><div class="sub">Total commitments this FY</div></div>
+        <div class="kpi"><div class="lab">Committed this year</div><div class="val">$14.2<small>M</small></div><div class="sub"><span style="color:var(--good);font-weight:600;">$9.1M received</span></div></div>
+      </div>
+      <div class="rgrid">
+        <div>
+          <div class="rcard">
+            <h3>Impact by designation</h3>
+            <div class="hint">Dollars closed, translated into the units each gift type produces.</div>
+            <div class="bars">
+              <div class="brow"><span class="bl">Scholarships</span><div class="btrack"><div class="bfill" style="width:88%"></div></div><span class="bval">71 students</span></div>
+              <div class="brow"><span class="bl">Fellowships</span><div class="btrack"><div class="bfill" style="width:34%"></div></div><span class="bval">12 grads</span></div>
+              <div class="brow"><span class="bl">Faculty support</span><div class="btrack"><div class="bfill b3" style="width:46%"></div></div><span class="bval">3 positions</span></div>
+              <div class="brow"><span class="bl">Research/program</span><div class="btrack"><div class="bfill b3" style="width:52%"></div></div><span class="bval">~9 mo</span></div>
+              <div class="brow"><span class="bl">Capital</span><div class="btrack"><div class="bfill b2" style="width:64%"></div></div><span class="bval">1 building</span></div>
+            </div>
+          </div>
+          <div class="rcard">
+            <h3>Team activity</h3>
+            <div class="hint" style="font-style:italic;">Listed alphabetically — recognition is for wins and milestones, not a dollar ranking.</div>
+            <div class="mslist">
+              <div class="msrow"><div class="ic" style="background:#e8eef9;">JR</div><div class="b"><div class="t"><b>Jordan Rivera</b> — Sr. Director of Development</div></div><span class="tag">★ Named space · Leadership gift</span></div>
+              <div class="msrow"><div class="ic" style="background:#f6ece2;">MT</div><div class="b"><div class="t"><b>Marcus Thompson</b> — Director of Development</div></div><span class="tag">2 scholarships · Bequest</span></div>
+              <div class="msrow"><div class="ic" style="background:#e6f3ec;">PA</div><div class="b"><div class="t"><b>Priya Anand</b> — Director of Development</div></div><span class="tag">★ Fund endowed</span></div>
+              <div class="msrow"><div class="ic" style="background:#efe9f7;">DW</div><div class="b"><div class="t"><b>Dana Wells</b> — Development Officer</div></div><span class="tag">Lapsed donor recovered</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="rcard">
+            <h3>Toward our collective goal</h3>
+            <div class="hint">One team goal, in students — not individual quotas.</div>
+            <div class="goal">
+              <div class="gt"><span class="l">Spartans funded this FY</span><span class="c">83 <small>/ 120</small></span></div>
+              <div class="gtrack"><div class="gfill" style="width:69%"></div></div>
+              <div class="gmarks"><span>0</span><span>69% there</span><span>120</span></div>
+            </div>
+            <div class="goal" style="margin-top:1.1rem;">
+              <div class="gt"><span class="l">New endowed funds</span><span class="c">6 <small>/ 8</small></span></div>
+              <div class="gtrack"><div class="gfill" style="width:75%;background:linear-gradient(90deg,var(--bronze),var(--bronze-lift));"></div></div>
+              <div class="gmarks"><span>0</span><span>75% there</span><span>8</span></div>
+            </div>
+          </div>
+          <div class="rcard">
+            <h3>Recent milestones</h3>
+            <div class="hint">The wins worth celebrating — pulled from the feed.</div>
+            <div class="mslist">
+              <div class="msrow"><div class="ic gold">★</div><div class="b"><div class="t"><b>Leinweber leadership gift</b> closed — a named studio secured.</div><div class="m">Jordan Rivera · 2 days ago</div></div><span class="tag">Named space</span></div>
+              <div class="msrow"><div class="ic green">🎓</div><div class="b"><div class="t"><b>Boettcher Scholarship</b> grew — another Spartan every year.</div><div class="m">Priya Anand · 4 days ago</div></div><span class="tag">Endowed</span></div>
+              <div class="msrow"><div class="ic green">↩</div><div class="b"><div class="t"><b>A donor lapsed since 2019 returned</b> with a new gift.</div><div class="m">Dana Wells · 1 week ago</div></div><span class="tag">Recovered</span></div>
+            </div>
+          </div>
+          <div class="rcard">
+            <h3>Realization mix</h3>
+            <div class="hint">Received vs. committed — the firewall, at a glance.</div>
+            <div style="display:flex;height:26px;border-radius:6px;overflow:hidden;margin-top:0.3rem;">
+              <div style="width:64%;background:var(--spartan);display:grid;place-items:center;color:#fff;font-size:0.7rem;font-weight:600;">Received 64%</div>
+              <div style="width:26%;background:var(--bronze-lift);display:grid;place-items:center;color:#fff;font-size:0.7rem;font-weight:600;">Pledged 26%</div>
+              <div style="width:10%;background:var(--stone-400);display:grid;place-items:center;color:#fff;font-size:0.66rem;font-weight:600;">10%</div>
+            </div>
+            <div style="font-size:0.72rem;color:var(--stone-600);margin-top:0.55rem;line-height:1.5;font-family:var(--sans);">Only <b style="color:var(--ink);">received</b> dollars drive donor-facing impact claims.</div>
+          </div>
+        </div>
+      </div>
+      <div class="rfoot">
+        <b>Design note:</b> this rollup reports <b>impact and collective progress</b> — and deliberately contains <b>no individual dollar leaderboard</b>. Goals are shared and expressed in students. This is the guardrail against gift-entry gaming, made visible.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXTERNAL: gallery ============ -->
+<section id="view-external" class="view-section hidden">
+  <div id="external-gallery">
+    <div class="gal-head">
+      <p class="eyebrow">The Donor View · Your Spartan Impact</p>
+      <h2>The same system, every kind of gift.</h2>
+      <p>Each donor sees the same emotional shape — what their gift funds, who it reaches, for how long, and what it makes possible — but the posture flexes by gift type. Select a donor to open their stewardship experience.</p>
+    </div>
+    <div class="hintbar-gal">
+      <span class="hintchip"><span class="pulse"></span> Open any donor, then tap a confidence tier to see how each number is computed</span>
+    </div>
+    <div class="gal-grid" id="galGrid"><!-- donor cards injected --></div>
+  </div>
+
+  <!-- individual donor page renders here -->
+  <div id="donorPage" class="dp hidden"></div>
+</section>
+
+<div class="demo-flag">Demo · fictional donors &amp; gifts</div>
+
+<script>
+/* =========================================================
+   DATA — multiple donors across gift types & structures.
+   Each donor drives both a Teams card and a full donor page.
+   ========================================================= */
+const DONORS = [
+  {
+    id:"chen", name:"Margaret & David Chen", type:"capital", typeLabel:"Capital — Facility",
+    posture:"Narrative-forward",
+    cardBanner:"capital",
+    galImpact:'Built <b>a home for computing & AI</b> that thousands of Spartans will learn in for decades.',
+    galStats:[{n:"Thousands",l:"students / year"},{n:"50+ yrs",l:"service life"}],
+    // teams card
+    kicker:"Milestone · Named space secured",
+    cardImpact:'Jordan just closed the Chen family\'s leadership gift to Leinweber — <span class="hl">a named studio</span>, and a building thousands of Spartans will learn in for decades. 🎉',
+    designation:"Capital — Leinweber Building", structure:"5-year pledge · payment 3 of 5",
+    amount:"$1,500,000", amountNote:"committed", tier:"t2", tierLabel:"projected reach",
+    fundraiser:"Jordan Rivera", fundraiserInit:"JR", fundraiserRole:"Senior Director of Development",
+    milestone:"★ Named space secured", draft:true,
+    // donor page
+    page:{
+      eyebrow:"Your Impact · The Leinweber Building",
+      h1:'Because of you, there is now <em>a home for computing and AI</em> at Michigan State.',
+      sub:"Your leadership gift helped build the Leinweber Building — a place thousands of Spartans will learn in each year, long after this one, and long after all of us.",
+      meta:[{n:"Thousands",l:"of students each year"},{n:"50+ yrs",l:"designed service life"},{n:"In perpetuity",l:"your name on the space"}],
+      narrative:{
+        lead:"In the fall, the first students will walk into a building that did not exist when you made your commitment. That is the nature of what you chose to give toward: not a program that runs for a year, but a place that changes what MSU can teach for a generation.",
+        p2:"The Leinweber Building brings computing, data science, and artificial-intelligence education under one roof for the first time — programs that were scattered across campus, now designed to collide.",
+        pull:"A scholarship changes a student's four years. A building changes what the university is able to teach — for every student who comes after.",
+        p3:"Yours was among the lead gifts that moved the project from plan to groundbreaking. Commitments like it are what let the college finalize the design, name the spaces, and give every donor who followed the confidence that the building would be built.",
+        plaqueName:"The Chen Family Collaboration Studio",
+        plaqueDed:"A permanent space within the Leinweber Building, dedicated to interdisciplinary student work in computing and AI.",
+        plaqueEst:"Dedicated 2026 · In perpetuity",
+        facts:[["Designation","Capital — Facility"],["Gift structure","5-year pledge"],["Status","Received: 3 of 5 payments"],["Recognition","Named space + Cornerstone Society"]]
+      },
+      metrics:[
+        {feature:true,frame:"Who it reaches",n:"~2,400",unit:"/ yr",cap:"Students expected to learn in the building each year across computing and AI programs.",tier:"t2",tierLabel:"Projected from enrollment",method:"<b>How this is estimated:</b> Projected annual enrollments and lab assignments for programs housed in the building, per the College's academic plan. A planning figure, not a headcount.",src:"MSU College academic plan · Dean's office"},
+        {frame:"For how long",n:"50+",unit:"years",cap:"The building's designed service life — students served, compounded across every one of those years.",tier:"t1",tierLabel:"Standard facility basis",method:"<b>How this is estimated:</b> Public universities model major buildings on a 50-year componentized service life. A conservative, standard figure.",src:"GASB 34/35 conventions · Controller's office"},
+        {frame:"What it makes possible",n:"First",unit:"",cap:"The first single home for computing, data science, and AI at MSU — enabling collaboration separate buildings could not.",tier:"t3",tierLabel:"Illustrative",method:"<b>How to read this:</b> The value of co-locating programs — the unplanned collaboration a shared building creates — is real but not reducible to a single number. We describe it rather than count it.",src:"Qualitative · reviewed by Donor Relations"}
+      ],
+      ledger:[
+        {yr:"1998",t:"First gift — Annual Fund, College of Engineering",d:"Expendable · greatest need",amt:"$1,000"},
+        {yr:"2004–14",t:"Sustaining annual support",d:"Expendable · 11 consecutive years",amt:"$47,500"},
+        {yr:"2011",t:"The Chen Family Endowed Scholarship",d:"Endowed · in perpetuity",amt:"$250,000"},
+        {yr:"2019",t:"Faculty research support, Computer Science",d:"Expendable · program",amt:"$100,000"},
+        {yr:"2024",t:"The Leinweber Building — leadership gift",d:"Capital · 5-yr pledge · 3 of 5 received",amt:"$1,500,000"}
+      ],
+      ltEyebrow:"Committed across 26 years", ltBig:"A quarter-century of building MSU", ltAmt:"$1,898,500",
+      cumu:'Since 1998, your giving has endowed a scholarship that will support <strong>a Spartan every year, forever</strong>, funded <strong>faculty research</strong>, and — with the Leinweber Building — created a place where <strong>thousands of students each year</strong> will learn for the next half-century.',
+      realized:"Impact shown reflects gifts received to date. Your Leinweber pledge continues through 2028.",
+      fwdH:"The building is rising. The next class isn't funded yet.",
+      fwdP:"You built the room. The students who fill it — many the first in their families to study computing — still need scholarships to walk through the door.",
+      fwdSub:"Your gift officer would welcome a conversation about closing that gap.",
+      ctaQ:'"You\'ve built something that will outlast all of us. When you have time, I\'d love to talk about the students who\'ll fill it."',
+      ctaName:"Jordan Rivera", ctaInit:"JR", ctaRole:"Senior Director of Development · College of Engineering"
+    }
+  },
+  {
+    id:"boettcher", name:"Dr. Ellen Boettcher", type:"scholarship", typeLabel:"Endowed Scholarship",
+    posture:"Metrics-forward",
+    cardBanner:"",
+    galImpact:'Endowed a scholarship that has already put <b>14 Spartans</b> through MSU — and recurs every year, forever.',
+    galStats:[{n:"14",l:"Spartans so far"},{n:"Forever",l:"in perpetuity"}],
+    kicker:"Milestone · Fund endowed",
+    cardImpact:'Priya closed a new gift to the Boettcher Endowed Scholarship — <span class="hl">another Spartan supported every year</span>, in perpetuity. 🎉',
+    designation:"Endowed scholarship — added gift", structure:"Outright · appreciated securities",
+    amount:"$100,000", amountNote:"received", tier:"t1", tierLabel:"payout ÷ award",
+    fundraiser:"Priya Anand", fundraiserInit:"PA", fundraiserRole:"Director of Development",
+    milestone:"★ Fund endowed", draft:false,
+    page:{
+      scholarship:true,
+      eyebrow:"Your Impact · The Boettcher Endowed Scholarship",
+      h1:'Every year, a Spartan who couldn\'t otherwise afford MSU walks through the door <em>because of you.</em>',
+      sub:"Your endowed scholarship doesn't fund one student once. It funds a student this year, and next year, and every year after — permanently.",
+      ring:{big:"1",sm:"Spartan / year",cap:"…forever"},
+      meta:[],
+      metricsIntro:"A scholarship converts cleanly into people. These are the students your gift reaches — this year, and cumulatively over its life so far.",
+      metrics:[
+        {feature:true,frame:"This year",n:"1",unit:"full ride",cap:"Your endowment's payout this year covers full in-state tuition and fees for one student.",tier:"t1",tierLabel:"Payout ÷ award",method:"<b>How this is computed:</b> Endowment market value × MSU's programmatic spending rate (4.4%), divided by the scholarship's award value as defined in your gift agreement.",src:"MSU Investment Office + gift agreement"},
+        {frame:"Since it began",n:"14",unit:"",cap:"Spartans have held the Boettcher Scholarship since 2011 — a new recipient nearly every year.",tier:"t1",tierLabel:"Award records",method:"<b>How this is computed:</b> A direct count of scholarship recipients from financial-aid award records since the fund's first distribution.",src:"MSU Office of Financial Aid"},
+        {frame:"For how long",n:"Forever",unit:"",cap:"The principal is never spent. Only the earnings are awarded — so the gift renews itself, in perpetuity.",tier:"t1",tierLabel:"Endowment structure",method:"<b>How this works:</b> An endowed fund distributes only a portion of its earnings each year and preserves the principal, which is why it recurs indefinitely. The payout is smoothed over several years and can vary year to year, so the honest promise is a reliable ongoing average rather than exactly one student in every single year.",src:"MSU endowment spending policy"}
+      ],
+      student:{mono:"M",label:"Maria — Boettcher Scholar, 2025–26",quote:'"I\'m the first in my family to go to college. This scholarship is the reason I get to study computer science instead of working two jobs to pay for it."',attrib:"Maria R. · Junior, Computer Science · this year's Boettcher Scholar",note:"Each year the scholarship passes to a new student. Maria is this year's — one of the fourteen your gift has carried so far."},
+      flow:[
+        {k:"Your gift",v:"$250,000",d:"Endowed in 2011 — the principal."},
+        {k:"Invested",v:"~$340K",d:"Grown by MSU's endowment over time."},
+        {k:"Earns & distributes",v:"4.4%",d:"Only the earnings are awarded each year."},
+        {k:"Becomes",v:"1 Spartan",d:"A full ride — every year, forever."}
+      ],
+      flowNote:'The principal is never touched. That is the quiet power of an endowed gift: <strong>you gave once in 2011, and the gift will still be putting a Spartan through MSU long after all of us.</strong>',
+      ledger:[
+        {yr:"1994",t:"First gift — College of Natural Science annual fund",d:"Expendable · greatest need",amt:"$500"},
+        {yr:"1999–2010",t:"Sustaining annual support",d:"Expendable · 12 consecutive years",amt:"$38,000"},
+        {yr:"2011",t:"The Boettcher Endowed Scholarship",d:"Endowed · in perpetuity",amt:"$250,000"},
+        {yr:"2018",t:"Scholarship endowment — added gift",d:"Endowed · grew the principal",amt:"$100,000"},
+        {yr:"2023",t:"Boettcher Scholarship — planned gift intention",d:"Deferred · documented bequest",amt:"Future"}
+      ],
+      ltEyebrow:"Committed across 32 years", ltBig:"Three decades of Spartans", ltAmt:"$388,500",
+      cumu:'Since 1994, your giving has grown from a $500 annual gift into an endowment that has already put <strong>14 Spartans</strong> through MSU — and, with your documented bequest, will keep choosing a new student <strong>every year, in perpetuity.</strong>',
+      realized:"Impact shown reflects gifts received to date. Your 2023 bequest intention is recorded and not yet realized.",
+      fwdH:"One Spartan a year is extraordinary. The need is larger.",
+      fwdP:"For every student who receives the Boettcher Scholarship, several equally deserving applicants go unfunded. A second endowed award — or growth to the current fund — would mean another first-generation Spartan every year, forever.",
+      fwdSub:"Your gift officer would welcome a conversation about doubling the reach of the scholarship that already carries your name.",
+      ctaQ:'"You\'ve quietly changed fourteen lives. I\'d love to talk about the next fourteen."',
+      ctaName:"Marcus Thompson", ctaInit:"MT", ctaRole:"Director of Development · College of Natural Science"
+    }
+  },
+  {
+    id:"okafor", name:"The Okafor Family", type:"scholarship", typeLabel:"Expendable Scholarship",
+    posture:"Metrics-forward",
+    cardBanner:"",
+    galImpact:'Funded <b>full tuition for 5 Spartans</b> this year through an expendable scholarship gift.',
+    galStats:[{n:"5",l:"students this year"},{n:"$0",l:"left unspent"}],
+    kicker:"Milestone · Gift closed",
+    cardImpact:'Dana closed the Okafor family\'s scholarship gift — <span class="hl">full tuition for 5 Spartans</span> this year. 🎉',
+    designation:"Expendable scholarship", structure:"Outright · cash",
+    amount:"$90,000", amountNote:"received", tier:"t1", tierLabel:"amount ÷ award",
+    fundraiser:"Dana Wells", fundraiserInit:"DW", fundraiserRole:"Development Officer",
+    milestone:"★ 5 students funded", draft:false,
+    page:{
+      scholarship:true,
+      eyebrow:"Your Impact · The Okafor Family Scholarship",
+      h1:'This year, <em>five Spartans</em> are in class instead of at a second job — because of your family.',
+      sub:"Your gift is fully spendable, which means every dollar reaches a student right now. No waiting, no endowment — direct support, this year.",
+      ring:{big:"5",sm:"Spartans this year",cap:"fully funded"},
+      meta:[],
+      metricsIntro:"An expendable scholarship is the most immediate kind of impact — the entire gift reaches students this year. Here's exactly who it reached.",
+      metrics:[
+        {feature:true,frame:"This year",n:"5",unit:"students",cap:"Your gift covers full in-state tuition and fees for five Spartans this academic year.",tier:"t1",tierLabel:"Amount ÷ award",method:"<b>How this is computed:</b> The full gift amount divided by the average in-state tuition-and-fees award. Because the gift is expendable, the whole amount is awarded this year.",src:"MSU Office of Financial Aid · award value"},
+        {frame:"How much reaches students",n:"100%",unit:"",cap:"Every dollar of an expendable gift is awarded — none is held back as principal.",tier:"t1",tierLabel:"Expendable structure",method:"<b>How this works:</b> Unlike an endowment, an expendable gift is spent in full on its purpose in the near term — maximizing immediate reach.",src:"MSU gift administration"},
+        {frame:"What it makes possible",n:"Now",unit:"",cap:"Immediate relief for five students who might otherwise have stopped out for financial reasons.",tier:"t3",tierLabel:"Illustrative",method:"<b>How to read this:</b> Financial-stress relief and retention effects are real but described rather than precisely counted for any individual student.",src:"Qualitative · reviewed by Donor Relations"}
+      ],
+      student:{mono:"J",label:"James — Okafor Scholar, 2025–26",quote:'"I was about to drop to part-time to afford tuition. This scholarship meant I could stay full-time and graduate on schedule."',attrib:"James O. · Sophomore, Mechanical Engineering · Okafor Scholar",note:"Your gift reached five students like James this year — direct, immediate, and entirely spent on their education."},
+      flow:[
+        {k:"Your gift",v:"$90,000",d:"Fully spendable this year."},
+        {k:"Awarded",v:"100%",d:"No principal held back."},
+        {k:"Divided by",v:"~$18K",d:"Average in-state tuition & fees."},
+        {k:"Becomes",v:"5 Spartans",d:"Full support, this year."}
+      ],
+      flowNote:'Every dollar reached a student this year. Expendable gifts trade permanence for immediacy: <strong>the whole gift is at work right now, for five Spartans who needed it this year.</strong>',
+      ledger:[
+        {yr:"2016",t:"First gift — Engineering annual fund",d:"Expendable · greatest need",amt:"$2,500"},
+        {yr:"2019",t:"Okafor Family Scholarship established",d:"Expendable · annual",amt:"$50,000"},
+        {yr:"2022",t:"Scholarship gift — renewed",d:"Expendable · annual",amt:"$75,000"},
+        {yr:"2025",t:"Okafor Family Scholarship — this year",d:"Expendable · 5 students funded",amt:"$90,000"}
+      ],
+      ltEyebrow:"Given across 9 years", ltBig:"Nine years of steady support", ltAmt:"$217,500",
+      cumu:'Since 2016, your family has put <strong>more than 15 Spartans</strong> through a year of MSU — every gift spent in full, every dollar reaching a student in the year you gave it.',
+      realized:"Impact shown reflects gifts received to date. Expendable gifts are awarded in the year they're received.",
+      fwdH:"Five students this year. Imagine an endowment that does it every year.",
+      fwdP:"Your expendable gifts have changed lives year by year. An endowed version would make the Okafor name a permanent presence — funding Spartans every year, forever, without needing to renew.",
+      fwdSub:"Your gift officer would love to explore what endowing the scholarship could look like.",
+      ctaQ:'"Your family has shown up for students year after year. I\'d love to talk about making that permanent."',
+      ctaName:"Dana Wells", ctaInit:"DW", ctaRole:"Development Officer · College of Engineering"
+    }
+  }
+];
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+function go(view){
+  document.querySelectorAll('.view-section').forEach(v=>v.classList.add('hidden'));
+  document.getElementById('view-'+view).classList.remove('hidden');
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('active',t.dataset.nav===view));
+  if(view==='external'){ showGallery(); }
+  if(view==='internal'){ setInternal('feed'); }
+  window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
+}
+
+function setInternal(which){
+  document.getElementById('internal-feed').classList.toggle('hidden',which!=='feed');
+  document.getElementById('internal-rollup').classList.toggle('hidden',which!=='rollup');
+  document.querySelectorAll('.subtab').forEach(t=>t.classList.toggle('active',t.dataset.sub===which));
+}
+
+/* =========================================================
+   INTERNAL FEED — build cards from data
+   ========================================================= */
+function buildFeed(){
+  const feed=document.getElementById('teamsFeed');
+  let html='';
+  DONORS.forEach((d,i)=>{
+    const pending=d.draft;
+    html+=`
+    <div class="t-sys">
+      <div class="si-av">SI</div>
+      <div style="flex:1;">
+        <div class="meta"><b>Spartan Impact</b><span class="apptag">app</span> · ${i===0?'Today':(i===1?'4 days ago':'1 week ago')}</div>
+        <div class="acard ${pending?'pending':'posted'}" id="card-${d.id}" style="margin-top:0.4rem;">
+          ${pending?'<div class="draft">✎ Draft — only you can see this until you approve it</div>':''}
+          <div class="abanner ${d.cardBanner}">
+            <div class="kick">${d.kicker}</div>
+            <div class="impact">${d.cardImpact}</div>
+          </div>
+          <div class="abody">
+            <div class="row2">
+              <div class="kv"><div class="k">Designation</div><div class="v">${d.designation}</div></div>
+              <div class="kv"><div class="k">Structure</div><div class="v">${d.structure}</div></div>
+              <div class="kv"><div class="k">Gift amount</div><div class="v amt">${d.amount} <span class="note">${d.amountNote}</span></div></div>
+            </div>
+            <div class="tl">
+              <span class="tchip ${d.tier}"><span class="d"></span> ${d.tier.toUpperCase()} · ${d.tierLabel}</span>
+              <a class="how" href="#" onclick="viewDonor('${d.id}');return false;">See the donor's view →</a>
+            </div>
+            <div class="fr">
+              <div class="pf">${d.fundraiserInit}</div>
+              <div><div class="fn">${d.fundraiser}</div><div class="role">${d.fundraiserRole}</div></div>
+              <div class="ms">${d.milestone}</div>
+            </div>
+          </div>
+          ${pending?`
+          <div class="appr" id="appr-${d.id}">
+            <div class="st" id="apprst-${d.id}">⏳ Ready for your review before it posts wide</div>
+            <div class="by" id="apprby-${d.id}">Impact line auto-generated · edit wording, not the figures</div>
+            <div class="acts" id="apracts-${d.id}">
+              <button class="mini-btn" onclick="holdCard('${d.id}')">Hold</button>
+              <button class="mini-btn" onclick="editCard('${d.id}')">Edit wording</button>
+              <button class="mini-btn primary" onclick="approveCard('${d.id}')">Approve &amp; post</button>
+            </div>
+          </div>`:''}
+        </div>
+        ${pending?`<div class="rxrow hidden" id="rx-${d.id}"><span class="rx">🎉 <b>7</b></span><span class="rx">👏 <b>5</b></span><span class="rx">🟢 <b>3</b></span></div>`:`<div class="rxrow"><span class="rx">🎉 <b>${5-i}</b></span><span class="rx">👏 <b>${4-i}</b></span></div>`}
+      </div>
+    </div>`;
+  });
+  feed.innerHTML=html;
+}
+
+function approveCard(id){
+  const card=document.getElementById('card-'+id);
+  card.classList.remove('pending');card.classList.add('posted');
+  document.getElementById('appr-'+id).classList.add('approved');
+  document.getElementById('apprst-'+id).innerHTML='<span style="color:var(--good)">✔</span> Approved — now posted to #wins &amp; impact';
+  document.getElementById('apprst-'+id).className='st ok';
+  document.getElementById('apprby-'+id).textContent='Approved by Priya Anand (Director) · just now';
+  document.getElementById('apracts-'+id).style.display='none';
+  document.getElementById('rx-'+id).classList.remove('hidden');
+}
+function holdCard(id){
+  document.getElementById('apprst-'+id).innerHTML='⏸ On hold — won\'t post until you release it';
+  document.getElementById('apprst-'+id).style.color='var(--stone-600)';
+  document.getElementById('apprby-'+id).textContent='Held · often used when a pledge has open contingencies';
+  document.getElementById('apracts-'+id).innerHTML='<button class="mini-btn primary" onclick="approveCard(\''+id+'\')">Release &amp; post</button>';
+}
+function editCard(id){
+  const imp=document.querySelector('#card-'+id+' .impact');
+  imp.setAttribute('contenteditable','true');
+  imp.style.outline='2px dashed var(--bronze-lift)';imp.style.outlineOffset='3px';imp.focus();
+  document.getElementById('apprby-'+id).textContent='Editing wording — the figures stay locked to the metric library';
+}
+
+/* =========================================================
+   EXTERNAL GALLERY
+   ========================================================= */
+function buildGallery(){
+  const grid=document.getElementById('galGrid');
+  const bannerBg={capital:'linear-gradient(120deg,#3a3d8f,#5b5fc7)',scholarship:'linear-gradient(120deg,var(--spartan),var(--spartan-lift))'};
+  let html='';
+  DONORS.forEach(d=>{
+    const bg=d.type==='capital'?bannerBg.capital:bannerBg.scholarship;
+    html+=`
+    <button class="dcard" onclick="viewDonor('${d.id}')">
+      <div class="dc-top" style="background:${bg};">
+        <div class="dc-type">${d.typeLabel}</div>
+        <div class="dc-name">${d.name}</div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-impact">${d.galImpact}</div>
+        <div class="dc-stats">
+          ${d.galStats.map(s=>`<div class="dc-stat"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('')}
+        </div>
+        <span class="dc-posture">${d.posture}</span>
+        <span class="dc-go">Open stewardship view →</span>
+      </div>
+    </button>`;
+  });
+  grid.innerHTML=html;
+}
+
+function showGallery(){
+  document.getElementById('external-gallery').classList.remove('hidden');
+  document.getElementById('donorPage').classList.add('hidden');
+}
+
+/* render a full donor page from data */
+function viewDonor(id){
+  const d=DONORS.find(x=>x.id===id);
+  if(!d) return;
+  // ensure we're on external view
+  document.querySelectorAll('.view-section').forEach(v=>v.classList.add('hidden'));
+  document.getElementById('view-external').classList.remove('hidden');
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('active',t.dataset.nav==='external'));
+  document.getElementById('external-gallery').classList.add('hidden');
+  const el=document.getElementById('donorPage');
+  el.classList.remove('hidden');
+  el.innerHTML=renderDonorPage(d);
+  window.scrollTo({top:0,behavior:'instant'in window?'instant':'auto'});
+  bindTiers();
+}
+
+function metricHTML(m,dark){
+  const dk=dark?' dk':'';
+  const feat=m.feature?' feature':'';
+  return `
+  <div class="metric${feat}">
+    <div class="frame">${m.frame}</div>
+    <div class="n">${m.n}${m.unit?` <small>${m.unit}</small>`:''}</div>
+    <div class="cap">${m.cap}</div>
+    <button class="tier ${m.tier}${m.feature&&m.tier==='t1'?' dk':''}" aria-expanded="false"><span class="d"></span> ${m.tier.toUpperCase()} · ${m.tierLabel} <span class="car">▸</span></button>
+    <div class="method${m.feature?' dk':''}">${m.method}<span class="src">${m.src}</span></div>
+  </div>`;
+}
+
+function ledgerHTML(rows){
+  return rows.map(r=>`<div class="lr"><span class="yr">${r.yr}</span><span class="desc"><span class="t">${r.t}</span><span class="d">${r.d}</span></span><span class="amt">${r.amt}</span></div>`).join('');
+}
+
+function renderDonorPage(d){
+  const p=d.page;
+  const isSch=!!p.scholarship;
+  let hero;
+  if(isSch){
+    hero=`
+    <div class="dp-hero scholarship">
+      <div class="inner">
+        <div>
+          <p class="eyebrow">${p.eyebrow}</p>
+          <h1>${p.h1}</h1>
+          <p class="sub">${p.sub}</p>
+        </div>
+        <div class="ring-wrap" aria-hidden="true">
+          <div class="ring"><div class="inn"><div class="big">${p.ring.big}</div><div class="sm">${p.ring.sm}</div></div></div>
+          <div class="cap">${p.ring.cap}</div>
+        </div>
+      </div>
+    </div>`;
+  } else {
+    hero=`
+    <div class="dp-hero capital">
+      <div class="inner">
+        <p class="eyebrow">${p.eyebrow}</p>
+        <h1>${p.h1}</h1>
+        <p class="sub">${p.sub}</p>
+        <div class="metarow">
+          ${p.meta.map(m=>`<div class="st"><div class="n">${m.n}</div><div class="l">${m.l}</div></div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // metrics section
+  const metricsSec=`
+  <section class="dp-sec stone">
+    <div class="inner">
+      <div class="sh"><span class="num">01</span><h2>${isSch?'What your scholarship does, in numbers':'The reach of the space'}</h2></div>
+      ${isSch?`<p style="max-width:60ch;margin-bottom:1.6rem;font-size:1.1rem;color:var(--stone-600);">${p.metricsIntro}</p>`:`<p style="max-width:60ch;margin-bottom:1.6rem;font-size:1.1rem;color:var(--stone-600);">A building's impact isn't measured in a single number of graduates — it's measured in capacity and reach over decades.</p>`}
+      <div class="tleg">
+        <span class="lw">How confident is each number?</span>
+        <span class="it"><span class="d" style="background:#2f8163;"></span> Tier 1 — Directly computed</span>
+        <span class="it"><span class="d" style="background:#a9884f;"></span> Tier 2 — Projected</span>
+        <span class="it"><span class="d" style="background:#a8a599;"></span> Tier 3 — Illustrative</span>
+        <span class="hint">Tap any tier to see how it's estimated ▸</span>
+      </div>
+      <div class="mrow">${p.metrics.map(m=>metricHTML(m,false)).join('')}</div>
+    </div>
+  </section>`;
+
+  // narrative (capital) or student+mechanics (scholarship)
+  let midSecs='';
+  if(isSch){
+    midSecs=`
+    <section class="dp-sec">
+      <div class="inner">
+        <div class="stu-grid">
+          <div class="portrait"><span class="mono">${p.student.mono}</span><span class="pl">${p.student.label}</span></div>
+          <div>
+            <span class="consent">✓ Shared with the student's permission</span>
+            <blockquote>${p.student.quote}</blockquote>
+            <div class="attrib">${p.student.attrib}</div>
+            <p class="snote">${p.student.note}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="dp-sec dark">
+      <div class="inner">
+        <div class="sh"><span class="num">02</span><h2>Why it never runs out</h2></div>
+        <p class="eyebrow" style="font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--bronze-lift);">The engine behind the gift</p>
+        <div class="flow">
+          ${p.flow.map((s,i)=>`<div class="step"><div class="k">${s.k}</div><div class="v">${s.v}</div><div class="d">${s.d}</div>${i<3?'<span class="ar">→</span>':''}</div>`).join('')}
+        </div>
+        <p class="fnote">${p.flowNote}</p>
+      </div>
+    </section>`;
+  } else {
+    const n=p.narrative;
+    midSecs=`
+    <section class="dp-sec" style="border-top:3px solid var(--spartan);">
+      <div class="inner">
+        <div class="sh"><span class="num" style="visibility:hidden;">00</span><h2>What your gift made possible</h2></div>
+        <div class="narr-grid">
+          <div class="prose">
+            <p class="lead">${n.lead}</p>
+            <p>${n.p2}</p>
+            <p class="pull">${n.pull}</p>
+            <p>${n.p3}</p>
+          </div>
+          <aside>
+            <div class="plaque">
+              <div class="pk">Named in recognition of your gift</div>
+              <div class="pn">${n.plaqueName}</div>
+              <div class="pd">${n.plaqueDed}</div>
+              <div class="pe">${n.plaqueEst}</div>
+            </div>
+            <div class="facts">
+              ${n.facts.map(f=>`<div class="fact"><span class="k">${f[0]}</span><span class="v">${f[1]}</span></div>`).join('')}
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>`;
+  }
+
+  // lifetime
+  const lifeSec=`
+  <section class="dp-sec ${isSch?'':'dark'}">
+    <div class="inner">
+      <div class="sh"><span class="num"${isSch?'':' style="border-color:rgba(255,255,255,.25);color:var(--bronze-lift);"'}>03</span><h2>Your lifetime with MSU</h2></div>
+      <p class="eyebrow" style="font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:${isSch?'var(--bronze)':'var(--bronze-lift)'};">Every gift, since the beginning</p>
+      <div class="ledger">${ledgerHTML(p.ledger)}</div>
+      <div class="lt">
+        <div class="lab"><div class="eyebrow">${p.ltEyebrow}</div><div class="big">${p.ltBig}</div></div>
+        <div class="amt">${p.ltAmt}</div>
+      </div>
+      <div class="cumu">${p.cumu}<div class="realized"><span class="tick">✓</span> ${p.realized}</div></div>
+    </div>
+  </section>`;
+
+  // forward
+  const fwdSec=`
+  <section class="dp-sec stone fwd">
+    <div class="inner">
+      <div>
+        <div class="eyebrow" style="font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--bronze);">What's still ahead</div>
+        <h2 style="margin-top:0.6rem;">${p.fwdH}</h2>
+        <p>${p.fwdP}</p>
+        <p class="subp">${p.fwdSub}</p>
+      </div>
+      <div class="ctacard">
+        <div class="q">${p.ctaQ}</div>
+        <div class="who"><div class="av">${p.ctaInit}</div><div><div class="n">${p.ctaName}</div><div class="r">${p.ctaRole}</div></div></div>
+      </div>
+    </div>
+  </section>`;
+
+  const foot=`
+  <div class="dp-foot"><div class="inner">
+    <div class="note">Impact figures reflect gifts received as of Spring 2026 and are prepared under MSU's gift-reporting and student-privacy standards. ${isSch?'Recipient stories are shared only with the student\'s written permission. ':''}Projected and illustrative figures are labeled as such.</div>
+    <div class="mk">Spartan Impact</div>
+  </div></div>`;
+
+  return `
+  <div class="dp-back"><button onclick="showGallery()">← All donors</button></div>
+  ${hero}
+  ${isSch?metricsSec+midSecs:midSecs+metricsSec}
+  ${lifeSec}
+  ${fwdSec}
+  ${foot}`;
+}
+
+function bindTiers(){
+  document.querySelectorAll('#donorPage .tier').forEach(btn=>{
+    btn.addEventListener('click',function(){
+      const panel=this.parentElement.querySelector('.method');
+      if(!panel)return;
+      const open=panel.classList.toggle('open');
+      this.setAttribute('aria-expanded',open?'true':'false');
+    });
+  });
+}
+
+/* init */
+buildFeed();
+buildGallery();
+go('home');
+</script>
+</body>
+</html>
