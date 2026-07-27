@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share your Spartan story | College of Engineering | Michigan State University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Deliberately plain: this mocks a standard Drupal Webform on an institutional site.
+     Everything here is stock Webform capability: fields, descriptions, conditional
+     visibility, file uploads, radios, checkboxes, confirmation message. */
+  :root{
+    --green:#18453B; --green-deep:#0E2E27;
+    --bg:#F2F2EF; --card:#FFFFFF; --ink:#1D2521; --ink-soft:#55605A;
+    --line:#D8D8D2; --req:#9B2C23;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Public Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:16px}
+  button{font-family:inherit;cursor:pointer}
+  :focus-visible{outline:3px solid #7FB539;outline-offset:2px}
+
+  .site-header{background:var(--green);color:#fff;padding:16px 20px}
+  .site-header .inner{max-width:820px;margin:0 auto;font-weight:700;font-size:1.05rem}
+  .site-header .inner span{font-weight:400;opacity:.85}
+  .breadcrumb{max-width:820px;margin:0 auto;padding:12px 20px 0;font-size:.78rem;color:var(--ink-soft)}
+  .breadcrumb a{color:var(--green)}
+
+  main{max-width:820px;margin:0 auto;padding:10px 20px 70px}
+  h1{font-size:1.7rem;font-weight:700;margin:14px 0 6px}
+  .lede{color:var(--ink-soft);max-width:64ch;margin-bottom:6px}
+  .lede.small{font-size:.9rem}
+
+  form{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:28px;margin-top:18px}
+  fieldset{border:none;margin:0 0 26px;padding:0 0 22px;border-bottom:1px solid var(--line)}
+  fieldset:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0}
+  legend{font-weight:700;font-size:1.05rem;padding-bottom:10px}
+
+  .form-item{margin-top:16px}
+  .form-item > label{display:block;font-weight:600;font-size:.92rem;margin-bottom:4px}
+  .req{color:var(--req)}
+  .description{font-size:.8rem;color:var(--ink-soft);margin-top:4px;max-width:60ch}
+  input[type=text],input[type=email],textarea,select{
+    width:100%;border:1px solid #A9A9A2;border-radius:3px;padding:9px 10px;
+    font-family:inherit;font-size:.95rem;background:#fff;color:var(--ink);
+  }
+  textarea{min-height:110px;resize:vertical}
+  .form-item.narrow input{max-width:220px}
+
+  .option{display:flex;gap:10px;align-items:flex-start;margin-top:10px}
+  .option input{width:17px;height:17px;margin-top:3px;accent-color:var(--green);flex-shrink:0}
+  .option label{font-weight:400;font-size:.93rem}
+  .option .opt-desc{display:block;font-size:.78rem;color:var(--ink-soft)}
+
+  .conditional{display:none;margin-top:6px;padding-left:14px;border-left:3px solid #E4E9E2}
+  .conditional.visible{display:block}
+
+  .file-item input[type=file]{border:none;padding:6px 0;font-size:.85rem}
+  .file-note{font-size:.74rem;color:var(--ink-soft)}
+
+  .link-btn{background:none;border:none;color:var(--green);text-decoration:underline;font-size:.8rem;padding:0;cursor:pointer}
+  .hint-note{font-weight:400;color:var(--ink-soft);font-size:.78rem}
+
+  .withdraw-note{font-size:.82rem;color:var(--ink-soft);background:#F4F4EF;border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin-top:12px;max-width:60ch}
+
+  .actions{margin-top:26px}
+  .button-primary{
+    background:var(--green);color:#fff;border:none;border-radius:4px;
+    padding:12px 26px;font-size:.95rem;font-weight:700;
+  }
+  .button-primary:hover{background:var(--green-deep)}
+  .form-error{display:none;background:#FBECEA;border:1px solid #D9A6A1;border-radius:4px;padding:10px 14px;font-size:.85rem;color:#7C221B;margin-bottom:14px}
+  .form-error.show{display:block}
+
+  .confirmation{display:none;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:30px;margin-top:18px}
+  .confirmation.show{display:block}
+  .confirmation h2{font-size:1.3rem;margin-bottom:12px}
+  .confirmation p{max-width:62ch;margin-top:10px;font-size:.95rem}
+  .confirmation .steps-list{margin:14px 0 0 18px}
+  .confirmation .steps-list li{margin-top:8px;font-size:.93rem}
+  .passiton{margin-top:24px;border-top:1px solid var(--line);padding-top:20px}
+  .passiton h3{font-size:1.05rem;margin-bottom:6px}
+  .invite-text{
+    background:#F4F4EF;border:1px solid var(--line);border-radius:4px;
+    padding:12px 14px;font-size:.88rem;color:var(--ink-soft);margin:10px 0 14px;max-width:62ch;
+  }
+  .passiton-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .button-secondary{
+    display:inline-block;background:#fff;color:var(--green);border:1px solid var(--green);
+    border-radius:4px;padding:11px 22px;font-size:.9rem;font-weight:700;text-decoration:none;
+  }
+  .button-secondary:hover{background:#EFF5EC}
+
+  .build-notes{max-width:820px;margin:40px auto 0;padding:0 20px;font-size:.85rem}
+  .build-notes details{border:1px solid var(--line);border-radius:6px;background:var(--card)}
+  .build-notes summary{padding:14px 18px;font-weight:700;cursor:pointer}
+  .build-notes .bn-body{padding:0 20px 20px;color:var(--ink-soft);line-height:1.6}
+  .build-notes h3{font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;color:var(--green);margin:18px 0 6px}
+  .build-notes ul{margin:4px 0 0 18px}
+  .build-notes li{margin-top:4px}
+  .build-notes code{background:#F4F4EF;padding:1px 5px;border-radius:4px;font-size:.8rem}
+
+  footer{border-top:1px solid var(--line);padding:20px;font-size:.78rem;color:var(--ink-soft)}
+  footer .inner{max-width:820px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .bank-group{font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin:18px 0 8px}
+  .answer-count{font-size:.82rem;color:var(--ink-soft);margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<div class="site-header"><div class="inner">MSU College of Engineering <span>· Alumni</span></div></div>
+<div class="breadcrumb"><a href="#">Home</a> › <a href="#">Alumni</a> › Share your Spartan story</div>
+
+<main>
+  <h1>Share your Spartan story</h1>
+  <p class="lede">Somewhere in the College right now, a student is wondering what an engineering degree actually turns into. A high schooler is deciding whether MSU is for people like her. An alum in a new city is looking for a familiar name in the field. Your path, told plainly in your own words, is what they are looking for.</p>
+  <p class="lede small">The required part takes about fifteen minutes, and everything else is optional. Career changes, detours, and hard years belong here too. Our team reviews each story, and once yours is published we'll email you a link to your page to share with your networks.</p>
+
+  <form id="storyForm" novalidate>
+    <input type="hidden" id="fSource" value="direct">
+    <div class="form-error" id="formError" role="alert" aria-live="assertive">A few required fields still need an answer. They're marked with <span class="req">*</span>, and at least one question from the A few more section needs an answer.</div>
+
+    <!-- ============ ABOUT YOU ============ -->
+    <fieldset>
+      <legend>Who is this story from? <span class="req">*</span></legend>
+      <div class="form-item">
+        <div class="option"><input type="radio" name="role" id="r-alumni" value="alumni"><label for="r-alumni">An alum</label></div>
+        <div class="option"><input type="radio" name="role" id="r-faculty" value="faculty"><label for="r-faculty">Faculty, current or emeritus <span class="opt-desc">Many faculty arrive through the note the College sends when an alum names them.</span></label></div>
+        <div class="option"><input type="radio" name="role" id="r-student" value="student"><label for="r-student">A current student <span class="opt-desc">Student Ambassadors and capstone teams carry this link, and any Spartan student can use it.</span></label></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>About you</legend>
+      <div class="form-item alumni-only">
+        <label for="fName">Name <span class="req">*</span></label>
+        <input type="text" id="fName" required>
+        <div class="description">As you'd like it to appear on your page.</div>
+      </div>
+      <div class="form-item alumni-only">
+        <label for="fDegree">Degree program <span class="req">*</span></label>
+        <select id="fDegree" required>
+          <option value="">Select your program</option>
+          <option>Applied Engineering Sciences</option>
+          <option>Biosystems Engineering</option>
+          <option>Chemical Engineering</option>
+          <option>Civil Engineering</option>
+          <option>Computational Data Science</option>
+          <option>Computer Engineering</option>
+          <option>Computer Science</option>
+          <option>Electrical Engineering</option>
+          <option>Environmental Engineering</option>
+          <option>Materials Science and Engineering</option>
+          <option>Mechanical Engineering</option>
+          <option>Another MSU Engineering program</option>
+        </select>
+        <div class="description">If you hold more than one, pick the one that feels most like home.</div>
+      </div>
+      <div class="form-item narrow">
+        <label for="fYear">Class year <span class="req">*</span></label>
+        <input type="text" id="fYear" inputmode="numeric" required>
+      </div>
+      <div class="form-item">
+        <label for="fRole">What you're doing these days <span class="req">*</span></label>
+        <input type="text" id="fRole" required>
+        <div class="description">Your work or your retirement. For example: Process engineer, battery manufacturing. Or: Retired, formerly Consumers Energy.</div>
+      </div>
+      <div class="form-item narrow">
+        <label for="fCity">City <span class="req">*</span></label>
+        <input type="text" id="fCity" required>
+        <div class="description">City level only. It appears in your byline.</div>
+      </div>
+      <div class="form-item narrow">
+        <label for="fHometown">Where did you grow up? <span class="hint">(optional)</span></label>
+        <input type="text" id="fHometown">
+        <div class="description">A city or town. It helps us show future Spartans who came from where they did. It never appears publicly without asking you first.</div>
+      </div>
+      <div class="form-item">
+        <label for="fEmail">Email <span class="req">*</span></label>
+        <input type="email" id="fEmail" required>
+        <div class="description">So we can send you your page, and so one email from you can update or remove it later. Never shown publicly. Use the address tied to your Spartan record, your msu.edu address if you're a student or faculty member. One person, one page, for life: if you submit as a student and come back years later as an alum, this is how we find your page and grow it instead of starting a second one.</div>
+      </div>
+    </fieldset>
+
+    <!-- ============ YOUR STORY ============ -->
+    <fieldset id="alumniStory" hidden>
+      <legend>Your story</legend>
+      <div class="form-item">
+        <label>Where are you in your career? <span class="req">*</span></label>
+        <div class="description">Three questions follow. Write the way you'd say it out loud. Specific beats general: a place, a name, a number.</div>
+        <div class="option"><input type="radio" name="stage" id="st-fd" value="first-decade"><label for="st-fd">First decade out</label></div>
+        <div class="option"><input type="radio" name="stage" id="st-cp" value="career-path"><label for="st-cp">Mid-career</label></div>
+        <div class="option"><input type="radio" name="stage" id="st-lb" value="looking-back"><label for="st-lb">Late career or retired</label></div>
+      </div>
+
+      <!-- Conditional question sections: stock Webform conditional visibility -->
+      <div class="conditional" data-flavor="first-decade">
+        <div class="form-item">
+          <label for="q-fd-01">What does your work actually look like, day to day? <span class="req">*</span></label>
+          <textarea id="q-fd-01" data-required-when-visible></textarea>
+          <div class="description">What you actually spend your time on, not the job description.</div>
+        </div>
+        <div class="form-item">
+          <label for="q-fd-02">What do you know now that you didn't at graduation? <span class="req">*</span></label>
+          <textarea id="q-fd-02" data-required-when-visible></textarea>
+          <div class="description">The thing you'd go back and tell yourself.</div>
+        </div>
+        <div class="form-item">
+          <label for="q-fd-03">What surprised you most about the first years out? <span class="req">*</span></label>
+          <textarea id="q-fd-03" data-required-when-visible></textarea>
+        </div>
+      </div>
+
+      <div class="conditional" data-flavor="founder">
+        <div class="form-item">
+          <label for="q-fo-01">What's the moment it started?</label>
+          <textarea id="q-fo-01"></textarea>
+          <div class="description">The specific moment, not the summary. Where were you? Who was there?</div>
+        </div>
+        <div class="form-item">
+          <label for="q-fo-02">What did MSU give you that you still use?</label>
+          <textarea id="q-fo-02"></textarea>
+          <div class="description">Optional. A course, a person, a habit.</div>
+        </div>
+        <div class="form-item">
+          <label for="q-fo-03">What was the hardest stretch, and what got you through it?</label>
+          <textarea id="q-fo-03"></textarea>
+          <div class="description">Optional.</div>
+        </div>
+      </div>
+
+      <div class="conditional" data-flavor="career-path">
+        <div class="form-item">
+          <label for="q-cp-01">What has your career looked like, the short version? <span class="req">*</span></label>
+          <textarea id="q-cp-01" data-required-when-visible></textarea>
+          <div class="description">The main stops and turns.</div>
+        </div>
+        <div class="form-item">
+          <label for="q-cp-02">What has changed the most since you graduated? <span class="req">*</span></label>
+          <textarea id="q-cp-02" data-required-when-visible></textarea>
+        </div>
+        <div class="form-item">
+          <label for="q-cp-03">What would you tell a senior right now? <span class="req">*</span></label>
+          <textarea id="q-cp-03" data-required-when-visible></textarea>
+          <div class="description">Say it to one person, not a crowd.</div>
+        </div>
+      </div>
+
+      <div class="conditional" data-flavor="career-change">
+        <div class="form-item">
+          <label for="q-cc-01">What did you change, and why?</label>
+          <textarea id="q-cc-01"></textarea>
+          <div class="description">What made the old thing stop fitting?</div>
+        </div>
+        <div class="form-item">
+          <label for="q-cc-02">What transferred, and what didn't?</label>
+          <textarea id="q-cc-02"></textarea>
+          <div class="description">Optional.</div>
+        </div>
+        <div class="form-item">
+          <label for="q-cc-03">What would you tell someone considering a switch?</label>
+          <textarea id="q-cc-03"></textarea>
+          <div class="description">Optional.</div>
+        </div>
+      </div>
+
+      <div class="conditional" data-flavor="service">
+        <div class="form-item">
+          <label for="q-sv-01">What do you do, and how did it start?</label>
+          <textarea id="q-sv-01"></textarea>
+          <div class="description">How you got involved, and who got you started.</div>
+        </div>
+        <div class="form-item">
+          <label for="q-sv-02">Why do you keep doing it?</label>
+          <textarea id="q-sv-02"></textarea>
+          <div class="description">Optional.</div>
+        </div>
+        <div class="form-item">
+          <label for="q-sv-03">What could the College do for people like you?</label>
+          <textarea id="q-sv-03"></textarea>
+          <div class="description">Optional.</div>
+        </div>
+      </div>
+
+      <div class="conditional" data-flavor="looking-back">
+        <div class="form-item">
+          <label for="q-lb-01">What was the College like when you were here? <span class="req">*</span></label>
+          <textarea id="q-lb-01" data-required-when-visible></textarea>
+          <div class="description">Buildings, professors, what a semester cost.</div>
+        </div>
+        <div class="form-item">
+          <label for="q-lb-02">What are you proudest of? <span class="req">*</span></label>
+          <textarea id="q-lb-02" data-required-when-visible></textarea>
+        </div>
+        <div class="form-item">
+          <label for="q-lb-03">Why do you stay connected to MSU? <span class="req">*</span></label>
+          <textarea id="q-lb-03" data-required-when-visible></textarea>
+        </div>
+      </div>
+
+      <div class="form-item" id="alongItem">
+        <label>Also part of your story? <span class="hint-note">all optional</span></label>
+        <div class="description">Check any that apply; their questions will be added to yours.</div>
+        <div class="option"><input type="checkbox" id="exp-founder" data-opens-flavor="founder">
+          <label for="exp-founder">I started something <span class="opt-desc">A company, a practice, a nonprofit</span></label></div>
+        <div class="option"><input type="checkbox" id="exp-cc" data-opens-flavor="career-change">
+          <label for="exp-cc">I changed fields <span class="opt-desc">Within engineering, or out of it entirely</span></label></div>
+        <div class="option"><input type="checkbox" id="exp-sv" data-opens-flavor="service">
+          <label for="exp-sv">I mentor, volunteer, or give back <span class="opt-desc">In any form</span></label></div>
+      </div>
+    </fieldset>
+
+    <!-- ============ A FEW MORE ============ -->
+    <fieldset id="facultySet" hidden>
+      <legend>Your story</legend>
+      <div class="form-item alumni-hide">
+        <label for="fFacTitle">Title and department <span class="req">*</span></label>
+        <input type="text" id="fFacTitle" data-req-role="faculty">
+        <div class="description">For example: Professor emeritus, Civil and Environmental Engineering.</div>
+      </div>
+      <div class="form-item">
+        <label for="fFacYears">Years at the College</label>
+        <input type="text" id="fFacYears">
+        <div class="description">1985 to 2019 is a fine format.</div>
+      </div>
+      <div class="form-item">
+        <label for="q-fac-01">What did you teach or do at the College, and how did you come to it? <span class="req">*</span></label>
+        <textarea id="q-fac-01" data-req-role="faculty"></textarea>
+      </div>
+      <div class="form-item">
+        <label for="q-fac-02">Is there a class, lab exercise, or moment you're known for? <span class="req">*</span></label>
+        <textarea id="q-fac-02" data-req-role="faculty"></textarea>
+      </div>
+      <div class="form-item">
+        <label for="q-fac-03">What did the College give you? <span class="req">*</span></label>
+        <textarea id="q-fac-03" data-req-role="faculty"></textarea>
+      </div>
+      <div class="form-item">
+        <label for="q-fac-04">What would you tell someone teaching their first semester?</label>
+        <textarea id="q-fac-04"></textarea>
+      </div>
+      <div class="form-item">
+        <label for="q-fac-05">Why tell your story here?</label>
+        <textarea id="q-fac-05"></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset id="studentSet" hidden>
+      <legend>Your story</legend>
+      <div class="form-item">
+        <label for="sProgram">Program <span class="req">*</span></label>
+        <input type="text" id="sProgram" data-req-role="student">
+      </div>
+      <div class="form-item">
+        <label for="sYear">Expected class year <span class="req">*</span></label>
+        <input type="text" id="sYear" inputmode="numeric" data-req-role="student">
+        <div class="description">When you graduate, this page keeps its address and becomes your alumni page.</div>
+      </div>
+      <div class="form-item">
+        <label for="q-stu-01">Why MSU? <span class="req">*</span></label>
+        <textarea id="q-stu-01" data-req-role="student"></textarea>
+      </div>
+      <div class="form-item">
+        <label for="q-stu-02">What has surprised you? <span class="req">*</span></label>
+        <textarea id="q-stu-02" data-req-role="student"></textarea>
+      </div>
+      <div class="form-item">
+        <label for="q-stu-03">What's the project you're proudest of so far? <span class="req">*</span></label>
+        <textarea id="q-stu-03" data-req-role="student"></textarea>
+      </div>
+      <div class="form-item">
+        <label for="q-stu-04">What do you want alumni reading this to know? <span class="req">*</span></label>
+        <textarea id="q-stu-04" data-req-role="student"></textarea>
+      </div>
+      <div class="form-item">
+        <label for="q-stu-05">What's been the hardest semester so far, and what got you through it?</label>
+        <textarea id="q-stu-05"></textarea>
+        <div class="description">Setback stories help other students most.</div>
+      </div>
+    </fieldset>
+
+    <fieldset id="bankSet" hidden>
+      <legend>A few more (pick at least one) <span class="req">*</span></legend>
+      <p class="description" style="margin-top:0">Check at least one and answer it. These are the questions people tend to enjoy most.</p>
+
+      <div class="bank-group">About the work</div>
+      <div class="option"><input type="checkbox" id="ck-employer" data-opens="opt-employer">
+        <label for="ck-employer">Who thrives where you work</label></div>
+      <div class="conditional" id="opt-employer">
+        <div class="form-item">
+          <label for="q-opt-employer">What kind of engineer thrives where you work?</label>
+          <textarea id="q-opt-employer"></textarea>
+          <div class="description">Help the next Spartan find the right fit.</div>
+        </div>
+      </div>
+
+      <div class="option"><input type="checkbox" id="ck-firstrun" data-opens="opt-firstrun">
+        <label for="ck-firstrun">The day it ran for the first time</label></div>
+      <div class="conditional" id="opt-firstrun">
+        <div class="form-item">
+          <label for="q-opt-firstrun">Tell us about the day something you worked on ran for the first time. Where were you standing, and what happened?</label>
+          <textarea id="q-opt-firstrun"></textarea>
+          <div class="description">For example: a production line, a system going live, a bridge opening.</div>
+        </div>
+      </div>
+      <div class="option"><input type="checkbox" id="ck-failure" data-opens="opt-failure">
+        <label for="ck-failure">A time something failed</label></div>
+      <div class="conditional" id="opt-failure">
+        <div class="form-item">
+          <label for="q-opt-failure">Tell us about a time something you built or inspected failed, or almost did. What did you find, and what did you change?</label>
+          <textarea id="q-opt-failure"></textarea>
+          <div class="description">Share whatever details you can.</div>
+        </div>
+      </div>
+      <div class="option"><input type="checkbox" id="ck-hardpath" data-opens="opt-hardpath">
+        <label for="ck-hardpath">A setback, and what happened next</label></div>
+      <div class="conditional" id="opt-hardpath">
+        <div class="form-item">
+          <label for="q-opt-hardpath">Tell us about a time you failed a test, a class, or a project, and what happened next.</label>
+          <textarea id="q-opt-hardpath"></textarea>
+          <div class="description">Setback stories help current students more than success stories do.</div>
+        </div>
+      </div>
+      <div class="option"><input type="checkbox" id="ck-michigan" data-opens="opt-michigan">
+        <label for="ck-michigan">A piece of Michigan you had a hand in</label></div>
+      <div class="conditional" id="opt-michigan">
+        <div class="form-item">
+          <label for="q-opt-michigan">What's a piece of Michigan, a building, a road, a plant, a product, that you had a hand in? What do you think about when you pass it?</label>
+          <textarea id="q-opt-michigan"></textarea>
+          <div class="description">A building, a road, a plant, or a product.</div>
+        </div>
+      </div>
+      <div class="bank-group">About MSU, and since</div>
+      <div class="option"><input type="checkbox" id="ck-professor" data-opens="opt-professor">
+        <label for="ck-professor">A professor or mentor who made a difference</label></div>
+      <div class="conditional" id="opt-professor">
+        <div class="form-item">
+          <label for="q-opt-professor">Was there a professor or mentor who made a difference for you?</label>
+          <textarea id="q-opt-professor"></textarea>
+          <div class="description">If you name them, the College sends them a short note with the link.</div>
+        </div>
+      </div>
+
+      <div class="option"><input type="checkbox" id="ck-tradition" data-opens="opt-tradition">
+        <label for="ck-tradition">Your favorite MSU tradition</label></div>
+      <div class="conditional" id="opt-tradition">
+        <div class="form-item">
+          <label for="q-opt-tradition">What's your favorite MSU tradition?</label>
+          <textarea id="q-opt-tradition"></textarea>
+        </div>
+      </div>
+
+      <div class="option"><input type="checkbox" id="ck-community" data-opens="opt-community">
+        <label for="ck-community">Being a Spartan since graduation</label></div>
+      <div class="conditional" id="opt-community">
+        <div class="form-item">
+          <label for="q-opt-community">What have you enjoyed most about being part of the Spartan community since graduation?</label>
+          <textarea id="q-opt-community"></textarea>
+        </div>
+      </div>
+
+      <div class="option"><input type="checkbox" id="ck-family" data-opens="opt-family">
+        <label for="ck-family">Spartans in your family</label></div>
+      <div class="conditional" id="opt-family">
+        <div class="form-item">
+          <label for="q-opt-family">Are there other Spartans in your family?</label>
+          <textarea id="q-opt-family"></textarea>
+          <div class="description">Parents, kids, siblings, in-laws.</div>
+        </div>
+      </div>
+
+      <div class="option"><input type="checkbox" id="ck-future" data-opens="opt-future">
+        <label for="ck-future">For a future Spartan engineer</label></div>
+      <div class="conditional" id="opt-future">
+        <div class="form-item">
+          <label for="q-opt-future">What would you tell someone considering becoming a Spartan engineer?</label>
+          <textarea id="q-opt-future"></textarea>
+          <div class="description">A high schooler deciding, or their parents. Say it to them.</div>
+        </div>
+      </div>
+
+      <div class="option"><input type="checkbox" id="ck-giveback" data-opens="opt-giveback">
+        <label for="ck-giveback">Why you give back</label></div>
+      <div class="conditional" id="opt-giveback">
+        <div class="form-item">
+          <label for="q-opt-giveback">If you give back to MSU, with time, treasure, or talent, why?</label>
+          <textarea id="q-opt-giveback"></textarea>
+          <div class="description">In your own words. Fellow alumni rarely get to hear this.</div>
+        </div>
+      </div>
+
+      <div class="option"><input type="checkbox" id="ck-wildcard" data-opens="opt-wildcard">
+        <label for="ck-wildcard">Something we didn't ask</label></div>
+      <div class="conditional" id="opt-wildcard">
+        <div class="form-item">
+          <label for="q-opt-wildcard">What should we have asked you?</label>
+          <textarea id="q-opt-wildcard"></textarea>
+          <div class="description">The question you wish this form had, and your answer to it.</div>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- ============ SUMMARY LINE ============ -->
+    <fieldset id="summarySet" hidden>
+      <legend>The line under your name</legend>
+      <div class="form-item">
+        <label for="fOneline">In a single sentence, how would you sum it up?</label>
+        <textarea id="fOneline" style="min-height:64px"></textarea>
+        <div class="description">Optional. This appears under your name at the top of your page. If you're stuck, your best sentence is probably already in one of your answers above.</div>
+      </div>
+    </fieldset>
+
+    <!-- ============ PHOTOS ============ -->
+    <fieldset>
+      <legend>Photos</legend>
+      <div class="form-item file-item">
+        <label for="ph1">A photo of you, now <span class="req">*</span></label>
+        <input type="file" id="ph1" accept="image/*" required>
+        <div class="description">A clear photo of you. A phone photo in daylight is perfect.</div>
+        <div class="file-note">One file only. 10 MB limit. Allowed types: jpg, jpeg, png.</div>
+      </div>
+      <div class="form-item file-item">
+        <label for="ph2">A photo of you at MSU</label>
+        <input type="file" id="ph2" accept="image/*">
+        <div class="description">Optional, if you have one. From any era. Dorm, lab, graduation, tailgate.</div>
+        <div class="file-note">One file only. 10 MB limit. Allowed types: jpg, jpeg, png.</div>
+      </div>
+      <div class="form-item file-item">
+        <label for="ph3">The work</label>
+        <input type="file" id="ph3" accept="image/*">
+        <div class="description">Optional. You doing something your engineering education made possible.</div>
+        <div class="file-note">One file only. 10 MB limit. Allowed types: jpg, jpeg, png.</div>
+      </div>
+    </fieldset>
+
+    <!-- ============ BETWEEN US (never published) ============ -->
+    <fieldset>
+      <legend>Between us <span class="hint-note">optional, never published</span></legend>
+      <p class="description" style="margin-top:0">Nothing here goes on your page. It goes to our team.</p>
+      <div class="form-item">
+        <label for="q-priv-hear">One thing the College of Engineering should hear from you?</label>
+        <textarea id="q-priv-hear" style="min-height:70px"></textarea>
+        <div class="description">A suggestion, a concern, or something we should keep doing. It goes directly to College leadership.</div>
+      </div>
+      <div class="form-item">
+        <label for="q-priv-partner">Is there a problem where you work that a university could help with?</label>
+        <textarea id="q-priv-partner" style="min-height:70px"></textarea>
+        <div class="description">Research, testing, student projects. We'll connect you with the right people.</div>
+      </div>
+    </fieldset>
+
+    <!-- ============ SHARING ============ -->
+    <fieldset>
+      <legend>Sharing your page</legend>
+      <div class="form-item">
+        <label>Who can see it? <span class="req">*</span></label>
+        <div class="option"><input type="radio" name="consent" id="c1" value="internal">
+          <label for="c1">Keep it inside the College <span class="opt-desc">Students, faculty, and staff of the College of Engineering.</span></label></div>
+        <div class="option"><input type="radio" name="consent" id="c2" value="community">
+          <label for="c2">Share with the MSU community <span class="opt-desc">The above, plus alumni audiences, donors, and MSU publications.</span></label></div>
+        <div class="option"><input type="radio" name="consent" id="c3" value="public">
+          <label for="c3">Public: share it anywhere <span class="opt-desc">A public page you can post to LinkedIn or anywhere else. Most alumni choose this.</span></label></div>
+        <div class="option" style="margin-top:14px"><input type="checkbox" id="fMap">
+          <label for="fMap">If the College builds a public map of Spartan engineers, include me at the city level.</label></div>
+        <div class="withdraw-note">Your answers appear on your page and in collections of answers to the same question, at the level you chose above. Whatever you choose: your page comes down any time you ask. One email, no questions. Coming down includes coming off the map and out of the collections.</div>
+      </div>
+      <div class="form-item">
+        <label>Two optional things, while you're here</label>
+        <div class="option"><input type="checkbox" id="fCall">
+          <label for="fCall">I'd take a fifteen-minute call with a current student who reads my story.</label></div>
+        <div class="option"><input type="checkbox" id="fInvolve">
+          <label for="fInvolve">The College can reach out to me about other ways to stay involved.</label></div>
+        <div class="option"><input type="checkbox" id="fNearby">
+          <label for="fNearby">Let me know when the College or fellow Spartans gather near me.</label></div>
+      </div>
+    </fieldset>
+
+    <div class="actions">
+      <div class="answer-count" id="answerCount" aria-live="polite"></div>
+      <button type="button" id="submitStory" class="button-primary">Submit my story</button>
+    </div>
+  </form>
+
+  <!-- ============ CONFIRMATION (Webform confirmation message) ============ -->
+  <div class="confirmation" id="confirmation">
+    <h2>Thank you. Your story is in.</h2>
+    <p>Here's what happens next:</p>
+    <ol class="steps-list">
+      <li>Someone on our team reads your story. A person, not a system.</li>
+      <li>Once it's published, we email you the link to your page.</li>
+      <li>That email includes a ready-to-post version for LinkedIn, written from your own words, if you'd like to share it.</li>
+      <li>Any time after that, one email updates your page, changes who can see it, or takes it down.</li>
+    </ol>
+    <p>If a current student takes you up on that fifteen-minute call, we'll introduce you by email first. Nothing happens without you knowing.</p>
+    <p>Anything you shared under Between us stays between us: it goes to the team, never to your page.</p>
+    <div class="passiton">
+      <h3>Pass it on</h3>
+      <p>Know a Spartan engineer who has a story? Send this to them yourself; it means more coming from you.</p>
+      <div class="invite-text" id="inviteText">I just told my Spartan story for the College of Engineering's alumni pages. It took me about twenty minutes, most of it optional. Here's the link: engineering.msu.edu/stories/share?ref=peer</div>
+      <div class="passiton-actions">
+        <button type="button" class="button-primary" id="copyInvite">Copy the invite</button>
+        <a class="button-secondary" id="mailInvite" href="#">Email a fellow Spartan</a>
+        <a class="button-secondary" href="spartan-stories-on-site.html">Browse Spartan Stories</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="build-notes">
+  <details>
+    <summary>Build notes for the MSU web team (not part of the user-facing form)</summary>
+    <div class="bn-body">
+      <p>This mock uses only stock Drupal Webform capability: elements, conditional visibility, required states, file uploads, confirmation message, email handlers. Build it as one webform, <code>share_your_spartan_story</code>. One mock-only detail: the submit button here runs on a click handler because sandboxed preview environments block native form submission; the real Webform submits normally.</p>
+
+      <h3>Elements and machine names</h3>
+      <ul>
+        <li>Element machine names mirror the question IDs shown in this mock, version included: <code>q_fd_01_v2</code>, <code>q_opt_professor_v1</code>, and so on. Never rename or reword an element that has submissions; add the new version and close the old. Question wording is versioned data, not copy.</li>
+        <li>The twelve trimmed path questions (two per path) live in the question-bank doc as rotation inventory. Swapping one in is a quarterly, versioned change by the content owner, not a dev task: clone the element pattern, new machine name.</li>
+      </ul>
+
+      <h3>Conditional logic</h3>
+      <ul>
+        <li><code>stage</code> radios show one of three stage fieldsets. All three questions in the visible stage fieldset are conditionally required (required when visible); Webform supports conditional required states.</li>
+        <li>Along-the-way checkboxes each show an experience fieldset. Everything inside them is optional.</li>
+        <li>Path extras checkboxes each show one optional textarea. The A few more group is a required checkboxes element (minimum one), and each revealed textarea there is conditionally required when visible. Both are native Webform. Together with the three path questions this guarantees at least four answered questions per submission, the publish floor for a page that reads as a story rather than a caption.</li>
+      </ul>
+
+      <h3>Files, spam, accessibility</h3>
+      <ul>
+        <li>Three managed-file elements, jpg/jpeg/png, 10 MB, private file system. Photo 1 required. Strip EXIF location data on upload.</li>
+        <li>Honeypot module for spam; avoid CAPTCHA unless abuse forces it, since every point of friction costs real submissions.</li>
+        <li>Standard form accessibility: labels bound to inputs, error summary at top, keyboard operable. The mock's behavior is the spec.</li>
+      </ul>
+
+      <h3>Tagging, realistically</h3>
+      <ul>
+        <li>A voice-first path is a V2 stretch: record instead of type, with a transcript the storyteller approves before anything publishes. Publish-as-written holds because the approved transcript is the writing. Nothing in this form pretends to record audio today; the Webform ships text-only.</li>
+<li>The role radios are the top-level conditional, same Webform mechanic as the stage radios one level down. The form is public for all three classes; the gate is review, not access. Invitation links (mention-loop note for faculty, Ambassadors and capstone teams for students) still carry their ref codes so sources stay visible, and the reviewer standard carries the gaming tells: coordinated batches, promotion-shaped answers, mention-stuffing. No contests, leaderboards, or counts ever attach to submitting.</li>
+        <li>Identity is one key for life: the email tied to the Spartan record (msu.edu NetID for students and faculty, Contact ID match for alumni). Review starts with one search of the sheet for the address. A returning submitter grows their existing page; a graduating student's page converts to an alumni page at the same URL. Nobody ever gets a second page.</li>
+        <li>V1 has no tagging operation. Structure captured at source does the work: stage (radio), experiences (checkboxes), era (derived from class year), department (the degree select above), consent tier, and the question IDs themselves. Any question's answers across the corpus is a query, not a tagging project.</li>
+        <li>One human judgment at publish: a route-to flag on the submission record (major gifts / planned giving / Careers / corporate and foundation relations / none). Ten seconds inside the read the reviewer already does. This replaces fund tags, company tags, and topic tags for V1. Planned giving is deliberately its own value: a late-career alum writing about the scholarship that made them is a different lead, for a different officer, than anything major gifts works.</li>
+        <li>Explicitly deferred: company normalization, topic or AI tagging, and all Drupal taxonomy administration. The stored fields keep every future option open; nothing about V1 forecloses the segmented layer later.</li>
+      </ul>
+
+      <h3>Submission handling</h3>
+      <ul>
+        <li>Email handler 1: acknowledgment to the submitter with the same content as the confirmation message.</li>
+        <li>Email handler 2: notification to the review inbox with all fields, including stage, experiences, and both optional checkboxes, so triage can route without opening Drupal.</li>
+        <li>Routing at triage, not in the form: the fifteen-minute-call checkbox goes to the student-connection owner; stay-involved plus the late-career or retired stage flags for gift-officer review. These rules live with the review team; the form just carries the signals.</li>
+        <li>The Between us fields (<code>q_priv_hear</code>, <code>q_priv_partner</code>) are excluded from every publish path and every export that feeds the public surface. They route separately: the hear field to a monthly leadership digest, the partner field to corporate and foundation relations. If these two routes don't have owners, remove the fields rather than collect answers nobody reads.</li>
+        <li>Leadership uses beyond the digest: published entries are ready material for advisory board meetings and podium remarks. A dean opening a board meeting with one alum's page, deks and quotes at hand, is the program's best internal distribution event, and it costs the dean's office a link, not a request to communications.</li>
+        <li>Peer growth is self-serve, not staff-routed: the confirmation page carries a Pass it on block with a prewritten invite, a copy button, and a mailto link. In Drupal this is confirmation-page HTML plus a few lines of JS (or plain mailto only, if the team wants zero script). No submission data is involved and no staff action is required.</li>
+        <li>The employer question is deliberately framed as positive fit ("What kind of engineer thrives where you work?") so the answer space is fit characteristics, not employer reviews. The framing is the guardrail; do not add a disclaimer.</li>
+        <li>Rotation example, already performed in this spec: <code>q_opt_extra_v1</code> (outside the classroom) rotated to inventory; <code>q_opt_employer_v1</code> rotated in. This is the quarterly motion: clone the pattern, new machine name, old element closed, never edited.</li>
+        <li>Webform submissions are the working store only. Weekly export (Webform CSV or a Views data export) into the canonical store. Drupal is not the system of record for this corpus.</li>
+        <li>One page per alum, enforced at review since V1 has no accounts: match on email, then name plus class year plus program. A second submission from the same person is an update to the existing entry, same node, same URL, change noted in the log. A resubmission must never create a second page; the permanent-link promise depends on it. This match is one operation serving three purposes: Spartan verification, duplicate detection, and CRM connection.</li>
+        <li>Salesforce connection, V1: a shared Excel file, not an integration. The weekly export is a spreadsheet on a shared drive; advancement services matches each row to its Contact record and adds two columns, Contact ID and donor status, then sends it back. Logging on the record can be as simple as a note with the story URL, or deferred entirely. Typed activities, volunteer-interest flags, and CFR tasks on the record are V2, once someone owns the Salesforce configuration. The story text never goes into Salesforce; the hear field stays in the leadership digest, not on the individual's record.</li>
+        <li>The Contact ID column gets pasted back into the canonical store every week. Thirty seconds, and it is still the most valuable field in the system: the permanent join key that makes every V2 ambition a query instead of a project.</li>
+        <li>Where the submitted role and city differ from the record's employment data, flag to the records team as a possible update. Never auto-write to Salesforce. A custom Story object, automation flows, or any live sync are gate two, earned by volume.</li>
+      </ul>
+
+      <h3>Development yield (V1: a spreadsheet and an email)</h3>
+      <ul>
+        <li>The match doubles as the discovery engine: once the donor-status column comes back, the rows sort into two piles. Entries by existing donors are stewardship touches; entries by non-donors carrying signals (route flag, stay-involved, give-back answers) are qualified discovery, arriving with no discovery-officer labor.</li>
+        <li>The V1 officer digest is an email with that week's rows in it: name, link, dek, route flag, donor status. Sent by whoever reviewed that week, to a small officer list. The intended use is one sentence in the officer's own words with the link. Nothing asks officers to produce anything.</li>
+        <li>Utilization in V1 is a tally column: officers reply used-it, or someone asks quarterly. Contact reports referencing a story activity in Salesforce is the V2 version. Either way, utilization, never gift attribution, is the program's development metric.</li>
+      </ul>
+
+      <h3>The map (captured now, built later)</h3>
+      <ul>
+        <li>The map opt-in checkbox and the structured city field are captured from day one so the corpus is map-ready when volume justifies building it. A pin requires the checkbox, the public tier, and a verified record; the location is the byline city geocoded to a centroid at review. The map must never disclose anything the story page does not already show.</li>
+        <li>Hometown is optional and sensitive by design: it powers aggregate views (county-level, for prospective-student audiences) and internal recruitment tools. It is never an individual public pin and never appears on a page without a separate ask.</li>
+        <li>If the College has an existing map surface when this ships, it becomes a layer on that surface, not a second map.</li>
+      </ul>
+
+      <h3>Source attribution</h3>
+      <ul>
+        <li>A hidden element (<code>q_meta_source</code>, Webform prepopulate enabled) captures how each submission arrived via URL parameter: launch invitations carry their own ref, the pass-it-on invite carries <code>?ref=peer</code>, everything else lands as direct. This is the only instrumentation on the acquisition flywheel; without it nobody can ever say whether peer growth works. Include it in the weekly export.</li>
+      </ul>
+
+      <h3>Engagement reporting (alumni relations)</h3>
+      <ul>
+        <li>V1 is quarterly counts from the spreadsheet, handed to alumni relations in the framework they already report in (CASE's four modes): submissions as experiential engagement, the call and stay-involved checkboxes as volunteer interest, nearby and pass-it-on as communication engagement, give-back answers as philanthropic-adjacent context. Ten minutes with a pivot table.</li>
+        <li>V2 is typed Salesforce activities rolling into the engagement dashboard automatically, with zero logging by the team. Same numbers, no pivot table.</li>
+        <li>The nearby checkbox plus the city in the role field is a self-building regional event-interest list, opt-in clean. In V1 it is two columns in the same spreadsheet, sorted by city when an event is being planned.</li>
+      </ul>
+
+      <h3>Microsoft Forms fallback</h3>
+      <ul>
+        <li>If the pilot starts in Forms: the stage question branches to three sections; that part ports cleanly. Checkbox-revealed questions do not port, so experience and extra questions appear as ordinary optional questions in each branch, making the form longer but functional. Treat Forms as the two-week pilot vehicle and Webform as the target.</li>
+      </ul>
+    </div>
+  </details>
+</div>
+
+<footer>
+  <div class="inner">
+    <div>Spartan Stories · MSU College of Engineering</div>
+    <div>Demo prototype · nothing you type here is stored or sent</div>
+  </div>
+</footer>
+
+<script>
+/* Only behavior a stock Drupal Webform provides: conditional visibility,
+   required-field validation, confirmation message. Nothing else. */
+
+const form = document.getElementById('storyForm');
+const bankSet = document.getElementById('bankSet');
+const summarySet = document.getElementById('summarySet');
+
+/* Flavor-specific optional questions. In the real build these are ordinary
+   Webform fields with conditional visibility, exactly like the shared bank. */
+/* Three live extras per path. The full bank (five per path) lives in the
+   question-bank doc; swaps in and out are versioned rotations, not edits. */
+const FLAVOR_EXTRAS = {
+  "first-decade": [
+    {id:"q-fd-04", label:"How you got your first job", q:"How did you get your first job?", desc:"The actual sequence: application, referral, career fair, luck."},
+    {id:"q-fd-05", label:"The class or project that matters most now", q:"What class or project turns out to matter most now?", desc:""},
+    {id:"q-fd-08", label:"What's next", q:"What's next for you?", desc:""}
+  ],
+  "founder": [
+    {id:"q-fo-04", label:"Your first customer", q:"How did you get your first customer?", desc:""},
+    {id:"q-fo-06", label:"What you got wrong early", q:"What did you get wrong early?", desc:""},
+    {id:"q-fo-07", label:"What the company does", q:"What does the company do, in plain terms?", desc:"Explain it like the reader isn't in your industry."}
+  ],
+  "career-path": [
+    {id:"q-cp-04", label:"A project you're proud of", q:"What's a project you're proud of?", desc:"What was your part in it?"},
+    {id:"q-cp-05", label:"What people get wrong about your industry", q:"What does someone outside your industry get wrong about it?", desc:""},
+    {id:"q-cp-07", label:"Someone who opened a door", q:"Who opened a door for you?", desc:""}
+  ],
+  "career-change": [
+    {id:"q-cc-05", label:"What the switch cost", q:"What did the switch cost you, honestly?", desc:"Money, time, certainty. An honest answer helps the next person."},
+    {id:"q-cc-07", label:"Where the engineering showed up", q:"Did your engineering training show up in unexpected places?", desc:""},
+    {id:"q-cc-08", label:"When it started to feel right", q:"How long before it felt right?", desc:""}
+  ],
+  "service": [
+    {id:"q-sv-04", label:"A moment with someone you've mentored", q:"What's a moment with a student or mentee that stuck with you?", desc:"First names or no names is fine."},
+    {id:"q-sv-05", label:"What it actually takes", q:"What does it actually take, week to week?", desc:"Hours, patience, spare parts. The real answer helps the next volunteer."},
+    {id:"q-sv-07", label:"How another alum could start", q:"How could another alum start doing what you do?", desc:"Be specific. Someone reading this will want to."}
+  ],
+  "looking-back": [
+    {id:"q-lb-04", label:"Your first job and what it paid", q:"What was your first job out of school, and what did it pay?", desc:"Numbers welcome. They tell the story."},
+    {id:"q-lb-06", label:"The technology that changed everything", q:"What technology arrived during your career that changed everything?", desc:"What was the before, and what was the after?"},
+    {id:"q-lb-08", label:"For today's students", q:"What do you want today's students to know about your era?", desc:""}
+  ]
+};
+
+/* Build the per-flavor extras into each conditional section */
+document.querySelectorAll('.conditional[data-flavor]').forEach(section=>{
+  const extras = FLAVOR_EXTRAS[section.dataset.flavor];
+  if(!extras) return;
+  const holder = document.createElement('div');
+  holder.className = 'form-item';
+  holder.innerHTML = '<label>More for this story, if you\'d like</label>'
+    + extras.map(x=>`
+      <div class="option"><input type="checkbox" id="ck-${x.id}" data-opens="wrap-${x.id}">
+        <label for="ck-${x.id}">${x.label}</label></div>
+      <div class="conditional" id="wrap-${x.id}">
+        <div class="form-item">
+          <label for="${x.id}">${x.q}</label>
+          <textarea id="${x.id}"></textarea>
+          ${x.desc ? `<div class="description">${x.desc}</div>` : ''}
+        </div>
+      </div>`).join('');
+  section.appendChild(holder);
+});
+
+const stageSections = ["first-decade","career-path","looking-back"];
+const expSections = ["founder","career-change","service"];
+let stage = null;
+let role = null;
+function applyRole(){
+  const isA = role === 'alumni', isF = role === 'faculty', isS = role === 'student';
+  document.getElementById('alumniStory').hidden = !isA;
+  document.getElementById('facultySet').hidden = !isF;
+  document.getElementById('studentSet').hidden = !isS;
+  document.querySelectorAll('.alumni-only').forEach(el => el.hidden = !isA);
+  document.getElementById('fDegree').required = isA;
+  document.getElementById('fYear').required = isA;
+  bankSet.hidden = !(isA && stage);
+  const sm = document.getElementById('summarySet');
+  if(sm) sm.hidden = !role;
+  const call = document.getElementById('fCall');
+  if(call) call.closest('.option').hidden = isS;
+}
+document.querySelectorAll('input[name="role"]').forEach(r=>{
+  r.addEventListener('change', ()=>{ role = r.value; applyRole(); });
+});
+
+/* Order the fieldset: stage sections, then the experience checkboxes, then experience sections */
+const alongItem = document.getElementById('alongItem');
+const lbSection = document.querySelector('.conditional[data-flavor="looking-back"]');
+lbSection.after(alongItem);
+let anchor = alongItem;
+expSections.forEach(f=>{
+  const el = document.querySelector(`.conditional[data-flavor="${f}"]`);
+  anchor.after(el);
+  anchor = el;
+});
+
+document.querySelectorAll('input[name="stage"]').forEach(r=>{
+  r.addEventListener('change', ()=>{
+    stage = r.value;
+    stageSections.forEach(fl=>{
+      document.querySelector(`.conditional[data-flavor="${fl}"]`).classList.toggle('visible', fl === stage);
+    });
+    bankSet.hidden = false;
+    summarySet.hidden = false;
+  });
+});
+
+/* Along-the-way checkboxes reveal their question sets, all optional */
+document.querySelectorAll('input[data-opens-flavor]').forEach(ck=>{
+  ck.addEventListener('change', ()=>{
+    document.querySelector(`.conditional[data-flavor="${ck.dataset.opensFlavor}"]`)
+      .classList.toggle('visible', ck.checked);
+  });
+});
+
+/* Bank checkboxes reveal their question */
+document.querySelectorAll('input[data-opens]').forEach(ck=>{
+  ck.addEventListener('change', ()=>{
+    document.getElementById(ck.dataset.opens).classList.toggle('visible', ck.checked);
+  });
+});
+
+/* Submit: required check, then confirmation message */
+/* Sandboxed previews block native form submission, so the button drives it directly.
+   The real Webform uses its normal submission; this is mock-only wiring. */
+form.addEventListener('submit', e=>e.preventDefault());
+document.getElementById('submitStory').addEventListener('click', ()=>{
+  const err = document.getElementById('formError');
+  let missing = false, firstEl = null;
+  const mark = el => { missing = true; if(!firstEl && el) firstEl = el; };
+
+  if(!role) mark(document.getElementById('r-alumni'));
+  form.querySelectorAll('input[required], textarea[required]').forEach(el=>{
+    if(el.type === 'file'){ if(!el.files.length) mark(el); }
+    else if(!el.value.trim()) mark(el);
+  });
+  if(role === 'faculty' || role === 'student'){
+    document.querySelectorAll(`[data-req-role="${role}"]`).forEach(el=>{
+      if(!el.value.trim()) mark(el);
+    });
+  }
+  if(role === 'alumni' && !stage) mark(document.getElementById('st-fd'));
+  if(role === 'alumni' && stage){
+    const section = form.querySelector(`.conditional[data-flavor="${stage}"]`);
+    section.querySelectorAll('[data-required-when-visible]').forEach(el=>{
+      if(!el.value.trim()) mark(el);
+    });
+  }
+  const checkedBank = Array.from(bankSet.querySelectorAll('input[data-opens]')).filter(c=>c.checked);
+  if(role === 'alumni' && !checkedBank.length) mark(bankSet.querySelector('input[data-opens]'));
+  checkedBank.forEach(c=>{
+    const ta = document.querySelector('#'+c.dataset.opens+' textarea');
+    if(ta && !ta.value.trim()) mark(ta);
+  });
+  if(!form.querySelector('input[name="consent"]:checked')) mark(document.getElementById('c1'));
+
+  if(missing){
+    err.classList.add('show');
+    if(firstEl){
+      firstEl.scrollIntoView({block:'center'});
+      try{ firstEl.focus({preventScroll:true}); }catch(e){}
+    } else {
+      window.scrollTo({top:0});
+    }
+    return;
+  }
+  err.classList.remove('show');
+  form.style.display = 'none';
+  document.getElementById('confirmation').classList.add('show');
+  window.scrollTo({top:0});
+});
+
+/* Source attribution: hidden field from URL param, default direct */
+const refParam = new URLSearchParams(window.location.search).get('ref');
+if(refParam) document.getElementById('fSource').value = refParam.slice(0, 40);
+
+/* Pass it on: self-serve peer invite, no staff in the loop */
+const inviteText = document.getElementById('inviteText').textContent.trim();
+document.getElementById('mailInvite').href =
+  'mailto:?subject=' + encodeURIComponent('Your Spartan story') +
+  '&body=' + encodeURIComponent(inviteText);
+document.getElementById('copyInvite').addEventListener('click', e=>{
+  if(navigator.clipboard) navigator.clipboard.writeText(inviteText).catch(()=>{});
+  e.target.textContent = 'Copied';
+  setTimeout(()=>{ e.target.textContent = 'Copy the invite'; }, 1800);
+});
+
+/* live answer count near submit */
+(function(){
+  const el = document.getElementById('answerCount');
+  if(!el) return;
+  function update(){
+    const n = [...document.querySelectorAll('textarea')].filter(t => t.value.trim().length > 0 && !t.closest('[hidden]')).length;
+    el.textContent = n === 0 ? '' : 'Answers so far: ' + n + (n < 4 ? ' (four are needed to publish)' : '');
+  }
+  document.addEventListener('input', e => { if(e.target && e.target.tagName === 'TEXTAREA') update(); });
+  update();
+})();
+</script>
+</body>
+</html>
