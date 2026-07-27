@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Stories from the Spartan Engineering community at Michigan State University, told in their own words and published as written.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spartan Stories | College of Engineering | Michigan State University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --msu-green:#18453B; --msu-deep:#0B2E26; --leaf:#7FB539; --leaf-dark:#4E7A1E;
+    --white:#FFFFFF; --ink:#161A18; --ink-soft:#50564F; --line:#E2E4E0; --bg:#FFFFFF; --bg-alt:#F6F7F4;
+    --r:8px;
+    --shadow-hover:0 10px 28px rgba(11,46,38,.12);
+    --ease:180ms cubic-bezier(.2,.6,.3,1);
+    --sec:clamp(52px,7vw,84px);
+    --wrap:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{transition:none!important;animation:none!important} }
+  body{font-family:'Public Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+  a{color:var(--msu-green);text-underline-offset:3px}
+  ::selection{background:#CDE0C4}
+  :focus-visible{outline:3px solid var(--leaf);outline-offset:2px;border-radius:4px}
+  h1,h2,h3{font-family:'Montserrat',sans-serif;letter-spacing:-0.01em}
+  [id]{scroll-margin-top:24px}
+
+  .wrap{max-width:var(--wrap);margin:0 auto;padding-left:24px;padding-right:24px}
+
+  .eyebrow{
+    display:block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.7rem;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--leaf-dark);margin-bottom:8px;
+  }
+  .sec-h{font-weight:700;font-size:clamp(1.45rem,2.6vw,1.8rem);color:var(--msu-green)}
+
+  /* ===== mock ribbon ===== */
+  .mock-ribbon{
+    background:#FBF6E8;border-bottom:1px dashed #C9AE5E;color:#6B5416;
+    font-size:.72rem;padding:7px 16px;text-align:center;letter-spacing:.01em;
+  }
+
+  /* ===== MSU utility bar ===== */
+  .msu-bar{background:var(--msu-deep);color:#fff}
+  .msu-bar-inner{max-width:var(--wrap);margin:0 auto;padding:9px 24px;display:flex;align-items:center;gap:16px}
+  .msu-wordmark{font-family:'Montserrat',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.16em}
+  .msu-bar nav{margin-left:auto;display:flex;gap:20px;font-size:.78rem}
+  .msu-bar a{color:#DCE8D6;text-decoration:none;transition:color var(--ease)}
+  .msu-bar a:hover{color:#fff;text-decoration:underline}
+
+  /* ===== site header ===== */
+  .site-head{background:#fff;border-bottom:1px solid var(--line)}
+  .site-head-inner{max-width:var(--wrap);margin:0 auto;padding:18px 24px 0;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .site-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.3rem;color:var(--msu-green);text-decoration:none}
+  .site-search{margin-left:auto;font-size:.8rem;color:var(--ink-soft);border:1px solid var(--line);border-radius:6px;padding:7px 14px;background:var(--bg-alt)}
+  .site-nav{max-width:var(--wrap);margin:0 auto;padding:8px 24px 0;display:flex;gap:2px;flex-wrap:wrap}
+  .site-nav a{
+    font-family:'Montserrat',sans-serif;font-weight:600;font-size:.84rem;color:var(--ink);
+    text-decoration:none;padding:10px 13px 13px;border-bottom:3px solid transparent;transition:border-color var(--ease),color var(--ease);
+  }
+  .site-nav a:hover{border-bottom-color:var(--leaf);color:var(--msu-green)}
+  .site-nav a.active{border-bottom-color:var(--msu-green);color:var(--msu-green)}
+  @media (max-width:700px){ .site-nav{overflow-x:auto;flex-wrap:nowrap} .site-nav a{white-space:nowrap} }
+
+  .crumb{max-width:var(--wrap);margin:0 auto;padding:16px 24px 0;font-size:.76rem;color:var(--ink-soft)}
+  .crumb a{color:var(--ink-soft)}
+
+  /* ===== hero ===== */
+  .hero{background:linear-gradient(180deg,var(--msu-green) 0%,var(--msu-deep) 100%);color:#fff;margin-top:14px}
+  .hero-inner{max-width:var(--wrap);margin:0 auto;padding:clamp(40px,6vw,68px) 24px clamp(44px,6vw,72px)}
+  .hero h1{font-weight:800;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.08;letter-spacing:-0.015em}
+  .hero .lede{margin-top:16px;max-width:62ch;font-size:clamp(.98rem,1.4vw,1.08rem);color:#D8E6D0}
+  .hero .cta-row{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .page-title{max-width:var(--wrap);margin:0 auto;padding:14px 24px 0}
+  .page-title h1{font-weight:800;font-size:clamp(1.9rem,3.8vw,2.6rem);color:var(--msu-green)}
+  .page-intro{max-width:var(--wrap);margin:0 auto;padding:10px 24px 8px;display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap}
+  .page-intro p{max-width:66ch;font-size:1rem;color:var(--ink-soft)}
+
+  /* ===== buttons ===== */
+  .btn-green{
+    display:inline-block;background:var(--msu-green);color:#fff;text-decoration:none;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem;
+    padding:12px 22px;border-radius:6px;white-space:nowrap;border:none;cursor:pointer;
+    transition:background var(--ease);
+  }
+  .btn-green:hover{background:var(--msu-deep)}
+  .btn-ghost{
+    display:inline-block;background:transparent;color:#fff;text-decoration:none;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem;
+    padding:12px 22px;border-radius:6px;border:1.5px solid rgba(255,255,255,.55);
+    transition:border-color var(--ease),background var(--ease);cursor:pointer;
+  }
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+  .btn-random{
+    border:1.5px solid var(--msu-green);background:#fff;color:var(--msu-green);border-radius:6px;
+    padding:9px 18px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;cursor:pointer;
+    transition:background var(--ease),transform var(--ease);
+  }
+  .btn-random:hover{background:#EFF5EC;transform:translateY(-1px)}
+
+  /* ===== featured ===== */
+  .featured{max-width:var(--wrap);margin:26px auto 0;padding:0 24px}
+  .featured-card{
+    background:#fff;border:1px solid var(--line);border-left:5px solid var(--msu-green);
+    border-radius:var(--r);padding:26px 30px;
+    display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
+  }
+  .featured-card .f-kicker{font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf-dark);font-weight:700}
+  .featured-card h2{font-weight:700;font-size:1.45rem;margin-top:6px;color:var(--msu-green)}
+  .featured-card p{color:var(--ink-soft);margin-top:6px;max-width:70ch;font-size:.95rem}
+  .featured-card .byline{font-size:.78rem;color:var(--ink-soft);margin-top:10px}
+  .featured-card a.readlink{color:var(--msu-green);font-weight:700;font-size:.9rem;white-space:nowrap;text-decoration:none;border-bottom:2px solid var(--leaf)}
+  .featured-card a.readlink:hover{color:var(--msu-deep)}
+  @media (max-width:700px){ .featured-card{grid-template-columns:1fr} }
+
+  /* ===== browse ===== */
+  .browse{max-width:var(--wrap);margin:0 auto;padding:var(--sec) 24px 0}
+  .microcopy{font-size:.8rem;color:var(--ink-soft);margin-top:6px;max-width:76ch}
+  .chip-rows{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+  .chip-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .chip-row .rlabel{font-family:'Montserrat',sans-serif;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-soft);min-width:76px}
+  .chip{
+    border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 16px;
+    font-size:.8rem;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit;
+    transition:border-color var(--ease),background var(--ease),color var(--ease);
+  }
+  .chip:hover{border-color:var(--msu-green)}
+  .chip[aria-pressed="true"]{background:var(--msu-green);border-color:var(--msu-green);color:#fff}
+  .chip .n{color:var(--ink-soft);font-weight:400;font-size:.72rem}
+  .chip[aria-pressed="true"] .n{color:#BFD9B0}
+  @media (max-width:700px){ .chip-row{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px} .chip{white-space:nowrap} }
+
+  /* ===== grid ===== */
+  .grid-wrap{max-width:var(--wrap);margin:0 auto;padding:34px 24px 0}
+  .grid-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .grid-head h2{font-weight:700;font-size:clamp(1.45rem,2.6vw,1.8rem);color:var(--msu-green)}
+  .grid-head .count{font-size:.82rem;color:var(--ink-soft);max-width:52ch}
+  .grid-head .btn-random{margin-left:auto}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;margin-top:20px}
+  .card{
+    border:1px solid var(--line);border-radius:var(--r);background:#fff;padding:22px 22px 20px;
+    text-decoration:none;color:var(--ink);display:flex;flex-direction:column;
+    transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease);
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:#CBD4C7}
+  .card.hide{display:none}
+  .card .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .tag{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--leaf-dark);background:#EFF5EC;border-radius:4px;padding:4px 9px}
+  .tag.legacy{color:#8A6D1D;background:#FBF6E8}
+  .card h3{font-weight:700;font-size:1.06rem;color:var(--msu-green);line-height:1.3}
+  .card .dek{font-size:.88rem;color:var(--ink-soft);margin-top:7px;flex:1}
+  .card .byline{font-size:.74rem;color:var(--ink-soft);margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+
+  /* ===== the signature: alumni voice set in serif ===== */
+  .quotes{background:var(--bg-alt);margin-top:var(--sec);padding:var(--sec) 24px}
+  .quotes-inner{max-width:var(--wrap);margin:0 auto}
+  .quote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:22px}
+  .pull{
+    background:#fff;border:1px solid var(--line);border-radius:var(--r);
+    padding:26px 26px 22px;text-decoration:none;color:var(--ink);display:block;position:relative;
+    transition:transform var(--ease),box-shadow var(--ease);
+  }
+  .pull::before{
+    content:"\201C";font-family:'Newsreader',Georgia,serif;font-size:3.6rem;line-height:1;
+    color:var(--leaf);position:absolute;top:12px;left:20px;opacity:.9;
+  }
+  .pull:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+  .pull p{font-family:'Newsreader',Georgia,serif;font-size:1.12rem;line-height:1.55;font-style:italic;padding-top:26px;color:var(--ink)}
+  .pull .who{font-family:'Public Sans',sans-serif;font-size:.75rem;color:var(--ink-soft);margin-top:14px;font-style:normal;padding-top:12px;border-top:1px solid var(--line)}
+
+  /* ===== advice thread ===== */
+  .thread{max-width:var(--wrap);margin:0 auto;padding:var(--sec) 24px 0}
+  .thread .sub{font-size:.85rem;color:var(--ink-soft);margin-top:6px;max-width:76ch}
+  .thread-list{margin-top:22px;border-left:3px solid var(--leaf);padding-left:26px;display:flex;flex-direction:column;gap:22px;max-width:78ch}
+  .voice{display:block;text-decoration:none;color:var(--ink)}
+  .voice p{font-family:'Newsreader',Georgia,serif;font-size:1.08rem;line-height:1.55;font-style:italic;transition:color var(--ease)}
+  .voice .who{font-size:.74rem;color:var(--ink-soft);margin-top:5px}
+  .voice:hover p{color:var(--msu-green)}
+
+  /* ===== statewide ===== */
+  .statewide{background:var(--msu-green);color:#fff;margin-top:var(--sec);padding:clamp(40px,5.5vw,62px) 24px}
+  .statewide-inner{max-width:var(--wrap);margin:0 auto;display:flex;gap:26px;flex-wrap:wrap;align-items:center}
+  .statewide h2{font-weight:700;font-size:clamp(1.3rem,2.4vw,1.6rem)}
+  .statewide p{color:#D8E6D0;font-size:.92rem;max-width:56ch;margin-top:6px}
+  .statewide .eyebrow{color:#A9CD8E}
+  .citychips{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+  .citychip{
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:99px;
+    padding:6px 15px;font-size:.78rem;text-decoration:none;transition:background var(--ease),border-color var(--ease);
+  }
+  .citychip:hover{background:rgba(255,255,255,.2);border-color:#fff}
+
+  /* ===== numbers ===== */
+  .numbers{max-width:var(--wrap);margin:0 auto;padding:var(--sec) 24px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;text-align:center}
+  .num .big{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(2.2rem,4vw,2.8rem);color:var(--msu-green);font-variant-numeric:tabular-nums}
+  .num .lab{font-size:.78rem;color:var(--ink-soft);margin-top:2px}
+
+  /* ===== led-to + future band ===== */
+  .ledto{max-width:var(--wrap);margin:0 auto;padding:var(--sec) 24px 0}
+  .ledto-card{
+    border:1px solid var(--line);border-left:5px solid var(--leaf);border-radius:var(--r);
+    padding:26px 28px;display:block;text-decoration:none;color:var(--ink);
+    transition:transform var(--ease),box-shadow var(--ease);
+  }
+  .ledto-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+  .ledto-card .k{font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf-dark);font-weight:700}
+  .ledto-card p{margin-top:8px;font-family:'Newsreader',Georgia,serif;font-size:1.06rem;line-height:1.55;max-width:78ch}
+  .ledto-card .who{font-size:.78rem;color:var(--ink-soft);margin-top:10px}
+  .future-band{background:var(--bg-alt);margin-top:var(--sec);padding:var(--sec) 24px}
+  .future-inner{max-width:var(--wrap);margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+  .future-inner h2{font-weight:700;font-size:clamp(1.3rem,2.4vw,1.6rem);color:var(--msu-green)}
+  .future-inner blockquote{font-family:'Newsreader',Georgia,serif;font-size:1.12rem;font-style:italic;color:var(--ink);margin-top:12px;max-width:70ch;line-height:1.55}
+  .future-inner .who{font-size:.76rem;color:var(--ink-soft);margin-top:8px;font-style:normal}
+  @media (max-width:760px){ .future-inner{grid-template-columns:1fr} }
+
+  /* ===== promises + share ===== */
+  .promises{max-width:var(--wrap);margin:0 auto;padding:var(--sec) 24px 0}
+  .promises-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+  .promise{border-top:3px solid var(--leaf);padding-top:14px}
+  .promise h3{font-weight:700;font-size:.95rem;color:var(--msu-green)}
+  .promise p{font-size:.86rem;color:var(--ink-soft);margin-top:5px}
+  .share-band{max-width:var(--wrap);margin:0 auto;padding:var(--sec) 24px var(--sec);text-align:center}
+  .share-band h2{font-weight:700;font-size:clamp(1.35rem,2.4vw,1.7rem);color:var(--msu-green)}
+  .share-band p{max-width:60ch;margin:10px auto 18px;font-size:.92rem;color:var(--ink-soft)}
+
+  /* ===== footer ===== */
+  footer{background:var(--msu-deep);color:#fff}
+  .foot-cols{max-width:var(--wrap);margin:0 auto;padding:44px 24px 26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px}
+  .foot-cols h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:#A9CD8E;margin-bottom:10px}
+  .foot-cols ul{list-style:none}
+  .foot-cols li{margin-top:6px;font-size:.8rem;color:#DCE8D6}
+  .foot-cols a{color:#fff;text-decoration:none}
+  .foot-cols a:hover{text-decoration:underline}
+  .foot-base{border-top:1px solid rgba(255,255,255,.18)}
+  .foot-base-inner{max-width:var(--wrap);margin:0 auto;padding:16px 24px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:.76rem;color:#B9CDB2}
+  .foot-base a{color:#fff}
+  .spartans-will{font-family:'Montserrat',sans-serif;font-weight:800;letter-spacing:.12em;margin-left:auto;color:#fff}
+
+  /* ===== team notes ===== */
+  .team-notes{max-width:900px;margin:44px auto 80px;padding:0 24px}
+  .team-notes h2{font-weight:700;font-size:1.1rem;color:#6B5416}
+  .team-notes .note{
+    border:1px dashed #C9AE5E;background:#FBF6E8;color:#6B5416;border-radius:var(--r);
+    padding:15px 18px;font-size:.87rem;margin-top:12px;line-height:1.6;
+  }
+  .team-notes .note b{display:block;font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;color:#8A6D1D}
+
+  @media print{
+    .mock-ribbon,.msu-bar,.site-nav,.site-search,.team-notes,.btn-random{display:none!important}
+    .hero{background:#fff;color:#000}.hero .lede{color:#333}
+  }
+  .entry-view{padding:26px 0 60px}
+  .entry-view .ev-back{font-size:.85rem;display:inline-block;margin-bottom:18px}
+  .entry-view .ev-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .entry-view h1{font-weight:800;font-size:clamp(1.7rem,3.4vw,2.3rem);color:var(--msu-green)}
+  .entry-view .ev-byline{font-size:.88rem;color:var(--ink-soft);margin-top:8px}
+  .entry-view .ev-thread{font-size:.8rem;color:var(--ink-soft);margin-top:8px}
+  .entry-view .ev-dek{font-family:'Newsreader',Georgia,serif;font-size:1.15rem;font-style:italic;margin-top:14px;max-width:70ch}
+  .entry-view .ev-q{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;color:var(--msu-green);margin-top:26px}
+  .entry-view .ev-a{font-family:'Newsreader',Georgia,serif;font-size:1.08rem;line-height:1.65;margin-top:8px;max-width:74ch}
+  .entry-view .ev-q-know{margin-top:30px;padding-top:14px;border-top:1px solid var(--line);font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+  .entry-view .ev-a-know{font-size:.86rem;color:var(--ink-soft);margin-top:6px;max-width:74ch}
+  .entry-view .ev-after{border:1px solid var(--line);border-left:4px solid var(--msu-green);border-radius:8px;padding:16px 20px;margin-top:28px}
+  .entry-view .ev-after .k{font-family:'Montserrat',sans-serif;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--leaf-dark);font-weight:700}
+  .entry-view .ev-after p{font-family:'Newsreader',Georgia,serif;margin-top:6px}
+  .entry-view .ev-foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:.82rem;color:var(--ink-soft)}
+  .entry-view .ev-next{margin-left:auto}
+  .entry-view .cq-item{border-bottom:1px solid var(--line);padding:18px 0;max-width:76ch}
+  .entry-view .cq-item:last-child{border-bottom:none}
+  .entry-view .cq-a{font-family:'Newsreader',Georgia,serif;font-size:1.06rem;line-height:1.6}
+  .entry-view .cq-who{font-size:.8rem;color:var(--ink-soft);margin-top:6px}
+  body.entry-open #landingView{display:none}
+  .qindex{margin-top:16px;border-top:1px solid var(--line)}
+  .qindex a{display:flex;gap:14px;align-items:baseline;justify-content:space-between;padding:13px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+  .qindex a:hover .qq{color:var(--msu-green);text-decoration:underline}
+  .qindex .qq{font-family:'Newsreader',Georgia,serif;font-size:1.02rem;max-width:72ch}
+  .qindex .qn{font-size:.78rem;color:var(--ink-soft);white-space:nowrap}
+  .subnav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+  .subnav-inner{max-width:var(--wrap);margin:0 auto;padding:7px 24px;display:flex;gap:14px;align-items:center;position:relative}
+  .snav-btn{
+    display:flex;align-items:baseline;gap:9px;border:none;background:none;cursor:pointer;
+    padding:8px 4px;font-family:'Montserrat',sans-serif;min-width:0;
+  }
+  .snav-k{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+  .snav-cur{font-size:.9rem;font-weight:700;color:var(--msu-green);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+  .snav-caret{width:8px;height:8px;border-right:2px solid var(--msu-green);border-bottom:2px solid var(--msu-green);transform:rotate(45deg) translateY(-2px);flex:none;transition:transform var(--ease)}
+  .snav-btn[aria-expanded="true"] .snav-caret{transform:rotate(225deg) translateY(-1px)}
+  .subnav .subnav-cta{
+    margin-left:auto;background:var(--msu-green);color:#fff;border-radius:6px;padding:8px 14px;
+    font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;text-decoration:none;white-space:nowrap;
+  }
+  .subnav .subnav-cta:hover{background:var(--msu-deep)}
+  .snav-panel{
+    position:absolute;top:calc(100% + 1px);left:24px;background:#fff;border:1px solid var(--line);
+    border-radius:0 0 8px 8px;box-shadow:0 12px 30px rgba(11,46,38,.12);min-width:260px;padding:6px 0;
+  }
+  .snav-panel a{
+    display:block;padding:11px 18px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.85rem;
+    color:var(--ink);text-decoration:none;border-left:3px solid transparent;
+  }
+  .snav-panel a:hover{background:var(--bg-alt);color:var(--msu-green)}
+  .snav-panel a[aria-current="true"]{color:var(--msu-green);border-left-color:var(--msu-green);background:var(--bg-alt)}
+  @media (max-width:700px){
+    .snav-panel{left:12px;right:12px;min-width:0}
+    .subnav .subnav-cta{padding:8px 11px;font-size:.72rem}
+  }
+  [id]{scroll-margin-top:64px}
+  .qmore{margin-top:14px;border:1.5px solid var(--msu-green);background:#fff;color:var(--msu-green);border-radius:6px;padding:9px 18px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;cursor:pointer}
+  .qmore:hover{background:#EFF5EC}
+  @media print{ .subnav{display:none!important} }
+  #featured.hide{display:none}
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--msu-green);color:#fff;padding:10px 18px;z-index:100;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem}
+  .skip-link:focus{left:0}
+  .ev-more{margin-top:8px;font-size:.8rem}
+  .searchbox{width:100%;max-width:420px;padding:10px 14px;border:1.5px solid var(--line);border-radius:6px;font:inherit;font-size:.92rem;margin:2px 0 14px}
+  .searchbox:focus{outline:none;border-color:var(--msu-green)}
+  .ask-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .ask-row .searchbox{margin:0;flex:1;min-width:240px}
+  .ask-promise{font-size:.78rem;color:var(--ink-soft);margin:8px 0 4px}
+  .ask-item{border-bottom:1px solid var(--line);padding:16px 0;max-width:76ch}
+  .ask-item:last-child{border-bottom:none}
+  .ask-a{font-family:'Newsreader',Georgia,serif;font-size:1.05rem;line-height:1.6}
+  .ask-a::before{content:'\201C'}
+  .ask-a::after{content:'\201D'}
+  .ask-who{font-size:.8rem;color:var(--ink-soft);margin-top:6px}
+  .ask-empty{font-family:'Newsreader',Georgia,serif;font-size:1rem;color:var(--ink-soft);padding:14px 0}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#stories">Skip to stories</a>
+
+<div class="mock-ribbon">Visualization: how this could sit at engineering.msu.edu/alumni/spartan-stories. Site chrome approximated from the live site, July 2026. Not an official page; sample stories throughout.</div>
+
+<!-- MSU utility bar -->
+<div class="msu-bar">
+  <div class="msu-bar-inner">
+    <span class="msu-wordmark">MICHIGAN STATE UNIVERSITY</span>
+    <nav>
+      <a href="https://engineering.msu.edu/current-students" target="_blank" rel="noopener">Current Students</a>
+      <a href="https://engineering.msu.edu/future-students" target="_blank" rel="noopener">Future Students</a>
+      <a href="https://engineering.msu.edu/directory" target="_blank" rel="noopener">Directory</a>
+    </nav>
+  </div>
+</div>
+
+<!-- College site header -->
+<header class="site-head">
+  <div class="site-head-inner">
+    <a class="site-title" href="https://engineering.msu.edu/" target="_blank" rel="noopener">College of Engineering</a>
+    <span class="site-search">Search 🔍</span>
+  </div>
+  <nav class="site-nav">
+    <a href="https://engineering.msu.edu/about" target="_blank" rel="noopener">About</a>
+    <a href="https://engineering.msu.edu/academics" target="_blank" rel="noopener">Academics</a>
+    <a href="https://engineering.msu.edu/admissions" target="_blank" rel="noopener">Admissions</a>
+    <a href="https://engineering.msu.edu/research" target="_blank" rel="noopener">Research</a>
+    <a href="https://engineering.msu.edu/careers" target="_blank" rel="noopener">Careers</a>
+    <a href="https://engineering.msu.edu/alumni" class="active" target="_blank" rel="noopener">Alumni</a>
+    <a href="https://engineering.msu.edu/give" target="_blank" rel="noopener">Give</a>
+    <a href="https://engineering.msu.edu/news-events" target="_blank" rel="noopener">News and Events</a>
+  </nav>
+</header>
+
+<div class="crumb"><a href="https://engineering.msu.edu/" target="_blank" rel="noopener">Home</a> / <a href="https://engineering.msu.edu/alumni" target="_blank" rel="noopener">Alumni</a> / Spartan Stories</div>
+
+<nav class="subnav" aria-label="Page sections">
+  <div class="subnav-inner">
+    <button class="snav-btn" id="snavBtn" type="button" aria-expanded="false" aria-controls="snavPanel">
+      <span class="snav-k">On this page</span>
+      <span class="snav-cur" id="snavCur">Stories</span>
+      <span class="snav-caret" aria-hidden="true"></span>
+    </button>
+    <a class="subnav-cta" href="spartan-stories-intake-v1.html">Share your story</a>
+    <div class="snav-panel" id="snavPanel" hidden>
+      <a href="#stories">Stories</a>
+      <a href="#faculty">Faculty</a>
+      <a href="#students">Students</a>
+      <a href="#history">History</a>
+      
+      <a href="#ask">Ask the record</a>
+      <a href="#byquestion">By question</a>
+      <a href="#awards">Award winners</a>
+      <a href="#words">In their words</a>
+      <a href="#world">Spartans around the world</a>
+      <a href="#future">Future Spartans</a>
+    </div>
+  </div>
+</nav>
+
+<div id="landingView">
+<div class="page-title"><h1>Spartan Stories</h1></div>
+<div class="page-intro">
+  <p>Stories from the Spartan Engineering community, told in their own words and published as written: alumni first, with faculty, student, College-history, and award-winner entries alongside. Career changes, detours, and hard years belong here as much as the straight paths.</p>
+  <a class="btn-green" href="spartan-stories-intake-v1.html">Share your Spartan story</a>
+</div>
+
+<div class="featured" id="featured" data-type="alumni" data-decade="1970s" data-path="">
+  <div class="featured-card">
+    <div>
+      <div class="f-kicker">Featured story</div>
+      <h2>Bill Andrzejewski</h2>
+      <p>Four decades in power systems at Consumers Energy, including storm restoration since 1985.</p>
+      <div class="byline">Electrical Engineering, Class of 1979 · Bay City</div>
+    </div>
+    <a class="readlink" href="#a-2026-0015">Read his story →</a>
+  </div>
+</div>
+
+<div class="browse">
+  <h2 class="sec-h">Browse the stories</h2>
+  <input class="searchbox" id="storySearch" type="search" aria-label="Search stories by name, program, or city" placeholder="Search names, programs, cities">
+  <div class="chip-rows">
+    <div class="chip-row">
+      <span class="rlabel">Story type</span>
+      <button class="chip" data-f="type" data-v="alumni" aria-pressed="false">Alumni <span class="n">(11)</span></button>
+      <button class="chip" data-f="type" data-v="faculty" aria-pressed="false">Faculty <span class="n">(7)</span></button>
+      <button class="chip" data-f="type" data-v="student" aria-pressed="false">Students <span class="n">(6)</span></button>
+      <button class="chip" data-f="type" data-v="award" aria-pressed="false">Award winners <span class="n">(20)</span></button>
+      <button class="chip" data-f="type" data-v="legacy" aria-pressed="false">College history <span class="n">(3)</span></button>
+    </div>
+    <div class="chip-row"><span class="rlabel">Decade</span>
+      <button class="chip" data-f="decade" data-v="1970s" aria-pressed="false">1970s <span class="n">(1)</span></button>
+      <button class="chip" data-f="decade" data-v="1980s" aria-pressed="false">1980s <span class="n">(1)</span></button>
+      <button class="chip" data-f="decade" data-v="1990s" aria-pressed="false">1990s <span class="n">(1)</span></button>
+      <button class="chip" data-f="decade" data-v="2000s" aria-pressed="false">2000s <span class="n">(2)</span></button>
+      <button class="chip" data-f="decade" data-v="2010s" aria-pressed="false">2010s <span class="n">(4)</span></button>
+      <button class="chip" data-f="decade" data-v="2020s" aria-pressed="false">2020s <span class="n">(2)</span></button>
+    </div>
+    <div class="chip-row"><span class="rlabel">Path</span>
+      <button class="chip" data-f="path" data-v="firstdecade" aria-pressed="false">First decade out <span class="n">(2)</span></button>
+      <button class="chip" data-f="path" data-v="founder" aria-pressed="false">Founders <span class="n">(1)</span></button>
+      <button class="chip" data-f="path" data-v="careerchange" aria-pressed="false">Career changes <span class="n">(1)</span></button>
+      <button class="chip" data-f="path" data-v="service" aria-pressed="false">Service <span class="n">(1)</span></button>
+      <button class="chip" data-f="" data-v="" aria-pressed="true">All stories</button>
+    </div>
+  </div>
+</div>
+
+<div class="grid-wrap" id="stories">
+  <div class="grid-head">
+    <h2>Recent stories</h2>
+    <span class="count">Every story is told in the alum's own words and reviewed by a person before it publishes.</span>
+    <button class="btn-random" id="randomStory" type="button">Read one at random</button>
+  </div>
+  <div class="cards">
+    <a class="card" data-type="alumni" data-decade="2010s" data-path="" href="#a-2026-0036">
+      <div class="tags"><span class="tag">Mid-career</span></div>
+      <h3>Priya Natarajan</h3>
+      <div class="dek">PLCs, robot cells, and the startup weekends when a production line runs for the first time.</div>
+      <div class="byline">Electrical Engineering, Class of 2013 · Holland</div>
+    </a>
+    <a class="card" data-type="alumni" data-decade="1990s" data-path="" href="#a-2026-0035">
+      <div class="tags"><span class="tag">Mid-career</span></div>
+      <h3>Dave Kowalczyk</h3>
+      <div class="dek">Twenty-five years figuring out why structures crack, from parking decks to grain elevators.</div>
+      <div class="byline">Civil Engineering, Class of 1998 · Kalamazoo</div>
+    </a>
+    <a class="card" data-type="alumni" data-decade="1980s" data-path="" href="#a-2026-0034">
+      <div class="tags"><span class="tag">Late career</span></div>
+      <h3>Hank Fischer</h3>
+      <div class="dek">Chief engineer of the water treatment plant that serves Marquette, thirty years in the role.</div>
+      <div class="byline">Chemical Engineering, Class of 1988 · Marquette</div>
+    </a>
+    <a class="card" data-type="alumni" data-decade="2020s" data-path="firstdecade" href="#a-2026-0031">
+      <div class="tags"><span class="tag">First decade out</span></div>
+      <h3>Jordan Whitfield</h3>
+      <div class="dek">A process engineer in battery manufacturing on what the first years of work actually look like.</div>
+      <div class="byline">Chemical Engineering, Class of 2021 · Grand Rapids</div>
+    </a>
+    <a class="card" data-type="alumni" data-decade="2010s" data-path="founder" href="#a-2026-0027">
+      <div class="tags"><span class="tag">Founder</span><span class="tag">Mid-career</span></div>
+      <h3>Danielle Okonkwo</h3>
+      <div class="dek">From enterprise consulting to co-founding a Detroit logistics software company with a fellow Spartan.</div>
+      <div class="byline">Computer Science, Class of 2014 · Detroit</div>
+    </a>
+    <a class="card" data-type="alumni" data-decade="2000s" data-path="" href="#a-2026-0022">
+      <div class="tags"><span class="tag">Mid-career</span></div>
+      <h3>Marcus Trần</h3>
+      <div class="dek">Twenty years of Michigan bridge work, from inspection to running a regional program.</div>
+      <div class="byline">Civil Engineering, Class of 2006 · Lansing</div>
+    </a>
+    <a class="card" data-type="alumni" data-decade="2010s" data-path="careerchange" href="#a-2026-0019">
+      <div class="tags"><span class="tag">Career change</span></div>
+      <h3>Renée Castellanos</h3>
+      <div class="dek">An automotive engineer's move into clinical engineering after a family stay in the ICU.</div>
+      <div class="byline">Mechanical Engineering, Class of 2012 · Ann Arbor</div>
+    </a>
+    <a class="card" data-type="alumni" data-decade="2020s" data-path="firstdecade" href="#a-2026-0012">
+      <div class="tags"><span class="tag">First decade out</span></div>
+      <h3>Aisha Rahman</h3>
+      <div class="dek">Stormwater and shoreline work for small towns in northern Michigan, three years out.</div>
+      <div class="byline">Biosystems Engineering, Class of 2023 · Traverse City</div>
+    </a>
+    <a class="card" data-type="alumni" data-decade="2000s" data-path="service" href="#a-2026-0008">
+      <div class="tags"><span class="tag">Service</span></div>
+      <h3>Curtis Boyd</h3>
+      <div class="dek">Eleven years mentoring a Lansing robotics team, and where those students ended up.</div>
+      <div class="byline">Computer Engineering, Class of 2003 · Lansing</div>
+    </a>
+    <a class="card" data-type="alumni" data-decade="2010s" data-path="" href="#a-2026-0004">
+      <div class="tags"><span class="tag">Mid-career</span></div>
+      <h3>Stephanie Vogel</h3>
+      <div class="dek">Failure analysis on turbine parts at a West Michigan aerospace supplier.</div>
+      <div class="byline">Materials Science, Class of 2017 · Muskegon</div>
+    </a>
+  </div>
+</div>
+
+<div class="grid-wrap" id="faculty">
+  <div class="grid-head">
+    <h2>Faculty voices</h2>
+    <span class="count">Faculty of the College of Engineering, in their own words.</span>
+  </div>
+  <div class="cards" id="facultyCards"></div>
+</div>
+
+<div class="grid-wrap" id="students">
+  <div class="grid-head">
+    <h2>Student voices</h2>
+    <span class="count">Students of the College of Engineering, in their own words.</span>
+  </div>
+  <div class="cards" id="studentCards"></div>
+</div>
+
+<div class="grid-wrap" id="history">
+  <div class="grid-head">
+    <h2>From the College's history</h2>
+    <span class="count">Entries from the College's record, told by the College.</span>
+  </div>
+  <div class="cards">
+    <a class="card" data-type="legacy" data-decade="1950s" data-path="" href="#l-1957-0001">
+      <div class="tags"><span class="tag legacy">Legacy</span></div>
+      <h3>MISTIC, the computer MSU built by hand</h3>
+      <div class="dek">A professor and three graduate students wired MSU's first computer together, and it ran the university's calculations for six years.</div>
+      <div class="byline">Electrical Engineering, 1957 · East Lansing</div>
+    </a>
+    <a class="card" data-type="legacy" data-decade="1950s" data-path="" href="#l-1958-0002">
+      <div class="tags"><span class="tag legacy">Legacy</span></div>
+      <h3>Joseph Colucci and clean gasoline</h3>
+      <div class="dek">A 1958 mechanical engineering graduate who spent 36 years making the case for taking the lead out of American gasoline.</div>
+      <div class="byline">Mechanical Engineering, Class of 1958 · Warren</div>
+    </a>
+    <a class="card" data-type="legacy" data-decade="1980s" data-path="" href="#l-1986-0003">
+      <div class="tags"><span class="tag legacy">Legacy</span></div>
+      <h3>A way to hear a heartbeat through rubble</h3>
+      <div class="dek">Kun-Mu Chen and his students built a microwave system that finds trapped people by their breathing and heartbeat.</div>
+      <div class="byline">Electrical Engineering, 1964 to 2000 · East Lansing</div>
+    </a>
+  </div>
+</div>
+
+<div class="grid-wrap" id="ask">
+  <div class="grid-head">
+    <h2>Ask the record</h2>
+    <span class="count">Ask a question; the answers come back as quotes from published stories, each linked to its source.</span>
+  </div>
+  <div class="ask-row">
+    <input class="searchbox" id="askInput" type="search" aria-label="Ask a question of the record" placeholder="How do people get through failing a class?">
+    <button class="qmore" id="askBtn" type="button">Ask</button>
+  </div>
+  <div class="ask-promise">Everything shown is quoted from a published story. Nothing on this page is generated.</div>
+  <div id="askResults" aria-live="polite"></div>
+</div>
+
+<div class="grid-wrap" id="byquestion">
+  <div class="grid-head">
+    <h2>Answers by question</h2>
+    <span class="count">Every published answer, gathered on one page per question.</span>
+  </div>
+  <div class="qindex" id="qIndex"></div>
+</div>
+
+<div class="grid-wrap" id="awards">
+  <div class="grid-head">
+    <h2>Alumni award winners</h2>
+    <span class="count">Recipients of the College's alumni awards, told by the College from its published record. Each page awaits its own storyteller.</span>
+  </div>
+  <div class="cards" id="awardCards"></div>
+</div>
+
+<div class="quotes" id="words">
+  <div class="quotes-inner">
+    <h2 class="sec-h">In their own words</h2>
+    <div class="quote-grid">
+      <a class="pull" href="#a-2026-0015">
+        <p>"Somebody paid for me before I could pay for anything. It seemed like the obvious way to square the account."</p>
+        <div class="who">Bill Andrzejewski, Electrical Engineering, Class of 1979 · Read the story</div>
+      </a>
+      <a class="pull" href="#a-2026-0019">
+        <p>"Then my dad spent a month in an ICU and I could not stop looking at the equipment. Six months later I took a pay cut into clinical engineering and I have never once regretted it."</p>
+        <div class="who">Renée Castellanos, Mechanical Engineering, Class of 2012 · Read the story</div>
+      </a>
+      <a class="pull" href="#a-2026-0004">
+        <p>"West Michigan is full of us. You do not have to leave the state to work on things that fly."</p>
+        <div class="who">Stephanie Vogel, Materials Science, Class of 2017 · Read the story</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="thread" id="advice">
+  <h2 class="sec-h">Advice for the next Spartans</h2>
+  <div class="sub">Pulled from stories across five decades. Every line links to the person who said it. Students: the place to act on any of this is <a href="https://www.careers.egr.msu.edu/" target="_blank" rel="noopener">The Center for Spartan Engineering</a>. And for one question with every answer in one place, <a href="#q-mentor">see the mentor collection</a>.</div>
+  <div class="thread-list">
+    <a class="voice" href="#a-2026-0031">
+      <p>"Asking a technician to show you something is a skill, and the people who learn it early get good fast."</p>
+      <div class="who">Jordan Whitfield, Class of 2021</div>
+    </a>
+    <a class="voice" href="#a-2026-0022">
+      <p>"Public work will never pay what the private side does, and I have never once been unclear on why my job matters. Know which trade you are making."</p>
+      <div class="who">Marcus Trần, Class of 2006</div>
+    </a>
+    <a class="voice" href="#a-2026-0012">
+      <p>"It is big, and that scared me as a high schooler from a small town. You find your people in the first semester and it gets small fast."</p>
+      <div class="who">Aisha Rahman, Class of 2023</div>
+    </a>
+    <a class="voice" href="#a-2026-0015">
+      <p>"I would rather answer the awkward questions now than have someone learn it the hard way like I did."</p>
+      <div class="who">Bill Andrzejewski, Class of 1979</div>
+    </a>
+  </div>
+</div>
+
+<div class="statewide" id="world">
+  <div class="statewide-inner">
+    <div>
+      <h2>Spartan engineers around the world</h2>
+      <p>The sample stories span Marquette to Detroit, Traverse City to Kalamazoo. The real corpus grows wherever Spartans are, and alumni who opt in appear on a map by city, in Michigan and far beyond it.</p>
+    </div>
+    <div class="citychips">
+      <a class="citychip" href="spartan-stories-map.html">Grand Rapids</a>
+      <a class="citychip" href="spartan-stories-map.html">Detroit</a>
+      <a class="citychip" href="spartan-stories-map.html">Traverse City</a>
+      <a class="citychip" href="spartan-stories-map.html">Bay City</a>
+      <a class="citychip" href="spartan-stories-map.html">Explore the map (concept)</a>
+    </div>
+  </div>
+</div>
+
+<div class="numbers">
+  <div class="num"><div class="big" data-count="27">0</div><div class="lab">stories in their own words</div></div>
+  <div class="num"><div class="big" data-count="12">0</div><div class="lab">Michigan cities</div></div>
+  <div class="num"><div class="big" data-count="7">0</div><div class="lab">decades, 1957 to 2023</div></div>
+  <div class="num"><div class="big" data-count="8">0</div><div class="lab">departments</div></div>
+  <div style="grid-column:1/-1;font-size:.78rem;color:var(--ink-soft)">Placement rates and starting salaries live at <a href="https://www.careers.egr.msu.edu/reports" target="_blank" rel="noopener">The Center's reports</a>.</div>
+</div>
+
+<div class="ledto">
+  <a class="ledto-card" href="#a-2026-0031">
+    <div class="k">After the story</div>
+    <p>Since Jordan's page published, two students have taken him up on the fifteen-minute call. One wrote afterward: "He told me what to ask on my plant tour. I used all of it and got the offer."</p>
+    <div class="who">Shared with the student's permission · Read the full story and its update</div>
+  </a>
+</div>
+
+<div class="future-band" id="future">
+  <div class="future-inner">
+    <div>
+      <h2>For future Spartans</h2>
+      <blockquote>"It is big, and that scared me as a high schooler from a small town. You find your people in the first semester and it gets small fast. Come see it on a normal weekday, not a tour day."</blockquote>
+      <div class="who">Aisha Rahman, Biosystems Engineering, Class of 2023 · Traverse City</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+      <a class="btn-green" href="#a-2026-0012">Read Aisha's story</a>
+      <a class="btn-random" style="text-decoration:none;display:inline-block" href="https://engineering.msu.edu/admissions/visit-college" target="_blank" rel="noopener">Plan a visit</a>
+      <a style="font-size:.8rem" href="https://engineering.msu.edu/future-students/undergraduate/student-ambassadors" target="_blank" rel="noopener">Or email a current student: the Student Ambassadors</a>
+    </div>
+  </div>
+</div>
+
+<div class="grid-wrap" id="elsewhere">
+  <div class="grid-head" style="margin-top:34px">
+    <h2>Elsewhere at MSU Engineering</h2>
+    <span class="count">These stories connect to things the College already runs. Every link below is live.</span>
+  </div>
+  <div class="cards">
+    <a class="card" href="https://www.careers.egr.msu.edu/" target="_blank" rel="noopener">
+      <h3>The Center for Spartan Engineering</h3>
+      <div class="dek">Where students act on the advice in these stories: co-ops, career fairs, and employer connections. The fall Engineering Career Fair is September 15.</div>
+      <div class="byline">careers.egr.msu.edu</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/alumni/get-involved" target="_blank" rel="noopener">
+      <h3>Get Involved</h3>
+      <div class="dek">The standing paths for alumni who checked the stay-involved box: speaking, judging, mentoring, and event hosting.</div>
+      <div class="byline">engineering.msu.edu/alumni/get-involved</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/news-events/spartan-engineering-e-news" target="_blank" rel="noopener">
+      <h3>Spartan Engineering E-News</h3>
+      <div class="dek">The quarterly newsletter where one story runs each issue: a name, the summary, and the link back here.</div>
+      <div class="byline">Subscribe from the News and Events section</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/inclusive-excellence" target="_blank" rel="noopener">
+      <h3>Inclusive Excellence</h3>
+      <div class="dek">Programs whose alumni voices appear in these stories. The form never asks about identity; each story carries what its author chose to say.</div>
+      <div class="byline">engineering.msu.edu/inclusive-excellence</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/academics/first-year-core" target="_blank" rel="noopener">
+      <h3>First-Year CoRe Experience</h3>
+      <div class="dek">Where new Spartan engineers start. Stories like Aisha's are written for the student reading them in a CoRe residence hall.</div>
+      <div class="byline">engineering.msu.edu/academics/first-year-core</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/events" target="_blank" rel="noopener">
+      <h3>Events</h3>
+      <div class="dek">Career fairs, preview days, and department events. The gather-near-me opt-in in each story's intake feeds regional event interest lists.</div>
+      <div class="byline">engineering.msu.edu/events</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/departments" target="_blank" rel="noopener">
+      <h3>Academic Departments</h3>
+      <div class="dek">Every story carries its department. Filter above by program to see where one department's graduates landed.</div>
+      <div class="byline">engineering.msu.edu/departments</div>
+    </a>
+    <a class="card" href="https://spartan.msu.edu/spartan-story-hub" target="_blank" rel="noopener">
+      <h3>Spartan Story Hub</h3>
+      <div class="dek">The university's produced stories, told by MSU. This page is the first-person complement: told by the alumni themselves, as written.</div>
+      <div class="byline">spartan.msu.edu</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/career-center/recruit-spartans" target="_blank" rel="noopener">
+      <h3>Recruit Spartans</h3>
+      <div class="dek">For employers reading stories like Jordan's and Stephanie's: the path to co-ops, career fairs, and hiring Spartan engineers.</div>
+      <div class="byline">engineering.msu.edu/career-center/recruit-spartans</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/academics/k-12" target="_blank" rel="noopener">
+      <h3>K-12 Resources</h3>
+      <div class="dek">Where volunteer work like Curtis's robotics mentoring connects to the College's own programs for young students.</div>
+      <div class="byline">engineering.msu.edu/academics/k-12</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/about/history" target="_blank" rel="noopener">
+      <h3>History of the College</h3>
+      <div class="dek">The College's story since 1885, told at length: the longer thread behind legacy entries like MISTIC.</div>
+      <div class="byline">engineering.msu.edu/about/history</div>
+    </a>
+    <a class="card" href="https://engineering.msu.edu/inclusive-excellence/women-in-engineering/alumni" target="_blank" rel="noopener">
+      <h3>Women in Engineering alumni</h3>
+      <div class="dek">WIE's own alumni page: volunteering, staying connected, and being a resource for current students.</div>
+      <div class="byline">engineering.msu.edu/inclusive-excellence</div>
+    </a>
+  </div>
+</div>
+
+<div class="promises">
+  <div class="promises-inner">
+    <div class="promise"><h3>Published as written</h3><p>A person reviews every story. Nothing is rewritten.</p></div>
+    <div class="promise"><h3>Permanent addresses</h3><p>Every page keeps its address and can be linked from anywhere.</p></div>
+    <div class="promise"><h3>Alumni stay in control</h3><p>Alumni choose where their story appears, and one email removes it.</p></div>
+  </div>
+</div>
+
+<div class="share-band" id="share">
+  <h2>Add your story</h2>
+  <p>The required part takes about fifteen minutes, and everything else is optional. Once it publishes, we'll send you the link to share with your own networks.</p>
+  <a class="btn-green" href="spartan-stories-intake-v1.html">Share your Spartan story</a>
+</div>
+
+</div>
+
+<div id="entryView" class="entry-view" hidden><div class="wrap" id="entryContent"></div></div>
+
+<footer>
+  <div class="foot-cols">
+    <div>
+      <h3>Academic Departments</h3>
+      <ul>
+        <li><a href="https://engineering.msu.edu/departments/aes" target="_blank" rel="noopener">Applied Engineering Sciences</a></li>
+        <li><a href="https://engineering.msu.edu/departments/bme" target="_blank" rel="noopener">Biomedical Engineering</a></li>
+        <li><a href="https://www.canr.msu.edu/bae/" target="_blank" rel="noopener">Biosystems and Agricultural Engineering</a></li>
+        <li><a href="https://engineering.msu.edu/departments/chems" target="_blank" rel="noopener">Chemical Engineering and Materials Science</a></li>
+        <li><a href="https://engineering.msu.edu/departments/cee" target="_blank" rel="noopener">Civil and Environmental Engineering</a></li>
+        <li><a href="https://engineering.msu.edu/departments/cse" target="_blank" rel="noopener">Computer Science and Engineering</a></li>
+        <li><a href="https://engineering.msu.edu/departments/ece" target="_blank" rel="noopener">Electrical and Computer Engineering</a></li>
+        <li><a href="https://engineering.msu.edu/departments/me" target="_blank" rel="noopener">Mechanical Engineering</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Alumni</h3>
+      <ul>
+        <li><a href="https://engineering.msu.edu/alumni/alumni-board" target="_blank" rel="noopener">Alumni Board</a></li>
+        <li><a href="https://engineering.msu.edu/alumni/awards" target="_blank" rel="noopener">Alumni Awards</a></li>
+        <li><a href="https://engineering.msu.edu/alumni/get-involved" target="_blank" rel="noopener">Get Involved</a></li>
+        <li>Spartan Stories</li>
+        <li><a href="https://engineering.msu.edu/alumni" target="_blank" rel="noopener">Update Your Information</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <ul>
+        <li>Engineering Building</li>
+        <li>428 S. Shaw Lane</li>
+        <li>East Lansing, MI 48824-1226</li>
+        <li>(517) 355-5113</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-base">
+    <div class="foot-base-inner">
+      <a href="https://engineering.msu.edu/contact-us" target="_blank" rel="noopener">Contact Information</a> |
+      <a href="https://engineering.msu.edu/site-map" target="_blank" rel="noopener">Site Map</a> |
+      <a href="https://msu.edu/privacy" target="_blank" rel="noopener">Privacy Statement</a> |
+      <a href="https://msu.edu/accessibility" target="_blank" rel="noopener">Site Accessibility</a>
+      <span class="spartans-will">SPARTANS WILL.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="team-notes">
+  <h2>Notes for the marketing and web team (not part of the page)</h2>
+  <div class="note"><b>Where it lives</b>The Alumni section currently holds four items: Board, Awards, Get Involved, and Update Your Information. Spartan Stories slots in as a fifth, at /alumni/spartan-stories, with the share form at /stories/share. No information-architecture changes needed anywhere else.</div>
+  <div class="note"><b>What gets reused</b>The site runs Drupal 11 with the college's egrbs5 theme. The cards above follow the same pattern as the homepage's Latest News cards; the featured band follows the storybite pattern. The intake is one stock Webform. Nothing here needs custom development beyond a content type and a view.</div>
+  <div class="note"><b>A naming note for the director</b>The university already runs a produced-content "Spartan Story Hub" at spartan.msu.edu. This program is the first-person complement, but the working title overlaps with it. The name is the alumni relations director's decision, and this collision belongs in that conversation.</div>
+  <div class="note"><b>Launch versus later, module by module</b>The launch page is the intro, the story grid, the three promises, and the share button. Everything else on this page is a later switch, shown here so the destination is visible: the filter chips are views on fields the form captures from day one; the quote and advice sections preview the collection pages, which are launch behavior once a question has three published public answers; the map band is the opt-in city layer; the numbers strip and the where-stories-lead card populate themselves as the corpus and the follow-up loop grow. Nothing needs new data capture, only volume.</div>
+  <div class="note"><b>Award-winner entries are College-told drafts</b>The twenty award-winner pages are drafted from the College's own award announcements and public professional sources, in the institutional voice, pending the program's normal review. Each ends with the standing invitation. Before any publish: status-check the pre-1965 graduates (Flinn, Wineman), confirm Conroy's title given the pending Abbott acquisition, and route Surbrook and Wieferich through departmental and official channels.</div>
+  <div class="note"><b>The award-winner entries are drafts from the public record</b>All twenty College-told profiles come from the July 2026 awards research: College award pages, state biographies, and professional society records only. Invitations have not been sent. Review and invitations run in batches, the first five (Wirsing, Surbrook, Wieferich, Fleis, Tinsey) first per the research shortlist; each page keeps its address and becomes the person's first-person page if they respond. Nothing publishes before the program's normal review.</div>
+  <div class="note"><b>What the page no longer says out loud</b>The surface stopped explaining itself; these facts live here instead. Student pages keep their URL and convert to alumni pages at graduation, per the configuration. The sample corpus is sample. And the idea of linking a faculty page to the alumni stories that name them is logged as a V3 candidate in the configuration: the mention-loop email and page-to-page links are separate systems, and nothing on the page implies otherwise now.</div>
+  <div class="note"><b>Ask the record is a stand-in for the capstone's answers engine</b>This demo version is keyword retrieval running in the page, which makes it verbatim by construction. The capstone builds the semantic version under the bright lines in spartan-stories-answers-engine.md: quotes only, no answer without a source, consent-scoped indexing, no persona, and an automated verbatim checker. Unanswered queries feed the question bank.</div>
+  <div class="note"><b>Answers by question is a view, not a workload</b>Question IDs are captured at the source, so on the built site this index is a database view: every question's answers assemble themselves, zero reviewer effort, across all personas. In the spreadsheet era before the build, the reviewer hand-maintains only the collections past the three-answer floor; the full index arrives with the Drupal build or the capstone platform. The demo shows the built state.</div>
+  <div class="note"><b>External links are live</b>Every chrome and footprint link on this page points at the real destination on engineering.msu.edu and adjacent MSU properties, verified July 2026, opening in a new tab. Only story cards, quotes, the map chips, and the share buttons stay inside this repo. The rule for any future edit: external links are real and verified or they don't ship; never a plausible-looking invented URL.</div>
+  <div class="note"><b>What the links do</b>Story cards and the share buttons link into the working demo and intake in this repo, so the click-through behavior is real. On the live site those become the story pages and Webform at their real addresses.</div>
+</div>
+
+<script>
+/* filter chips: one active at a time; All resets */
+const cards = [...document.querySelectorAll('#stories .card, #faculty .card, #students .card, #history .card'), document.getElementById('featured')].filter(Boolean);
+const active = {};
+let searchQ = '';
+function cardVisible(card){
+  if(searchQ && !(card.textContent||'').toLowerCase().includes(searchQ)) return false;
+  const type = card.dataset.type || '';
+  const t = active.type || [], d = active.decade || [], p = active.path || [];
+  if(t.length && !t.includes(type)) return false;
+  /* decade and path are alumni dimensions: they filter alumni cards, and used
+     without a type selection they scope the view to alumni; other types are
+     exempt when a type is explicitly selected */
+  for(const [vals, key] of [[d,'decade'],[p,'path']]){
+    if(!vals.length) continue;
+    if(type === 'alumni'){
+      if(!vals.includes(card.dataset[key] || '')) return false;
+    } else if(!t.length){
+      return false;
+    }
+  }
+  return true;
+}
+function applyCardFilters(){
+  cards.forEach(card=>card.classList.toggle('hide', !cardVisible(card)));
+  ['stories','faculty','students','awards','history'].forEach(id=>{
+    const sec = document.getElementById(id);
+    if(!sec) return;
+    const any = [...sec.querySelectorAll('.card')].some(c=>!c.classList.contains('hide'));
+    sec.style.display = any ? '' : 'none';
+  });
+}
+const sb = document.getElementById('storySearch');
+if(sb) sb.addEventListener('input', ()=>{ searchQ = sb.value.trim().toLowerCase(); applyCardFilters(); });
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    const f = chip.dataset.f, v = chip.dataset.v;
+    const pressed = chip.getAttribute('aria-pressed') === 'true';
+    chip.setAttribute('aria-pressed', pressed ? 'false' : 'true');
+    active[f] = active[f] || [];
+    if(pressed) active[f] = active[f].filter(x=>x!==v);
+    else active[f].push(v);
+    applyCardFilters();
+  });
+});
+/* counters: the one motion moment, matching the live site's own animated numbers */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const bigs = [...document.querySelectorAll('.big[data-count]')];
+if(reduceMotion){ bigs.forEach(el=>{ el.textContent = el.dataset.count; }); }
+else if('IntersectionObserver' in window){
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(!en.isIntersecting) return;
+      const el = en.target, target = parseInt(el.dataset.count,10);
+      const t0 = performance.now(), dur = 750;
+      function tick(t){
+        const p = Math.min(1,(t-t0)/dur);
+        el.textContent = Math.round(target * (1-Math.pow(1-p,3)));
+        if(p<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+      io.unobserve(el);
+    });
+  },{threshold:.6});
+  bigs.forEach(el=>io.observe(el));
+} else { bigs.forEach(el=>{ el.textContent = el.dataset.count; }); }
+
+/* read one at random */
+const STORIES = [
+  {
+    id:"a-2026-0036", name:"Priya Natarajan", initials:"PN", pal:"p1",
+    era:"2010s", flavorLabel:"Career path", tags:["Mid-career"],
+    program:"Electrical Engineering", year:"Class of 2013",
+    where:"Controls engineer, automation integrator, Holland",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"PLCs, robot cells, and the startup weekends when a production line runs for the first time.",
+    oneline:"The best control system is one that doesn't need me.",
+    qa:[
+      ["What has your career looked like?","Co-op at a Grand Rapids integrator, and I never really left the field. I program PLCs and robot cells for plants across West Michigan: furniture, food, and lately battery lines. Commissioning is the part I'd never trade. There's a weekend when the line runs for the first time and everyone on the floor is watching."],
+      ["What changed the most since you graduated?","When I started, a changeover meant an afternoon of ladder logic edits on a laptop nobody else could touch. Now half my work is building systems the plant's own techs can adjust themselves. The best control system is one that doesn't need me."],
+      ["What would you tell a senior right now?","Learn to read electrical prints and learn to talk to electricians. The gap between the drawing and the panel is where every startup lives or dies."],
+      ["Was there a professor or mentor who made a difference for you?","Dr. Okafor's signals class. I was drowning and went to office hours ready to switch majors. She spent an hour showing me I was one definition behind, not stupid. That hour is why I'm an engineer."]
+    ]
+  },
+  {
+    id:"a-2026-0035", name:"Dave Kowalczyk", initials:"DK", pal:"p3",
+    era:"1990s", flavorLabel:"Career path", tags:["Mid-career"],
+    program:"Civil Engineering", year:"Class of 1998",
+    where:"Principal, structural forensics firm, Kalamazoo",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"Twenty-five years figuring out why structures crack, from parking decks to grain elevators.",
+    oneline:"You cannot learn what a failing structure sounds like from a desk.",
+    qa:[
+      ["What has your career looked like?","Bridge inspection out of school, then a design firm, then I found forensics. Now I'm the one they call when a parking deck spalls or a roof sags after a heavy snow. Half my job is concrete and steel. The other half is telling a building owner the truth when they'd rather hear something cheaper."],
+      ["What changed the most since you graduated?","The tools. I inspected my first decks with binoculars and a chain drag. Now we fly a drone in twenty minutes and map delamination I used to find on my knees. What hasn't changed is freeze-thaw. Michigan winters are still undefeated."],
+      ["What would you tell a senior right now?","Take the field job first. You can learn design software at thirty-five. You cannot learn what a failing structure sounds like from a desk."],
+      ["Was there a professor or mentor who made a difference for you?","Professor Hearn made us break our own lab beams and write up why. My first report blamed the concrete. He handed it back and said the concrete did exactly what concrete does; the question is what you assumed. I've written every failure report since with that sentence in my head."]
+    ]
+  },
+  {
+    id:"a-2026-0034", name:"Hank Fischer", initials:"HF", pal:"p2",
+    era:"1980s", flavorLabel:"Career path", tags:["Late career or retired"],
+    program:"Chemical Engineering", year:"Class of 1988",
+    where:"Chief engineer, municipal water treatment, Marquette",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"Chief engineer of the water treatment plant that serves Marquette, thirty years in the role.",
+    oneline:"The best possible outcome of my job is that nobody ever thinks about it.",
+    qa:[
+      ["What was the College like in the eighties?","We ran process simulations overnight on the mainframe and prayed. The Engineering Building smelled like solder and coffee. I met my wife in a unit operations lab, so I am biased about the place."],
+      ["What are you proudest of?","Thirty years of somebody turning on a tap in Marquette and not thinking about it once. Water treatment is a job where the best possible outcome is that nobody ever notices you. It took me a decade to love that, and now I wouldn't trade it."],
+      ["Why do you stay connected to MSU?","The College sent three interns up here over the years and two of them stayed in the UP. That pipeline matters more than people downstate realize."],
+      ["What's your favorite MSU tradition?","Walking to the Red Cedar after finals. The river was the reset button. I hear students still do it, which is the point of a tradition."]
+    ]
+  },
+  {
+    id:"a-2026-0031", name:"Jordan Whitfield", initials:"JW", pal:"p1",
+    era:"2020s", flavorLabel:"First decade", tags:["First decade out"],
+    program:"Chemical Engineering", year:"Class of 2021",
+    where:"Process engineer, battery materials, Grand Rapids",
+    date:"March 2026", tier:"featured", verified:true,
+    dek:"A process engineer in battery manufacturing on what the first years of work actually look like.",
+    oneline:"Nobody tells you the first two years are mostly learning what the job actually is.",
+    qa:[
+      ["What do you do now?","Process engineer at a battery materials plant. My day is half spreadsheets, half walking the floor, and the walking half is where the real problems are."],
+      ["What do you know now that you didn't at graduation?","That asking a technician to show you something is a skill, and the people who learn it early get good fast. Also that my senior design project mattered less than the fact of having finished one."],
+      ["What does being a Spartan mean out here?","There are four of us on this site. We found each other in the first month without trying. That is not nothing when you move somewhere new for a job."],
+      ["Would you talk to a current student?","Sure. Email me through the College and I will find fifteen minutes. I would rather answer the awkward questions now than have someone learn it the hard way like I did."],
+      ["What kind of engineer thrives where you work?","Someone who will go to the floor and ask the operators questions. We have hired two MSU co-ops since I got here and both converted, and that was the whole filter."]
+    ],
+    update: "Since this page published, two students have taken Jordan up on the fifteen-minute call. One wrote afterward: \"He told me what to ask on my plant tour. I used all of it and got the offer.\" Shared with the student's permission."
+  },
+  {
+    id:"a-2026-0027", name:"Danielle Okonkwo", initials:"DO", pal:"p3",
+    era:"2010s", flavorLabel:"Founder", tags:["Founder","Mid-career"],
+    program:"Computer Science", year:"Class of 2014",
+    where:"Co-founder, logistics software company, Detroit",
+    date:"March 2026", tier:"standard", verified:true,
+    dek:"From enterprise consulting to co-founding a Detroit logistics software company with a fellow Spartan.",
+    oneline:"We started the company because a warehouse manager showed me his whiteboard and I couldn't stop thinking about it.",
+    qa:[
+      ["How did the company start?","I was doing enterprise consulting and a client walked me through how they scheduled dock doors. It was a whiteboard and a phone. I went home and could not let it go. My co-founder is also an MSU grad, class of 2015, and we started nights and weekends."],
+      ["What did MSU give you that you still use?","The habit of being around people smarter than me in different ways. Our first three hires came out of my old project teams. I knew exactly how they worked under pressure because I had watched it at 2 a.m. in the engineering building."],
+      ["What was the hardest year?","Year two. We almost died twice. What got us through was boring: customers who paid on time because we had done right by them in year one."],
+      ["Was there a professor or mentor who made a difference for you?","Professor Hale ran capstone like the client's money was real. She failed our first proposal because it solved a problem the client didn't actually have. Every investor pitch I've given since started with that lesson."]
+    ]
+  },
+  {
+    id:"a-2026-0022", name:"Marcus Trần", initials:"MT", pal:"p2",
+    era:"2000s", flavorLabel:"Career path", tags:["Mid-career"],
+    program:"Civil Engineering", year:"Class of 2006",
+    where:"Regional bridge program manager, MDOT",
+    date:"February 2026", tier:"standard", verified:true,
+    dek:"Twenty years of Michigan bridge work, from inspection to running a regional program.",
+    oneline:"Twenty years in and I still slow down when I drive over one of mine.",
+    qa:[
+      ["What has your career looked like?","Inspection first, then design, then management, all bridges, all Michigan. I have worked on structures my kids cross to get to school. That is never far from my mind on an inspection."],
+      ["What changed the most since you graduated?","The tools completely, the judgment not at all. Software does in an hour what took my first team a week. Deciding what the numbers mean and what to do when the budget says otherwise, that part is exactly as hard as it was in 2006."],
+      ["What would you tell a senior right now?","Public work will never pay what the private side does, and I have never once been unclear on why my job matters. Know which trade you are making."],
+      ["What's your favorite MSU tradition?","The Rock. My roommate and I walked past it before every final to see what had been painted overnight. I still detour past it when I'm on campus for meetings."]
+    ]
+  },
+  {
+    id:"a-2026-0019", name:"Renée Castellanos", initials:"RC", pal:"p4",
+    era:"2010s", flavorLabel:"Career change", tags:["Career change","Mid-career"],
+    program:"Mechanical Engineering", year:"Class of 2012",
+    where:"Director of clinical engineering, hospital system, Ann Arbor",
+    date:"February 2026", tier:"standard", verified:true,
+    dek:"An automotive engineer's move into clinical engineering after a family stay in the ICU.",
+    oneline:"I designed seats for eight years. Then my dad spent a month in an ICU.",
+    qa:[
+      ["You changed industries mid-career. Why?","Automotive was good to me and I was good at it. Then my dad spent a month in an ICU and I could not stop looking at the equipment. Six months later I took a pay cut into clinical engineering and I have never once regretted it."],
+      ["What transferred and what didn't?","Everything about rigor transferred. Nothing about pace did. In auto, a failure costs money. Here the failure modes have names and rooms."],
+      ["What do you miss about East Lansing?","Cold walks to the engineering building when the whole day was still ahead of me. And the people. Mostly the people."],
+      ["Are there other Spartans in your family?","My daughter is a sophomore at MSU now. She says she picked it on her own. Maybe she did."]
+    ]
+  },
+  {
+    id:"a-2026-0015", name:"Bill Andrzejewski", initials:"BA", pal:"p5",
+    era:"1970s", flavorLabel:"Looking back", tags:["Late career or retired"],
+    program:"Electrical Engineering", year:"Class of 1979",
+    where:"Retired, formerly power systems, Consumers Energy",
+    date:"January 2026", tier:"standard", verified:true,
+    dek:"Four decades in power systems at Consumers Energy, including storm restoration since 1985.",
+    oneline:"Forty years in power systems. The ice storms were the best part.",
+    qa:[
+      ["What was the College like in the seventies?","Slide rules were just leaving and the first calculators cost more than my rent. We did HF radio from the top of the engineering building, which I understand some students are trying to bring back. Tell them the antenna went on the northeast corner and to check the roof penetrations from '76."],
+      ["What are you proudest of?","Storm restoration. Every big one from 1985 on, I was in the operations center. You have not felt useful until you have brought a county back on line at 3 a.m. in an ice storm."],
+      ["Why do you stay connected to MSU?","Because a scholarship put me there. Somebody I never met paid for a kid from Bay City to become an engineer. I have spent a long time trying to be worth it."],
+      ["Was there a professor or mentor who made a difference for you?","Professor Krause taught power systems like it was a public trust. Forty years later I can still hear him telling us the grid does not care about our excuses."],
+      ["If you give back to MSU, with time, treasure, or talent, why?","I fund a small scholarship now, about the size mine was. Somebody paid for me before I could pay for anything. It seemed like the obvious way to square the account."]
+    ]
+  },
+  {
+    id:"a-2026-0012", name:"Aisha Rahman", initials:"AR", pal:"p2",
+    era:"2020s", flavorLabel:"First decade", tags:["First decade out"],
+    program:"Biosystems Engineering", year:"Class of 2023",
+    where:"Water resources engineer, consulting firm, Traverse City",
+    date:"January 2026", tier:"standard", verified:true,
+    dek:"Stormwater and shoreline work for small towns in northern Michigan, three years out.",
+    oneline:"I'm often the youngest person in the room and the only engineer.",
+    qa:[
+      ["What does your work actually look like?","Stormwater and shoreline projects, mostly small towns. I am often the youngest person in the room and the only engineer, which meant learning fast how to explain a hydrograph to a township board at 7 p.m. on a Tuesday."],
+      ["What surprised you about the first years out?","How much people trust you once you have been straight with them once. My first project, I told a client their cheaper option would flood and showed them why. They have called me first ever since."],
+      ["What's next for you?","PE exam this fall. Then I want to work on the harder shoreline problems, because the lake is not getting more predictable."],
+      ["What did you do outside of class that stuck with you?","The concrete canoe team. It sounds ridiculous, it comes up in every interview, and it is where I learned that a schedule is a design document."],
+      ["What would you tell someone considering becoming a Spartan engineer?","It is big, and that scared me as a high schooler from a small town. You find your people in the first semester and it gets small fast. Come see it on a normal weekday, not a tour day."]
+    ]
+  },
+  {
+    id:"a-2026-0008", name:"Curtis Boyd", initials:"CB", pal:"p1",
+    era:"2000s", flavorLabel:"Service", tags:["Service","Mid-career"],
+    program:"Computer Engineering", year:"Class of 2003",
+    where:"Engineering director and volunteer robotics mentor, Lansing",
+    date:"December 2025", tier:"standard", verified:true,
+    dek:"Eleven years mentoring a Lansing robotics team, and where those students ended up.",
+    oneline:"I've mentored the same high school robotics team for eleven years. Six of my kids became Spartans.",
+    qa:[
+      ["How did the mentoring start?","A coworker dragged me to a competition in 2015 to help with programming for one weekend. Eleven years later I have a garage full of spare parts and a text thread with every kid who ever came through the team."],
+      ["Why keep doing it?","Because I watch a fifteen-year-old realize the robot moved because of code she wrote, and I get to see the exact moment I had in a lab in the Engineering Building in 2000. Also, six of them chose MSU engineering. I take full credit and will not be argued with."],
+      ["What could the College do for people like you?","Make it easier to find each other. There are alumni doing this in every district in the state and most of us have never been in the same room."],
+      ["What's your favorite MSU tradition?","We bring the robot to the homecoming parade every year. The kids love it, and half of them end up asking for a tour of the engineering building."]
+    ]
+  },
+  {
+    id:"a-2026-0004", name:"Stephanie Vogel", initials:"SV", pal:"p3",
+    era:"2010s", flavorLabel:"Career path", tags:["Mid-career"],
+    program:"Materials Science", year:"Class of 2017",
+    where:"Senior engineer, aerospace supplier, Muskegon",
+    date:"December 2025", tier:"standard", verified:true,
+    dek:"Failure analysis on turbine parts at a West Michigan aerospace supplier.",
+    oneline:"Parts I've tested are flying right now.",
+    qa:[
+      ["What do you work on?","Turbine components. Metallurgy, failure analysis, the occasional 6 a.m. call when a batch does something weird. When a test comes back clean on something that will spend twenty years at thirty thousand feet, that is a good day."],
+      ["What part of MSU shows up in your work?","A professor who handed me a failed part sophomore year and said, tell me the story of this fracture. I did not know it then, but that is the entire job. Every broken thing is a story about decisions somebody made."],
+      ["What do you want current students to hear?","West Michigan is full of us. You do not have to leave the state to work on things that fly."],
+      ["What have you enjoyed most about being part of the Spartan community since graduation?","The West Michigan alumni group runs a plant-tour series and I hosted one last spring. Forty Spartans in safety glasses asking better questions than most auditors."]
+    ]
+  },
+
+  {
+    id:"l-1957-0001", name:"MISTIC, the computer MSU built by hand", initials:"M", pal:"p4",
+    era:"1950s", flavorLabel:"Legacy", tags:["Legacy"], legacy:true,
+    program:"Electrical Engineering", year:"1957",
+    where:"Electrical Engineering Building, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A professor and three graduate students wired MSU's first computer together, and it ran the university's calculations for six years.",
+    qa:[
+      ["What happened?","In the fall of 1956, electrical engineering professor Lawrence Von Tersch and three of his graduate students began building Michigan State's first computer. They had spent the summer in Illinois studying the ILLIAC machine and adapted its design. The Michigan State Integral Computer, MISTIC, began operating in October 1957 in the Electrical Engineering Building."],
+      ["What did it do?","It handled the university's heavy calculating for six years, a room-sized machine full of vacuum tubes, until a commercial computer replaced it in 1963. Von Tersch went on to found MSU's Computer Laboratory and later served as dean of Engineering for two decades."],
+      ["Why tell it here?","Because computing at Michigan State began with a professor and three students building the machine themselves. That is a story current students recognize."],
+      ["How we know","The College's history timeline, university archives, and the November 1957 Spartan Engineer document the build and the dates."]
+    ]
+  },
+  {
+    id:"l-1958-0002", name:"Joseph Colucci and clean gasoline", initials:"JC", pal:"p2",
+    era:"1950s", flavorLabel:"Legacy", tags:["Legacy"], legacy:true,
+    program:"Mechanical Engineering", year:"Class of 1958",
+    where:"GM Research Laboratories, Warren",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A 1958 mechanical engineering graduate who spent 36 years making the case for taking the lead out of American gasoline.",
+    qa:[
+      ["What happened?","Joseph Colucci grew up in Brooklyn and finished a mechanical engineering degree at Michigan State in 1958. He spent 36 years at General Motors Research Laboratories, where he rose to lead the Fuels and Lubricants Department and made the case, with data, for unleaded gasoline and cleaner reformulated fuels."],
+      ["What did it change?","What comes out of every gas pump and tailpipe in the country. The Society of Automotive Engineers came to call him the father of clean gasoline, and he was elected to the National Academy of Engineering."],
+      ["The MSU thread","He endowed a graduate fellowship in the mechanical engineering department where he started. The College's support helped put a Brooklyn kid in a position to change fuel; he put some of it back."],
+      ["How we know","The SAE Foundation's biography, the National Academy of Engineering, and the College's own remembrance. The father-of-clean-gasoline title is SAE's phrase, and this page attributes it to them."]
+    ]
+  },
+  {
+    id:"l-1986-0003", name:"A way to hear a heartbeat through rubble", initials:"KC", pal:"p5",
+    era:"1980s", flavorLabel:"Legacy", tags:["Legacy"], legacy:true,
+    program:"Electrical Engineering", year:"1964 to 2000",
+    where:"Electromagnetics Research Group, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"Kun-Mu Chen and his students built a microwave system that finds trapped people by their breathing and heartbeat.",
+    qa:[
+      ["What happened?","Kun-Mu Chen joined Michigan State's electrical engineering faculty in 1964 and founded its Electromagnetics Research Group. Over years of work, he and his students built a device for a hard problem: finding people trapped after a building collapses. It aims a low-intensity microwave beam at the rubble and reads the faint signal that returns, picking out the small movements of a heartbeat and breathing."],
+      ["How was it tested?","The team tested the idea on rabbits before people. An early version, published in 1986, could sense a person behind a wall. A later version, published in 2000, worked through about ten feet of debris and was field-tested with a Federal Emergency Management Agency task force."],
+      ["Why tell it here?","Because it is engineering aimed directly at keeping people alive, done in East Lansing across a 36-year career."],
+      ["How we know","Chen's peer-reviewed papers in IEEE Transactions on Biomedical Engineering, 1986 and 2000, which document the system and the FEMA field test. Accounts of use beyond that come from the university's own materials, and this page doesn't claim more than the record shows."]
+    ]
+  }
+,
+  {
+    id:"f-2026-0001", name:"Alan Hearn", initials:"AH", pal:"p3", voice:"faculty",
+    era:"2010s", flavorLabel:"Faculty", tags:["Emeritus faculty"],
+    program:"Civil and Environmental Engineering", year:"Faculty, 1985 to 2019",
+    where:"Professor emeritus, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"Thirty-four years teaching structures, and the lab exercise generations of students remember.",
+    qa:[
+      ["What did you teach, and how did you come to it?","Structural analysis and concrete design, thirty-four years of it. I came from bridge practice in Ohio and expected to stay five years. The students kept being worth another semester."],
+      ["Is there a class exercise you're known for?","I made every structures section break their own lab beams and write up why. The first drafts always blamed the concrete. The concrete does exactly what concrete does; the question is what you assumed. Some of them tell me they still hear that on the job, which is the whole point of teaching."],
+      ["What did the College give you?","A shop, a lab, and forty semesters of people at the exact moment they figure out they can do this. You don't get that in practice."],
+      ["Why tell your story here?","A former student asked me why my story wasn't up yet. Fair question. Forty semesters of other people's stories pass through a classroom; it seemed right to put one of mine down."]
+    ]
+  },
+  {
+    id:"s-2026-0001", name:"Maya Castillo", initials:"MC", pal:"p1", voice:"student",
+    era:"2020s", flavorLabel:"Student", tags:["Senior"],
+    program:"Mechanical Engineering", year:"Class of 2027, expected",
+    where:"Senior, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A mechanical engineering senior in the middle of her capstone project.",
+    qa:[
+      ["Why MSU?","I came on a visit day in the rain, and a student ambassador spent an hour showing us the labs anyway. Nobody was performing. That read as honest, and it was."],
+      ["What has surprised you?","How much of engineering is asking. Asking the machine shop how to fixture a part, asking a TA to see the problem a second way. High school taught me asking was weakness. Capstone taught me it's the job."],
+      ["The project you're proudest of so far?","Our capstone team is building a test rig for a Grand Rapids supplier. The first weekend our load cell read garbage, and it turned out I had wired the bridge backwards. Fixing it at eleven at night with two teammates is the closest I've come to feeling like the people in these stories."],
+      ["What do you want the alumni reading this to know?","The setback stories get passed around more than you'd think. Keep writing them down."]
+    ]
+  },
+  {
+    id:"f-2026-0002", name:"Rosa Delgado", initials:"RD", pal:"p2", voice:"faculty",
+    era:"2000s", flavorLabel:"Faculty", tags:["Department chair"],
+    program:"Mechanical Engineering", year:"Faculty since 2004",
+    where:"Professor and chair, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A thermodynamics professor who now chairs the Department of Mechanical Engineering.",
+    qa:[
+      ["What did you teach or do at the College, and how did you come to it?","Thermodynamics for seventeen years, and now I chair the department. I came from a national lab because I missed explaining things to people who didn't already know them."],
+      ["Is there a class, lab exercise, or moment you're known for?","The Tuesday open hour. Any student, any question, no appointment. It started as office hours nobody came to, so I moved it to the atrium with a whiteboard. Now there's a line."],
+      ["What did the College give you?","A department where the machinists, the advisors, and the faculty eat at the same tables. I've worked places where that wasn't true. It changes what students think engineering is."]
+    ]
+  },
+  {
+    id:"f-2026-0003", name:"Ken Osei", initials:"KO", pal:"p4", voice:"faculty",
+    era:"2010s", flavorLabel:"Faculty", tags:["Program director"],
+    program:"First-Year Programs", year:"Faculty since 2012",
+    where:"Director, first-year engineering, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"Director of the first-year engineering program, teaching EGR 100 to every new Spartan engineer.",
+    qa:[
+      ["What did you teach or do at the College, and how did you come to it?","I direct the first-year program and teach EGR 100. Every engineering student at MSU passes through my classroom in their first semester, which is a strange kind of privilege."],
+      ["Is there a class, lab exercise, or moment you're known for?","Week three. That's when the first exam scores land and half the room quietly decides whether they belong here. We built the whole course around getting people through week three."],
+      ["What would you tell someone teaching their first semester?","Learn forty names by October. Nothing you do at the whiteboard matters more than a student hearing their own name in a two-hundred-person course."],
+      ["What did the College give you?","Permission to redesign a course around students who struggle instead of students who don't. Not every college would have said yes."]
+    ]
+  },
+  {
+    id:"f-2026-0004", name:"Elena Vasquez", initials:"EV", pal:"p1", voice:"faculty",
+    era:"2010s", flavorLabel:"Faculty", tags:["Research faculty"],
+    program:"Chemical Engineering and Materials Science", year:"Faculty since 2015",
+    where:"Associate professor, composites research, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"An associate professor who runs a composites research lab.",
+    qa:[
+      ["What did you teach or do at the College, and how did you come to it?","I run a composites lab: lighter materials for vehicles, mostly, which in Michigan means the work drives past you on the highway. I came here because the auto companies are ninety minutes away and they answer the phone."],
+      ["Is there a class, lab exercise, or moment you're known for?","Every student in my lab presents their failed experiments at group meeting before their successful ones. The failures are where the actual materials science is."],
+      ["What did the College give you?","Eleven PhD students so far, and the odd experience of my first one now reviewing papers I submit. The lab's real product is people. The papers follow from that."]
+    ]
+  },
+  {
+    id:"f-2026-0005", name:"Tom Brzezinski", initials:"TB", pal:"p3", voice:"faculty",
+    era:"1990s", flavorLabel:"Faculty", tags:["Teaching faculty"],
+    program:"Civil and Environmental Engineering", year:"Faculty since 1998",
+    where:"Teaching professor, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A teaching professor who has taught statics to three hundred students a semester since 1998.",
+    qa:[
+      ["What did you teach or do at the College, and how did you come to it?","Statics and mechanics of materials, three hundred students at a time, since 1998. I practiced for six years first, and I still teach every problem as a thing that either stands up or doesn't."],
+      ["Is there a class, lab exercise, or moment you're known for?","The cardboard bridge. Every semester, teams build one to hold a concrete block, and every semester one team ignores the buckling lecture. That failure teaches the buckling lecture better than I can."],
+      ["What would you tell someone teaching their first semester?","Grade the first exam generously and the last one honestly. The first one tells them where they are; only the last one says who they became."],
+      ["What did the College give you?","Somewhere around fifteen thousand students. I run into them at Meijer, on job sites, at my dentist. It's a good way to grow old in one town."]
+    ]
+  },
+  {
+    id:"f-2026-0006", name:"Denise Park", initials:"DP", pal:"p5", voice:"faculty",
+    era:"2010s", flavorLabel:"Faculty", tags:["Capstone coordinator"],
+    program:"Mechanical Engineering", year:"Faculty since 2013",
+    where:"Capstone design coordinator, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"The coordinator who matches senior capstone teams to company projects.",
+    qa:[
+      ["What did you teach or do at the College, and how did you come to it?","I coordinate senior capstone design: forty-some teams a year, each matched to a real company problem. I spent a decade in industry writing the kind of project briefs I now read, so I can tell which briefs describe a real problem and which were written just to give students something to do."],
+      ["Is there a class, lab exercise, or moment you're known for?","Design review day, when the sponsoring engineers show up and the students present to people who can hire them. Someone's voice shakes every year. It's the most useful hour of their degree."],
+      ["What did the College give you?","A standing excuse to call any company in Michigan and ask what problems they can't get to. Almost nobody hangs up."]
+    ]
+  },
+  {
+    id:"f-2026-0007", name:"Jamal Reed", initials:"JR", pal:"p2", voice:"faculty",
+    era:"2020s", flavorLabel:"Faculty", tags:["Assistant professor"],
+    program:"Electrical and Computer Engineering", year:"Faculty since 2022",
+    where:"Assistant professor, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"An assistant professor of electrical and computer engineering, three years into the role.",
+    qa:[
+      ["What did you teach or do at the College, and how did you come to it?","Power electronics, three years in. I picked MSU over two coastal offers because the grid work here is real: utilities, EV charging, rural co-ops, all within a tank of gas."],
+      ["Is there a class, lab exercise, or moment you're known for?","Not yet, honestly. I'm still figuring out which of my teaching ideas hold up in a real classroom. I expect to have a better answer in a few years."],
+      ["What did the College give you?","A senior colleague who reads my proposal drafts line by line and has never once made me feel small about it. That's rarer than funding."]
+    ]
+  },
+  {
+    id:"s-2026-0002", name:"Luis Herrera", initials:"LH", pal:"p4", voice:"student",
+    era:"2020s", flavorLabel:"Student", tags:["First generation"],
+    program:"Civil Engineering", year:"Class of 2026, expected",
+    where:"Senior, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A first-generation senior from Grand Rapids, studying civil engineering.",
+    qa:[
+      ["Why MSU?","Nobody in my family had done college, so we picked the place that answered our questions like they'd heard them before. The financial aid office walked my mom through everything in Spanish. That decided it."],
+      ["What has surprised you?","That professors want you to come to office hours. I spent my first year thinking it was an imposition. It's the opposite; most of them are glad when someone shows up."],
+      ["What's the project you're proudest of so far?","A stormwater analysis of my own neighborhood in Grand Rapids for a class project. I showed my dad the flood map and he pointed at the corner that floods every March. The model knew. He tells people about it more than I do."],
+      ["What do you want alumni reading this to know?","When you visit a class and mention that you were first-gen too, someone in the room needs that sentence more than the rest of the talk."]
+    ]
+  },
+  {
+    id:"s-2026-0003", name:"Emma Voss", initials:"EVo", pal:"p1", voice:"student",
+    era:"2020s", flavorLabel:"Student", tags:["Student org leader"],
+    program:"Mechanical Engineering", year:"Class of 2027, expected",
+    where:"Junior, solar car team lead, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A junior who leads the forty-person solar car team.",
+    qa:[
+      ["Why MSU?","I visited the solar car shop on a Friday night and it was full. That told me everything about the place I needed to know."],
+      ["What has surprised you?","How much of leading a technical team is not technical. I spend more time on budgets, sponsor emails, and keeping two subteams from feuding than on the car. Nobody warns you that the org chart is the hardest system."],
+      ["What's the project you're proudest of so far?","We redesigned the battery enclosure over winter break after a thermal scare at a track day. Six of us, a borrowed thermal camera, and a group chat that never slept. The new enclosure passed scrutineering on the first try."],
+      ["What do you want alumni reading this to know?","Team alumni who show up to shop nights are worth more than sponsors who send checks. Both are great. Come to a shop night."]
+    ]
+  },
+  {
+    id:"s-2026-0004", name:"Derek Boyd", initials:"DB", pal:"p3", voice:"student",
+    era:"2020s", flavorLabel:"Student", tags:["Co-op"],
+    program:"Chemical Engineering", year:"Class of 2026, expected",
+    where:"Senior, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A senior who completed three co-op rotations at a Midland chemical plant.",
+    qa:[
+      ["Why MSU?","The co-op program, honestly. I wanted to graduate having already worked, and the career center's placement numbers were specific where other schools' were vague."],
+      ["What has surprised you?","How different a real distillation column is from the one in the textbook. Mine had a pigeon problem, which no course prepares you for."],
+      ["What's the project you're proudest of so far?","On my second rotation I noticed a heat exchanger was being cleaned on a calendar schedule instead of a fouling measurement. I built the case to switch, my supervisor let me present it, and the change stuck after I left. Something in that plant runs differently because a co-op student asked why."],
+      ["What do you want alumni reading this to know?","If your company doesn't take co-ops, be the person who asks why not. My whole career direction came from someone at that plant saying yes to the program."]
+    ]
+  },
+  {
+    id:"s-2026-0005", name:"Aaliyah Grant", initials:"AG", pal:"p5", voice:"student",
+    era:"2020s", flavorLabel:"Student", tags:["Student founder"],
+    program:"Computer Science", year:"Class of 2027, expected",
+    where:"Junior, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A junior whose soil-moisture sensor project won student venture funding.",
+    qa:[
+      ["Why MSU?","I wanted a place where agriculture and computing sit on the same campus. My whole idea only works because I can walk from a machine learning lecture to an actual research farm."],
+      ["What has surprised you?","That people give students money to try things. We pitched a cheap soil-moisture sensor network at a student venture competition expecting feedback and left with funding and a faculty mentor. I assumed that only happened at schools in California."],
+      ["What's the project you're proudest of so far?","Twelve of our sensor nodes ran through a full growing season on a farm near St. Johns. Half of them survived. The farmer's notes on why the other half died were worth more than the funding."],
+      ["What do you want alumni reading this to know?","If you've built a company, students trying to build one can smell the difference between advice and war stories. We want the war stories."]
+    ]
+  },
+  {
+    id:"s-2026-0006", name:"Sophie Tran", initials:"STr", pal:"p2", voice:"student",
+    era:"2020s", flavorLabel:"Student", tags:["Out of state"],
+    program:"Biomedical Engineering", year:"Class of 2028, expected",
+    where:"Sophomore, East Lansing",
+    date:"July 2026", tier:"standard", verified:true,
+    dek:"A sophomore from Houston, studying biomedical engineering.",
+    qa:[
+      ["Why MSU?","I'm from Houston, and everyone assumed I'd stay in Texas. MSU's biomedical program answered my emails with actual answers, a professor got on a call with a seventeen-year-old in July, and the out-of-state aid made the math work. My family had to look up where East Lansing was."],
+      ["What has surprised you?","Winter, obviously. But also that being far from home built a different kind of family faster. The people on my floor taught me to drive in snow in a parking garage."],
+      ["What's the project you're proudest of so far?","A first-year design project: a pill organizer for my grandmother's arthritis, redesigned after she video-called into our team meeting to tell us everything wrong with version one. She's listed in the acknowledgments."],
+      ["What do you want alumni reading this to know?","If you're somewhere far away, say so in your story. Out-of-state students read these looking for proof the leap works."]
+    ]
+  },
+  {
+    id:"aw-2019-0001", name:"Penny Wirsing", initials:"PW", pal:"p1", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2019 Erickson Award"],
+    program:"Civil Engineering", year:"Class of 1983",
+    where:"Environmental manager, Torrance Refining Company, Redondo Beach, California", city:"Redondo Beach",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2019 Claud R. Erickson Distinguished Alumni Award. Environmental manager and 2019 national president of the Society of Women Engineers.",
+    qa:[
+      ["The story, as the College tells it","Penny Wirsing earned an associate's degree in business management from Lansing Community College in 1979 and a bachelor's degree in civil engineering from Michigan State in 1983, finishing as a single mother who had first worked among engineers as a secretary. Her career in environmental regulatory compliance spans more than thirty years, including Mobil and ExxonMobil, and she served as environmental manager for the Torrance Refining Company in Southern California. She was the 2019 national president of the Society of Women Engineers and a SWE Fellow since 2007. She was the second woman to receive the Erickson Award; the first, Betty Shanahan, nominated her. This page records what the College can document. It awaits her own words."],
+      ["How we know","The College's 2019 alumni awards announcement (engineering.msu.edu/news/alumni-awards-2019), the Society of Women Engineers (alltogether.swe.org, 2018 and 2019), and the College's 2018 SWE presidency news item."]
+    ]
+  },
+  {
+    id:"aw-2025-0002", name:"Truman C. Surbrook", initials:"TS", pal:"p2", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2025 BAE Distinguished Alumni Award"],
+    program:"Biosystems and Agricultural Engineering", year:"Classes of 1965, 1969, and 1977",
+    where:"Professor and master electrician, East Lansing", city:"East Lansing",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2025 BAE Distinguished Alumni Award. Built MSU's electrical apprenticeship program and solved stray voltage on Michigan farms.",
+    qa:[
+      ["The story, as the College tells it","Truman Surbrook earned three MSU degrees: a bachelor's in 1965, a master's in 1969, and a Ph.D. in 1977. A licensed professional engineer and master electrician, he joined the MSU faculty in 1965 and in 1970 built the Electrical Technology Apprenticeship Program, which graduated its first certificate class in 1972 and continues today. When ground electrical currents began harming farm livestock in the late 1970s, he researched the sources of neutral-to-earth voltage, developed detection techniques and mitigation methods used across the Midwest, and co-authored Interpreting the National Electrical Code. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2025 alumni award recipients page (engineering.msu.edu/alumni/awards/2025-alumni-award-recipients) and MSU BAE department records."]
+    ]
+  },
+  {
+    id:"aw-2025-0003", name:"Bradley C. Wieferich", initials:"BW", pal:"p3", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2025 CEE Distinguished Alumni Award"],
+    program:"Civil Engineering", year:"Class of 1992",
+    where:"Director, Michigan Department of Transportation, Lansing", city:"Lansing",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2025 CEE Distinguished Alumni Award. Director of MDOT after nearly thirty years with the department.",
+    qa:[
+      ["The story, as the College tells it","Bradley Wieferich earned a bachelor's degree in civil engineering from Michigan State and is a licensed professional engineer. After three years as a field engineer with a consulting firm in the Chicago area, he joined the Michigan Department of Transportation and worked up through the Transportation Service Centers in Mt. Pleasant, Lansing, and Marshall, then as engineer of design, director of the Bureau of Development, and chief operations officer and chief engineer. On May 30, 2023, Governor Whitmer appointed him director of MDOT, the agency responsible for Michigan's nearly 10,000-mile state highway system. He serves on the Mackinac Bridge Authority. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2025 alumni award recipients page, the State of Michigan's MDOT director biography (michigan.gov/mdot/about/brad-wieferich), and the Governor's May 30, 2023 appointment release."]
+    ]
+  },
+  {
+    id:"aw-2024-0004", name:"Holly Bowers", initials:"HB", pal:"p4", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2024 BAE Distinguished Alumni Award"],
+    program:"Biosystems Engineering", year:"Class of 1998",
+    where:"Vice president of gas engineering and supply, Consumers Energy, Jackson", city:"Jackson",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2024 BAE Distinguished Alumni Award. Runs natural gas engineering and supply for Consumers Energy.",
+    qa:[
+      ["The story, as the College tells it","Holly Bowers earned a bachelor's degree in biosystems engineering with an environmental specialization in 1998 and later an MBA from Baker College. As vice president of gas engineering and supply at Consumers Energy she is responsible for gas transmission engineering, pipeline integrity, and the company's methane reduction work toward its net-zero goals. This page records what the College can document. It awaits her own words."],
+      ["How we know","The College's 2024 alumni award recipients page (engineering.msu.edu/alumni/awards/2024-alumni-award-recipients) and Consumers Energy public materials."]
+    ]
+  },
+  {
+    id:"aw-2019-0005", name:"Larry J. Fleis", initials:"LF", pal:"p5", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2019 CEE Distinguished Alumni Award"],
+    program:"Civil Engineering", year:"Class of 1973",
+    where:"Cofounder and chairman, Fleis and VandenBrink Engineering, Ada", city:"Ada",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2019 CEE Distinguished Alumni Award. Michigan water and wastewater engineering, and a family scholarship fund built from a $56 raffle account.",
+    qa:[
+      ["The story, as the College tells it","Larry Fleis earned a bachelor's degree in civil engineering in 1973 and is a licensed professional engineer. He cofounded Fleis and VandenBrink Engineering, whose work includes water and wastewater systems across Michigan, and serves as its chairman. After their mother Irene's death in 1994, he and his brother Ted founded the Ed and Irene Fleis Education Fund, which began with $56 from a raffle account and by 2025 had distributed more than $840,000 to nearly 500 students. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2019 alumni awards announcement and the Leelanau Ticker's 2025 coverage of the Fleis Education Fund."]
+    ]
+  },
+  {
+    id:"aw-2024-0006", name:"Rachel S. Hutter", initials:"RH", pal:"p1", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2024 Erickson Award"],
+    program:"Electrical Engineering", year:"Class of 1993",
+    where:"Head of studio operations, Walt Disney Studios, California", city:"California",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2024 Claud R. Erickson Distinguished Alumni Award. From an EE degree with a theater concentration to running Disney studio operations.",
+    qa:[
+      ["The story, as the College tells it","Rachel Hutter earned a bachelor's degree in electrical engineering in 1993 with a concentration in theater, and holds both a professional engineer license and a Certified Safety Professional credential. She was on the team that built and opened Disney's Animal Kingdom, and she designed and patented a ride safety system used at Disney parks worldwide. She now leads studio operations for Walt Disney Studios. This page records what the College can document. It awaits her own words."],
+      ["How we know","The College's 2024 alumni award recipients page and its Erickson Award announcement."]
+    ]
+  },
+  {
+    id:"aw-2023-0007", name:"Keith G. Tinsey", initials:"KT", pal:"p2", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2023 BAE Distinguished Alumni Award"],
+    program:"Agricultural Engineering", year:"Class of 1989",
+    where:"Chipping potato production and supply, Black Gold Farms, Grand Ledge", city:"Grand Ledge",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2023 BAE Distinguished Alumni Award. Potato storage engineering that reduced food waste at Michigan farms.",
+    qa:[
+      ["The story, as the College tells it","Keith Tinsey earned a bachelor's degree in agricultural engineering in 1989. His career in potato storage optimization, including work with Walther Farms and Black Gold Farms, reduced storage losses in chipping potato production, and he is a past president of the American Society of Agricultural and Biological Engineers. He facilitates chipping potato production and supply for Black Gold Farms from Grand Ledge. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2023 alumni award recipients page (engineering.msu.edu/alumni/awards/2023-alumni-award-recipients) and ASABE records."]
+    ]
+  },
+  {
+    id:"aw-2017-0008", name:"Steven H. Noll", initials:"SN", pal:"p3", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2017 Erickson Award"],
+    program:"Electrical Engineering", year:"Class of 1974",
+    where:"Patent attorney, Chicago", city:"Chicago",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2017 Claud R. Erickson Distinguished Alumni Award. An engineer who became a patent attorney, and a two-term College Alumni Board chair.",
+    qa:[
+      ["The story, as the College tells it","Steven Noll earned a bachelor's degree in electrical engineering in 1974 through the Honors College, then a law degree from Ohio State in 1977, and built a career in intellectual property law in Chicago. He has served the College across two eight-year terms on its Alumni Board, including as chair, and is a longtime College donor. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2017 Erickson Award announcement (egr.msu.edu, spring 2017) and the College Alumni Board archive."]
+    ]
+  },
+  {
+    id:"aw-2024-0009", name:"Lizette R. Chevalier", initials:"LC", pal:"p4", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2024 CEE Distinguished Alumni Award"],
+    program:"Civil Engineering", year:"Classes of 1990 and 1994",
+    where:"Dean of engineering, University of New Orleans", city:"New Orleans",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2024 CEE Distinguished Alumni Award. Watershed science on four continents, now an engineering dean.",
+    qa:[
+      ["The story, as the College tells it","Lizette Chevalier earned a master's degree in 1990 and a Ph.D. in 1994 in civil engineering. She is dean of the College of Engineering at the University of New Orleans and holds the Freeport-McMoRan Chair in Environmental Modeling, with watershed research spanning the Cache, Atchafalaya, Yangtze, and Tisza rivers. This page records what the College can document. It awaits her own words."],
+      ["How we know","The College's 2024 alumni award recipients page and University of New Orleans public materials."]
+    ]
+  },
+  {
+    id:"aw-2020-0010", name:"Stephanie Luster-Teasley", initials:"SL", pal:"p5", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2020 CEE Distinguished Alumni Award"],
+    program:"Environmental Engineering", year:"Classes of 2000 and 2003",
+    where:"Professor and chair, North Carolina A&T, Greensboro", city:"Greensboro",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2020 CEE Distinguished Alumni Award. Patented controlled-release chemistry for water and wastewater remediation.",
+    qa:[
+      ["The story, as the College tells it","Stephanie Luster-Teasley earned a master's degree in 2000 and a Ph.D. in 2003. She is professor and chair of Civil, Architectural and Environmental Engineering at North Carolina A&T State University, and holds United States, United Kingdom, and Canadian patents for a controlled-release chemical oxidation system used in water and wastewater remediation. She was the first African-American woman and the first NC A&T faculty member to hold international patents. This page records what the College can document. It awaits her own words."],
+      ["How we know","The College's 2020 alumni awards announcement (engineering.msu.edu, May 2020) and North Carolina A&T public materials."]
+    ]
+  },
+  {
+    id:"aw-2021-0011", name:"Michael K.J. Milligan", initials:"MM", pal:"p1", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2021 Erickson Award"],
+    program:"Electrical Engineering", year:"Class of 1983",
+    where:"Former executive director and CEO, ABET, Baltimore", city:"Baltimore",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2021 Claud R. Erickson Distinguished Alumni Award. Led the organization that accredits engineering programs worldwide.",
+    qa:[
+      ["The story, as the College tells it","Michael Milligan earned a bachelor's degree in electrical engineering in 1983, later a Ph.D., and is a licensed professional engineer. He served as executive director and chief executive of ABET, the accreditor whose standards cover thousands of engineering, computing, and technology programs at hundreds of institutions in dozens of countries. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2021 alumni awards announcement (egr.msu.edu, May 2021) and ABET's public organizational records."]
+    ]
+  },
+  {
+    id:"aw-2020-0012", name:"Kevin Conroy", initials:"KC", pal:"p2", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2020 Erickson Award"],
+    program:"Electrical Engineering", year:"Class of 1988",
+    where:"Chairman and CEO, Exact Sciences, Madison", city:"Madison",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2020 Claud R. Erickson Distinguished Alumni Award. Grew a cancer diagnostics company from three employees.",
+    qa:[
+      ["The story, as the College tells it","Kevin Conroy earned a bachelor's degree in electrical engineering in 1988. As chairman and chief executive of Exact Sciences in Madison, Wisconsin, he led the company's growth from three employees to several thousand, building it around cancer screening diagnostics. In November 2025 the company agreed to be acquired by Abbott Laboratories. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2020 Erickson Award announcement and trade press coverage of the November 2025 Abbott agreement. Confirm his current title before publication."]
+    ]
+  },
+  {
+    id:"aw-2023-0013", name:"Ronald T. Flinn", initials:"RF", pal:"p3", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2023 CEE Distinguished Alumni Award"],
+    program:"Civil Engineering", year:"Class of 1960",
+    where:"Retired MSU vice president for strategic infrastructure, East Lansing", city:"East Lansing",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2023 CEE Distinguished Alumni Award. Helped design and build most of the MSU campus across six decades.",
+    qa:[
+      ["The story, as the College tells it","Ronald Flinn earned a bachelor's degree in civil engineering in 1960, having arrived on campus in 1957, and is a licensed professional engineer. Over a career that ran until his retirement in 2015 as MSU's vice president for strategic infrastructure, the College's citation records that he was involved in the design and construction of nearly 75 percent of the campus's buildings and infrastructure. He wrote the memoir A Rendezvous with MSU, published by MSU Press in 2016. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2023 alumni award recipients page and MSU Press. Confirm status before contact given his class year."]
+    ]
+  },
+  {
+    id:"aw-2024-0014", name:"Chad B. Steiner", initials:"CS", pal:"p4", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2024 AES Distinguished Alumni Award"],
+    program:"Applied Engineering Sciences", year:"Class of 1993",
+    where:"President, North America Packaging and Graphics, Sun Chemical, Midland", city:"Midland",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2024 AES Distinguished Alumni Award. Runs North American packaging and graphics for Sun Chemical.",
+    qa:[
+      ["The story, as the College tells it","Chad Steiner earned a bachelor's degree in applied engineering sciences in 1993 and an MBA from MSU in 1995. He is president of North America Packaging and Graphics at Sun Chemical, based in Midland, Michigan, and his community service includes Shelterhouse and United Way. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2024 alumni award recipients page."]
+    ]
+  },
+  {
+    id:"aw-2024-0015", name:"Lynn M. Frostman", initials:"LFr", pal:"p5", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2024 Red Cedar Circle Award"],
+    program:"Chemical Engineering", year:"Class of 1990",
+    where:"VP of sustainability, Syzygy Plasmonics, Sugar Land", city:"Sugar Land",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2024 Red Cedar Circle Award. Sustainability lead for photocatalytic reactors that electrify chemical manufacturing.",
+    qa:[
+      ["The story, as the College tells it","Lynn Frostman earned a bachelor's degree in chemical engineering in 1990 through the Honors College. She is vice president of sustainability and corporate social responsibility at Syzygy Plasmonics in Sugar Land, Texas, whose photocatalytic reactors electrify chemical manufacturing, and she serves on the College's Alumni Board. This page records what the College can document. It awaits her own words."],
+      ["How we know","The College's 2024 alumni award recipients page and the College Alumni Board roster."]
+    ]
+  },
+  {
+    id:"aw-2023-0016", name:"James A. Wineman", initials:"JW", pal:"p1", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2023 John D"],
+    program:"Electrical Engineering", year:"Class of 1961",
+    where:"Founder, Wineman Technology, retired, Petoskey", city:"Petoskey",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2023 John D. Ryder ECE Alumni Award. Laser surface hardening at GM, then a test-systems company serving Caterpillar, Boeing, and SpaceX.",
+    qa:[
+      ["The story, as the College tells it","James Wineman earned a bachelor's degree in electrical engineering in 1961. At General Motors he worked on surface hardening of iron with high-powered carbon dioxide lasers, recognized with a Laser Focus Technical Achievement Award, and he later founded Wineman Technology, which built test machines and data acquisition systems for customers including Caterpillar, Boeing, and SpaceX. He is retired in Petoskey. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2023 alumni award recipients page. Confirm status before contact given his class year."]
+    ]
+  },
+  {
+    id:"aw-2024-0017", name:"Charles R. Severance", initials:"CSe", pal:"p2", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2024 CSE Distinguished Alumni Award"],
+    program:"Computer Science", year:"Classes of 1984, 1990, and 1996",
+    where:"Clinical professor, University of Michigan School of Information", city:"Ann Arbor",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2024 CSE Distinguished Alumni Award. Creator of Python for Everybody, taken by millions of learners.",
+    qa:[
+      ["The story, as the College tells it","Charles Severance earned three MSU computer science degrees: a bachelor's in 1984, a master's in 1990, and a Ph.D. in 1996. He is a clinical professor at the University of Michigan School of Information and the creator of the open Python for Everybody course materials used by learners worldwide. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2024 alumni award recipients page and University of Michigan public materials."]
+    ]
+  },
+  {
+    id:"aw-2023-0018", name:"Aaron L. Copeland", initials:"AC", pal:"p3", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2023 ME Distinguished Alumni Award"],
+    program:"Mechanical Engineering", year:"Class of 1987",
+    where:"VP of engineering, Northrop Grumman Mission Systems, Baltimore", city:"Baltimore",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2023 ME Distinguished Alumni Award. Aerospace engineering leadership and NSBE mentorship.",
+    qa:[
+      ["The story, as the College tells it","Aaron Copeland earned a bachelor's degree in mechanical engineering in 1987. He is vice president of engineering at Northrop Grumman Mission Systems in Baltimore, with recognition including Black Engineer of the Year Awards honors and leadership in the National Society of Black Engineers. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2023 alumni award recipients page."]
+    ]
+  },
+  {
+    id:"aw-2019-0019", name:"Scott Piggott", initials:"SP", pal:"p4", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2019 BAE Distinguished Alumni Award"],
+    program:"Biosystems Engineering", year:"Classes of 1998 and 2010",
+    where:"CEO, Michigan Farm Bureau, Fowler", city:"Fowler",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2019 BAE Distinguished Alumni Award. Leads the Michigan Farm Bureau and farms near Fowler.",
+    qa:[
+      ["The story, as the College tells it","Scott Piggott earned a bachelor's degree in 1998 and a master's in 2010 in biosystems engineering. He is chief executive of the Michigan Farm Bureau, with earlier work including the Michigan Agriculture Environmental Assurance Program, and he farms near Fowler. This page records what the College can document. It awaits his own words."],
+      ["How we know","The College's 2019 alumni awards announcement."]
+    ]
+  },
+  {
+    id:"aw-2022-0020", name:"Marcia L. Lampela", initials:"ML", pal:"p5", voice:"award",
+    era:"awards", flavorLabel:"College-told", tags:["2022 ME Distinguished Alumni Award"],
+    program:"Mechanical Engineering", year:"Class of 1984",
+    where:"Site manager, Discovery Partners Institute, University of Illinois", city:"Chicago",
+    date:"July 2026", tier:"college", verified:true,
+    dek:"2022 ME Distinguished Alumni Award. SWE Fellow and advocate for women in engineering.",
+    qa:[
+      ["The story, as the College tells it","Marcia Lampela earned a bachelor's degree in mechanical engineering in 1984. She is a site manager at the Discovery Partners Institute of the University of Illinois system and a Fellow of the Society of Women Engineers since 2008, with long service in SWE governance advancing women in engineering. This page records what the College can document. It awaits her own words."],
+      ["How we know","The College's 2022 alumni awards announcement (engineering.msu.edu, May 2022) and SWE records."]
+    ]
+  }
+];
+const COLLECTIONS = [
+  {h:"q-mentor", q:"Was there a professor or mentor who made a difference for you?"},
+  {h:"q-tradition", q:"What's your favorite MSU tradition?"}
+];
+
+/* faculty and student grids render from the data */
+(function(){
+  const card = x => `
+    <a class="card" data-type="${x.voice}" href="#${x.id}">
+      <div class="tags"><span class="tag">${(x.tags||[])[0]||''}</span></div>
+      <h3>${x.name}</h3>
+      <div class="dek">${x.dek}</div>
+      <div class="byline">${x.program}, ${x.year} · ${x.city || 'East Lansing'}</div>
+    </a>`;
+  const f = document.getElementById('facultyCards');
+  const st = document.getElementById('studentCards');
+  const aw = document.getElementById('awardCards');
+  if(f) f.innerHTML = STORIES.filter(x=>x.voice==='faculty').map(card).join('');
+  if(st) st.innerHTML = STORIES.filter(x=>x.voice==='student').map(card).join('');
+  if(aw) aw.innerHTML = STORIES.filter(x=>x.voice==='award').map(card).join('');
+})();
+
+const entryView = document.getElementById('entryView');
+const entryContent = document.getElementById('entryContent');
+function setHash(h){ try{ location.hash = h; }catch(e){} }
+function snavSet(t){ const e = document.getElementById('snavCur'); if(e) e.textContent = t; }
+function badgeFor(st){
+  if(st.voice === 'award') return '<span class="tag legacy">Told by the College</span>';
+  if(st.legacy) return '<span class="tag legacy">Legacy · told by the College</span>';
+  if(st.voice === 'award') return '<span class="tag legacy">Told by the College</span>';
+  if(st.voice === 'faculty') return '<span class="tag">Faculty voice</span>';
+  if(st.voice === 'student') return '<span class="tag">Student voice</span>';
+  return '<span class="tag">Verified Spartan</span>';
+}
+function nextOf(st){
+  const pool = STORIES.filter(x => (!!x.legacy === !!st.legacy) && ((x.voice||'') === (st.voice||'')) && ((x.told||'') === (st.told||'')));
+  const i = pool.indexOf(st);
+  return pool[(i+1) % pool.length];
+}
+function shareNote(st){
+  if(st.voice === 'award') return 'This page records what the College can document. It awaits their own words.';
+  if(st.legacy) return "This page is the College's record. It will stay at this address.";
+  if(st.voice === 'award') return "This page records what the College can document. It awaits their own words at this same address.";
+
+  return `This page is ${st.name.split(' ')[0]}'s to share. It will stay at this address.`;
+}
+function openStory(st){
+  const nxt = nextOf(st);
+  entryContent.innerHTML = `
+    <a class="ev-back" href="#" onclick="closeEntry(); return false">&larr; All stories</a>
+    <div class="ev-tags">${badgeFor(st)}${(st.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <h1>${st.name}</h1>
+    <div class="ev-byline">${st.program}, ${st.year} &middot; ${st.where}</div>
+    <div class="ev-dek">${st.dek}</div>
+    ${(st.qa||[]).map(([q,a]) => {
+      if(q === 'How we know') return `<div class="ev-q-know">${q}</div><div class="ev-a-know">${a}</div>`;
+      const more = (QCOUNT[q] > 1 && QHASH[q]) ? `<div class="ev-more"><a href="#${QHASH[q]}">All ${QCOUNT[q]} answers to this question</a></div>` : '';
+      return `<div class="ev-q">${q}</div><div class="ev-a">${a}</div>${more}`;
+    }).join('')}
+    ${st.update ? `<div class="ev-after"><div class="k">After the story</div><p>${st.update.text || st.update}</p></div>` : ''}
+    <div class="ev-foot">
+      <span>${shareNote(st)}</span>
+      <a class="ev-next" href="#${nxt.id}">Next: ${nxt.name} &rarr;</a>
+    </div>`;
+  snavSet(st.name);
+  showEntry();
+}
+function openColl(c){
+  const items = collAnswers(c);
+  entryContent.innerHTML = `
+    <a class="ev-back" href="#" onclick="closeEntry(); return false">&larr; All stories</a>
+    <div class="ev-tags"><span class="tag">Collection</span><span class="tag">${items.length} answers</span></div>
+    <h1 style="font-family:'Newsreader',Georgia,serif;font-weight:500">${c.q}</h1>
+    <div class="ev-byline">Every published answer to this question, in year order, each attributed and linked to its full story.</div>
+    <div style="margin-top:14px">
+      ${items.map(it=>`<div class="cq-item"><div class="cq-a">${it.a}</div><div class="cq-who">${it.s.name}, ${it.s.program}, ${it.s.year} &middot; <a href="#${it.s.id}">read the full story</a></div></div>`).join('')}
+    </div>`;
+  snavSet('By question');
+  showEntry();
+}
+function collAnswers(c){
+  const out = [];
+  STORIES.forEach(st=>{
+    (st.qa||[]).forEach(([q,a])=>{ if(q === c.q) out.push({s:st, a}); });
+  });
+  out.sort((x,y)=> parseInt((x.s.year.match(/\d{4}/)||['0'])[0],10) - parseInt((y.s.year.match(/\d{4}/)||['0'])[0],10));
+  return out;
+}
+/* the question index: every question across every persona, hash-addressable */
+function slugQ(q){
+  return 'q-' + q.toLowerCase().replace(/[^a-z0-9\s]/g,'').trim().split(/\s+/).slice(0,6).join('-');
+}
+const QMAP = {}, QCOUNT = {}, QHASH = {};
+(function(){
+  const counts = QCOUNT;
+  STORIES.forEach(st => (st.qa||[]).forEach(([q]) => { counts[q] = (counts[q]||0) + 1; }));
+  /* keep the two canonical hashes stable */
+  COLLECTIONS.forEach(c => { QMAP[c.h] = c.q; });
+  Object.keys(counts).forEach(q => {
+    if(Object.values(QMAP).includes(q)) return;
+    let h = slugQ(q), base = h, i = 2;
+    while(QMAP[h]){ h = base + '-' + i++; }
+    QMAP[h] = q;
+  });
+  Object.entries(QMAP).forEach(([h,q]) => { QHASH[q] = h; });
+  const el = document.getElementById('qIndex');
+  if(el){
+    const rows = Object.entries(QMAP)
+      .map(([h,q]) => ({h, q, n: counts[q]||0}))
+      .sort((a,b) => b.n - a.n || a.q.localeCompare(b.q));
+    const rowHTML = r => `<a href="#${r.h}"><span class="qq">${r.q}</span><span class="qn">${r.n} answer${r.n===1?'':'s'}</span></a>`;
+    const TOP = 10;
+    function paint(all){
+      el.innerHTML = (all ? rows : rows.slice(0,TOP)).map(rowHTML).join('')
+        + (!all && rows.length > TOP ? `<button class="qmore" type="button" id="qMore">Show all ${rows.length} questions</button>` : '');
+      const b = document.getElementById('qMore');
+      if(b) b.addEventListener('click', ()=>paint(true));
+    }
+    paint(false);
+  }
+})();
+let savedScroll = 0;
+function showEntry(){
+  if(!document.body.classList.contains('entry-open')) savedScroll = window.scrollY || 0;
+  document.body.classList.add('entry-open');
+  entryView.hidden = false;
+  window.scrollTo({top:0});
+}
+function closeEntry(){
+  snavSet('Stories');
+  document.body.classList.remove('entry-open');
+  entryView.hidden = true;
+  setHash('');
+  window.scrollTo({top: savedScroll});
+}
+function routeHash(){
+  const id = location.hash.slice(1);
+  if(!id){ document.body.classList.remove('entry-open'); entryView.hidden = true; return; }
+  if(id.startsWith('q-')){
+    const q = QMAP[id];
+    if(q){ openColl({h:id, q}); return; }
+  }
+  const st = STORIES.find(x=>x.id===id);
+  if(st){ openStory(st); return; }
+  /* section anchors like #stories, #history fall through to normal scroll */
+  document.body.classList.remove('entry-open'); entryView.hidden = true;
+  const target = document.getElementById(id);
+  if(target) requestAnimationFrame(()=>target.scrollIntoView());
+}
+/* Ask the record: client-side verbatim retrieval, standing in for the capstone's
+   semantic version. Bright lines from spartan-stories-answers-engine.md: quotes only,
+   no answer without a source, no generated prose. */
+const ANSWERS = [];
+STORIES.forEach(st => (st.qa||[]).forEach(([q,a])=>{
+  if(q !== 'How we know') ANSWERS.push({st, q, a, blob: (q+' '+a).toLowerCase()});
+}));
+const STOP = new Set(['the','a','an','and','or','of','to','in','on','for','with','how','what','was','were','is','are','do','does','did','you','your','i','my','me','we','our','it','its','at','by','from','that','this','who','when','get','people','through','about','any','anyone']);
+function askStem(t){ const r = t.replace(/(ing|ed|es|s)$/,''); return r.length >= 3 ? r : t; }
+function askTokens(s2){ return [...new Set(s2.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(t=>t.length>2 && !STOP.has(t)).map(askStem))]; }
+function runAsk(){
+  const el = document.getElementById('askResults');
+  const raw = (document.getElementById('askInput').value||'').trim();
+  if(!raw){ el.innerHTML=''; return; }
+  const toks = askTokens(raw);
+  const need = Math.min(2, Math.max(1, toks.length));
+  const scored = ANSWERS.map(x=>({x, s: toks.filter(t=>x.blob.includes(t)).length}))
+    .filter(r=>r.s >= need).sort((p,q)=>q.s - p.s).slice(0,5);
+  if(!scored.length){
+    el.innerHTML = `<div class="ask-empty">No one has answered that yet. Browse the <a href="#byquestion">question index</a>, or share your own story and answer it first.</div>`;
+    return;
+  }
+  el.innerHTML = scored.map(({x})=>{
+    const who = x.st.voice === 'award' || x.st.legacy ? `${x.st.name} · told by the College` : `${x.st.name}, ${x.st.program}, ${x.st.year}`;
+    const coll = (QCOUNT[x.q] > 1 && QHASH[x.q]) ? ` · <a href="#${QHASH[x.q]}">all ${QCOUNT[x.q]} answers</a>` : '';
+    return `<div class="ask-item"><div class="ask-a">${x.a}</div><div class="ask-who">${who}, answering "${x.q}" · <a href="#${x.st.id}">read the full story</a>${coll}</div></div>`;
+  }).join('');
+}
+const askBtn = document.getElementById('askBtn');
+if(askBtn){ askBtn.addEventListener('click', runAsk);
+  document.getElementById('askInput').addEventListener('keydown', e=>{ if(e.key==='Enter') runAsk(); }); }
+
+window.addEventListener('hashchange', routeHash);
+routeHash();
+
+/* subnav: disclosure behavior + active section tracking */
+(function(){
+  const btn = document.getElementById('snavBtn');
+  const panel = document.getElementById('snavPanel');
+  if(!btn || !panel) return;
+  function setOpen(open){
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    panel.hidden = !open;
+  }
+  btn.addEventListener('click', ()=> setOpen(panel.hidden));
+  document.addEventListener('click', e=>{
+    if(!panel.hidden && !e.target.closest('.subnav')) setOpen(false);
+  });
+  document.addEventListener('keydown', e=>{
+    if(e.key === 'Escape' && !panel.hidden){ setOpen(false); btn.focus(); }
+  });
+  const links = [...panel.querySelectorAll('a')];
+  links.forEach(a=>a.addEventListener('click', ()=>setOpen(false)));
+
+  const targets = links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  if(!('IntersectionObserver' in window) || !targets.length) return;
+  const byId = {};
+  links.forEach(a=>{ byId[a.getAttribute('href').slice(1)] = a; });
+  const io = new IntersectionObserver(entries=>{
+    if(document.body.classList.contains('entry-open')) return;
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        links.forEach(a=>a.removeAttribute('aria-current'));
+        const a = byId[en.target.id];
+        if(a){ a.setAttribute('aria-current','true'); snavSet(a.textContent); }
+      }
+    });
+  }, {rootMargin:'-15% 0px -70% 0px'});
+  targets.forEach(t=>io.observe(t));
+})();
+
+const IDS = STORIES.filter(s => !s.legacy && s.voice !== 'award').map(s => s.id);
+document.getElementById('randomStory').addEventListener('click', ()=>{
+  const pick = IDS[Math.floor(Math.random()*IDS.length)];
+  window.location.href = '#' + pick;
+});
+</script>
+</body>
+</html>
