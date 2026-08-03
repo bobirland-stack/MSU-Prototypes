@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The CoRe Experience | First-Year Engineering | Michigan State University</title>
+<meta name="description" content="The First-Year Engineering CoRe Experience at Michigan State University. Program information, the first-year guide, EGR 100, Design Day, and how alumni and partners get involved.">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --spartan:#18453B; --forest:#0B2E26;
+  --leaf:#7FB539; --leaf-dark:#4E7A1E; --leaf-soft:#A9CE7A;
+  --mist:#F6F7F4; --paper:#FFFFFF; --ink:#161A18; --ink-soft:#50564F;
+  --line:#E2E4E0; --amber:#8A5A1F;
+  --sans:'Public Sans',system-ui,-apple-system,sans-serif;
+  --display:'Montserrat',sans-serif;
+  --maxw:1180px; --radius:6px; --shadow:0 10px 34px rgba(11,46,38,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.btn,.brand b,.chip,.sp-status{font-family:var(--display)}
+a{color:var(--spartan)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.skip-link{position:absolute;left:-9999px;background:var(--spartan);color:#fff;padding:10px 18px;z-index:200;font-weight:700}
+.skip-link:focus{left:12px;top:12px}
+
+/* ============ shared chrome ============ */
+.mock-ribbon b{color:#4A3A0F}
+.mock-ribbon{background:#FBF6E8;border-bottom:1px dashed #C9AE5E;color:#6B5416;font-size:.72rem;padding:7px 16px;text-align:center}
+.msu-bar{background:var(--forest);color:#fff}
+.msu-bar-inner{max-width:var(--maxw);margin:0 auto;padding:9px 24px;display:flex;align-items:center;gap:16px}
+.msu-wordmark{font-family:var(--display);font-weight:800;font-size:.78rem;letter-spacing:.16em}
+.msu-bar nav{margin-left:auto;display:flex;gap:20px;font-size:.78rem}
+.msu-bar a{color:#fff;text-decoration:none}.msu-bar a:hover{text-decoration:underline}
+.site-head{background:#fff;border-bottom:1px solid var(--line)}
+.site-head-inner{max-width:var(--maxw);margin:0 auto;padding:18px 24px 0;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.site-title{font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--spartan);text-decoration:none}
+.site-search{margin-left:auto;font-size:.8rem;color:var(--ink-soft);border:1px solid var(--line);border-radius:6px;padding:7px 14px;background:var(--mist)}
+.site-nav{max-width:var(--maxw);margin:0 auto;padding:8px 24px 0;display:flex;gap:2px;flex-wrap:wrap}
+.site-nav a{font-family:var(--display);font-weight:600;font-size:.84rem;color:var(--ink);text-decoration:none;padding:10px 13px 13px;border-bottom:3px solid transparent}
+.site-nav a.active{border-bottom-color:var(--spartan);color:var(--spartan)}
+.site-nav a:hover{border-bottom-color:var(--leaf);color:var(--spartan)}
+@media(max-width:700px){.site-nav{overflow-x:auto;flex-wrap:nowrap}}
+
+/* program nav */
+.nav{position:sticky;top:0;z-index:60;background:var(--spartan);color:#fff;box-shadow:0 2px 12px rgba(11,46,38,.25)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;gap:18px}
+.brand{text-decoration:none;color:#fff;display:flex;flex-direction:column;line-height:1.2}
+.brand b{font-size:1.08rem;font-weight:700}
+.brand b em{font-style:normal;color:var(--leaf-soft)}
+.brand span{font-size:.67rem;letter-spacing:.16em;text-transform:uppercase;opacity:.8;margin-top:2px}
+.navlinks{display:flex;align-items:center;gap:6px;list-style:none}
+.navlinks button{background:none;border:none;font-family:var(--display);color:#fff;font-size:.87rem;font-weight:600;opacity:.85;cursor:pointer;padding:8px 12px;border-radius:var(--radius)}
+.navlinks button:hover{opacity:1;background:rgba(255,255,255,.1)}
+.navlinks button[aria-current="page"]{opacity:1;background:rgba(255,255,255,.16)}
+.navlinks .aud{margin-left:auto;padding-left:20px;border-left:1px solid rgba(255,255,255,.28);display:flex;gap:4px}
+.navlinks .aud button{font-size:.81rem;font-weight:600;opacity:.72}
+.navlinks .aud button:hover,.navlinks .aud button[aria-current="page"]{opacity:1}
+@media(max-width:1040px){
+  .navlinks .aud{margin-left:0;padding-left:0;border-left:none;border-top:1px solid rgba(255,255,255,.15);flex-direction:column;gap:0;width:100%;margin-top:8px;padding-top:8px}
+  .navlinks .aud button{width:100%;text-align:left;padding:12px 24px}
+}
+.navtoggle{display:none;background:none;border:1.5px solid rgba(255,255,255,.6);color:#fff;border-radius:var(--radius);padding:7px 12px;font-size:.85rem;font-family:var(--sans);cursor:pointer}
+@media(max-width:1040px){
+ .navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:var(--spartan);flex-direction:column;gap:0;padding:8px 0 14px;border-top:1px solid rgba(255,255,255,.15)}
+ .navlinks.open{display:flex}.navlinks li{width:100%}
+ .navlinks button{display:block;width:100%;text-align:left;padding:12px 24px;border-radius:0}
+ .navtoggle{display:block}.brand span{display:none}}
+
+/* router + compact bands */
+.router{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:900px){.router{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.router{grid-template-columns:1fr}}
+.router a{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.24);border-radius:var(--radius);padding:15px 17px;text-decoration:none;color:#fff;transition:background .15s}
+.router a:hover{background:rgba(255,255,255,.17)}
+.router b{display:block;font-family:var(--display);font-size:.93rem}
+.router span{display:block;font-size:.83rem;color:rgba(255,255,255,.75);margin-top:3px}
+.quoteband{background:var(--mist);padding:44px 0}
+.qb{max-width:860px}
+.qb .q{font-size:1.2rem;line-height:1.55;color:var(--ink);border-left:4px solid var(--leaf);padding-left:22px}
+.qb .attrib{margin-top:14px;padding-left:26px;font-size:.9rem;color:var(--ink-soft)}
+.qb .attrib b{font-family:var(--display);color:var(--forest)}
+.qb-cta{margin-top:22px;padding-left:26px}
+.qb-cta .btn-solid{background:var(--spartan);color:#fff}
+.qb-cta .btn-solid:hover{background:var(--forest)}
+.qb-cta .btn-ghost{color:var(--spartan);border-color:var(--spartan)}
+.qb-cta .btn-ghost:hover{background:var(--spartan);color:#fff}
+
+/* ============ shared layout vocabulary ============ */
+.view[hidden]{display:none}
+section{padding:58px 0}
+.alt{background:var(--mist)}
+.dark{background:var(--forest);color:#fff}
+.deep{background:var(--spartan);color:#fff}
+.eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--leaf-dark);margin-bottom:12px}
+h2.sec{font-size:clamp(1.5rem,2.7vw,1.98rem);color:var(--forest);max-width:28ch;line-height:1.24}
+.intro{margin-top:15px;max-width:66ch;color:var(--ink-soft);font-size:1.01rem}
+.dark .eyebrow,.deep .eyebrow{color:var(--leaf)}
+.dark h2.sec,.deep h2.sec{color:#fff}
+.dark .intro,.deep .intro{color:rgba(255,255,255,.82)}
+
+.hero{background:linear-gradient(162deg,var(--spartan) 0%,var(--forest) 82%);color:#fff;padding:50px 0 56px}
+.hero.tight{padding-bottom:0}
+.hero .eyebrow{color:var(--leaf)}
+.hero h1{font-size:clamp(1.78rem,3.5vw,2.55rem);line-height:1.16;max-width:21ch}
+.hero .lede{margin-top:16px;max-width:62ch;font-size:1.04rem;color:rgba(255,255,255,.86)}
+.hero-ctas{margin-top:28px;display:flex;gap:13px;flex-wrap:wrap}
+.facts{margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2);display:flex;gap:40px;flex-wrap:wrap}
+.facts div{font-size:.85rem;color:rgba(255,255,255,.74);max-width:190px}
+.facts strong{display:block;font-family:var(--display);font-size:1.22rem;color:#fff;font-weight:700}
+
+.btn{display:inline-block;font-weight:700;font-size:.92rem;padding:12px 22px;border-radius:var(--radius);text-decoration:none;border:none;cursor:pointer;transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-solid{background:#fff;color:var(--spartan)}.btn-solid:hover{background:var(--mist)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}.btn-ghost:hover{border-color:#fff}
+.btn-green{background:var(--spartan);color:#fff}.btn-green:hover{background:var(--forest)}
+.btn-outline{background:transparent;color:var(--spartan);border:1.5px solid var(--spartan)}
+.btn-outline:hover{background:var(--spartan);color:#fff}
+
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.mt{margin-top:34px}
+@media(max-width:980px){.grid4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
+@media(max-width:560px){.grid4{grid-template-columns:1fr}}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px}
+.card--top{border-top:3px solid var(--spartan)}
+.card--leaf{border-top:3px solid var(--leaf)}
+.card h3{font-size:1.03rem;color:var(--forest)}
+.card p{margin-top:9px;font-size:.92rem;color:var(--ink-soft)}
+.card ul{margin-top:11px;padding-left:18px;font-size:.9rem;color:var(--ink-soft)}
+.card li{margin-bottom:5px}
+.card .lab{font-size:.71rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--leaf-dark)}
+.dark .card,.deep .card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)}
+.dark .card h3,.deep .card h3{color:#fff}
+.dark .card p,.deep .card p,.dark .card ul,.deep .card ul{color:rgba(255,255,255,.8)}
+.dark .card .lab,.deep .card .lab{color:var(--leaf)}
+
+.strip{display:grid;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.strip>div{padding:24px 22px;border-left:1px solid var(--line)}
+.strip>div:first-child{border-left:none}
+.strip h3,.strip h4{font-size:1.01rem;color:var(--forest);margin-top:8px}
+.strip p{margin-top:8px;font-size:.9rem;color:var(--ink-soft)}
+.strip .lab{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--leaf-dark)}
+.dark .strip,.deep .strip{border-color:rgba(255,255,255,.2)}
+.dark .strip>div,.deep .strip>div{border-left-color:rgba(255,255,255,.2)}
+.dark .strip h3,.dark .strip h4,.deep .strip h3,.deep .strip h4{color:#fff}
+.dark .strip p,.deep .strip p{color:rgba(255,255,255,.8)}
+.dark .strip .lab,.deep .strip .lab{color:var(--leaf)}
+.s3{grid-template-columns:repeat(3,1fr)}
+.s4{grid-template-columns:repeat(4,1fr)}
+.s5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:1000px){.s5{grid-template-columns:repeat(2,1fr)}.s5>div{border-left:1px solid var(--line);border-top:1px solid var(--line)}}
+@media(max-width:900px){.s3,.s4{grid-template-columns:1fr}.strip>div{border-left:none;border-top:1px solid var(--line)}.strip>div:first-child{border-top:none}
+ .dark .strip>div,.deep .strip>div{border-top-color:rgba(255,255,255,.2)}}
+
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:250px 1fr 190px;gap:22px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.row h3{font-size:.99rem;color:var(--forest)}
+.row .samp{margin-left:6px}
+.row .visit{margin-top:8px;font-size:.88rem;color:var(--ink-soft);border-left:2px solid var(--leaf);padding-left:12px}
+.row .visit b{color:var(--forest);font-family:var(--display);font-size:.82rem}
+.row .src{display:block;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin-top:5px}
+.row .src.ours{color:var(--leaf-dark)}
+.row .src.theirs{color:var(--ink-soft)}
+
+.row p{font-size:.91rem;color:var(--ink-soft)}
+.row a{font-size:.89rem;font-weight:700;text-decoration:none;border-bottom:2px solid var(--leaf);padding-bottom:1px;justify-self:start;white-space:nowrap}
+@media(max-width:860px){.row{grid-template-columns:1fr!important;gap:5px}}
+
+.keyrows{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.keyrow{display:grid;grid-template-columns:180px 1fr;border-top:1px solid var(--line)}
+.keyrow:first-child{border-top:none}
+.keyrow .k{background:var(--mist);padding:20px 22px;font-family:var(--display);font-weight:700;color:var(--forest);font-size:.93rem}
+.keyrow .v{padding:20px 24px;font-size:.94rem;color:var(--ink-soft)}
+.keyrow .v b{color:var(--ink)}
+@media(max-width:760px){.keyrow{grid-template-columns:1fr}}
+
+.note{margin-top:28px;background:var(--mist);border-left:4px solid var(--spartan);border-radius:0 var(--radius) var(--radius) 0;padding:20px 24px;font-size:.93rem;color:var(--ink-soft);max-width:80ch}
+.note b{color:var(--ink)}
+.note h3{font-size:1.02rem;color:var(--forest);margin-bottom:8px}
+.warn{background:#FBF6E8;border:1px solid #C9AE5E;border-left:1px solid #C9AE5E;color:#6B5416;border-radius:var(--radius)}
+.warn b{color:#4A3A0F}
+.warn h3{color:#4A3A0F}
+
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:start}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:28px}}
+.list{list-style:none;background:var(--mist);border:1px solid var(--line);border-radius:var(--radius);padding:8px 24px 18px}
+.list li{padding:13px 0;border-top:1px solid var(--line);font-size:.93rem;display:flex;gap:12px;align-items:baseline}
+.list li:first-child{border-top:none}
+.list li::before{content:"";flex:0 0 8px;height:8px;border-radius:50%;background:var(--leaf);transform:translateY(-1px)}
+.list.plain li::before{display:none}
+.list.plain li{display:block}
+.list.plain b{display:block;color:var(--forest);font-weight:700;margin-bottom:3px}
+.list.plain span{color:var(--ink-soft)}
+.list.muted li::before{background:var(--line)}
+
+.samp{display:inline-block;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--amber);border:1px solid var(--amber);border-radius:3px;padding:1px 5px;margin-left:7px;vertical-align:middle} details.acc{border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;background:var(--paper)}
+details.acc summary{cursor:pointer;padding:16px 20px;font-family:var(--display);font-weight:700;color:var(--forest);font-size:.97rem;list-style:none}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";float:right;color:var(--leaf-dark);font-size:1.2rem;line-height:1}
+details.acc[open] summary::after{content:"–"}
+details.acc .a{padding:0 20px 20px;font-size:.94rem;color:var(--ink-soft);max-width:76ch}
+details.acc .a b{color:var(--ink)}
+
+/* ============ date-aware panels ============ */
+.nowpanel{margin-top:30px;background:var(--paper);color:var(--ink);border-radius:var(--radius) var(--radius) 0 0;box-shadow:var(--shadow);overflow:hidden}
+.np-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 30px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.np-lab{font-size:.71rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--leaf-dark)}
+.np-head h2{font-size:1.33rem;font-weight:700;color:var(--forest);margin-top:5px;max-width:32ch}
+.np-date{font-size:.83rem;color:var(--ink-soft);white-space:nowrap}
+.np-items{display:grid;grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.np-items{grid-template-columns:1fr}}
+.np-item{padding:24px 30px 26px;border-left:1px solid var(--line)}
+.np-item:first-child{border-left:none}
+@media(max-width:820px){.np-item{border-left:none;border-top:1px solid var(--line)}.np-item:first-child{border-top:none}}
+.np-item h3{font-size:1rem;font-weight:600;color:var(--forest)}
+.np-item p{margin-top:7px;font-size:.91rem;color:var(--ink-soft)}
+.np-item a{display:inline-block;margin-top:12px;font-size:.87rem;font-weight:700;color:var(--spartan);text-decoration:none;border-bottom:2px solid var(--leaf);padding-bottom:2px}
+
+.track{background:var(--mist);padding:18px 30px 22px;border-top:1px solid var(--line)}
+.track-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:13px;flex-wrap:wrap}
+.track-lab{font-size:.71rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink-soft)}
+.track-stage{font-size:.8rem;color:var(--spartan);font-weight:700}
+.track-rail{display:flex}
+.tstep{flex:1;min-width:0;border-top:3px solid var(--line);padding-top:11px;padding-right:10px;position:relative}
+.tstep .dot{position:absolute;top:-8px;left:0;width:13px;height:13px;border-radius:50%;background:var(--line)}
+.tstep b{display:block;font-size:.77rem;font-weight:700;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tstep em{display:block;font-style:normal;font-size:.74rem;color:var(--spartan);font-weight:700;margin-top:2px}
+.tstep.now{border-top-color:var(--spartan)}
+.tstep.now .dot{background:var(--spartan);box-shadow:0 0 0 4px rgba(24,69,59,.15)}
+.tstep.now b{color:var(--spartan)}
+.tstep.past{border-top-color:var(--leaf)}
+.tstep.past .dot{background:var(--leaf)}
+@media(max-width:760px){.tstep{display:none}.tstep.now{display:block;padding-right:0}}
+
+/* updates card (home) */
+.issue{margin-top:36px;background:var(--paper);color:var(--ink);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.issue-top{padding:24px 30px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;align-items:baseline;flex-wrap:wrap}
+.issue-top h3{font-size:1.36rem;color:var(--forest);margin-top:6px;max-width:26ch}
+.issue-body{padding:24px 30px 28px;display:grid;grid-template-columns:1.25fr 1fr;gap:32px}
+@media(max-width:820px){.issue-body{grid-template-columns:1fr;gap:20px}}
+.issue-body .lead{font-size:1.01rem;color:var(--ink)}
+.went b{display:block;font-family:var(--display);font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;color:var(--forest);margin-bottom:8px}
+.went ul{list-style:none;font-size:.9rem;color:var(--ink-soft)}
+.went li{padding:7px 0;border-top:1px solid var(--line)}
+.went li:first-child{border-top:none}
+
+/* questions */
+.qtools{margin-top:28px;position:sticky;top:66px;z-index:40;background:var(--paper);padding:14px 0 12px;border-bottom:1px solid var(--line)}
+.qtools-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.searchwrap{flex:1;min-width:240px;position:relative}
+.searchwrap input{width:100%;font-family:var(--sans);font-size:.95rem;padding:12px 40px 12px 16px;border:1.5px solid var(--line);border-radius:var(--radius);color:var(--ink)}
+.searchwrap input:focus{border-color:var(--leaf-dark)}
+.searchwrap .clr{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:1.1rem;color:var(--ink-soft);cursor:pointer;padding:4px 8px;display:none}
+.searchwrap.has .clr{display:block}
+.qtools select{font-family:var(--sans);font-size:.92rem;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--radius);background:var(--paper);color:var(--ink);cursor:pointer}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.linkish{background:none;border:none;padding:0;font:inherit;color:var(--spartan);font-weight:700;text-decoration:underline;cursor:pointer}
+.chip{font-size:.84rem;font-weight:600;padding:6px 14px;border-radius:20px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink-soft);cursor:pointer}
+.chip:hover{border-color:var(--leaf-dark)}
+.chip[aria-pressed="true"]{background:var(--spartan);border-color:var(--spartan);color:#fff}
+.qmeta{margin-top:16px;display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.qcount{font-size:.86rem;color:var(--ink-soft)}
+.qlist{margin-top:12px;border-top:1px solid var(--line)}
+.qitem{border-bottom:1px solid var(--line);padding:15px 0}
+.qitem[hidden]{display:none}
+.qhead{display:block;width:100%;text-align:left;background:none;border:none;font-family:var(--sans);cursor:pointer;padding:0 38px 0 0;position:relative}
+.qhead::after{content:"›";position:absolute;right:8px;top:2px;font-size:1.5rem;line-height:1;color:var(--leaf-dark);transition:transform .2s ease}
+.qitem.open .qhead::after{transform:rotate(90deg)}
+.qhead h3{font-family:var(--display);font-size:1.01rem;font-weight:700;color:var(--forest);line-height:1.38}
+.qhead .short{margin-top:5px;font-size:.93rem;color:var(--ink-soft);line-height:1.5;max-width:80ch;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.qitem.open .qhead .short{-webkit-line-clamp:unset;overflow:visible;color:var(--ink)}
+.qhead .short b{font-weight:700;color:var(--spartan)}
+.qhead .attrib{margin-top:5px;font-size:.78rem;color:var(--ink-soft)}
+.qhead .attrib em{font-style:normal;font-weight:700;color:var(--ink)}
+.qhead .more{display:none}
+.qbody{display:none;padding-top:16px}
+.qitem.open .qbody{display:block}
+.answer{font-size:1.02rem;line-height:1.68;color:var(--ink);max-width:68ch;border-left:3px solid var(--leaf);padding-left:20px}
+.answer p+p{margin-top:14px}
+.answer p:first-child{font-weight:600}
+.byline{margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.byline .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(150deg,var(--spartan),var(--leaf));flex:0 0 38px}
+.byline .who{font-size:.86rem;color:var(--ink-soft)}
+.byline .who b{display:block;font-family:var(--display);color:var(--forest);font-size:.91rem}
+.storylink{display:block;margin-top:4px;font-size:.83rem;font-weight:700;color:var(--spartan);text-decoration:none;border-bottom:2px solid var(--leaf);padding-bottom:1px;align-self:flex-start}
+.qaction{margin-top:20px;background:var(--mist);border-left:4px solid var(--spartan);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;max-width:70ch}
+.qaction .lab{font-size:.71rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--spartan)}
+.qaction p{margin-top:5px;font-size:.93rem;color:var(--ink)}
+.linkbtn{margin-top:16px;background:none;border:1px solid var(--line);border-radius:var(--radius);font-family:var(--sans);font-size:.82rem;color:var(--ink-soft);padding:7px 13px;cursor:pointer}
+.linkbtn:hover{border-color:var(--leaf-dark);color:var(--spartan)}
+.empty{padding:40px 0 8px;max-width:56ch}
+.empty h3{font-size:1.1rem;color:var(--forest)}
+.empty p{margin-top:9px;color:var(--ink-soft);font-size:.95rem}
+.bar{margin-top:38px;background:var(--forest);color:#fff;border-radius:var(--radius);padding:28px 32px;display:flex;justify-content:space-between;gap:24px;align-items:center;flex-wrap:wrap}
+.bar h3{font-size:1.18rem}
+.bar p{margin-top:7px;font-size:.92rem;color:rgba(255,255,255,.82);max-width:58ch}
+
+/* voices */
+.voice .q{font-size:1.01rem;line-height:1.58;color:var(--ink);border-left:3px solid var(--leaf);padding-left:18px}
+.voice .attrib{margin-top:18px;font-size:.86rem;color:var(--ink-soft)}
+.voice .attrib b{display:block;font-family:var(--display);color:var(--forest);font-size:.93rem}
+.voice a{margin-top:12px;display:inline-block;font-size:.85rem;font-weight:700;text-decoration:none;border-bottom:2px solid var(--leaf);padding-bottom:1px}
+
+/* footer */
+footer.site{background:var(--forest);color:rgba(255,255,255,.8);padding:52px 0 30px;font-size:.87rem}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:38px}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.foot-grid{grid-template-columns:1fr}}
+footer.site .foot-h{color:#fff;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;font-family:var(--display)}
+footer.site ul{list-style:none}footer.site li{margin-bottom:8px}
+footer.site a,footer.site button{color:rgba(255,255,255,.8);text-decoration:none;background:none;border:none;font-family:var(--sans);font-size:.87rem;padding:0;cursor:pointer;text-align:left}
+footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underline}
+.foot-brand b{color:#fff;font-family:var(--display);font-size:1.05rem}
+.foot-brand p{margin-top:11px;max-width:40ch}
+.support{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);font-size:.85rem;color:rgba(255,255,255,.72);max-width:80ch}
+.support b{color:#fff}
+.legal{margin-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.77rem;color:rgba(255,255,255,.55)}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--forest);color:#fff;padding:12px 22px;border-radius:var(--radius);font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:100}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+    /* ---- Ask a Spartan: multiple answers ---- */
+    .answer.alt{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+    .alsohead{font-size:.76rem;letter-spacing:.07em;text-transform:uppercase;font-weight:800;color:var(--leaf-dark);margin:0 0 10px}
+    .storyrow{margin:16px 0 0}
+
+    /* ---- guide: prominent panel buttons ---- */
+    .gnav [data-panel]{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%; padding:13px 15px;margin-bottom:7px;border:1.5px solid var(--line);border-radius:10px;background:#fff; font-weight:750;font-size:.95rem;text-align:left;color:var(--ink);cursor:pointer; transition:border-color .15s,background .15s,color .15s,transform .12s}
+    .gnav [data-panel]:hover{border-color:var(--spartan);background:var(--mist);transform:translateX(2px)}
+    .gnav [data-panel].on,.gnav [data-panel][aria-selected="true"]{background:var(--spartan);border-color:var(--spartan);color:#fff}
+    .gnav [data-panel] .cnt{background:var(--mist);border-radius:99px;padding:2px 9px;font-size:.78rem;font-weight:800;color:var(--ink-soft)}
+    .gnav [data-panel].on .cnt,.gnav [data-panel][aria-selected="true"] .cnt{background:rgba(255,255,255,.24);color:#fff}
+
+    /* ---- highlights ---- */
+    .hl-arc{display:grid;gap:13px}
+    .hl-arc>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+    .hl-arc>div b{display:block;font-size:.73rem;letter-spacing:.08em;text-transform:uppercase;color:var(--leaf-dark);margin-bottom:6px}
+    .hl-arc>div p{margin:0;font-size:.95rem;color:var(--ink-soft)}
+
+    /* ---- partners ---- */
+    #v-partners h2.sec{margin-top:58px}
+    #v-partners section:first-of-type h2.sec{margin-top:0}
+    #v-partners .grid{gap:18px}
+    #v-partners .card{border:1px solid var(--line);border-radius:13px;padding:22px 22px 24px;background:#fff}
+    #v-partners .card h3{margin:0 0 9px;font-size:1.02rem;color:var(--spartan)}
+    #v-partners .card p{margin:0;color:var(--ink-soft)}
+    .plogos{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:26px 0 10px}
+    .plogo{border:1px solid var(--line);border-radius:14px;background:#fff;padding:32px 22px;text-align:center; display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:176px}
+    .plogo img{max-width:206px;width:100%;height:auto}
+    .plogo p{margin:0;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:var(--ink-soft)}
+    .pnums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:28px 0 6px}
+    .pnum{background:var(--mist);border-radius:12px;padding:20px 18px}
+    .pnum b{display:block;font-family:var(--display);font-size:1.9rem;line-height:1;color:var(--spartan);margin-bottom:7px}
+    .pnum span{font-size:.87rem;color:var(--ink-soft)}
+    @media(max-width:820px){.pnums{grid-template-columns:1fr 1fr}}
+    @media(max-width:720px){.plogos{grid-template-columns:1fr}}
+  
+    .ptable{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#fff;margin-top:22px}
+    .prow{display:grid;grid-template-columns:230px 1fr;gap:22px;padding:18px 22px;border-bottom:1px solid var(--line)}
+    .prow:last-child{border-bottom:none}
+    .prow b{color:var(--spartan);font-size:.98rem;line-height:1.35}
+    .prow span{color:var(--ink-soft);font-size:.95rem}
+    @media(max-width:760px){.prow{grid-template-columns:1fr;gap:6px}}
+    .pnums{grid-template-columns:repeat(3,1fr)}
+  
+    .carousel{position:relative;display:flex;align-items:center;gap:10px;margin-top:24px}
+    .ctrack{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px;flex:1;scrollbar-width:none}
+    .ctrack::-webkit-scrollbar{display:none}
+    .scard{flex:0 0 min(360px,84%);scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 24px 22px;display:flex;flex-direction:column}
+    .scard .quote{font-family:var(--display);font-size:1.06rem;line-height:1.45;color:var(--ink);margin:0 0 16px}
+    .scard .sbody{margin:0 0 18px;font-size:.94rem;color:var(--ink-soft);flex:1}
+    .scard .sname{display:flex;align-items:center;gap:11px;border-top:1px solid var(--line);padding-top:14px}
+    .scard .sav{width:38px;height:38px;border-radius:50%;background:var(--mist);flex:0 0 38px}
+    .scard .sname b{display:block;font-size:.94rem}
+    .scard .sname span{font-size:.83rem;color:var(--ink-soft)}
+    .cnav{flex:0 0 40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:#fff;font-size:1.3rem;line-height:1;cursor:pointer;color:var(--spartan)}
+    .cnav:hover{border-color:var(--spartan);background:var(--mist)}
+    .cdots{display:flex;justify-content:center;gap:7px;margin-top:16px}
+    .cdots button{width:8px;height:8px;border-radius:50%;border:none;background:var(--line);cursor:pointer;padding:0}
+    .cdots button.on{background:var(--spartan);width:22px;border-radius:99px}
+    @media(max-width:640px){.cnav{display:none}.scard{flex:0 0 88%}}
+  
+    .photogrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+    .ph{margin:0}
+    .ph-wide{grid-column:span 2}
+    .phimg{aspect-ratio:4/3;border-radius:12px;background:linear-gradient(135deg,var(--mist),#e8ece6);border:1px solid var(--line); display:flex;align-items:center;justify-content:center;position:relative}
+    .phimg::after{content:attr(data-label);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:var(--ink-soft);opacity:.65}
+    .ph figcaption{margin-top:9px;font-size:.87rem;color:var(--ink-soft)}
+    .awtag{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--leaf-dark); background:var(--mist);border-radius:99px;padding:5px 11px;margin:0 0 11px}
+    @media(max-width:860px){.photogrid{grid-template-columns:1fr 1fr}.ph-wide{grid-column:span 2}}
+  
+    /* --- UX polish --- */
+    .prow{transition:background .14s} .prow:hover{background:var(--mist)}
+    .plogo{transition:border-color .14s} .plogo:hover{border-color:var(--spartan)}
+    .gitem{transition:border-color .14s,transform .12s}
+    .gitem:hover{border-color:var(--leaf-soft)}
+    .qhead{cursor:pointer;transition:background .14s} .qhead:hover{background:var(--mist)}
+    .qitem.open .more{opacity:.55}
+    .scard{transition:box-shadow .16s} .scard:hover{box-shadow:var(--shadow)}
+    .cnav:focus-visible,.cdots button:focus-visible,.gnav [data-panel]:focus-visible,.qhead:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
+    .ph .phimg{transition:transform .18s} .ph:hover .phimg{transform:translateY(-2px)} a,button{overflow-wrap:break-word}
+    .pnum b{font-variant-numeric:tabular-nums}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  
+    /* --- rhythm and hierarchy --- */
+    .view section{padding-block:clamp(44px,6vw,74px)}
+    .view section:first-of-type{padding-top:clamp(34px,4.4vw,54px)}
+    h2.sec{margin-bottom:6px}
+    .intro{max-width:66ch}
+    .lede{max-width:62ch}
+    .card p:last-child{margin-bottom:0}
+    .grid3{align-items:start}
+    .ptable{box-shadow:0 1px 2px rgba(11,46,38,.04)}
+    .pnum{border:1px solid var(--line)}
+    /* consistent eyebrow treatment */
+    .eyebrow{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--leaf-dark);margin-bottom:10px}
+    .hero .eyebrow{color:var(--leaf-soft)}
+    /* sample tags never dominate */
+    .samp{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800;
+      background:var(--mist);color:var(--ink-soft);border-radius:99px;padding:3px 8px;margin-left:9px;vertical-align:middle;white-space:nowrap}
+    .deep .samp,.dark .samp{background:rgba(255,255,255,.18);color:#fff}
+  
+    @media print{
+      .msu-bar,.site-head,.navtoggle,.navlinks,.mock-ribbon,.cnav,.cdots,.gnav,.skip-link,.toast,.btn{display:none!important}
+      .view[hidden]{display:block!important}
+      body{color:#000;background:#fff;font-size:11pt}
+      .hero,.deep,.dark,.alt{background:#fff!important;color:#000!important}
+      .hero .eyebrow,.deep .eyebrow{color:#000!important}
+      a[href^="http"]::after{content:" (" attr(href) ")";font-size:9pt;color:#444}
+      .card,.prow,.ptable,.plogo,.scard{border:1px solid #999;break-inside:avoid}
+      section{padding-block:14pt!important;break-inside:avoid}
+      h1,h2,h3{break-after:avoid}
+    }
+  
+    /* --- contrast and small screens --- */
+    .ph figcaption,.scard .sname span,.pnum span,.prow span,.card p{color:#4A514A}
+    .eyebrow{color:#3F6318}
+    .hero .eyebrow{color:#C9E39A}
+    .samp{color:#4A514A}
+    @media(max-width:520px){
+      .pnums{grid-template-columns:1fr}
+      .photogrid{grid-template-columns:1fr}
+      .ph-wide{grid-column:span 1}
+      .prow{padding:15px 16px}
+      .plogo{min-height:140px;padding:24px 18px}
+      h1{font-size:clamp(1.65rem,7vw,2.2rem)}
+      .btn{width:100%;justify-content:center;margin-left:0!important;margin-top:9px}
+    }
+    /* long guide lists stay scannable */
+    .gitem h3{font-size:1rem;line-height:1.35}
+    .qhead h3{line-height:1.35}
+  </style>
+<link rel="canonical" href="https://engineering.msu.edu/academics/first-year-core">
+<meta name="theme-color" content="#18453B">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Michigan State University College of Engineering">
+<meta property="og:title" content="The First-Year Engineering CoRe Experience">
+<meta property="og:description" content="Every incoming MSU engineering student takes the cornerstone design course. CoRe brings together that course, tutoring five nights a week, advising, and a residential community.">
+<meta property="og:url" content="https://engineering.msu.edu/academics/first-year-core">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The First-Year Engineering CoRe Experience">
+<meta name="twitter:description" content="Every incoming MSU engineering student takes the cornerstone design course. CoRe brings together that course, tutoring five nights a week, advising, and a residential community.">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="mock-ribbon"><b>Concept</b> Visualization only, at engineering.msu.edu/academics/first-year-core. Sample answers, names and dates throughout.</div>
+
+<div class="msu-bar"><div class="msu-bar-inner">
+  <span class="msu-wordmark">MICHIGAN STATE UNIVERSITY</span>
+  <nav><a href="https://engineering.msu.edu/current-students">Current Students</a><a href="https://engineering.msu.edu/future-students">Future Students</a><a href="https://engineering.msu.edu/directory">Directory</a></nav>
+</div></div>
+
+<header class="site-head">
+  <div class="site-head-inner">
+    <a class="site-title" href="https://engineering.msu.edu/">College of Engineering</a>
+    <span class="site-search">Search</span>
+  </div>
+  <nav class="site-nav" aria-label="College sections">
+    <a href="https://engineering.msu.edu/about">About</a>
+    <a href="https://engineering.msu.edu/academics" class="active">Academics</a>
+    <a href="https://engineering.msu.edu/admissions">Admissions</a>
+    <a href="https://engineering.msu.edu/research">Research</a>
+    <a href="https://engineering.msu.edu/careers">Careers</a>
+    <a href="https://engineering.msu.edu/alumni">Alumni</a>
+    <a href="https://engineering.msu.edu/give">Give</a>
+  </nav>
+</header>
+
+<nav class="nav" aria-label="CoRe Experience">
+  <div class="wrap">
+    <a class="brand" href="#/home"><b>Co<em>Re</em> Experience</b><span>First-Year Engineering · MSU</span></a>
+    <button class="navtoggle" id="navToggle" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <ul class="navlinks" id="navlinks">
+      <li><button data-view="home">The program</button></li>
+      <li><button data-view="guide">First-year guide</button></li>
+      <li><button data-view="course">EGR 100</button></li>
+      <li><button data-view="highlights">Highlights</button></li>
+      
+            <li class="aud"><button data-view="effect">For alumni</button><button data-view="partners">For partners</button></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ==================== HOME ==================== -->
+<div class="view" id="v-home">
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">First-Year Engineering CoRe Experience</p>
+      <h1>The launchpad for Spartan Engineers.</h1>
+      <p class="lede">CoRe brings together the cornerstone design courses, tutoring and advising, and the option to live among other engineers in South Neighborhood. It also puts first-year students in front of working engineers in year one. The aim is to build the habits and standards an engineering career depends on, starting in the first semester.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-solid" href="#/guide">Open the first-year guide</a>
+        <button class="btn btn-ghost" data-view="course">How the design course works</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="what">
+    <div class="wrap">
+      <p class="eyebrow reveal">The program</p>
+      <h2 class="sec reveal">What CoRe includes.</h2>
+      <div class="grid3 mt">
+        <article class="card card--top reveal"><h3>Live</h3><p>First-year engineering students can choose to live together in Wilson, Wonders and Holden. CoRe works with Residence Education so study tables and build nights run in the buildings students already live in. The RAs there know when tutoring runs and who to tell when someone is having a hard semester.</p></article>
+        <article class="card card--top reveal"><h3>Learn</h3><p>The Cornerstone Engineering Program: real design projects on real teams from the first weeks, with free tutoring five evenings a week and advising every semester.</p><p style="margin-top:12px"><button class="linkish" data-view="course">About the design course →</button></p></article>
+        <article class="card card--top reveal"><h3>Launch</h3><p>Alumni answering student questions, and Cornerstone Partners bringing a problem from their own work, and their engineers, into the design course and the showcase. Students meet working engineers in year one.</p><p style="margin-top:12px"><button class="linkish" data-view="highlights">See what teams built →</button></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="yourguide">
+    <div class="wrap">
+      <div class="split">
+        <div class="reveal">
+          <p class="eyebrow">Students</p>
+          <h2 class="sec">The first-year guide.</h2>
+          <p class="intro">Which office handles what, the deadlines that are easy to miss, and where to go when something is hard. Plus answers to the questions first-year students ask, written by Spartan engineers who have done it. Most of what makes a first year go well is knowing things nobody writes down. We have written down what students usually learn by chance.</p>
+          <p style="margin-top:20px"><a class="btn btn-green" href="#/guide">Read the first-year guide</a></p>
+        </div>
+        <ul class="list plain reveal">
+          <li><b>Who does what</b><span>Advising, tutoring, careers, financial aid and the CoRe office, and which one owns your question</span></li>
+          <li><b>Dates worth knowing early</b><span>The career fair, the scholarship deadline, summer research windows and the showcase</span></li>
+          <li><b>Support</b><span>Counseling, the food bank, emergency funds and the Dean of Students office</span></li>
+          <li><b>Ask a Spartan</b><span>Forty-nine answers from working engineers, recruiters and students a year ahead</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="ge">
+    <div class="wrap">
+      <p class="eyebrow reveal">Cornerstone Partners</p>
+      <h2 class="sec reveal">Consumers Energy and GE Aerospace.</h2>
+      <p class="intro reveal">Every first-year engineer here builds something real, presents it to people who do this for a living, and has somewhere to turn on the nights a project stalls. That is true because Consumers Energy and GE Aerospace decided it should be, and have kept deciding it for years. We call them Cornerstone Partners, after the design course at the centre of the first year.</p>
+      <div class="grid3 mt">
+        <article class="card card--top reveal">
+          <h3>Answering student questions</h3>
+          <p>When a student asks how recruiting timing works or what an engineer does day to day, the answer comes from someone doing that job. Answers are published in the first-year guide with a name on them.</p>
+          <p style="margin-top:12px"><a href="#/guide" style="font-weight:700;font-size:.88rem">The first-year guide &rarr;</a></p>
+        </article>
+        <article class="card card--top reveal">
+          <h3>In the room when it counts</h3>
+          <p>Partner engineers set the challenge in September, work with teams at the design review in week seven, and judge the results in December. Presenting to someone who does this work professionally changes how a team prepares.</p>
+        </article>
+        <article class="card card--top reveal">
+          <h3>Money that reaches students</h3>
+          <p>Paid coaching and tutoring roles, materials so every team can build to the same standard, and awards sized against a real tuition bill.</p>
+        </article>
+      </div>
+      <p class="intro reveal" style="margin-top:26px;font-size:.94rem">What that partnership has meant is best told by the people who lived it. Partner engineers and our students both have stories in <a href="https://engineering.msu.edu/alumni/spartan-stories">Spartan Stories</a>, and there is more on the <button class="linkish" data-view="partners">partners page</button>.</p>
+    </div>
+  </section>
+
+  <section class="quoteband" aria-label="Student voices">
+    <div class="wrap">
+      <div class="qb reveal">
+        <p class="q">What I did not expect was how much of engineering is explaining your reasoning to other people. That started in my first semester, on a team of four, and it has not stopped since.</p>
+        <p class="attrib"><b>Sofia N.</b> · Mechanical Engineering 2021 · Automotive<span class="samp">Sample</span></p>
+        <p class="qb-cta"><a class="btn btn-solid" href="#/guide">Start with the guide</a> <a class="btn btn-ghost" style="margin-left:10px" href="https://engineering.msu.edu/alumni/spartan-stories">Read Spartan Stories</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark" id="updates">
+    <div class="wrap">
+      <div class="split">
+        <div class="reveal">
+          <p class="eyebrow">Stay in touch</p>
+          <h2 class="sec">Email updates.</h2>
+          <p class="intro">Short email updates through the academic year, timed to what first-year students are working through. Students, partners and alumni each get the version written for them.</p>
+        </div>
+        <ul class="list plain reveal" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)">
+          <li style="border-color:rgba(255,255,255,.2)"><b style="color:#fff">Students</b><span style="color:rgba(255,255,255,.8)">In the EGR 100 course shell and in the halls, through the semester</span></li>
+          <li style="border-color:rgba(255,255,255,.2)"><b style="color:#fff">Partners</b><span style="color:rgba(255,255,255,.8)">What your support funded and which of your engineers took part, each term</span></li>
+          <li style="border-color:rgba(255,255,255,.2)"><b style="color:#fff">Alumni</b><span style="color:rgba(255,255,255,.8)">What students asked recently, and an invitation to answer one</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ==================== GUIDE ==================== -->
+<div class="view" id="v-guide" hidden>
+  <header class="ghero">
+    <div class="wrap">
+      <h1>Your first year, answered by Spartans who have done it.</h1>
+      <p>Answers from MSU engineering graduates working in industry, the recruiters who hire them, and students a year or two ahead of you.</p>
+      <div class="gsearch" id="gsearchWrap">
+        <label class="sr-only" for="gq">Search the guide</label>
+        <input id="gq" type="search" placeholder="Search everything: tutoring, my team, internships, money" autocomplete="off">
+        <button class="clr" id="gqclear" aria-label="Clear search">×</button>
+      </div>
+      <p class="ghint">Searches offices, dates, support and every answer at once.</p>
+    </div>
+  </header>
+
+  <div class="glayout">
+    <nav class="gnav" id="gnav" aria-label="Guide sections">
+      <button data-panel="basics" aria-current="page">Start here</button>
+      <button data-panel="offices">Who does what</button>
+      <button data-panel="community">Finding people</button>
+      <button data-panel="support">Support</button>
+      <button data-panel="dates">Dates</button>
+      <button data-panel="questions">Ask a Spartan<span class="cnt">20</span></button>
+      <button data-panel="careers">Careers</button>
+    </nav>
+
+    <div class="gmain" id="gmain">
+      <section class="gpanel" id="p-basics"><h2>How CoRe works.</h2>
+      <div class="grid3 mt">
+        <article class="gitem card card--leaf"><h3>You are already in CoRe</h3><p>Every incoming engineering student is part of the CoRe Experience. There is no application and nothing to sign up for. If you are taking EGR 100, this is for you.</p></article>
+        <article class="gitem card card--leaf"><h3>Everyone thinks everyone else has it figured out</h3><p>Research on first-year students finds this consistently. People consistently underestimate how much others liked talking to them. People consistently underestimate how glad someone would be to hear from them, and the effect is strongest when you barely know the person. And most people believe everyone else has a fuller social life than they do.</p><p>What that produces on a floor in October is everyone sitting in their room assuming everyone else is out, which is a lonely way to spend a term for no reason. The person you are nervous about messaging is probably having the same week you are.</p></article>
+        <article class="gitem card card--leaf"><h3>Engineering housing is optional</h3><p>Engineering students can choose to live together in Wilson, Wonders or Holden. Plenty of first-year engineers live elsewhere on campus or at home, and everything here applies either way.</p></article>
+        <article class="gitem card card--leaf"><h3>Admission to major comes later</h3><p>You are admitted to the college first and enter a specific degree program later. That step is called admission to major, it has its own credit and grade requirements that differ by major, and it is competitive. Ask your advisor in your first semester what your major requires. Knowing the target early gives you time to plan around it.<span class="samp">Confirm</span></p></article>
+        <article class="gitem card card--leaf"><h3>Tutoring is free and drop-in</h3><p>Sunday through Thursday, 6 to 10 p.m., in C211 Wonders Hall. You can walk in without booking anything and without being behind.</p></article>
+        <article class="gitem card card--leaf"><h3>What office hours are</h3><p>They are set times when a professor is available without an appointment. Going once early in the semester makes it much easier to go back later.</p></article>
+        <article class="gitem card card--leaf"><h3>Using the career office</h3><p>The Center for Spartan Engineering works with students at every stage, including first-year students who have nothing on a resume yet.</p></article>
+      <article class="gitem card card--leaf"><h3>What computer should I buy?</h3><p>An entry-level current laptop is enough for first-year coursework. Most first-year work runs on any current laptop, and the Division of Engineering Computing Services publishes a recommended specification each year before term. Check theirs before you spend anything, because some majors have requirements that only start to matter in your second year. If money is tight, say so to your advisor before you buy — there are loaner and support options that are not advertised well.</p></article><article class="gitem card card--leaf"><h3>Why am I being charged an engineering fee?</h3><p>It is a per-credit fee on engineering courses that funds labs, computing, software licences and the equipment you use in EGR 100. It appears on your bill separately from tuition, which catches people out. If it creates a real problem, financial aid is the office to talk to, not your department.</p></article></div></section>
+      <section class="gpanel" id="p-offices" hidden><h2>Who does what.</h2>
+      <p class="lede">Most of the first year runs through a handful of offices, and knowing which one owns what saves a lot of time. This guide explains how things work, and the offices below are where you go to do them.</p>
+      <div class="rows mt">
+        <div class="gitem row"><h3>Your academic advisor</h3><p>Course planning, major requirements, admission to major, and anything about your record. Your advisor gives the official answer.</p><p class="visit"><b>First time:</b> You book a time and meet for about half an hour. Bring a rough list of what you want to ask. Most students leave with a plan for next semester written down.</p><a href="https://engineering.msu.edu/current-students/undergraduate/meet-advisor">Make an appointment →</a></div>
+        <div class="gitem row"><h3>CoRe tutoring</h3><p>Free tutoring in math, physics and chemistry, Sunday through Thursday from 6 to 10 p.m. in C211 Wonders Hall. It starts in the third week of the semester and runs to the week before finals, with review sessions before midterms and finals.</p><p class="visit"><b>First time:</b> You walk in and sign your name. Sit at a table, work on what you brought, and ask when you get stuck. Come with whatever you are working on. No appointment or prepared question is needed.</p><a href="https://engineering.msu.edu/academics/first-year-core">See hours →</a></div>
+        <div class="gitem row"><h3>Center for Spartan Engineering</h3><p>Everything about careers: resumes, career fairs, interviews and advice on internships and co-ops, which are longer paid placements taken for credit. They also run Handshake, the platform where jobs and internships are posted. First-year students are welcome to use it.</p><p class="visit"><b>First time:</b> You can drop in or book a time. Bring whatever you have, even a half-finished resume, and someone will sit down and go through it with you.</p><a href="https://www.careers.egr.msu.edu/">Go to the Center →</a></div>
+                <div class="gitem row"><h3>Scholarships and financial aid</h3><p>College scholarship applications and deadlines, and what to do if something changes with your finances partway through the year. Two things students get wrong: the college scholarship application is separate from the one you did to get in, and it is open to students at every level.</p><a href="https://engineering.msu.edu/admissions/scholarships-and-financial-resources">See scholarships →</a></div>
+        <div class="gitem row"><h3>Your RA and hall staff</h3><p>Your resident assistant, the student who lives on your floor and runs it, and the person to ask about roommate problems. They are not tutors and not counsellors, but they know which office handles what and who to tell if you are having a difficult stretch. Asking them where to go is exactly what the role is for.</p><a href="https://liveon.msu.edu/">About living on campus →</a></div>
+                <div class="gitem row"><h3>Math Learning Center</h3><p>Free drop-in math help, separate from CoRe tutoring and open to any MSU undergraduate. Useful when calculus is the sticking point.</p><a href="https://math.msu.edu/mlc/">Math Learning Center →</a></div>
+        <div class="gitem row"><h3>The Writing Center</h3><p>One-to-one consultations on any writing, including lab reports and design documentation. Engineering writing counts, and they see a lot of it.</p><a href="https://writing.msu.edu/">Writing Center →</a></div>
+        <div class="gitem row"><h3>Engineering computing (DECS)</h3><p>The college's own computing service: software licenses, lab machines, printing and help when something technical stops working. They handle most of what you need for coursework, ahead of central IT.</p><a href="https://www.egr.msu.edu/decs/">DECS →</a></div>
+<div class="gitem row"><h3>The CoRe office</h3><p>Wilson Hall C101. If you are unsure who to ask, start here and we will point you to the right office.</p><a href="mailto:core@egr.msu.edu">core@egr.msu.edu →</a></div>
+      </div></section>
+      <section class="gpanel" id="p-community" hidden><h2>Finding people.</h2>
+      <p class="lede">A first year goes better with people in it. These are the places students find them, and none of them require you to already know somebody.</p>
+      <div class="rows mt">
+        <div class="gitem row"><h3>Engineering student groups</h3><p>Project teams, professional societies and discipline clubs run through the college. Formula racing, robotics, IEEE, SWE, NSBE, SHPE and others. Most take first-year students and several are looking for them.</p><a href="https://engineering.msu.edu/academics/undergraduate/student-groups">Engineering student groups →</a></div>
+        <div class="gitem row"><h3>Women in Engineering</h3><p>Programming and community run by the college for women in engineering: events, connections with upper-level students and industry, and a group of people going through the same year. Open to any student who wants to take part.</p><a href="https://engineering.msu.edu/inclusive-excellence/women-in-engineering">Women in Engineering →</a></div>
+        <div class="gitem row"><h3>Inclusive Excellence</h3><p>The college's own work on building a community where engineering is open to everyone, including the student organizations, programs and staff attached to it. Diversity and belonging work in the college runs through here. Worth reading if you want to know what the college says it stands for and who is doing it.</p><a href="https://engineering.msu.edu/inclusive-excellence">Inclusive Excellence →</a></div>
+        <div class="gitem row"><h3>Every organization at MSU</h3><p>More than 1,000 registered student organizations across the university, most of them nothing to do with engineering. That is rather the point. Involve@State lists them all with their events and contacts, and going to one meeting is how a lot of people find their friends.</p><a href="https://sle.msu.edu/involvestate">Browse organizations →</a></div>
+        <div class="gitem row"><h3>Recreational sports</h3><p>Intramural leagues, the gyms and pools, fitness classes and open recreation, and one of the easier places to make friends outside engineering. Intramurals are one of the easier ways to end up with a regular group of people without having to be good at anything.</p><a href="https://recsports.msu.edu/">Recreational sports →</a></div>
+        <div class="gitem row"><h3>Working on campus</h3><p>Useful if you commute, because a campus job gives you a reason to be here between classes. A campus job puts you around the same people every week, and the research on belonging is fairly clear that this matters more than it sounds like it should. Engineering departments, labs, the library and dining all hire first-year students, and work study employment counts here too.</p><a href="https://careers.msu.edu/cw/en-us/listing/">Student job postings →</a></div>
+      </div>
+    </section>
+
+  <section class="gpanel" id="p-support" hidden><h2>Support services.</h2>
+      <p class="lede">Some of what makes a first year hard has nothing to do with coursework. MSU staffs offices for all of it, and Spartans use them every week.</p>
+      <div class="rows mt">
+        <div class="gitem row"><h3>Counseling and psychiatric services</h3><p>Free counseling for enrolled students, including same-day appointments and a 24-hour line. You can go once to talk something through, or regularly. Both are normal.</p><a href="https://caps.msu.edu/">CAPS →</a></div>
+        <div class="gitem row"><h3>The Student Food Bank</h3><p>Free groceries for MSU students, in Olin Health Center. Founded in 1993, it was the first collegiate food pantry in the country run by students for students. Bring your student ID. You can go once a week.</p><a href="https://foodbank.msu.edu/">Student Food Bank →</a></div>
+        <div class="gitem row"><h3>The Dean of Students office</h3><p>Where to go when something outside class is affecting your semester. They can notify your instructors on your behalf, so you explain it once and they pass it on.</p><a href="https://deanofstudents.msu.edu/">Dean of Students →</a></div>
+        <div class="gitem row"><h3>Emergency financial help</h3><p>MSU keeps funds for students facing something unexpected, such as a car repair or an unexpected bill. Contact financial aid as soon as something comes up. More options are available before a bill is late.</p><a href="https://finaid.msu.edu/">Financial aid →</a></div>
+        <div class="gitem row"><h3>Resource Center for Persons with Disabilities</h3><p>Accommodations for disabilities, chronic illness, mental health conditions and temporary injuries. Contact them early in the semester, before finals.</p><a href="https://www.rcpd.msu.edu/">RCPD →</a></div>
+        <div class="gitem row"><h3>If you are in crisis</h3><p>Call or text 988 for the Suicide and Crisis Lifeline, any time. MSU also runs a 24/7 crisis line through CAPS: call (517) 355-8270 and press 1.</p><a href="https://caps.msu.edu/">CAPS crisis services →</a></div>
+      </div></section>
+      <section class="gpanel" id="p-dates" hidden><h2>Dates and deadlines.</h2>
+      <p class="lede">These are easy to miss and much easier to handle with a month of notice. The first two belong to CoRe and we keep them current here. The rest are set by other offices, so we link you to the office that owns each date.</p>
+      <div class="rows mt">
+        <div class="gitem row"><h3>The first-year showcase</h3><span class="src ours">Ours to keep current<span class="samp">Confirm</span></span><p>Early December. Teams present their first-year projects.</p><a href="#/home">The program →</a></div>
+        <div class="gitem row"><h3>EGR 100 check-in</h3><span class="src ours">Ours to keep current<span class="samp">Confirm</span></span><p>Week 8 of the fall semester, during class. Nothing to sign up for and nothing to prepare.</p><a href="#/design">Why it is there →</a></div>
+        <div class="gitem row"><h3>Summer research applications</h3><span class="src ours">Ours to keep current<span class="samp">Confirm</span></span><p>Most programs close in January and February, which means the work happens over winter break. We keep a list of where to look.</p><a href="mailto:core@egr.msu.edu?subject=Summer%20research">Ask us where to look →</a></div>
+        <div class="gitem row"><h3>Fall career fair</h3><span class="src theirs">Set by the Center for Spartan Engineering</span><p>Usually September or early October. Worth going in your first year to see how the conversations work, even with nothing to offer yet.</p><a href="https://www.careers.egr.msu.edu/">Check their dates →</a></div>
+        <div class="gitem row"><h3>College scholarship application</h3><span class="src theirs">Set by the college scholarship office</span><p>One deadline, usually in the fall for the following year. Put it in your calendar during your first week.</p><a href="https://engineering.msu.edu/admissions/scholarships-and-financial-resources">Check the deadline →</a></div>
+        <div class="gitem row"><h3>Advising appointments</h3><span class="src theirs">Set by undergraduate advising</span><p>Book before registration opens. Appointments fill quickly once it does.</p><a href="https://engineering.msu.edu/current-students/undergraduate/meet-advisor">Book with advising →</a></div>
+        <div class="gitem row"><h3>Course changes and drop deadlines</h3><span class="src theirs">Set by the university</span><p>These come up early in each semester. Talk to your advisor before you act on one.</p><a href="https://reg.msu.edu/">Office of the Registrar →</a></div>
+      </div></section>
+      <section class="gpanel" id="p-questions" hidden>
+        <h2>Questions and answers.</h2>
+        <p class="lede">Every answer comes from a Spartan engineering graduate working in industry, a recruiter who reads first-year resumes, or a student a year or two ahead of you. First-year students answer here too. Each answer is dated, because advice about timing and hiring can go out of date.</p>
+        <div class="chips" role="group" aria-label="Filter by topic" style="margin-top:20px">
+          <button class="chip" data-val="all" aria-pressed="true">All topics</button>
+          <button class="chip" data-val="start" aria-pressed="false">Getting started</button>
+          <button class="chip" data-val="grades" aria-pressed="false">Grades and classes</button>
+          <button class="chip" data-val="teams" aria-pressed="false">Teams and EGR 100</button>
+          <button class="chip" data-val="major" aria-pressed="false">Choosing a major</button>
+          <button class="chip" data-val="career" aria-pressed="false">Internships and careers</button>
+          <button class="chip" data-val="involved" aria-pressed="false">Getting involved</button>
+          <button class="chip" data-val="money" aria-pressed="false">Paying for it</button>
+        </div>
+        <p class="qcount" id="qcount" aria-live="polite" style="margin-top:16px"></p>
+        <div class="qlist" id="qlist"></div>
+      </section>
+      <section class="gpanel" id="p-careers" hidden><h2>How engineering careers work.</h2>
+      <p class="lede">Careers at MSU Engineering run through the <a href="https://www.careers.egr.msu.edu/">Center for Spartan Engineering</a>. Everything below is background, so that your first conversation with them starts further along.</p>
+
+      <div class="gitem note" style="background:var(--paper);margin-top:26px">
+        <h3 style="font-size:1.04rem;color:var(--forest);margin-bottom:8px">Start with the Center</h3>
+        First-year students are welcome there, and going once early makes later visits easier. They will review a resume that is still short, and they run sessions before each career fair.
+        <p style="margin-top:16px"><a class="btn btn-green" href="https://www.careers.egr.msu.edu/">Go to the Center for Spartan Engineering</a></p>
+      </div>
+
+      <h3 style="font-size:1.1rem;color:var(--forest);margin-top:36px">Internships, co-ops and research</h3>
+      <div class="grid3" style="margin-top:18px">
+        <article class="gitem card"><p class="lab">Usually the summer after year two or three</p><h3>Internship</h3><p>10 to 12 weeks with a company, usually over the summer. Recruiting for the following summer begins in the fall, often in September and October.</p><p style="margin-top:12px"><a href="https://www.careers.egr.msu.edu/" style="font-weight:700;font-size:.88rem">Talk to the Center →</a></p></article>
+        <article class="gitem card"><p class="lab">Usually year three, sometimes two</p><h3>Co-op</h3><p>A longer paid rotation, often a full semester or more, taken for credit alongside your degree. It requires planning with both the Center and your advisor, and usually extends your time to graduation.</p><p style="margin-top:12px"><a href="https://www.careers.egr.msu.edu/" style="font-weight:700;font-size:.88rem">Co-op advising →</a></p></article>
+        <article class="gitem card"><p class="lab">Can start in year one</p><h3>Undergraduate research</h3><p>Working in a faculty lab during the semester or over the summer. Many first-year students assume this starts in junior year, but you can begin by emailing a professor whose work interests you.</p><p style="margin-top:12px"><a href="#q-research-lab" style="font-weight:700;font-size:.88rem">How to ask →</a></p></article>
+      </div>
+
+      <div class="gitem card mt" style="padding:28px 28px 24px">
+        <h3 style="font-size:1.1rem">Where Spartan engineers go</h3>
+        <p>Where graduates in each major end up in the first six months after finishing, drawn from the college Destination Report and confirmed with the Center for Spartan Engineering. Four figures for each major, so you can compare where different paths lead before you choose.</p>
+        <div class="grid4" style="margin-top:20px">
+          <div style="border-top:2px solid var(--line);padding-top:12px"><b style="display:block;font-size:.89rem;color:var(--forest)">Placed or continuing study</b><span style="font-size:.83rem;color:var(--ink-soft)">Share with a job or graduate program within six months</span></div>
+          <div style="border-top:2px solid var(--line);padding-top:12px"><b style="display:block;font-size:.89rem;color:var(--forest)">Median starting salary</b><span style="font-size:.83rem;color:var(--ink-soft)">For graduates in that major, six months after finishing</span></div>
+          <div style="border-top:2px solid var(--line);padding-top:12px"><b style="display:block;font-size:.89rem;color:var(--forest)">Held a co-op or internship</b><span style="font-size:.83rem;color:var(--ink-soft)">Share who had one before graduating</span></div>
+          <div style="border-top:2px solid var(--line);padding-top:12px"><b style="display:block;font-size:.89rem;color:var(--forest)">Top employers</b><span style="font-size:.83rem;color:var(--ink-soft)">Where the most graduates went last year</span></div>
+        </div>
+      </div></section>
+      <section class="gpanel" id="p-results" hidden>
+        <p class="ghits" id="ghits" aria-live="polite"></p>
+        <div id="gresults"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== FELLOWSHIP ==================== -->
+<div class="view" id="v-partners" hidden>
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Partners</p>
+        <h1>Our Cornerstone Partners.</h1>
+        <p class="lede">Michigan needs more engineers than it is producing, and the ones it needs will come from students nobody told this field was for them. Consumers Energy and GE Aerospace have been working on that with us for years.</p>
+      </div>
+      </header>
+
+      <section id="p-who" aria-label="Our partners"><div class="wrap">
+        <div class="plogos reveal">
+          <div class="plogo"><img src="data:image/png;base64,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" alt="Consumers Energy"><p>Cornerstone Partner</p></div>
+          <div class="plogo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAADsCAIAAAC0UkXXAABkCElEQVR42u2dd3wUxfvHn5ndvUsjIT0QCKETeu8CovQiSFNBFEFEEUVQigKiIAKKICgKinQQFQUEQm9CCBJqqIEQEkJ6r3e3uzO/P57cegZSQPTr9/ub9ysvJcllbm9297PPPG0I5xwEAoHgfx0qpkAgEAixEwgEAiF2AoFAIMROIBAIhNgJBAKBEDuBQCAQYicQCARC7AQCgUCInUAgEGInEAgEQuwEAoFAiJ1AIBAIsRMIBAIhdgKBQCDETiAQCITYCQQCgRA7gUAgEGInEAiE2AkEAoEQO4FAIBBiJxAIBELsBAKBQIidQCAQCLETCAQCIXYCgUAgxE4gEAiE2AkEAiF2AoFAIMROIBAIhNgJBAKBEDuBQCAQYicQCARC7AQCgUCInUAgEAixEwgEAiF2AoFAiJ1AIBAIsRMIBAIhdgKBQCDETiAQCITYCQQCgRA7gUAgEGInEAgEQuwEAoFAiJ1AIBBiJxAIBELsBAKBQIidQCAQCLETCAQCIXYCgUAgxE4gEAiE2AkEAoEQO4FAIBBiJxAIhNgJBAKBEDuBQCAQYicQCARC7AQCgUCInUAgEAixEwgEAiF2AoFAIMROIBAIhNgJBAIhdgKBQCDETiAQCITYCQQCwb8S+T/79rwI4JzjTwghAECI8RJS9Ar7bwkhhBS9TCAQCMoJMXTknxQ4xjjnnBAiSQ9pWjLGGOMofJQK+1QgEPxrxI5zruusmMDZbOrdu2mxscm3byfGx6cmJ2ekp+fk5ORZrZqu64SA2Wx2dXWqWNHV19czMNC3WrWA6tUrVa3q5+7uUmxkSimlwtwTCAT/IbFDOw4ADI3Lzs4/d+5GWNil06evXrlyOy4uyWJhABIAAXBUKzww4vAtB2CE6JUr+9StG9SsWa127Rq2bh1Staqfo+pJEhWLXIFA8M+JHUqPLEv4bWJi+v79Ebt2hYWFXYqPTweQAQgAB9CdnGhAgLe/v5efn6eXVwUPDzcnJ5MsS4wxm03LyyvMyMhJTc1KTs5ISkrPyioAkO2hFd3d3dyiRZ0ePdr06dOuYcPq+F66zsTyViAQ/O1i5yhzmqbv3x+xYcPefftOp6XlA0gAjFI9JKRa8+Z1Wras16hRjeDgAD8/T1dXp9KHtdnUjIzcO3dSrl+PO3v2xunTVyMjo7OzrQASAFcU3rFjw2ef7TZw4GM+Ph5C8gQCwd8rdriQBICsrLyNG/evWrXz3LloABmAu7ubOnZs1KtX286dm9arF6QofzUWHB+fGh5+Ze/e3w8cOH37diqADKAHBno+++yTL7/ct06dqng8lBKxsBUIhNg9MrFjjGNSSG5uwYoVvy5f/ktMTAoABVA7dGg0bFjXfv3aBwcH3PuHqqqlpmYlJqYnJ2dmZORkZuamp+fk5hZomm4yyR4ebj4+Hv7+XpUre1eq5O3rW9HZ2VxshNzcgsOHz33//cFdu07m5NgAiJubNGJEj7feGmJI3kNHfgUCgRC7+6xbv/tu94IFm6KiEgCIs7M0cGDHV155qlOnJsX+JCEh/ezZqFOnrpw9e/3GjTuJiRl5eRYAAqAAEABrgwbBdetWDQz0rVDBhVLCGNc0Xdd1WZY9PNwCA31q1QqsXbuKr29Fx2Fv3UpYv37fmjW7b99OBwB3d/O4cf2nTHnW29uDMQ7AxapWIBBi99AGHUMFOX362pQpXx05chGAms0wfHj3iROHNGpUw/HFkZG3du8ODw09dfZsVG6uxR6jwDAr4Zx27dr01VefevLJlhUrupW0TE5JyYyPT719OykxMV3X9R49WterF4Rpd2i+ZWbmfvfd7i++2IqSV7267+zZo0aO7CFMPIFAiN1Domm6LEuapn/44dpPPtlssTAAvX//du+/P6p58zrGyzIycn/66ciGDXtPnLjEGEV1oxQoNQ6AEEKXLJkwfvxAQ0MxZ6UYlBJH6+zu3VTOoUoVX8xSxr9CGzMjI2fx4h+XLt2ak2MFYAMGdFiy5PVq1QI0TRfpKQKBELsHVrorV26//PInYWFXAaB27YB588YOHtzFeE1cXPLXX+9YsyY0MTELE01kmXLOGfujRIxSwhhdtertl17qo+sMf2KIEWbqEUJKyRnWNN2xmsJxWX31auz06Su3bw8DoAEB7p9//sbQoY9jCZpY0goEQuzKAAVIkujmzQfGj/88MzMfgI0b1//jj8dWrOiGIpiRkbNo0Zbly3/JyrIA6JKE9hoUe0dJIrpOO3Sof/z4l6qqybLkaHM5rjrz8y0JCWnp6TlWq02SaIUKLl5e7j4+Ho7xCsdqCkfJW71697RpK1NScgDYpElDPvnkVUqpWNIKBELsSoMxhuX4M2eumjt3PQD183NfvvytQYM641oSANat2ztr1qrY2DQAXZaJrvOS3kiWqabR2bNHzpw50liBOiqd1WrbsuXwTz8dPXv2enJyhqYZ43AnJ9nPz6tWrSrNmtXq0KFxq1b1qlTxdVQ9SaLYRkCSaHT03bFjPz106AIA9OjRYuPGGd7eHkLvBAIhdiUqHaVU0/RRo+Zv2HAQANq1C1m//t2aNQMtFpuTkyk+PnXChM+3bQsrU+YcxW7WrBEffPCSzaaaTAo45APv3h0+ZcrXly/HoZsPgBe1PQFgjNkrzPCLu7mZWrSo16tXm9692xqBEfTQoYnHGJs6dcWnn/4AQBo0CNq2bW6tWlXQDhWXgkAgxK640hUWWgcPnrl7dwQAHz78iW+/neLkZLJaVbNZ2b07fMyYTxITMyVJ55wwxsock1LCGGnUKPjixTWOZiMAzJr13Zw56wG4LOPCuchk++Poi+CE4KIVACgAoZS1b99wxIjuQ4c+7ulZAdUT7K7AVat2vfbaYpuNBQZ67tw5v2nT2kLvBAIhdsWVrqDA0rfv1MOHIwH4lCnDFiwYxznXNF1R5E8//f6dd74G4LJMNI2V/yAwQPHss48vXPgqrkPPnbsxbdqKffvOUsoA+H3Dsvf5MIRQCoTgu0sApHJlzzFj+o4fP8DPzxMlj3Muy9Levb8PGzY7O9vi61thz55PmjevI9azAoEQuyJ7CkWtb9+p+/efB+Bz57703nvPa5oOALIsvfXWsiVLfnkgbfqz3lHGSIUK5pCQIItFjYy8xTmVJKbrDxM/QdUDAF0HADkgwP2dd56dMOFpRZE1TeecK4ocHn65X79paWn5fn7uBw9+1rBhDaF3AsH/d7EzYq+DB8/YujUMgH/88Zhp04arqkYIkWXplVc+XbkyVJb1Mj10pSBJxL4O5QBMksjDKV0x1ZMkomkcQGrZstbnn7/Rvn1Dxpim6SaTEhFxrUePdzIy8oOCvI8f/7JqVT8jQVogEPyPUa4bG02eiROXotK9995wVDq06d58c+nKlaGKwjWN/ZWsPV3nhIAkMUo5IY9A6VCmNY0RArLMIiJudOo0Ye7cdZRSk0mxWtWWLevt2DHPzU2Ji0vv3396Xl4hAPzzrZsFAsG/QuzQeb9ixY7PP/8FAEaP7jl37hhcvSqKvHDhpqVLtysKR+3769qk60VN2x/hh0TJo5QxxmbOXDNw4Izs7DyzWbFa1Q4dGm3aNEuS+PnzMS+88BEm3wm9Ewj+95Bmz55duk0ny9Lp09eGDHlf16Fr1yY//vghuuQURd69++SoUZ/IMsdY578czoEQoij0ypU7e/aE9+nTzsvL3WKxNWhQ3cPDbc+e369ejTeZaOfOTTEtWVwcAsH/EqX57DAdNz+/sHnz0TdvJlet6n3mzDc+PkWJuImJ6U2ajEpPzyXkYSISRYYlpUbiyL3FFQ8xDmN/2qvsvsgy1TRSo0bA/v2LatSojEkzo0cv+O67vZTyw4eXdOrURAQrBIL/R8tYbHv51lvLbt5MkWXYsGGGr29F3DSHEDJ27MK0tHxJgodTOkoJpYQx0HVJ06iuU85Bkh64OF+SCCF/jMMY5ZyXvvOOpjFZ5rduJXXrNvnu3VSzWVFV7csv32rUqCpjdNSoj3Ny8kE47wSC/yeWHZo2oaGneveeCkBnzRr+wQejsd5ekuj33x989tmPZJk9UD6do0LpOgWAmjUD6tcPdnExJyamRUREFRSolLLyq6d9HB4SUqVOnapmsyk6OuHMmSgAQmkZ9ibad82a1fjtty/NZkWWpXPnbrRv/6rFwl59te/y5ZOEcScQ/O+LHS5gCwutTZqMio5ObtGiZnj41/a6BsjPtzRo8Hx8fAYhvDw1EvcuORmjHTrUf++957t2bW42K/jzmJjEt9/+8uefT5RH79C6ZIz26tVy2rThHTo0MoTp1Kkr48cvOXPmRpnjyDLVNOnpp9tt3ToXF7Pz5q1/773VlPKjR5d27NhI6J1A8D++jGWMU0oWLNgYHZ0iy/zrr9/GairOgVL65Ze/3LmTKUkPrHRoFTJGZswY/ttvy3r1aqMokqpqNpuq66x69Uo//TSnRYtajJHS16HY7okx+PTTV3bvXtipUxNCwGbTbDaVMdamTf19+z4NCvLlnJYeZ9A0pij8559PLly4CRezU6Y816xZMGN04sSluGAXi1mB4H9W7BhjlJLY2KTFi38AgLFj+7ZsWVfTdPSyZWXlLV78AyEPYdKBJFFdJ1988cacOaM556qqUUoVRTaZFEmiNptGCHn99acx3lCqbQi6TlasmDx58jBdZziOySSbTAql1GpVvbzc3357GOekzJiqpumyzN5995szZ67LsiTL0pIlb1LKzpyJXrMmFNvBi6tEIPjfFDtM0Zg7d21enubr6zp79miUP7R01q/fm5KSK0nwoGonSUTTyMyZI8aPH6iqGmNcUeRffz3Rvfs7H3ywGqMKnPOGDWsA6KVkFEsS0XVp0qTBY8f2w+Q+RZHPnYt65pk5H364BnNlOOcdOzYufRyHBTvTdRgzZqGuM03TO3VqMmRIZwA6Z87avLxCh17K/zRYuIJHpWm6rjNdZ4yJNECB4FGIHepaVNSdDRv2A/BJk4b5+lZkjFNKsVHSypU7CCkj6VeSiCz/yTrDSMKTTzb98MOiKIcsS19/vb1//xn795+ZPXvN3btp2Laz9Gbp2DIgJCRw/vxXUHwliR49er5jxze2bDny/vtr4uNTseW6s7MZpazMKdB1Lsv8/PnbS5f+hEL5wQcvOTvT2Nj0Vat2EUL+4SxCrEHG7i+UEkmiaHJKEpUkSinFQyr/UbG/wKP6UH/r4AJBeZDvNesoJYsX/2CxQOXKFV97bQDnHGVOkujJk5GXLsVSCqVYTJRihJRg+zl0sXFOXF2VFSvexptZUeQjR869+upiWSYAvGLFCq6uTtj4MykpA2MYun6fwQkBxmDBgnGKIquqJkk0OTlj6ND3CwosiiJVruzn61sR61vT0rIAKKXlskB1nVPK5sxZO3x4d19fj7p1g5577olVq/YvXfrT2LH9nJxMRlPSvxucZ/SQZmbm3rmTkpKSlZOTzzl3djZ7e3tUquQVGOiLYZNyNpf/NyRIiyRtwb9L7BgryhbevPkAAH/11QHu7q5YLsY5A4AtWw4VRVNZaZZXly6NBwx4bMuWgydPXqUUKAVNoxMnDqlRozIqVH6+ZfToBfh6mw06d27q6VnBalVNJvnChZsYa0WhvFdGmzat3rdve7vhQ2fM+CYlJc/ZWS4s5GPH9nNxMVssNrNZiYi4XvqhFjOmJIlnZVk++WTTp5+O55xPmjRsw4Z9t26l/Pjj4ZEje/4DDe9QTyWJJiVlfP/9wZ07T168GJ2ammW3vou2YXNykoKDK3Xo0HjYsK7durVEK+++IWNDoEeOnBMbmypJD+B/JIRwDm5u5o0b3/fwcP0rWo+Ht2jRlh07whSFovNX16FOncrffDP1H3uKCAR/ckjhLb1w4aapU1dVrGi6enWjv7+ncTlqmh4SMiI6OqkkcwnXqv37t92+/WMA2L8/onv3KbLMdB08Pd2iojZ5eVXAzndz566bOXOtLOucg67D8ePLOnRopKqaosidO79+7Njl+zZ3wp7GS5eOnzBhEPY0jo6+W7/+C4xpmgZ16gSePbvK2dmETdjbt3/15Mlr5W8SRQgBIG5uzteura9UyZsQMnDge9u3/962ba0TJ5b/3bvzGFujLVy4edGiLWlpeUZnZkkilGIonDGGM0+xN8zjjzddvHh8kya17qt3xokLChp0504WwIMuG4kk6YmJ2319K/4VSULPY+3az8TEZAAY5joB0G/d+r569Uqi04zgP+CzkySqafr69XsJoU8/3SUgwAu9dbi518WL0dHRiSXl1mEZg9ksffbZ66iMV6/eBgBZljinw4d38/Z2RzFNS8v+7LMthOiEUF2ngwd3QqWTZen69biTJ69SijcXKTa+pjGTifTp085+t8DatXtsNkapJMt03br3XF2dsAn74cPncJzyt07hnEsS5OZaV6zYgRknr746gHPt1KlrZ85EYYOAv0/pACA7O69XrynTp3+XlpYty0ySmKJI2PZKVZmqMk3jjDFZprIM+ILDh8936DB+9+5wSaKlWG0VKjhLElMUIklMkpjJRMzmMr6cnKjZTLy9Pf6iDOGVc+nSrbi4VFnW8AAkiZlMQIh08OAZfI24DwX/qNihv//kycuXLsUCaKNG9TKMPvzHgQNnAKSSKrooBc5pmzb1atYMROX67beLULTJIR85soexI+Lq1bszMwtxewovL9clSybg+ISQZcu26joHKKqTddQ7QgBAqlcvqHr1SpxzRZE457/+eoJSsNn4V19NatOmvqbpkiTpOps06QsAIORBt9cAQviqVTvz8y2EkMcfbxYSEsiYtHHjPvjbqsdwWjRNHzjwvX37zplMQAjoOtd1rqqg69TNzVy1qndQkK+3dwUAomlU0zBKy2WZ5+dbBg9+//LlmFKyZBjDARkOa7OB1VrGl8XCrVZIScn6i2EE/PM9e37XdYK+UfxijHEOu3adtNvUAsE/6LPDm/nHHw8DKA0bVm7XriG6ycDuXT5y5Fwp8U1cBrZqFYIixTm/di0WgGkahIQENmtWBwBMJlnT9NWrdxHCCaGM8VWrpgQG+qI4RkffXbNmD2OgKFKNGv63bydqGjfSeu1bVdQghOCCNy4u+caNeMbI++8PHzOmL7YglmVpypTl58/HSBJ/0I54jDFJInfvZoWGhg8a1FlR5CFDun74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" alt="GE Aerospace"><p>Cornerstone Partner</p></div>
+        </div>
+        <div class="pnums reveal">
+          <div class="pnum"><b>1,900</b><span>first-year engineers reached every year</span></div>
+          <div class="pnum"><b>475</b><span>teams building something for December</span></div>
+          <div class="pnum"><b>5</b><span>nights a week of tutoring</span></div>
+        </div>
+      </div></section>
+
+      <section class="alt" id="p-what"><div class="wrap">
+        <h2 class="sec reveal">What a partnership provides.</h2>
+        <p class="intro reveal">Everything below is a countable thing at a real price. A partner sees exactly what their money buys.</p>
+        <div class="ptable reveal">
+          <div class="prow"><b>Industry-trained teaching assistants</b><span>Stipends for undergraduate teaching assistants working inside EGR 100 studio sections, each carrying several design teams across the year.</span></div>
+          <div class="prow"><b>Named tutor positions</b><span>Five nights a week in Wonders, supporting students through the pre-engineering coursework that decides how the rest of the degree goes.</span></div>
+          <div class="prow"><b>A build budget for every team</b><span>A per-team materials allowance, so every team can build to the same standard regardless of what its members can afford.</span></div>
+          <div class="prow"><b>EGR 100 Design Day</b><span>Sponsorship of the December showcase where all 475 teams present what they built, to a room of working engineers, faculty and families.</span></div>
+          <div class="prow"><b>Team awards at Design Day</b><span>Awards judged by your engineers, for the teams whose work held up under questions from practising engineers.</span></div>
+          <div class="prow"><b>Awards for exceptional first-year Spartan engineers</b><span>Categories built together by CoRe leadership and our Cornerstone Partners, so students are recognised in the language and frameworks their future workplaces use.</span></div>
+          <div class="prow"><b>RA of the Year</b><span>Recognition for the resident assistant who did the most to build community on a floor of first-year engineers.</span></div>
+          <div class="prow"><b>Residence hall community</b><span>Funding for the events that turn a floor of strangers into the people a student studies with and turns to when something is not working.</span></div>
+          <div class="prow"><b>Themed floor lobbies in Wilson</b><span>The spaces where first-year engineers live and study, carrying real problems from your engineers and the Spartans who solved them. Exposure where students spend their evenings, inspiring the next generation of Spartan problem solvers.</span></div>
+        </div>
+      </div></section>
+
+      <section id="p-why"><div class="wrap">
+        <h2 class="sec reveal">Why it works.</h2>
+        <div class="grid reveal">
+          <div class="card"><h3>Students believe engineers</h3><p>Hearing a practising engineer say that a first draft is always wrong changes what a student expects of themselves.</p></div>
+          <div class="card"><h3>We reach everyone</h3><p>Every student who intends to be an engineer at MSU passes through these two courses, before anyone has sorted themselves into who is doing well and who is quietly falling behind.</p></div>
+          <div class="card"><h3>You see where it went</h3><p>An annual review showing what your money paid for, what changed alongside it, and what we learned. Named students, named positions, real numbers.</p></div>
+        </div>
+        <p class="reveal" style="margin-top:30px">Any Spartan engineer at your company can <button class="linkish" data-view="effect">get involved directly</button>, and their story belongs in <a href="https://engineering.msu.edu/alumni/spartan-stories">Spartan Stories</a>.</p>
+      </div></section>
+
+      <section class="deep" aria-label="Contact"><div class="wrap">
+        <div class="bar" style="margin-top:0">
+          <div><b style="display:block;font-size:1.1rem;margin-bottom:6px">Talk to us about partnering.</b>
+          <p style="margin:0;color:rgba(255,255,255,.85)">Bob Irland, Associate Director of Corporate and Foundation Relations, College of Engineering. <a href="mailto:irlandro@msu.edu" style="color:#fff;font-weight:700">irlandro@msu.edu</a> · (810) 705-0464</p></div>
+          <a class="btn btn-solid" href="mailto:irlandro@msu.edu?subject=Partnering%20with%20CoRe">Get in touch</a>
+        </div>
+      </div></section>
+      </div>
+
+<!-- ==================== THE DESIGN COURSE ==================== -->
+<div class="view" id="v-course" hidden>
+  <header class="hero"><div class="wrap">
+    <p class="eyebrow">EGR 100</p>
+    <h1>Introduction to Engineering Design.</h1>
+    <p class="lede">A two-credit course taken by every incoming engineering student. Teams of four work through one open-ended design problem across the semester and present what they build in December.</p>
+  </div></header>
+
+  <section><div class="wrap">
+    <h2 class="sec reveal">What happens in it.</h2>
+    <div class="grid reveal">
+      <div class="card"><h3>A team you did not pick</h3><p>Teams are formed deliberately, mixing intended majors and working styles. The first session covers how a team works before it covers what the team is building.</p></div>
+      <div class="card"><h3>A problem carried in from practice</h3><p>The brief comes from engineers who have lived with it. Real constraints, no worked example, and no single right answer.</p></div>
+      <div class="card"><h3>Something you have to build</h3><p>A working model or prototype by December, plus a written brief and a ten-minute defence to people who do this for a living.</p></div>
+      <div class="card"><h3>Explaining your reasoning</h3><p>Most of the grade is in the defence. Students consistently say this is the part that surprised them and the part that mattered later.</p></div>
+    </div>
+  </div></section>
+
+  <section class="alt" id="challenge"><div class="wrap">
+    <p class="eyebrow reveal">The design challenge</p>
+    <h2 class="sec reveal">Where industry meets the first year.</h2>
+    <p class="intro reveal">Every first-year team spends the semester on one open problem carried in from working practice. Teams present what they built in December to a room that includes people who solve problems like it for a living.</p>
+    <div class="grid3 mt">
+      <article class="card card--top reveal"><h3>The problem comes from outside</h3><p>A brief written by engineers who have lived with the problem. Students find out early that a real constraint is not a hurdle someone invented to make the assignment harder.</p></article>
+      <article class="card card--top reveal"><h3>Partners stay with it</h3><p>Cornerstone Partners are involved from the brief through to judging, so the same engineers who set the problem see how teams solved it.</p></article>
+      <article class="card card--top reveal"><h3>The field is wider than one company</h3><p>Alumni across automotive, energy, aerospace, semiconductors and medical devices judge, mentor and answer the questions students send.</p></article>
+    </div>
+    <div class="brief reveal" style="margin-top:28px">
+      <p class="lab">What a brief looks like<span class="samp">Sample</span></p>
+      <h3>Shortening the time it takes to inspect a component between flights.</h3>
+      <p>Inspection runs on a fixed schedule, whether or not anything needs attention, and equipment sitting still earns nothing. Teams were asked to shorten it without reducing what gets checked.</p>
+      <ul>
+        <li><b>Constraints</b><span>Nothing that adds weight. Nothing that requires removing the component. Must work with the tools a technician already carries.</span></li>
+        <li><b>What teams delivered</b><span>A working model or prototype, a written brief, and a ten-minute defence to practising engineers.</span></li>
+      </ul>
+    </div>
+    <p style="margin-top:26px" class="reveal"><button class="btn btn-green" data-view="highlights">See what teams built</button> <button class="btn btn-outline" style="margin-left:10px" data-view="partners">Bring us a problem</button></p>
+  </div></section>
+  <section class="alt" id="fellows"><div class="wrap">
+    <p class="eyebrow reveal">Paid undergraduate role</p>
+    <h2 class="sec reveal">Design Coach Fellows.</h2>
+    <p class="intro reveal">An expanded teaching assistant role inside EGR 100, funded and trained by our Cornerstone Partners. Fellows work alongside the graduate teaching assistants and stay with the same design teams through the semester.</p>
+    <div class="grid3 mt reveal">
+      <article class="card card--top"><h3>What the role involves</h3><p>Fellows take four design teams for the semester and work with them inside studio time, from the first sketch through to the December showcase.</p></article>
+      <article class="card card--top"><h3>How partners support it</h3><p>Consumers Energy and GE Aerospace fund the stipends and provide engineer-led coaching, so the methods these companies use on their own projects are applied to first-year design work.</p></article>
+      <article class="card card--top"><h3>What Fellows gain</h3><p>Training in facilitation and running a design review, experience employers ask about directly, and paid hours that fit around a full engineering course load.</p></article>
+    </div>
+    <div class="note reveal" style="background:var(--mist);margin-top:24px"><b>How the coaching role is designed.</b> Coaches work inside the classroom with every team, not on request. Sections run this way show substantially lower failure rates, and the gains are largest for women and first-generation students. The roles are paid, so students who need earning hours can take them.</div>
+    <p class="reveal" style="margin-top:26px">Applications open in March and are available to any student who has completed EGR 100. <a href="mailto:core@egr.msu.edu?subject=Design%20Coach%20Fellow" style="font-weight:700">Apply or ask a question &rarr;</a></p>
+  </div></section>
+
+</div>
+
+<!-- ==================== PROGRAM DESIGN ==================== -->
+<div class="view" id="v-highlights" hidden>
+  <header class="hero"><div class="wrap">
+    <p class="eyebrow">Design Day</p>
+    <h1>What first-year students built.</h1>
+    <p class="lede">Every team presents in December to a room of working engineers, faculty and families. These are the winners and the projects behind them.</p>
+  </div></header>
+
+  <section><div class="wrap">
+    <h2 class="sec reveal">The showcase.<span class="samp">Sample</span></h2>
+    <div class="photogrid reveal">
+      <figure class="ph ph-wide"><div class="phimg" data-label="Design Day, December"></div><figcaption>All 475 teams present their projects in the Engineering Building.</figcaption></figure>
+      <figure class="ph"><div class="phimg" data-label="Judging"></div><figcaption>Partner engineers judge alongside faculty.</figcaption></figure>
+      <figure class="ph"><div class="phimg" data-label="Families"></div><figcaption>For many students, this is the first time their family sees them working as an engineer.</figcaption></figure>
+      <figure class="ph"><div class="phimg" data-label="Prototypes"></div><figcaption>Every team brings a working prototype or model.</figcaption></figure>
+      <figure class="ph ph-wide"><div class="phimg" data-label="The defence"></div><figcaption>Each team has ten minutes to explain the decisions behind their design.</figcaption></figure>
+    </div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <h2 class="sec reveal">Award winners.<span class="samp">Sample</span></h2>
+    <div class="grid reveal" style="gap:20px">
+      <div class="card"><p class="awtag">First place · Design Rigor</p><h3>A strip that changes colour as a part wears down</h3><p class="who">Team 14 · Ava M., Daniel O., Priya K., Sam R.</p><p>Their first material reacted to temperature as well as wear, which made it useless in a hangar. The second one worked. Judges said that switch was the moment the project became real.</p></div>
+      <div class="card"><p class="awtag">Second place · Team Practice</p><h3>A checklist that routes a technician through an inspection</h3><p class="who">Team 3 · Marcus L., Jen T., Omar A.</p><p>The same brief approached from the other end: not a better sensor, a better sequence. Judges singled out how cleanly the team divided the work.</p></div>
+      <div class="card"><p class="awtag">Continuous Improvement</p><h3>A sleeve giving a camera a clear path into a tight space</h3><p class="who">Team 22 · Lena B., Chris D., Fatima H., Wei Z.</p><p>Two prototypes fouled on the way in. The third worked because the team stopped designing and started measuring. This award recognises how far a team travelled between October and December.</p></div>
+      <div class="card"><p class="awtag">First Generation Engineer</p><h3>Isabel R.</h3><p class="who">Team 9 · Mechanical Engineering</p><p>Nominated by her team for holding a project together through a late parts delivery, and for writing up a rig they never got to run. Faculty now hand that write-up to new teams.</p></div>
+    </div>
+  
+    <p class="reveal" style="margin-top:34px"><button class="btn btn-green" data-view="course">About EGR 100</button> <button class="btn btn-outline" style="margin-left:10px" data-view="effect">Judge at Design Day</button></p>
+  </div></section>
+</div>
+
+<div class="view" id="v-effect" hidden>
+  <header class="hero"><div class="wrap">
+    <p class="eyebrow">For alumni</p>
+    <h1>What one Spartan can change.</h1>
+    <p class="lede">A first-year student reads one answer and learns that what is worrying them is common, that a difficult exam is recoverable, and that recruiting starts earlier than they expected. One answer does that for everyone who reads it afterwards.</p>
+  </div></header>
+
+  <section><div class="wrap">
+    <h2 class="sec reveal">Ways to get involved.</h2>
+    <p class="intro reveal">Open to any Spartan engineer. Each option lists the time it takes.</p>
+    <div class="grid reveal" style="margin-top:22px">
+      <div class="card"><h3>Answer one student question</h3><p>Answers take about ten minutes to write and appear in the first-year guide under your name.</p><p style="margin-top:12px"><a href="mailto:core@egr.msu.edu?subject=I%20would%20like%20to%20answer%20a%20question" style="font-weight:700;font-size:.9rem">Volunteer &rarr;</a></p></div>
+      <div class="card"><h3>Work a design review</h3><p>You will spend an afternoon in week seven working with teams on problems they have run into, with about an hour of preparation beforehand.</p><p style="margin-top:12px"><a href="mailto:core@egr.msu.edu?subject=Design%20review" style="font-weight:700;font-size:.9rem">Volunteer &rarr;</a></p></div>
+      <div class="card"><h3>Judge at Design Day</h3><p>Judging takes place at the December showcase, where every team presents their project and answers questions about how they built it.</p><p style="margin-top:12px"><a href="mailto:core@egr.msu.edu?subject=Design%20Day%20judging" style="font-weight:700;font-size:.9rem">Volunteer &rarr;</a></p></div>
+      <div class="card"><h3>Share your story</h3><p>Share the fuller version of your path in your own words, for students deciding whether engineering is right for them.</p><p style="margin-top:12px"><a href="https://engineering.msu.edu/alumni/spartan-stories/share" style="font-weight:700;font-size:.9rem">Share a story &rarr;</a></p></div>
+    </div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <p class="eyebrow reveal">Spartan Stories</p>
+    <h2 class="sec reveal">Spartans who did it first.<span class="samp">Sample</span></h2>
+    <p class="intro reveal">Students read these more than anything else we publish, and the ones about a hard year get read most of all.</p>
+    <div class="carousel reveal" id="storyCar">
+      <button class="cnav prev" aria-label="Previous story">&#8249;</button>
+      <div class="ctrack" id="storyTrack"></div>
+      <button class="cnav next" aria-label="Next story">&#8250;</button>
+    </div>
+    <div class="cdots" id="storyDots"></div>
+    <p class="reveal" style="margin-top:22px;text-align:center"><a class="btn btn-outline" href="https://engineering.msu.edu/alumni/spartan-stories">Read more Spartan Stories</a></p>
+  </div></section>
+
+  
+</div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><h3 class="foot-h">CoRe</h3><ul>
+        <li><button class="linkish" data-view="home">The program</button></li>
+        <li><button class="linkish" data-view="guide">First-year guide</button></li>
+        <li><button class="linkish" data-view="course">EGR 100</button></li>
+        <li><button class="linkish" data-view="highlights">Highlights</button></li>
+      </ul></div>
+      <div><h3 class="foot-h">Get involved</h3><ul>
+        <li><button class="linkish" data-view="partners">Partners</button></li>
+        <li><button class="linkish" data-view="effect">Alumni</button></li>
+        <li><a href="https://engineering.msu.edu/alumni/spartan-stories">Spartan Stories</a></li>
+      </ul></div>
+      <div><h3 class="foot-h">More</h3><ul>
+        <li><a href="https://engineering.msu.edu">College of Engineering</a></li>
+        <li><a href="mailto:core@egr.msu.edu">core@egr.msu.edu</a></li>
+        <li><a href="mailto:irlandro@msu.edu">irlandro@msu.edu</a></li>
+      </ul></div>
+    </div>
+    <p class="support">Supported by our Cornerstone Partners, <b>Consumers Energy</b> and <b>GE Aerospace</b>.</p>
+    <div class="legal">
+      <span>© Michigan State University Board of Trustees. MSU is an affirmative-action, equal-opportunity employer.</span>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- reveal ---------- */
+function initReveal(root){ var els = (root||document).querySelectorAll('.reveal'); if(!('IntersectionObserver' in window) || RM){ els.forEach(function(e){e.classList.add('in');}); return; } var io = new IntersectionObserver(function(entries){ entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.05}); els.forEach(function(e){ if(!e.classList.contains('in')) io.observe(e); });
+}
+
+/* ---------- views ---------- */
+var VIEWS = ['home','guide','fellowship','partners','course','highlights','effect'];
+function showView(name, push){ if(VIEWS.indexOf(name)<0) name='home'; var found=false;
+  VIEWS.forEach(function(v){ var el=document.getElementById('v-'+v); if(!el) return; var on=(v===name); el.hidden=!on; if(on) found=true;
+  }); if(!found){ var h=document.getElementById('v-home'); if(h) h.hidden=false; } document.querySelectorAll('[data-view]').forEach(function(b){ var isOn=b.getAttribute('data-view')===name;b.classList.toggle('active',isOn);if(b.closest('.navlinks')){isOn?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current');}
+  }); var TITLES={home:'The CoRe Experience',guide:'First-year guide',partners:'For partners',course:'EGR 100',highlights:'Design Day highlights',effect:'For alumni'};
+  document.title=(TITLES[name]||'The CoRe Experience')+' | First-Year Engineering | Michigan State University';
+  if(push){ try{ history.pushState({v:name},'', '#/'+name); }catch(e){ location.hash='#/'+name; } } window.scrollTo({top:0,behavior:RM?'auto':'smooth'});
+  var vh=document.querySelector('#v-'+name+' h1');
+  if(vh){ vh.setAttribute('tabindex','-1'); if(push){ try{ vh.focus({preventScroll:true}); }catch(e){ vh.focus(); } } }
+  initReveal(document.getElementById('v-'+name));
+}
+document.addEventListener('click', function(e){ var b = e.target.closest('[data-view]'); if(b){ e.preventDefault(); showView(b.getAttribute('data-view'), true); return; } var a = e.target.closest('a[href^="#/"]'); if(a){ e.preventDefault(); showView(a.getAttribute('href').slice(2), true); }
+});
+window.addEventListener('popstate', function(){ showView((location.hash||'#/home').replace('#/',''), false);
+});
+
+/* ---------- nav ---------- */
+var nt=document.getElementById('navToggle'), nl=document.getElementById('navlinks');
+if(nt&&nl){ nt.addEventListener('click',function(){ var open=nl.classList.toggle('open'); nt.setAttribute('aria-expanded',open?'true':'false');
+}); nl.addEventListener('click',function(){ nl.classList.remove('open'); nt.setAttribute('aria-expanded','false'); }); }
+
+/* ---------- toast ---------- */
+var toast=document.getElementById('toast');
+function say(msg){ if(!toast) return; toast.textContent=msg; toast.classList.add('on'); setTimeout(function(){toast.classList.remove('on');},2200); }
+
+/* ---------- questions ---------- */
+const QUESTIONS=[
+{id:"q-internship-timing",dated:'Answered fall 2026',q:"When does internship recruiting start?",short:"<b>In the fall, for the following summer.</b> Many postings and fairs land in September and October, which catches a lot of first-year students out.",topic:"career",ind:"all",who:"Marcus W.",role:"Mechanical Engineering 2018 · GE Aerospace",a:["Companies hire for next summer during the autumn before it. A lot of postings and career fairs land in September and October, and some close before winter break.", "I found this out in April of my second year, which is roughly six months too late. I spent that summer working at a hardware store. It cost me nothing permanent, but it did cost me a year of momentum.", "The fix is boring: go to the autumn career fair every year starting with your first, even when you have nothing to show. The first one is reconnaissance."],act:"Put the autumn career fair in your calendar now.",actLink:"#q-first-year-resume",actText:"See what recruiters look for",more:[{who:"Priya S.",role:"Recruiter · Consumers Energy",dated:"Answered fall 2026",a:["From the hiring side, our first-year and sophomore postings go up in September and most of them are gone by the end of October. We are not trying to be difficult about it. We build the summer cohort in the autumn because that is when the budget is set.", "One thing students do not realise: if you miss the autumn window, the spring is not empty. Postings appear in January and February for roles that opened up. Fewer of them, but they exist, and there is far less competition."]},{who:"Maya R.",role:"Third-year, Mechanical Engineering",dated:"Answered spring 2026",a:["I went to the September fair in my first year with no idea what I was doing and it was the single most useful hour of that semester. Not because I got anything. Because I found out what the questions were.", "Go early, go badly, go again. It is much easier the second year when you already know how the room works."]}]},
+{id:"q-team-trouble",dated:'Answered fall 2026',q:"My design team isn't working. What do I do?",short:"<b>Name it early and specifically.</b> Most team trouble is unspoken expectations, and it compounds if you wait.",topic:"team",ind:"all",who:"Maya R.",role:"Third-year, Mechanical Engineering",a:["Almost every team I have been on has had a bad three weeks. The ones that recovered did the same thing: somebody said out loud what was bothering them, early, and without making it about a person.", "Say what you need, not what they did wrong. \\u201cI need to know by Thursday what you are bringing\\u201d works. \\u201cYou never do anything on time\\u201d does not.", "If it is genuinely not moving, tell your instructor in week five, not week ten. They have seen this before and they would much rather hear it early."],act:"Ask your team one specific question about who is doing what this week.",actLink:"#/guide",actText:"Back to the guide",more:[{who:"James O.",role:"Hiring manager · Aerospace",dated:"Answered fall 2026",a:["I want to say something from the other end of this. Every engineer I have hired has been on a team that was not working, and the ones who handle it well are not the ones who avoided the problem. They are the ones who said it out loud first.", "In an interview, a story about a team that went wrong and what you did about it is worth more than a story about a team that went smoothly."]},{who:"Devon A.",role:"Civil Engineering 2020 · Infrastructure",dated:"Answered fall 2026",a:["The version that worked for me was boring. We wrote down who was doing what, on paper, in the room, and read it back. Half the trouble disappeared because two people had assumed the same task was theirs and neither had said so."]}]},
+{id:"q-first-year-internship",dated:'Answered fall 2026',q:"Can I get an internship after my first year?",short:"<b>Some do, most do not, and it is not a verdict.</b> What matters is that you are doing something.",topic:"career",ind:"all",who:"Priya S.",role:"Recruiter · Consumers Energy",a:["Yes, and a few of our summer roles are open to first-years. But most students who get one have a connection somewhere, and I would rather you knew that than concluded something about yourself.", "What I look for the following year is what you did with the summer. A job, a project, a course, a team. Not nothing."],act:"Pick one thing to do this summer that you could describe in an interview.",actLink:"#q-first-year-resume",actText:"See what recruiters look for",more:[{who:"Marcus W.",role:"Mechanical Engineering 2018 · GE Aerospace",dated:"Answered fall 2026",a:["Yes, and I would add: the job does not have to be an engineering job to count. I spent my first summer doing quality checks on a production line and I have used that in interviews more than anything I did in a lab.", "What a manager is looking for is evidence you can show up somewhere unfamiliar and be useful. That is available in a lot of places."]},{who:"Jordan M.",role:"Second-year, Computer Science",dated:"Answered spring 2026",a:["I did not get one after my first year and I spent a while feeling behind about it. Almost nobody in my year did. The people who did mostly had a family connection, which is worth knowing so you do not read it as a verdict on you."]}]},
+{id:"q-research-lab",dated:'Answered fall 2026',q:"How do I get into a research lab as a first-year?",short:"<b>Ask directly, in a short specific email.</b> Most first-years never ask, which is most of the competition.",topic:"major",ind:"all",who:"Nia R.",role:"Materials Science 2015 · Medical device",a:["Read what the group works on, pick one thing, and email about that one thing. Say what you can do and how many hours you have.", "Expect silence from most. That is normal and it is not personal; send five."],act:"Find one research group whose work you can describe in a sentence.",actLink:"#q-ask-professor",actText:"How to ask for help",more:[{who:"Alena T.",role:"Electrical Engineering 2016 · Semiconductors",dated:"Answered fall 2026",a:["The email that works is short and specific. Say which paper or project of theirs you read, say what you can do, say how many hours a week you have. Three sentences.", "The email that does not work is the one that could have been sent to anyone in the building."]},{who:"Grace L.",role:"Chemical Engineering 2019 · Consumers Energy",dated:"Answered spring 2026",a:["I got in by asking a professor a question after class twice, and the second time she asked what I was doing over the summer. That was the whole process. Being visibly interested in the subject is most of it."]}]},
+{id:"q-failed-exam",dated:'Answered fall 2026',q:"I failed my first exam. Am I done?",short:"<b>No.</b> It is common, it is recoverable, and it is information about your method.",topic:"confidence",ind:"all",who:"Devon A.",role:"Civil Engineering 2020 · Infrastructure",a:["I got a 41 on my first physics exam and spent a week deciding I was not an engineer. What changed it was a tutor telling me the class average was 58.", "The people who recover are the ones who change something in the next fortnight. The people who do not are the ones who work harder in exactly the same way."],act:"Go to office hours this week and ask what you misunderstood.",actLink:"#q-ask-professor",actText:"How to ask for help",more:[{who:"Nia R.",role:"Materials Science 2015 · Medical device",dated:"Answered fall 2026",a:["I failed two. What I did wrong afterwards was work harder in exactly the same way. What eventually helped was finding out how other people were studying, which turned out to be completely different from what I was doing.", "The exam is information about your method, not about your ceiling."]},{who:"Maya R.",role:"Third-year, Mechanical Engineering",dated:"Answered spring 2026",a:["Go to office hours the same week. Not to argue the grade. To ask the instructor what they think you misunderstood. They will tell you, and it is usually one thing, not everything."]}]},
+{id:"q-first-year-resume",dated:'Answered fall 2026',q:"What does a recruiter look for on a first-year resume?",short:"<b>Evidence you can be useful somewhere.</b> Coursework and projects up top, and yes the restaurant job counts.",topic:"career",ind:"all",who:"James O.",role:"Hiring manager · Aerospace",a:["One page. Skip the objective. Put coursework and projects first, because that is what you have and nobody expects otherwise.", "Any job at all tells me you can turn up and deal with people, and I cannot learn that from a transcript."],act:"Write one page this week, even a rough one.",actLink:"#q-internship-timing",actText:"When recruiting starts",more:[{who:"Priya S.",role:"Recruiter · Consumers Energy",dated:"Answered fall 2026",a:["One page. No objective statement. Put your coursework and your projects up top because that is what you have, and that is fine for a first-year.", "A job at a shop or a restaurant belongs on there. It tells me you can be somewhere on time and deal with people, and I cannot tell that from a GPA."]}]},
+{id:"q-project-team",dated:'Answered fall 2026',q:"Should I join a project team? Which one?",short:"<b>Yes, one.</b> The specific team matters much less than being in the room.",topic:"team",ind:"all",who:"Maya R.",role:"Third-year, Mechanical Engineering",a:["Being somewhere people are building something, where you are expected to contribute, is the whole benefit. Pick on the people, not the prestige.", "One team is good. Three in your first year is how people end up in trouble in the spring."],act:"Go to one team's open meeting this month.",actLink:"#/guide",actText:"Back to the guide",more:[{who:"Tom D.",role:"Applied Engineering Sciences 2012 · Manufacturing",dated:"Answered fall 2026",a:["Join one. Almost any one. The specific team matters much less than being in a room where people are building something and you are expected to contribute.", "The one caution: teams eat time. One is a good idea. Three in your first year is how people end up in trouble in the spring."]}]},
+{id:"q-pick-major",dated:'Answered fall 2026',q:"How do I pick a major when I don't know what any of them do?",short:"<b>On a class you liked and people you liked working with.</b> Almost nobody picks on information.",topic:"major",ind:"all",who:"Tom D.",role:"Applied Engineering Sciences 2012 · Manufacturing",a:["I picked mine because a professor made a subject interesting and I liked the people in the room. That is not a reason. I did not change it and I do not regret it, but I got there by luck.", "Talk to students two years ahead in each one and ask what their second year was like."],act:"Ask one second-year student what their major is really like.",actLink:"#q-change-major",actText:"If you want to change",more:[{who:"Rita C.",role:"Civil Engineering 2014 · Transportation",dated:"Answered fall 2026",a:["Nobody I know picked correctly on information. They picked on a class they liked or a person they liked working with, and then justified it afterwards.", "That is not a failure of the process. It is the process."]},{who:"Grace L.",role:"Chemical Engineering 2019 · Consumers Energy",dated:"Answered spring 2026",a:["Talk to people two years ahead in each one. Not faculty, students. Ask them what the sophomore year is like, because that is the year that decides whether you enjoy it."]}]},
+{id:"q-coop-vs-internship",dated:'Answered fall 2026',q:"What's the difference between a co-op and an internship?",short:"<b>Length, mostly.</b> A co-op is longer and usually means you own something end to end.",topic:"career",ind:"all",who:"Grace L.",role:"Chemical Engineering 2019 · Consumers Energy",a:["An internship is a summer. A co-op is typically longer and often alternates with semesters, so it can move your graduation date.", "Both count. Talk to advising about the timing before you commit, because that is the part that is hard to undo."],act:"Ask advising how a co-op would affect your timeline.",actLink:"#/guide",actText:"Back to the guide",more:[{who:"James O.",role:"Hiring manager · Aerospace",dated:"Answered fall 2026",a:["From where I sit they read almost the same on a resume. The co-op tells me you spent longer somewhere and probably owned something end to end, which I will ask about.", "The real difference is what it does to your graduation date. That is a conversation for your advisor, not for me."]}]},
+{id:"q-ask-professor",dated:'Answered fall 2026',q:"How do I ask a professor for help without sounding like I wasn't paying attention?",short:"<b>Bring what you tried.</b> That single move changes the whole conversation.",topic:"confidence",ind:"all",who:"Alena T.",role:"Electrical Engineering 2016 · Semiconductors",a:["\\u201cI got to here and then this did not work\\u201d is a completely different conversation from \\u201cI do not understand.\\u201d", "They are not deciding whether you belong here. They are locating the gap, and you can make that fast or slow."],act:"Go to one office hour this week with a specific question.",actLink:"#q-failed-exam",actText:"If an exam went badly",more:[{who:"Devon A.",role:"Civil Engineering 2020 · Infrastructure",dated:"Answered fall 2026",a:["Bring the thing you tried. Not the blank page. \"I got to here and then this did not work\" is a completely different conversation from \"I do not understand.\"", "They are not judging whether you should be here. They are trying to find where the gap is, and you can make that fast or slow."]},{who:"Jordan M.",role:"Second-year, Computer Science",dated:"Answered spring 2026",a:["I put it off for a whole semester because I thought it would expose me. When I finally went the professor said about four sentences and I understood the thing. I had spent nine weeks not asking."]}]},
+{id:"q-is-it-hard",dated:'Answered fall 2026',q:"Is engineering at MSU hard?",short:"<b>Yes, in a specific way.</b> The problems stop having one method, and nobody announces it.",topic:"confidence",ind:"all",who:"Grace L.",role:"Chemical Engineering 2019 · Consumers Energy",a:["The volume is manageable. What is hard is that somewhere in the first two years the problems stop resembling the worked examples.", "Most people hit that and think it is about them. It is about the transition."],act:"Notice when a problem has no worked example. That is the point.",actLink:"#q-not-smart-enough",actText:"On not feeling smart enough",more:[{who:"Marcus W.",role:"Mechanical Engineering 2018 · GE Aerospace",dated:"Answered fall 2026",a:["It is hard in a specific way. The volume is manageable. What is hard is that the problems stop having one method and one answer, and nobody announces that this has happened.", "Most people I know hit that wall somewhere in the second year and thought it was about them."]}]},
+{id:"q-not-smart-enough",dated:'Answered fall 2026',q:"What if I am not smart enough for this?",short:"<b>That feeling is almost universal and it predicts very little.</b>",topic:"confidence",ind:"all",who:"Nia R.",role:"Materials Science 2015 · Medical device",a:["I felt that for two years and I have now spent fifteen years doing this work.", "What predicts whether people finish is whether they go back to a problem after it beat them. That is a habit, and habits are learnable."],act:"Tell one person on your team something you are finding hard.",actLink:"#q-everyone-smarter",actText:"On everyone seeming smarter",more:[{who:"Rita C.",role:"Civil Engineering 2014 · Transportation",dated:"Answered fall 2026",a:["I have worked with engineers for twenty years and I have never once been able to predict who would be good at this from how they did in the first year.", "What predicts it is whether you keep going back to a problem after it beat you. That is a habit and you can build it."]},{who:"Alena T.",role:"Electrical Engineering 2016 · Semiconductors",dated:"Answered spring 2026",a:["The people who quit around me were not the ones struggling with the material. They were the ones who decided that struggling with the material meant something about them."]}]},
+{id:"q-no-family-engineer",dated:'Answered fall 2026',q:"Nobody in my family did this. Am I starting behind?",short:"<b>On information, yes. On ability, no.</b> And information is the fixable one.",topic:"confidence",ind:"all",who:"Rita C.",role:"Civil Engineering 2014 · Transportation",a:["Roughly two-thirds of engineering students have an engineer somewhere in the family. The rest of us worked out the unwritten parts as we went.", "Everything they learned at the dinner table is written down somewhere or is one question away. Ask the obvious questions early."],act:"Ask one question this week you assumed everyone else knew.",actLink:"#/guide",actText:"Back to the guide",more:[{who:"Nia R.",role:"Materials Science 2015 · Medical device",dated:"Answered fall 2026",a:["You are starting with less information, not less ability, and information is the easy one to fix. Everything the other students know from dinner-table conversation is written down somewhere or is one question away.", "Ask the obvious questions early. Nobody thinks less of you for it, and the alternative is finding out in April."]}]},
+{id:"q-admission-major",dated:'Answered fall 2026',q:"What is admission to major, and what happens if I do not get in?",short:"<b>A competitive gate in your second year.</b> Find out your number in your first semester.",topic:"major",ind:"all",who:"Rita C.",role:"Civil Engineering 2014 · Transportation",a:["Each major sets a combination GPA threshold and they differ. It is not pass or fail; it is competitive, and the number moves.", "Students who know the target early plan differently. Ask your advisor in your first semester."],act:"Ask advising what your intended major requires.",actLink:"#q-change-major",actText:"If you want to change",more:[{who:"Maya R.",role:"Third-year, Mechanical Engineering",dated:"Answered spring 2026",a:["Look up the number for your major in your first semester. Not your second. Knowing the target early changes how you plan a schedule, and it is a much worse thing to discover late."]}]},
+{id:"q-change-major",dated:'Answered fall 2026',q:"What if I want to change my major, or leave engineering?",short:"<b>Both happen, both are survivable, and most credits move with you.</b>",topic:"major",ind:"all",who:"Tom D.",role:"Applied Engineering Sciences 2012 · Manufacturing",a:["People leave for better reasons than a bad semester and worse ones. Worth knowing which you are doing.", "Talk to advising before you decide anything. The mechanics are usually less brutal than the story in your head."],act:"Book an advising appointment before you decide anything.",actLink:"#q-pick-major",actText:"On picking a major",more:[{who:"Grace L.",role:"Chemical Engineering 2019 · Consumers Energy",dated:"Answered fall 2026",a:["Two people I started with left engineering and both are doing well. One went to supply chain and one went to design. The credits mostly moved with them.", "Leaving because you found something you want more is a different thing from leaving because a semester went badly. Worth knowing which one you are doing."]}]},
+{id:"q-parent",dated:'Answered fall 2026',q:"My child says everyone there is smarter than them. What do I say?",short:"<b>That everyone is saying it, quietly, at the same time.</b>",topic:"confidence",ind:"all",who:"Alena T.",role:"Electrical Engineering 2016 · Semiconductors",a:["It is the most common feeling in a first-year engineering class and it is almost never accurate.", "Ask what they are building rather than what their grades are. It changes what they tell you, and it means you hear about trouble sooner."],act:"Ask what they are working on this week.",actLink:"#q-everyone-smarter",actText:"On everyone seeming smarter",more:[{who:"Rita C.",role:"Civil Engineering 2014 · Transportation",dated:"Answered fall 2026",a:["The most useful thing my mother did was ask what I was building instead of what my grades were. It changed what I told her, and it meant I told her when things went wrong."]}]},
+{id:"q-egr100-point",dated:'Answered fall 2026',q:"EGR 100 is only two credits. Does it matter?",short:"<b>More than the credits suggest.</b> It is the only first-year course with no answer at the back.",topic:"team",ind:"all",who:"Grace L.",role:"Chemical Engineering 2019 · Consumers Energy",a:["Students bring it up in interviews three years later, because it is where they first had something they built and could explain.", "The credits measure the time. They do not measure what it sets up."],act:"Take the December showcase seriously. It travels further than you think.",actLink:"#/guide",actText:"Back to the guide",more:[{who:"Tom D.",role:"Applied Engineering Sciences 2012 · Manufacturing",dated:"Answered fall 2026",a:["The credits are not the point. It is the only course in your first year where the problem does not have an answer at the back, and that turns out to be the thing the job is made of."]}]},
+{id:"q-ge-day",dated:'Answered fall 2026',q:"What does an engineer do all day?",short:"<b>Analysis, design reviews and coordination.</b> More time explaining decisions than doing the maths.",topic:"major",ind:"all",who:"Marcus W.",role:"Mechanical Engineering 2018 · GE Aerospace",a:["Less maths and more conversation than I expected. Some analysis, a design review where people argue productively about whether something is good enough, and a lot of coordination.", "The part that transfers most directly from first year is being able to explain why you chose what you chose."],act:"Notice how much of your team's time goes into explaining reasoning.",actLink:"#q-egr100-point",actText:"Why the design course matters",more:[{who:"Grace L.",role:"Chemical Engineering 2019 · Consumers Energy",dated:"Answered fall 2026",a:["Different company, same shape of day. A lot of it is deciding what is good enough, and then explaining that decision to somebody who was not in the room when you made it."]}]},
+{id:"q-money",dated:'Answered fall 2026',q:"How am I supposed to pay for this?",short:"<b>Ask financial aid before it is urgent.</b> There is money that goes unclaimed every year.",topic:"support",ind:"all",who:"Rita C.",role:"Civil Engineering 2014 · Transportation",a:["Emergency funds, scholarships and department awards all exist and all go partly unclaimed because nobody applies.", "The options are much wider before a bill is late than after."],act:"Book a financial aid appointment this month.",actLink:"#/guide",actText:"Back to the guide",more:[{who:"Devon A.",role:"Civil Engineering 2020 · Infrastructure",dated:"Answered fall 2026",a:["Ask financial aid before it is urgent. I waited until a bill was already late and the options got much narrower.", "There is money that goes unclaimed every year because nobody applied. Some of it is small. Small helps."]}]},
+{id:"q-everyone-smarter",dated:'Answered fall 2026',q:"Everyone here seems smarter than me. Is that normal?",short:"<b>Yes, and almost everyone around you is thinking it too.</b>",topic:"confidence",ind:"all",who:"Jordan M.",role:"Second-year, Computer Science",a:["Everyone is performing certainty. The person who sounds confident in your team meeting is usually confident about the one thing they happen to know.", "It gets better once you have people you can be honest with. That is the real reason to join a team early."],act:"Tell one person on your EGR 100 team something you are finding hard.",actLink:"#q-team-trouble",actText:"On team trouble",more:[{who:"Alena T.",role:"Electrical Engineering 2016 · Semiconductors",dated:"Answered fall 2026",a:["Everyone is performing certainty. I did it too. Fifteen years in, I still work with people who do it, and now I know it means nothing about what they know."]},{who:"Nia R.",role:"Materials Science 2015 · Medical device",dated:"Answered spring 2026",a:["Ask the confident person a follow-up question sometime. Not to catch them out. You will just find the edge of it quickly, and it is oddly reassuring."]}]}
+];
+var qlist=document.getElementById('qlist'), qcount=document.getElementById('qcount');
+function esc(s){ return String(s).replace(/[<>"]/g,''); }
+if(qlist){ qlist.innerHTML = QUESTIONS.map(function(q){ var extra=(q.more||[]); var searchText=esc(q.q+' '+q.short+' '+q.a.join(' ')+' '+q.who+' '+q.role+' '+extra.map(function(m){return m.who+' '+m.role+' '+m.a.join(' ');}).join(' ')).toLowerCase(); var body='<div class="qbody"><div class="answer">'+q.a.map(function(p){return '<p>'+p+'</p>';}).join('')+
+      '<div class="byline"><span class="av" aria-hidden="true"></span><span class="who"><b>'+q.who+'</b>'+q.role+'<br>'+q.dated+'</span></div></div>'+ extra.map(function(m){ return '<div class="answer alt"><p class="alsohead">Also answered by '+m.who+'</p>'+ m.a.map(function(p){return '<p>'+p+'</p>';}).join('')+
+          '<div class="byline"><span class="av" aria-hidden="true"></span><span class="who"><b>'+m.who+'</b>'+m.role+'<br>'+m.dated+'</span></div></div>';
+      }).join('')+
+      '<p class="storyrow"><a class="storylink" href="https://engineering.msu.edu/alumni/spartan-stories">Read their Spartan Stories</a></p>'+
+      '<div class="qaction"><p class="lab">Do this next</p><p>'+q.act+' <a href="'+q.actLink+'">'+q.actText+' &rarr;</a></p></div>'+
+      '<button class="linkbtn" data-link="'+q.id+'">Copy link to this answer</button></div>'; return '<article class="qitem" id="'+q.id+'" data-topic="'+q.topic+'" data-text="'+searchText+'">'+
+      '<button class="qhead" aria-expanded="false"><h3>'+q.q+'</h3><p class="short">'+q.short+'</p>'+
+      '<p class="attrib"><em>'+q.who+'</em> &middot; '+q.role+'<span class="samp">Sample</span></p>'+
+      '<span class="more">Read '+(1+extra.length)+' answer'+(extra.length?'s':'')+'</span></button>'+body+'</article>';
+  }).join(''); if(qcount) qcount.textContent=QUESTIONS.length; qlist.addEventListener('click', function(e){ var h=e.target.closest('.qhead'); if(h){ var open=h.getAttribute('aria-expanded')==='true'; h.setAttribute('aria-expanded',open?'false':'true'); h.parentElement.classList.toggle('open',!open); return; } var lb=e.target.closest('[data-link]'); if(lb){ var url=location.href.split('#')[0]+'#'+lb.getAttribute('data-link'); if(navigator.clipboard) navigator.clipboard.writeText(url).then(function(){say('Link copied');},function(){say(url);}); else say(url); }
+  });
+}
+
+/* ---------- contributors ---------- */
+var CONTRIB=[
+ {org:'GE Aerospace',people:[['Marcus W.','Mechanical Engineering 2018 · answered student questions'],['Dana R.','Systems Engineering 2016 · showcase judge'],['James O.','Hiring manager, aerospace · answered student questions']]},
+ {org:'Consumers Energy',people:[['Grace L.','Chemical Engineering 2019 · answered student questions'],['Priya S.','Recruiter · answered student questions'],['Ellis T.','Distribution engineering · worked a design review']]},
+ {org:'Spartan alumni',people:[['Nia R.','Materials Science 2015 · answered student questions'],['Alena T.','Electrical Engineering 2016 · answered student questions'],['Rita C.','Civil Engineering 2014 · answered student questions'],['Devon A.','Civil Engineering 2020 · answered student questions'],['Tom D.','Applied Engineering Sciences 2012 · answered student questions']]},
+ {org:'Students',people:[['Maya R.','Third-year, Mechanical Engineering · answered student questions'],['Jordan M.','Second-year, Computer Science · answered student questions']]}
+];
+var cg=document.getElementById('contribGrid');
+if(cg){ cg.innerHTML=CONTRIB.map(function(c){ return '<article class="contrib"><p class="org">'+c.org+'<span class="samp">Sample</span></p><ul>'+ c.people.map(function(p){return '<li>'+p[0]+'<span>'+p[1]+'</span></li>';}).join('')+'</ul></article>';
+}).join(''); }
+
+
+/* ---------- spartan stories carousel ---------- */
+var STORIES=[
+ {q:'I failed two exams in my first year and finished with a distinction.',b:'What changed was not working harder. It was finding out how other people were studying, which turned out to be nothing like what I was doing.',n:'Nia R.',r:'Materials Science 2015 · Medical device'},
+ {q:'Nobody in my family had done this, so I asked the obvious questions.',b:'I thought that would make me look behind. It made me the person on my floor who knew where things were by October.',n:'Rita C.',r:'Civil Engineering 2014 · Transportation'},
+ {q:'The design course was the first time I built something that did not work.',b:'Three prototypes fouled before the fourth one went in. I have used that story in every interview since.',n:'Marcus W.',r:'Mechanical Engineering 2018 · GE Aerospace'},
+ {q:'I picked my major because I liked the people in the room.',b:'That is not a reason anyone puts in a brochure. Fourteen years later it was still the right call.',n:'Tom D.',r:'Applied Engineering Sciences 2012 · Manufacturing'},
+ {q:'Everyone is performing certainty. I did it too.',b:'Fifteen years in, I still work with people doing it, and now I know it means nothing about what they know.',n:'Alena T.',r:'Electrical Engineering 2016 · Semiconductors'},
+ {q:'I went to the September career fair with no idea what I was doing.',b:'It was the most useful hour of that semester. Not because I got anything, but because I found out what the questions were.',n:'Grace L.',r:'Chemical Engineering 2019 · Consumers Energy'}
+];
+var track=document.getElementById('storyTrack'), dots=document.getElementById('storyDots'), car=document.getElementById('storyCar');
+if(track){ track.innerHTML=STORIES.map(function(s){ return '<article class="scard"><p class="quote">\u201c'+s.q+'\u201d</p><p class="sbody">'+s.b+'</p>'+
+      '<div class="sname"><span class="sav" aria-hidden="true"></span><span><b>'+s.n+'</b><span>'+s.r+'</span></span></div></article>';
+  }).join(''); if(dots){ dots.innerHTML=STORIES.map(function(_,i){return '<button aria-label="Story '+(i+1)+'"'+(i===0?' class="on"':'')+'></button>';}).join(''); dots.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; var i=[].indexOf.call(dots.children,b), c=track.children[i]; if(c) track.scrollTo({left:c.offsetLeft-track.offsetLeft,behavior:'smooth'});
+    });
+  } function step(dir){ var w=track.children[0]?track.children[0].offsetWidth+18:340; track.scrollBy({left:dir*w,behavior:'smooth'});
+  } if(car){ var p=car.querySelector('.prev'), n=car.querySelector('.next'); if(p) p.addEventListener('click',function(){step(-1);}); if(n) n.addEventListener('click',function(){step(1);});
+  } track.addEventListener('scroll',function(){ if(!dots) return; var w=track.children[0]?track.children[0].offsetWidth+18:340; var i=Math.round(track.scrollLeft/w);
+    [].forEach.call(dots.children,function(d,j){d.classList.toggle('on',j===i);});
+  });
+}
+
+
+/* keyboard: carousel */
+if(track){
+  track.setAttribute('tabindex','0');
+  track.setAttribute('role','region');
+  track.setAttribute('aria-label','Spartan Stories');
+  track.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){e.preventDefault();step(1);}
+    if(e.key==='ArrowLeft'){e.preventDefault();step(-1);}
+  });
+}
+/* keyboard: question accordion arrow navigation */
+if(qlist){
+  qlist.addEventListener('keydown',function(e){
+    var h=e.target.closest('.qhead'); if(!h) return;
+    var heads=[].slice.call(qlist.querySelectorAll('.qhead'));
+    var i=heads.indexOf(h);
+    if(e.key==='ArrowDown'&&heads[i+1]){e.preventDefault();heads[i+1].focus();}
+    if(e.key==='ArrowUp'&&heads[i-1]){e.preventDefault();heads[i-1].focus();}
+    if(e.key==='Home'){e.preventDefault();heads[0].focus();}
+    if(e.key==='End'){e.preventDefault();heads[heads.length-1].focus();}
+  });
+}
+
+/* ---------- guide panels + search ---------- */
+var PANELS=['basics','offices','community','support','dates','questions','careers'];
+var LABEL={basics:'Basics',offices:'Offices',community:'Community',support:'Support',dates:'Dates',questions:'Ask a Spartan',careers:'Careers'};
+function showPanel(name){
+  PANELS.concat(['results']).forEach(function(p){ var el=document.getElementById('p-'+p); if(el) el.hidden=(p!==name);
+  }); document.querySelectorAll('[data-panel]').forEach(function(b){ var on=b.getAttribute('data-panel')===name; b.classList.toggle('on',on); b.setAttribute('aria-selected',on?'true':'false');
+  }); initReveal(document.getElementById('p-'+name));
+}
+document.querySelectorAll('[data-panel]').forEach(function(b){ b.addEventListener('click',function(){ showPanel(b.getAttribute('data-panel')); });
+});
+var gq=document.getElementById('gq'), gqclear=document.getElementById('gqclear'), gsw=document.getElementById('gsearchWrap'), ghits=document.getElementById('ghits'), gresults=document.getElementById('gresults');
+function runSearch(){ if(!gq) return; var q=gq.value.trim().toLowerCase(); if(gsw) gsw.classList.toggle('has',!!q); if(!q){ showPanel('basics'); return; } var groups=[];
+  PANELS.filter(function(p){return p!=='questions';}).forEach(function(p){ var el=document.getElementById('p-'+p); if(!el) return; var hits=[].slice.call(el.querySelectorAll('.gitem')).filter(function(i){return i.textContent.toLowerCase().indexOf(q)>=0;}); if(hits.length) groups.push([LABEL[p],hits.map(function(h){return h.outerHTML;})]);
+  }); var qh=(window.QUESTIONS||[]).filter(function(x){ return (x.q+' '+x.short+' '+x.a.join(' ')+' '+x.who+' '+x.role+' '+(x.more||[]).map(function(m){return m.who+' '+m.a.join(' ');}).join(' ')).toLowerCase().indexOf(q)>=0;
+  }); if(qh.length) groups.push(['Ask a Spartan',qh.map(function(x){ return '<div class="gitem row"><h3><a href="#'+x.id+'" style="text-decoration:none">'+x.q+'</a></h3><p>'+x.short.replace(/<[^>]+>/g,'')+'</p></div>';
+  })]); var total=groups.reduce(function(n,g){return n+g[1].length;},0); if(ghits) ghits.textContent=total+(total===1?' result for \u201c':' results for \u201c')+gq.value+'\u201d'; if(gresults) gresults.innerHTML = total
+    ? groups.map(function(g){return '<div class="ghit-grp"><b>'+g[0]+'</b><div class="rows">'+g[1].join('')+'</div></div>';}).join('')
+    : '<div class="gnone"><h3>Nothing matches that yet.</h3><p>Try a different word, or pick a section on the left.</p></div>'; showPanel('results');
+}
+if(gq){ var _t; gq.addEventListener('input',function(){clearTimeout(_t);_t=setTimeout(runSearch,120);}); }
+if(gqclear){ gqclear.addEventListener('click',function(){ gq.value=''; runSearch(); gq.focus(); }); }
+
+/* ---------- boot ---------- */
+window.QUESTIONS = (typeof QUESTIONS!=='undefined') ? QUESTIONS : [];
+showView((location.hash||'#/home').replace('#/',''), false);
+showPanel('basics');
+initReveal(document);
+})();
+</script>
+</body>
+</html>
