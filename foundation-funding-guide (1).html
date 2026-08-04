@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Guide to Foundation Funding | Giving to Michigan State University</title>
+<style>
+  :root {
+    /* MSU Spartan brand palette */
+    --green:#18453B;        /* Spartan green (primary) */
+    --green-deep:#0e2c25;
+    --green-mid:#2f6152;
+    --green-tint:#eef3f1;    /* very pale green wash */
+    --green-tint-2:#e2ece8;
+    --kelly:#008208;         /* MSU accent green */
+    --ink:#0d1b17;
+    --ink-2:#495853;
+    --line:#d7e0dc;
+    --line-2:#e8eeeb;
+    --bg:#ffffff;
+    --bg-2:#f6f9f7;
+    --focus:#008208;
+    --maxw:1080px; --readw:700px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{transition:none!important;animation:none!important;}}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--green);}
+
+  /* ---- site header band (echoes givingto.msu.edu) ---- */
+  .site-top{background:var(--green); color:#fff;}
+  .site-top .in{max-width:var(--maxw); margin:0 auto; padding:16px 28px; display:flex; align-items:center; gap:14px;}
+  .site-top .word{font-weight:700; font-size:15px; letter-spacing:.01em;}
+  .site-top .word span{opacity:.72; font-weight:400;}
+  .site-top .give{margin-left:auto; font-size:13px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; border:1.5px solid rgba(255,255,255,.5); border-radius:4px; padding:7px 15px; text-decoration:none; color:#fff;}
+  .site-top .give:hover{background:#fff; color:var(--green);}
+
+  /* breadcrumb */
+  .crumbs{background:var(--green-tint); border-bottom:1px solid var(--line-2);}
+  .crumbs .in{max-width:var(--maxw); margin:0 auto; padding:11px 28px; font-size:13px; color:var(--ink-2);}
+  .crumbs a{color:var(--green-mid); text-decoration:none;}
+  .crumbs a:hover{text-decoration:underline;}
+  .crumbs .here{color:var(--ink-2);}
+
+  /* ---- hero ---- */
+  .hero{background:var(--bg);}
+  .hero .in{max-width:var(--maxw); margin:0 auto; padding:52px 28px 8px;}
+  .hero .kicker{font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--kelly); margin:0 0 14px;}
+  .hero h1{font-size:clamp(2rem,4.4vw,2.75rem); line-height:1.12; letter-spacing:-.015em; margin:0 0 16px; color:var(--green);}
+  .hero .intro{font-size:1.12rem; color:var(--ink-2); max-width:62ch; margin:0;}
+
+  /* ---- shell ---- */
+  .shell{max-width:var(--maxw); margin:0 auto; padding:36px 28px 40px; display:grid; grid-template-columns:1fr 236px; gap:52px; align-items:start;}
+  .content{min-width:0; max-width:var(--readw);}
+
+  /* ---- rail ---- */
+  .rail{position:sticky; top:24px; font-size:14px;}
+  .rail .box{background:var(--green); border-radius:10px; padding:18px 18px 20px; margin-bottom:18px;}
+  .rail .box p{margin:0 0 12px; color:#cfe0da; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;}
+  .rail .railbtn{display:block; text-align:center; text-decoration:none; font-weight:700; font-size:14px; border-radius:6px; padding:11px 14px; margin-bottom:9px;}
+  .rail .railbtn.solid{background:#fff; color:var(--green);}
+  .rail .railbtn.solid:hover{background:var(--green-tint-2);}
+  .rail .railbtn.line{background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.55);}
+  .rail .railbtn.line:hover{background:rgba(255,255,255,.12);}
+  .rail .railbtn:last-child{margin-bottom:0;}
+  .rail .lbl{font-size:11px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-2); margin:0 0 10px;}
+  .rail ol{list-style:none; margin:0; padding:0; counter-reset:r;}
+  .rail li{counter-increment:r;}
+  .rail ol a{
+    display:flex; gap:11px; align-items:baseline; text-decoration:none; color:var(--ink-2);
+    padding:9px 0 9px 14px; border-left:2px solid var(--line); transition:color .15s,border-color .15s,font-weight .15s;
+  }
+  .rail ol a::before{content:counter(r); font-size:11px; font-weight:700; color:var(--green-mid); flex:0 0 auto;}
+  .rail ol a:hover, .rail ol a.active{color:var(--green); border-color:var(--green);}
+  .rail ol a.active{font-weight:700;}
+
+  /* ---- intro kick line ---- */
+  .kick{background:var(--green-tint); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:16px 20px; font-size:1rem; color:#26332e; margin:0 0 38px;}
+
+  .sec-h{font-size:1.5rem; letter-spacing:-.01em; margin:0 0 4px; color:var(--green);}
+  .sec-sub{color:var(--ink-2); font-size:14.5px; margin:0 0 20px;}
+
+  /* ---- STEPS ---- */
+  .steps{margin:0 0 12px;}
+  details.step{border:1px solid var(--line); border-radius:10px; margin-bottom:12px; background:var(--bg); overflow:hidden; transition:box-shadow .15s,border-color .15s;}
+  details.step[open]{border-color:var(--green-mid); box-shadow:0 6px 22px rgba(24,69,59,.08);}
+  details.step > summary{list-style:none; cursor:pointer; padding:20px 22px; display:flex; gap:16px; align-items:flex-start; background:var(--bg);}
+  details.step[open] > summary{background:var(--green-tint); border-bottom:1px solid var(--line-2);}
+  details.step > summary::-webkit-details-marker{display:none;}
+  details.step > summary:focus-visible{outline:3px solid var(--focus); outline-offset:-3px;}
+  .num{
+    flex:0 0 34px; height:34px; width:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; font-weight:700; color:#fff; background:var(--green-mid);
+    transition:background .15s;
+  }
+  details.step[open] .num{background:var(--green);}
+  .st-h{flex:1; min-width:0;}
+  .st-name{font-size:1.16rem; font-weight:700; display:block; line-height:1.3; margin-bottom:3px; color:var(--green);}
+  .st-sum{font-size:14px; color:var(--ink-2); line-height:1.45;}
+  .st-chev{flex:0 0 auto; color:var(--green-mid); margin-top:9px; transition:transform .2s;}
+  details.step[open] .st-chev{transform:rotate(180deg);}
+  .st-body{padding:20px 24px 24px 72px;}
+  .st-body p{font-size:16px; margin:0 0 14px; color:#25302c;}
+  .st-body p:last-child{margin-bottom:0;}
+  .st-body strong{color:var(--ink);}
+
+  .tools{display:flex; flex-wrap:wrap; gap:9px; margin-top:18px;}
+  .tool{
+    font-size:13.5px; font-weight:700; text-decoration:none; color:#fff; background:var(--green);
+    border-radius:6px; padding:9px 15px; display:inline-flex; align-items:center; gap:8px; transition:background .15s;
+  }
+  .tool:hover{background:var(--green-deep);}
+  .tool:focus-visible{outline:3px solid var(--focus); outline-offset:2px;}
+  .tool.ghost{background:var(--green-tint); color:var(--green); border:1px solid var(--line);}
+  .tool.ghost:hover{background:var(--green-tint-2);}
+  .tool svg{color:currentColor;}
+
+  /* ---- good to know ---- */
+  .aside-wrap{margin:50px 0 0; padding-top:36px; border-top:2px solid var(--green-tint-2);}
+  .kv{margin:0 0 24px;}
+  .kv:last-child{margin-bottom:0;}
+  .kv h3{font-size:1.06rem; margin:0 0 12px; color:var(--green);}
+  .kv dl{margin:0; display:grid; grid-template-columns:200px 1fr; gap:1px; background:var(--line-2); border:1px solid var(--line-2); border-radius:9px; overflow:hidden;}
+  .kv dt{background:var(--green-tint); padding:13px 16px; font-weight:700; font-size:14px; color:var(--green);}
+  .kv dd{background:var(--bg); padding:13px 16px; margin:0; font-size:14.5px; color:var(--ink-2); line-height:1.5;}
+  .mnem{margin:16px 0 0; font-size:15px; color:#25302c; background:var(--green-tint); border-radius:8px; padding:14px 18px;}
+  .mnem strong{color:var(--green);}
+
+  /* ---- consult strip ---- */
+  .consult{margin:44px 0 0; background:var(--green); border-radius:12px; padding:26px 28px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;}
+  .consult p{margin:0; flex:1; min-width:220px; font-size:16px; color:#eaf3ef;}
+  .consult .btn{text-decoration:none; background:#fff; color:var(--green); font-weight:700; font-size:14.5px; padding:12px 22px; border-radius:6px; white-space:nowrap;}
+  .consult .btn:hover{background:var(--green-tint-2);}
+  .consult .btn:focus-visible{outline:3px solid #fff; outline-offset:3px;}
+
+  /* short version */
+  .short{margin:40px 0 0; padding:26px 0 0; border-top:1px solid var(--line);}
+  .short h2{font-size:1.12rem; margin:0 0 12px; color:var(--green);}
+  .short p{font-size:15.5px; color:var(--ink-2); margin:0;}
+
+  /* related */
+  .related{margin:38px 0 0;}
+  .related .lbl{font-size:11px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-2); margin:0 0 13px;}
+  .related-row{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+  .related-row a{text-decoration:none; color:var(--ink); border:1px solid var(--line); border-radius:9px; padding:15px 17px; transition:border-color .15s,background .15s;}
+  .related-row a:hover{border-color:var(--green); background:var(--bg-2);}
+  .related-row .rt{font-weight:700; font-size:14.5px; display:block; color:var(--green);}
+  .related-row .rd{font-size:12.5px; color:var(--ink-2);}
+
+  /* footer band */
+  footer{background:var(--green-deep); color:#a9c6bc; margin-top:46px;}
+  footer .in{max-width:var(--maxw); margin:0 auto; padding:26px 28px; font-size:12.5px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  footer a{color:#d3e4dd;}
+  footer .tag{font-weight:700; letter-spacing:.08em; color:#cfe0da;}
+
+  .stage-banner{max-width:var(--maxw); margin:16px auto 0; padding:0 28px;}
+  .stage-banner div{font-size:12px; color:var(--green-mid); background:var(--green-tint); border:1px dashed var(--green-mid); border-radius:8px; padding:10px 14px; line-height:1.5;}
+
+  @media (max-width:860px){
+    .shell{grid-template-columns:1fr; gap:0;}
+    .rail{position:static; margin:0 0 30px;}
+    .content{max-width:none;}
+    .kv dl{grid-template-columns:1fr;}
+    .related-row{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .crumbs{display:none;}
+    .st-body{padding-left:24px;}
+    .site-top .word span{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="site-top">
+  <div class="in">
+    <span class="word">Giving to MSU <span>· Foundation Relations</span></span>
+    <a class="give" href="#link-consult">Contact Us</a>
+  </div>
+</div>
+
+<div class="crumbs">
+  <div class="in">
+    <a href="#">Ways to Give</a> &rsaquo; <a href="#">Corporate &amp; Foundation Relations</a> &rsaquo; <a href="#">Foundation Relations</a> &rsaquo; <span class="here">A Guide to Foundation Funding</span>
+  </div>
+</div>
+
+<div class="stage-banner"><div><strong>Staging note (delete before publish):</strong> replace each <code>href="#link-&hellip;"</code> with the live URL, and confirm the canonical Airtable base &mdash; the FAQ page uses <code>appgh3GzpYc00A5Wp</code>; a shared link used <code>appQrALqecpj6a6ZP</code>.</div></div>
+
+<header class="hero">
+  <div class="in">
+    <p class="kicker">A guide for faculty</p>
+    <h1>Working with private foundations</h1>
+    <p class="intro">How foundation funding works and how our office can help, from first exploring whether foundations fit your work through planning your next cycle.</p>
+  </div>
+</header>
+
+<div class="shell">
+
+  <div class="content">
+
+    <p class="kick">Foundations don&rsquo;t work like federal agencies. The five steps below are the whole process; open any one for what to do. New to this? Read top to bottom. Just need a tool? Jump to the step you&rsquo;re on.</p>
+
+    <h2 class="sec-h">The process, step by step</h2>
+    <p class="sec-sub">Five stages, from first idea to your next cycle.</p>
+
+    <div class="steps">
+
+      <details class="step" id="explore" open>
+        <summary>
+          <span class="num">1</span>
+          <span class="st-h">
+            <span class="st-name">Explore: is my work a fit?</span>
+            <span class="st-sum">Talk to us early, before you contact a funder or start writing.</span>
+          </span>
+          <svg class="st-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="st-body">
+          <p>Contact Foundation Relations early, ideally before you approach a foundation or start writing. Early contact lets us check whether your project aligns with a funder, spot any relationship MSU already has, build a strategy, and avoid conflicts with other campus efforts. There&rsquo;s no threshold of readiness you need to reach first.</p>
+          <p>We identify prospects, advise on strategy, open and hold relationships with program officers, and review proposals and letters of inquiry with a program officer&rsquo;s eye. We don&rsquo;t write your grant. The content stays with you, but we&rsquo;ll help frame the concept, advise on structure, review drafts, and share examples.</p>
+          <p>Our office covers private foundations and charitable organizations. State and federal opportunities run through the research office. Corporate foundations usually go through our corporate relations partner, so if you&rsquo;re pursuing a company&rsquo;s foundation, ask to be pointed there.</p>
+          <div class="tools">
+            <a class="tool" href="#link-consult"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Schedule a consultation</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="step" id="find">
+        <summary>
+          <span class="num">2</span>
+          <span class="st-h">
+            <span class="st-name">Find: who might fund me?</span>
+            <span class="st-sum">Three ways: open RFPs, the prospect library, and weekly alerts.</span>
+          </span>
+          <svg class="st-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="st-body">
+          <p>There are three ways to find foundation funding, and they work best together.</p>
+          <p><strong>Open calls (RFPs).</strong> Browse the active RFP list for opportunities you can apply to now. Read the short abstract first to judge fit before opening the full record.</p>
+          <p><strong>Funder prospecting.</strong> Even when nothing is open, search the prospect library, a set of profiles for funders whose interests overlap MSU strengths, then approach a funder or ask us to. Many foundations fund by invitation or letter of inquiry, so no current RFP doesn&rsquo;t mean no money.</p>
+          <p><strong>Weekly alerts.</strong> Opt into alerts matched to your interest areas, and new opportunities come to you each week. Volume is manageable, a handful a week.</p>
+          <p>Two search notes: categories are broad by design, so search wide first and don&rsquo;t assume a missing keyword means a missing opportunity; and search reads only the main fields, so if a keyword turns up nothing, try the broad category, check the archive, or ask us. The archive is also good for planning, since most calls recur annually and past opportunities show you roughly when a funder&rsquo;s call reopens.</p>
+          <div class="tools">
+            <a class="tool" href="#link-rfp"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Browse the RFP list</a>
+            <a class="tool ghost" href="#link-prospect"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Prospect library</a>
+            <a class="tool ghost" href="#link-alerts"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>Sign up for alerts</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="step" id="clear">
+        <summary>
+          <span class="num">3</span>
+          <span class="st-h">
+            <span class="st-name">Before you apply</span>
+            <span class="st-sum">You can contact a program officer. Check with us first, and watch for limited calls.</span>
+          </span>
+          <svg class="st-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="st-body">
+          <p>You can contact a program officer directly, and it&rsquo;s worth checking with us first. We can confirm whether MSU already has a relationship with the funder, flag any submission limits, coordinate outreach so the university isn&rsquo;t sending duplicate or conflicting requests, and help you prepare talking points. This is coordination, not permission. When in doubt about approaching a funder, ask us first.</p>
+          <p>Check whether the opportunity is <strong>limited</strong>. Some foundations cap how many proposals one institution may submit. When that happens, the university runs an internal selection process, the same one used for capped federal programs, and you go through it before submitting. Look for the limited flag and start early, since the internal deadline comes ahead of the funder&rsquo;s. We advise on these and send internal announcements when they apply.</p>
+        </div>
+      </details>
+
+      <details class="step" id="write">
+        <summary>
+          <span class="num">4</span>
+          <span class="st-h">
+            <span class="st-name">Write the proposal</span>
+            <span class="st-sum">Frame it for a foundation reader, get a review, and route any budgeted LOI through OSP.</span>
+          </span>
+          <svg class="st-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="st-body">
+          <p>Frame the proposal for a foundation reader. Reusing federal language as-is rarely works, because a program officer weighs mission fit and impact differently than a federal panel weighs methods and rigor. Lead with how your work aligns with what the funder cares about.</p>
+          <p>Ask us to review your draft. Many of us have written grants or worked inside foundations, so we can read your proposal or LOI the way the funder will and flag where the fit or framing is weak.</p>
+          <p>Know when OSP has to review a letter of inquiry. Rules vary by funder, but as a rule of thumb, if an LOI includes a line-item budget, route it through OSP before submitting. Loop in both us and your Research Administrator early so an LOI deadline doesn&rsquo;t catch you off guard.</p>
+          <p>Keep your institutional facts handy: EIN, current trustees, audited financials, official budget figures, leadership names. We keep these in one proposal resources document you can download without logging in.</p>
+          <div class="tools">
+            <a class="tool" href="#link-resources"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Proposal resources document</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="step" id="plan">
+        <summary>
+          <span class="num">5</span>
+          <span class="st-h">
+            <span class="st-name">Plan ahead</span>
+            <span class="st-sum">Start six to eight months out and treat funding as a recurring cycle.</span>
+          </span>
+          <svg class="st-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="st-body">
+          <p>Start six to eight months ahead. We can do much more with a long runway than with an urgent request, because sourcing prospects, building strategy, and coordinating relationships all take time. Foundations in particular don&rsquo;t respond well to rushed, cold approaches.</p>
+          <p>Treat funding as an ongoing cycle, not a series of one-offs. Since opportunities recur, the faculty who do well keep a forward calendar: which funders open when, which relationships to warm before a call opens, which pilot results to have ready. The archive and weekly alerts together make that planning possible.</p>
+          <p>And keep applying. Relationships matter, but the reliable way to win foundation funding is to submit to well-matched opportunities and keep doing it.</p>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="consult">
+      <p>Not sure where your project fits? The earlier you talk to us, the more we can help.</p>
+      <a class="btn" href="#link-consult">Schedule a consultation</a>
+    </div>
+
+    <div class="aside-wrap">
+      <h2 class="sec-h">Good to know</h2>
+      <p class="sec-sub">Two things that shape everything above.</p>
+
+      <div class="kv">
+        <h3>How foundations differ from federal funders</h3>
+        <dl>
+          <dt>Relationship and merit</dt>
+          <dd>Fit with a program officer&rsquo;s priorities and a credible tie to the university matter alongside the proposal itself.</dd>
+          <dt>A complement, not a replacement</dt>
+          <dd>Foundation money often works as pilot funding that positions a project for a larger federal grant later.</dd>
+          <dt>Fit is narrow</dt>
+          <dd>A funder of &ldquo;cancer research&rdquo; isn&rsquo;t necessarily a funder of <em>your</em> cancer research. Broad alignment is a starting point, not a green light.</dd>
+          <dt>Different framing</dt>
+          <dd>A program officer reads differently than a federal panel, so a federal-ready proposal often needs reworking.</dd>
+        </dl>
+      </div>
+
+      <div class="kv">
+        <h3>Who does what</h3>
+        <dl>
+          <dt>Foundation Relations</dt>
+          <dd>Finds prospects, advises on strategy, reviews for fit, manages foundation relationships, advises on limited submissions.</dd>
+          <dt>Research Administrator</dt>
+          <dd>Budgets, proposal prep and routing, internal approvals, required documents, post-award administration.</dd>
+          <dt>Office of Sponsored Programs</dt>
+          <dd>Reviews and approves proposals, ensures compliance, negotiates award terms, supports award setup.</dd>
+        </dl>
+        <p class="mnem"><strong>In short:</strong> we help you win the funder, your Research Administrator helps you build the proposal, and OSP approves and submits it. More on the <a href="#link-faq">FAQs page</a>.</p>
+      </div>
+    </div>
+
+    <div class="short">
+      <h2>The short version</h2>
+      <p>Foundation funding depends on relationships and usually works alongside your federal funding. Contact Foundation Relations early. Find opportunities three ways: the RFP list, the prospect library, and weekly alerts. You can contact a program officer yourself, but check with us first, and watch for limited calls that need an internal process. Frame proposals for how a foundation reads, route any budgeted LOI through OSP, and keep your institutional facts handy. Start six to eight months ahead, and use past opportunities to plan the next cycle.</p>
+    </div>
+
+    <div class="related">
+      <p class="lbl">Related</p>
+      <div class="related-row">
+        <a href="#link-hub"><span class="rt">Foundation Funding Hub</span><span class="rd">RFP list, prospect library, and alerts.</span></a>
+        <a href="#link-faq"><span class="rt">FAQs</span><span class="rd">Quick answers to common questions.</span></a>
+        <a href="#link-webinar"><span class="rt">Training &amp; Resources</span><span class="rd">The full hub walkthrough.</span></a>
+        <a href="#link-corporate"><span class="rt">Corporate Relations</span><span class="rd">For company and corporate-foundation giving.</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="rail" aria-label="On this page">
+    <div class="box">
+      <p>Start this week</p>
+      <a class="railbtn solid" href="#link-alerts">Sign up for alerts</a>
+      <a class="railbtn line" href="#link-consult">Schedule a consultation</a>
+    </div>
+    <p class="lbl">The five steps</p>
+    <ol>
+      <li><a href="#explore">Explore</a></li>
+      <li><a href="#find">Find funders</a></li>
+      <li><a href="#clear">Before you apply</a></li>
+      <li><a href="#write">Write the proposal</a></li>
+      <li><a href="#plan">Plan ahead</a></li>
+    </ol>
+  </aside>
+
+</div>
+
+<footer>
+  <div class="in">
+    <span>Office of Foundation Relations &middot; University Advancement &middot; Michigan State University</span>
+    <span class="tag">SPARTANS WILL</span>
+  </div>
+</footer>
+
+<script>
+  function openStep(id){var el=document.getElementById(id); if(el && el.tagName.toLowerCase()==='details'){el.open=true;}}
+  document.querySelectorAll('.rail a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(){ var id=a.getAttribute('href').slice(1); openStep(id); });
+  });
+  if(location.hash) openStep(location.hash.slice(1));
+
+  var steps = Array.prototype.slice.call(document.querySelectorAll('details.step'));
+  var railLinks = {};
+  document.querySelectorAll('.rail ol a').forEach(function(a){ railLinks[a.getAttribute('href').slice(1)] = a; });
+  function spy(){
+    var y = window.scrollY + 120, current = null;
+    steps.forEach(function(s){ if(s.offsetTop <= y) current = s.id; });
+    Object.keys(railLinks).forEach(function(id){ railLinks[id].classList.toggle('active', id===current); });
+  }
+  window.addEventListener('scroll', spy, {passive:true});
+  spy();
+</script>
+
+</body>
+</html>
