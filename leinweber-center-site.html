@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +34,7 @@ body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-heigh
 h1,h2,h3,h4,.btn,.brand b{font-family:var(--display)}
 a{color:var(--spartan)}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--leaf);outline-offset:2px;border-radius:3px;box-shadow:0 0 0 4px rgba(123,189,0,.22)}
-.hero a:focus-visible,.dark button:focus-visible,.deep button:focus-visible{box-shadow:0 0 0 4px rgba(123,189,0,.35)}
+.hero a:focus-visible,.dark a:focus-visible,.deep a:focus-visible,.dark button:focus-visible,.deep button:focus-visible{box-shadow:0 0 0 4px rgba(123,189,0,.45);outline-color:#fff}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 .skip-link{position:absolute;left:-9999px;background:var(--spartan);color:#fff;padding:10px 18px;z-index:200;font-weight:700}
@@ -65,9 +66,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .navlinks button:hover{opacity:1;background:rgba(255,255,255,.1)}
 .navlinks button[aria-current="page"]{opacity:1;background:rgba(255,255,255,.14)}
 .navlinks button[aria-current="page"]::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;background:var(--leaf);border-radius:2px}
-@media(max-width:1040px){.navlinks button[aria-current="page"]::after{display:none}}
+@media(max-width:1120px){.navlinks button[aria-current="page"]::after{display:none}}
 .navtoggle{display:none;background:none;border:1.5px solid rgba(255,255,255,.6);color:#fff;border-radius:var(--radius);padding:7px 12px;font-size:.85rem;font-family:var(--sans);cursor:pointer}
-@media(max-width:1040px){
+@media(max-width:1120px){
  .navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:var(--forest);flex-direction:column;gap:0;padding:6px 0 12px;border-top:1px solid rgba(255,255,255,.15);box-shadow:0 16px 32px rgba(0,0,0,.35);z-index:90}
  .navlinks.open{display:flex}.navlinks li{width:100%}
  .navlinks button{display:block;width:100%;text-align:left;padding:13px 24px;border-radius:0;border-bottom:1px solid rgba(255,255,255,.06)}
@@ -167,12 +168,21 @@ h2.sec{font-size:clamp(1.5rem,2.7vw,1.98rem);color:var(--forest);max-width:32ch;
 .keyrows{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:8px}
 .keyrow{display:grid;grid-template-columns:210px 1fr;border-top:1px solid var(--line)}
 .keyrow:first-child{border-top:none}
-.keyrow .k{background:var(--mist);padding:14px 20px;font-family:var(--display);font-weight:700;color:var(--forest);font-size:.9rem}
+.keyrow .k{background:var(--mist);padding:14px 20px;font-family:var(--display);font-weight:700;color:var(--forest);font-size:.9rem;overflow-wrap:break-word}
 .keyrow .v{padding:14px 22px;font-size:.92rem;color:var(--ink-soft)}
 .keyrow .v b{color:var(--ink)}
+.keyrow .k a{color:var(--forest);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;text-decoration-color:var(--leaf-dark)}
+.keyrow .k a:hover{color:var(--spartan);text-decoration-thickness:2px}
+.intro a,.list span a,.keyrow .v a{text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--leaf-dark)}
+.intro a:hover,.list span a:hover,.keyrow .v a:hover{text-decoration-thickness:2px}
 .keyrow:nth-child(even) .v{background:#FCFCFB}
 @media(max-width:640px){.keyrow{grid-template-columns:1fr}.keyrow .k{padding-bottom:4px}}
 
+.list--dark{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)}
+.list--dark li{border-color:rgba(255,255,255,.15)}
+.list--dark b{color:#fff}
+.list--dark span{color:rgba(255,255,255,.82)}
+.list--dark a{color:var(--leaf-soft)}
 /* split */
 .split{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start}
 @media(max-width:900px){.split{grid-template-columns:1fr;gap:28px}}
@@ -398,6 +408,12 @@ h2.sec{font-size:clamp(1.5rem,2.7vw,1.98rem);color:var(--forest);max-width:32ch;
 .deep .nextcard .k,.dark .nextcard .k{color:var(--leaf-soft)}
 .deep .nextcard .go,.dark .nextcard .go{color:#fff}
 
+.tbstats{min-width:0}
+.newsempty{margin:0}
+.mt-sm{margin-top:14px}
+.mt-md{margin-top:20px}
+.mt-lg{margin-top:24px}
+.on-dark{color:#fff}
 /* reveal */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
 .reveal.in{opacity:1;transform:none}
@@ -408,7 +424,7 @@ h2.sec{font-size:clamp(1.5rem,2.7vw,1.98rem);color:var(--forest);max-width:32ch;
 
 /* footer */
 footer.site{background:var(--forest);color:rgba(255,255,255,.8);padding:52px 0 30px;font-size:.87rem}
-.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:38px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:30px}
 @media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
 footer.site .foot-h{color:#fff;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;font-family:var(--display)}
@@ -450,7 +466,8 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
   .hero h1,.hero .lede,.deep h2.sec,.dark h2.sec,.deep .intro,.dark .intro,.statgrid .st b,.statgrid .st span,.livecard h3,.livecard p{color:#000!important}
   a{color:#000;text-decoration:underline}
   section{padding:16px 0;break-inside:avoid}
-  .card,.evcard,.backrow{break-inside:avoid}
+  .card,.evcard,.backrow,.keyrow,.backrows{break-inside:avoid}
+  .foot-grid{grid-template-columns:1fr 1fr}
   .evcard.hide{display:flex!important}
 }
 </style>
@@ -472,28 +489,28 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
     <li><button data-view="about" type="button">About</button></li>
     <li><button data-view="building" type="button">The building</button></li>
     <li><button data-view="research" type="button">Research</button></li>
-    <li><button data-view="students" type="button">Students</button></li>
-    <li><button data-view="partners" type="button">Partners &amp; funders</button></li>
+    <li><button data-view="partners" type="button">Partner &amp; colocation</button></li>
+    <li><button data-view="funders" type="button">Founding gifts</button></li>
     <li><button data-view="michigan" type="button">Michigan</button></li>
     <li><button data-view="news" type="button">News</button></li>
   </ul>
 </div></header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
 <!-- ============ HOME ============ -->
 <div class="view" id="v-home">
   <header class="hero"><div class="wrap">
     <p class="eyebrow">Michigan State University</p>
-    <h1>A new home for engineering and digital innovation</h1>
-    <p class="lede">The Leinweber Center for Engineering and Digital Innovation is a 265,000 square foot teaching and research facility rising on MSU&rsquo;s East Lansing campus, funded by private philanthropy and the state of Michigan, with substantial completion expected in December 2028. Six colleges, more than 75 research groups, and industry will work under one roof.</p>
+    <h1>A new center for engineering and digital innovation</h1>
+    <p class="lede">The Leinweber Center for Engineering and Digital Innovation is a 265,000 square foot teaching and research facility rising on MSU&rsquo;s East Lansing campus, funded by private philanthropy, the state of Michigan, and the university, with substantial completion expected in December 2028. The center expands the College of Engineering alongside its five partner colleges: six colleges, more than 75 research groups, and industry under one roof.</p>
     <div class="hero-ctas">
-      <button class="btn btn-solid" data-view="partners" type="button">How to get involved</button>
+      <button class="btn btn-solid" data-view="partners" type="button">Partnerships and colocation</button>
       <button class="btn btn-ghost" data-view="building" type="button">See the building</button>
     </div>
     <div class="facts">
       <div><strong>265,000 sq ft</strong>Of teaching, research, and collaboration space</div>
-      <div><strong>6 colleges</strong>Led by Engineering with five partner colleges</div>
+      <div><strong>6 colleges</strong>Engineering with five partner colleges, each named on the About page</div>
       <div><strong>Dec 2028</strong>Substantial completion expected</div>
     </div>
   </div></header>
@@ -502,8 +519,8 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
     <p class="eyebrow reveal">Start where you are</p>
     <h2 class="sec reveal">Three ways in</h2>
     <div class="router reveal">
-      <button data-view="students" type="button"><span class="rlab">Students &amp; families</span><b>I want to learn and build here</b><span>The programs, spaces, and outcomes behind a Spartan engineering education.</span></button>
-      <button data-view="partners" type="button"><span class="rlab">Companies &amp; funders</span><b>I want to partner or give</b><span>Capabilities to build on, named spaces, and one office to reach.</span></button>
+      <button data-view="about" type="button"><span class="rlab">Future Spartans &amp; families</span><b>I want to see what&rsquo;s coming</b><span>The six-college idea, the spaces, and the programs the center will hold for students of every major.</span></button>
+      <button data-view="partners" type="button"><span class="rlab">Companies</span><b>I&rsquo;m interested in partnerships</b><span>Sponsored research, hiring, chip testing, and colocation, with one office to reach.</span></button>
       <button data-view="michigan" type="button"><span class="rlab">Michigan &amp; the public</span><b>I want to see what the investment builds</b><span>What the state&rsquo;s support creates for the economy and communities.</span></button>
     </div>
   </div></section>
@@ -524,7 +541,7 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
           <div><b data-count="1000">1,000</b><span>additional engineering students enabled</span></div>
           <div><b data-count="10000">10,000</b><span>square feet for student entrepreneurship</span></div>
         </div>
-        <p style="margin-top:20px"><button class="linkish" data-view="building" style="color:#fff;border-color:var(--leaf)" type="button">See the full space program &rarr;</button></p>
+        <p class="mt-md"><button class="linkish" data-view="building" style="color:#fff;border-color:var(--leaf)" type="button">See how the space is used &rarr;</button></p>
       </div>
       <div class="livecard reveal">
         <span class="livebadge"><span class="dot"></span>Under construction now</span>
@@ -541,11 +558,20 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
     </div>
   </div></section>
 
+  <section class="alt tight"><div class="wrap">
+    <div class="sechead reveal">
+      <div><p class="eyebrow">Colocation</p><h2 class="sec">Company presence at the center</h2></div>
+      <button class="linkish" data-view="partners" type="button">Explore colocation &rarr;</button>
+    </div>
+    <p class="intro reveal">The center is designed so company teams can work in the same building as faculty and students, beside capabilities few campuses hold. MSU welcomes conversations about what presence at the center could look like for your company.</p>
+  </div></section>
+
   <section class="backers tight"><div class="wrap">
     <div class="sechead reveal">
       <div><p class="eyebrow">Founding support</p><h2 class="sec">The gifts and investment behind the center</h2></div>
-      <button class="linkish" data-view="partners" type="button">Named spaces &rarr;</button>
+      <button class="linkish" data-view="funders" type="button">Founding gifts &rarr;</button>
     </div>
+    <p class="intro reveal">The center is funded by private philanthropy, the state of Michigan, and the university itself. The gifts and state investment below are part of that whole.</p>
     <div class="backrows reveal mt">
       <div class="backrow"><div class="co">Leinweber Foundation<span>$50 million naming gift</span></div><div class="buys">The largest gift ever made to a facility at MSU, announced February 2026. The foundation&rsquo;s Software Scholars and STEM Scholars programs already fund Michigan students in computer science, computer engineering, and other STEM fields.</div></div>
       <div class="backrow"><div class="co">Mary and Mike Lamach<span>$10 million, the first gift</span></div><div class="buys">Announced October 2025, the gift that launched fundraising for the center. It names the Lamach Auditorium and Lobby. Mike Lamach is a former chair and CEO of Ingersoll Rand and Trane Technologies.</div></div>
@@ -580,7 +606,7 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
 
   <section class="next tight"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
     <button class="nextcard" data-view="research" type="button"><span class="k">Research</span><b>The capabilities</b><span>Semiconductors, space electronics, materials, AI, and entrepreneurship.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>The space program</b><span>What the 265,000 square feet hold, and the construction status.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>Inside the building</b><span>What the 265,000 square feet hold, and the construction status.</span><span class="go">Go &rarr;</span></button>
     <button class="nextcard" data-view="partners" type="button"><span class="k">Partner</span><b>Work with MSU</b><span>Ways for companies and funders to get involved now.</span><span class="go">Go &rarr;</span></button>
   </div></div></section>
 </div>
@@ -602,15 +628,31 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
       <div>
         <p class="eyebrow reveal">The idea</p>
         <h2 class="sec reveal">One building, six colleges</h2>
-        <p class="intro reveal">Engineering leads the center, and five partner colleges work inside it, so the social, business, legal, and communication dimensions of technology sit beside the engineering. Students work in the same building where more than 75 principal investigators run their research programs.</p>
+        <p class="intro reveal">Engineering leads the center, and five partner colleges work inside it, so the social, business, legal, and communication dimensions of technology sit beside the engineering. Students from every one of the six colleges will learn and build here, and the building is designed so industry can work beside them; proximity shortens the distance between a research question and a working answer. Students work in the same building where more than 75 principal investigators run their research programs.</p>
+        <p class="intro reveal">The design answers real pressures: the fields Michigan&rsquo;s economy runs on no longer fit inside one discipline, demand to study engineering at MSU exceeds what current facilities hold, and distance between research and application costs time.</p>
         <p class="intro reveal">The center is designed to enable enrollment of 1,000 additional engineering students, expanding a college of more than 6,800.</p>
       </div>
       <ul class="list reveal">
         <li><b>Led by</b><span>The College of Engineering</span></li>
-        <li><b>Partner colleges</b><span>Natural Science, the Broad College of Business, Arts and Letters, Communication Arts and Sciences, and Social Science</span></li>
+        <li><b>Partner colleges</b><span>Five colleges work in the center alongside Engineering. Each is linked below.</span></li>
         <li><b>Location</b><span>Red Cedar Road and West Shaw Lane, East Lansing campus</span></li>
         <li><b>Academic program</b><span><a href="https://provost.msu.edu/edicenter">Office of the Provost</a></span></li>
+        <li><b>Research enterprise</b><span><a href="https://research.msu.edu">MSU Office of Research and Innovation</a></span></li>
       </ul>
+    </div>
+  </div></section>
+
+  <section class="tight"><div class="wrap">
+    <p class="eyebrow reveal">The six colleges</p>
+    <h2 class="sec reveal">Who works in the center</h2>
+    <p class="intro reveal">Engineering leads the center, and five partner colleges work inside it. Each link goes to that college, where its programs, faculty, and research live.</p>
+    <div class="keyrows reveal mt">
+      <div class="keyrow"><div class="k"><a href="https://engineering.msu.edu">College of Engineering</a></div><div class="v">Leads the center. More than 6,800 students across every engineering discipline, and the home of the laboratories and teaching space the building is built around.</div></div>
+      <div class="keyrow"><div class="k"><a href="https://natsci.msu.edu">Natural Science</a></div><div class="v">The physical, biological, and mathematical sciences that materials, computation, and instrumentation research draw on.</div></div>
+      <div class="keyrow"><div class="k"><a href="https://broad.msu.edu">Broad College of Business</a></div><div class="v">How a technology becomes a company, a supply chain, and a market. The business side of taking research to practice.</div></div>
+      <div class="keyrow"><div class="k"><a href="https://cal.msu.edu">Arts and Letters</a></div><div class="v">Design, ethics, and the human questions that shape what gets built and who it serves.</div></div>
+      <div class="keyrow"><div class="k"><a href="https://comartsci.msu.edu">Communication Arts and Sciences</a></div><div class="v">How technology is explained, adopted, and trusted, plus the media and game design work behind the digital learning spaces.</div></div>
+      <div class="keyrow"><div class="k"><a href="https://socialscience.msu.edu">Social Science</a></div><div class="v">The economic, policy, and community effects of new technology, studied beside the engineering that creates it.</div></div>
     </div>
   </div></section>
 
@@ -625,10 +667,17 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
     </div>
   </div></section>
 
+  <section class="tight"><div class="wrap">
+    <p class="eyebrow reveal">Students</p>
+    <h2 class="sec reveal">For future Spartans</h2>
+    <p class="intro reveal">The center opens with substantial completion expected in December 2028. The programs that will teach in it exist today: every program in the College of Engineering, and the Burgess Institute&rsquo;s entrepreneurship minor, open to undergraduates of every major.</p>
+    <p class="reveal mt-sm"><a class="linkish" href="https://engineering.msu.edu">College of Engineering &rarr;</a> &nbsp;&nbsp; <a class="linkish" href="https://entrepreneurship.msu.edu">Burgess Institute &rarr;</a></p>
+  </div></section>
+
   <section class="next deep"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
-    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>The space program</b><span>Square footage, assets, and construction status.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="students" type="button"><span class="k">Students</span><b>Learning here</b><span>Outcomes and what the center adds for students.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="partners" type="button"><span class="k">Partner</span><b>Get involved</b><span>Ways for companies and funders to work with MSU.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>Inside the building</b><span>Square footage, assets, and construction status.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="news" type="button"><span class="k">News</span><b>The record</b><span>Gifts, state action, and construction milestones.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="partners" type="button"><span class="k">Partner</span><b>Get involved</b><span>Sponsored research, hiring, testing, and colocation.</span><span class="go">Go &rarr;</span></button>
   </div></div></section>
 </div>
 
@@ -641,30 +690,31 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
         <h1>The building</h1>
         <p class="lede">265,000 square feet at Red Cedar Road and West Shaw Lane, in the academic district near the Engineering Building, the STEM Teaching and Learning Facility, and FRIB. Two components: a digital learning wing with classrooms, teaching labs, studios, and the esports arena, and a research wing with laboratories, core facilities, and clean rooms.</p>
         <div class="hero-ctas">
-          <button class="btn btn-solid" data-view="partners" type="button">Get involved</button>
+          <button class="btn btn-solid" data-view="partners" type="button">Partnership information</button>
         </div>
       </div>
       <div class="herofacts">
-        <span class="hf-lab">At a glance</span>
-        <div class="hf-row"><b>265K</b><span>square feet total</span></div>
-        <div class="hf-row"><b>85K</b><span>materials science research</span></div>
-        <div class="hf-row"><b>30K</b><span>classrooms and teaching labs</span></div>
-        <div class="hf-row"><b>20K</b><span>AI research and entrepreneurship</span></div>
-        <div class="hf-row"><b>2028</b><span>substantial completion expected</span></div>
+        <span class="hf-lab">Square feet, at a glance</span>
+        <div class="hf-row"><b>265,000</b><span>square feet in the building</span></div>
+        <div class="hf-row"><b>85,000</b><span>for materials science research</span></div>
+        <div class="hf-row"><b>30,000</b><span>for classrooms and teaching labs</span></div>
+        <div class="hf-row"><b>10,000</b><span>for AI and computational research</span></div>
+        <div class="hf-row"><b>10,000</b><span>for student entrepreneurship</span></div>
       </div>
     </div>
   </div></header>
 
   <section><div class="wrap">
     <p class="eyebrow reveal">The program</p>
-    <h2 class="sec reveal">The space program</h2>
+    <h2 class="sec reveal">How the space is used</h2>
+    <p class="intro reveal">The research wing carries the laboratories, core facilities, and clean rooms. The digital learning wing carries the classrooms, studios, entrepreneurship space, and the arena. The atrium and auditorium join them.</p>
     <div class="keyrows reveal mt">
       <div class="keyrow"><div class="k">Materials science</div><div class="v"><b>85,000 square feet</b> of research space, the largest single block in the building, extending the work of the Department of Chemical Engineering and Materials Science</div></div>
-      <div class="keyrow"><div class="k">Classrooms and teaching labs</div><div class="v"><b>30,000 square feet</b> of technology-rich classrooms and teaching laboratories</div></div>
       <div class="keyrow"><div class="k">AI and computational research</div><div class="v"><b>10,000 square feet</b> for artificial intelligence and computational research</div></div>
+      <div class="keyrow"><div class="k">Research facilities</div><div class="v">Laboratories for more than 75 principal investigators, core facilities, clean rooms, and flexible modular research units</div></div>
+      <div class="keyrow"><div class="k">Classrooms and teaching labs</div><div class="v"><b>30,000 square feet</b> of technology-rich classrooms and teaching laboratories</div></div>
       <div class="keyrow"><div class="k">Entrepreneurship</div><div class="v"><b>10,000 square feet</b> for student entrepreneurship, the Burgess Institute&rsquo;s permanent on-campus home</div></div>
-      <div class="keyrow"><div class="k">Research facilities</div><div class="v">Laboratories for experimental and computational research, core facilities, clean rooms, and flexible modular research units</div></div>
-      <div class="keyrow"><div class="k">Community</div><div class="v">The Spalding Family Atrium, the Lamach Auditorium and Lobby, student project studios, and a competition esports arena</div></div>
+      <div class="keyrow"><div class="k">Gathering spaces</div><div class="v">The Spalding Family Atrium, the Lamach Auditorium and Lobby, student project studios, and a competition esports arena</div></div>
     </div>
   </div></section>
 
@@ -677,12 +727,13 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
       <div class="ir"><div class="num">Jul 2027</div><div class="desc"><b>Red Cedar Road throughway closes</b>; the Stadium Road throughway opens in August 2027.</div><div class="src">MSU IPF</div></div>
       <div class="ir"><div class="num">Dec 2028</div><div class="desc"><b>Substantial completion expected.</b></div><div class="src">MSU announcements</div></div>
     </div>
-    <div class="thin reveal"><b>Dates come from MSU construction notices and announcements.</b> One MSU facilities page lists an August 2028 completion; reconcile before publication. <span class="samp">Confirm with IPF</span></div>
+    <p class="reveal mt-sm"><a class="linkish" href="https://ipf.msu.edu/construction/current-projects/leinweber-center-engineering-and-digital-innovation">Construction updates from IPF &rarr;</a></p>
+    <div class="thin reveal"><b>Dates come from MSU construction notices and announcements.</b> One MSU facilities page lists an August 2028 completion, and a live camera link can be added here. <span class="samp">Confirm both with IPF</span></div>
   </div></section>
 
   <section class="next"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
     <button class="nextcard" data-view="research" type="button"><span class="k">Research</span><b>What runs inside</b><span>The capability areas the building was designed around.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="partners" type="button"><span class="k">Partner</span><b>Named spaces</b><span>The founding gifts, and the named spaces that remain.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="funders" type="button"><span class="k">Philanthropy</span><b>Founding gifts</b><span>The people behind the center and the names it carries.</span><span class="go">Go &rarr;</span></button>
     <button class="nextcard" data-view="michigan" type="button"><span class="k">Michigan</span><b>The state investment</b><span>What Michigan&rsquo;s support builds.</span><span class="go">Go &rarr;</span></button>
   </div></div></section>
 </div>
@@ -694,10 +745,10 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
       <div>
         <p class="eyebrow">Leinweber Center</p>
         <h1>Research</h1>
-        <p class="lede">The center concentrates a set of capabilities where companies and MSU already work together, and the Leinweber Center is an opportunity to accelerate that progress. Each area below is active at MSU today and grows at the center.</p>
+        <p class="lede">The center concentrates a set of capabilities where companies and MSU already work together, and the Leinweber Center is an opportunity to accelerate that progress. Each area below is active at MSU today and grows at the center, where company teams, faculty, and students can work in the same building.</p>
         <div class="hero-ctas">
           <button class="btn btn-solid" data-view="partners" type="button">Partner on research</button>
-          <button class="btn btn-ghost" data-view="students" type="button">Research as a student</button>
+          <button class="btn btn-ghost" data-view="building" type="button">See the building</button>
         </div>
       </div>
       <div class="herofacts">
@@ -706,7 +757,7 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
         <div class="hf-row"><b>2</b><span>Space electronics</span></div>
         <div class="hf-row"><b>3</b><span>Materials &amp; advanced manufacturing</span></div>
         <div class="hf-row"><b>4</b><span>AI, data science &amp; cybersecurity</span></div>
-        <div class="hf-row"><b>5</b><span>Entrepreneurship &amp; digital learning</span></div>
+        <div class="hf-row"><b>5</b><span>Entrepreneurship and learning</span></div>
       </div>
     </div>
   </div></header>
@@ -755,116 +806,104 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
 
     </div>
     <div class="thin reveal" style="max-width:none;margin-top:24px"><b>Looking for a specific researcher or capability?</b> The corporate engagement team can connect you across the six colleges. <span class="samp">Proposed shared address</span></div>
+    <p class="intro reveal mt-lg">MSU&rsquo;s research enterprise runs to roughly $992 million in annual research expenditures. The <a href="https://research.msu.edu">Office of Research and Innovation</a> administers that work across all 17 colleges, and the center adds capacity to it.</p>
   </div></section>
 
   <section class="next deep"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
     <button class="nextcard" data-view="partners" type="button"><span class="k">Partner</span><b>Work with MSU</b><span>Sponsored research, licensing, talent, and named spaces.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>Where it happens</b><span>The space program behind these capabilities.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="students" type="button"><span class="k">Students</span><b>Learn and build here</b><span>Outcomes and what the center adds for students.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>Where it happens</b><span>The laboratories and spaces behind these capabilities.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="michigan" type="button"><span class="k">Michigan</span><b>The state case</b><span>The center as a strategic asset for Michigan&rsquo;s economic future.</span><span class="go">Go &rarr;</span></button>
   </div></div></section>
 </div>
 
-<!-- ============ STUDENTS ============ -->
-<div class="view" id="v-students" hidden>
-  <header class="hero"><div class="wrap">
-    <div class="herosplit">
-      <div>
-        <p class="eyebrow">Leinweber Center</p>
-        <h1>Students</h1>
-        <p class="lede">Spartan Engineers work on real problems, informed by MSU&rsquo;s land-grant mission to use technology to improve society. The center expands that mission with studios, laboratories, and entrepreneurship space, and it is designed to enable enrollment of 1,000 additional engineering students.</p>
-        <div class="hero-ctas">
-          <button class="btn btn-solid" data-view="research" type="button">See the research</button>
-          <a class="btn btn-ghost" href="https://engineering.msu.edu">Explore the college</a>
-        </div>
-      </div>
-      <div class="herofacts">
-        <span class="hf-lab">In the center</span>
-        <div class="hf-row"><b>Build</b><span>in student project studios</span></div>
-        <div class="hf-row"><b>Launch</b><span>a venture at the Burgess Institute</span></div>
-        <div class="hf-row"><b>Compete</b><span>in the esports arena</span></div>
-        <div class="hf-row"><b>Research</b><span>beside 75+ faculty labs</span></div>
-      </div>
-    </div>
-  </div></header>
-
-  <section><div class="wrap">
-    <p class="eyebrow reveal">Outcomes</p>
-    <h2 class="sec reveal">Where Spartan Engineers land</h2>
-    <p class="intro reveal">The outcomes below come from the college&rsquo;s published destination reports for 2024-2025 graduates.</p>
-    <div class="impactrow reveal mt">
-      <div class="ir"><div class="num">$81,259</div><div class="desc"><b>Average starting salary</b> for 2024-2025 graduating undergraduates; the median was $80,000.</div><div class="src">Center for Spartan Engineering</div></div>
-      <div class="ir"><div class="num">92.9%</div><div class="desc"><b>Employed or continuing education</b> among graduates reporting a destination.</div><div class="src">2024-2025 report</div></div>
-      <div class="ir"><div class="num">400+</div><div class="desc"><b>Employers hire MSU engineers</b> through co-op, internship, and full-time pipelines.</div><div class="src">2024-2025 report</div></div>
-      <div class="ir"><div class="num">60%</div><div class="desc"><b>Of reporting graduates were employed in Michigan</b>, and 75 percent in the Midwest.</div><div class="src">2024-2025 report</div></div>
-    </div>
-    <p class="reveal" style="margin-top:18px;font-size:.9rem;color:var(--ink-soft)"><a href="https://engineering.msu.edu/career-center/reports/all-majors">Read the full destination report</a>, including salary tables for every major.</p>
-  </div></section>
-
-  <section class="alt tight"><div class="wrap">
-    <p class="eyebrow reveal">Getting started</p>
-    <h2 class="sec reveal">Ways to get involved</h2>
-    <div class="mt">
-      <div class="tier reveal"><div class="cost">Today</div><div><h3>Explore engineering at MSU</h3><p>The college enrolls more than 6,800 students across every engineering discipline, with hands-on learning from the first year.</p><a class="linkish" href="https://engineering.msu.edu">Visit the College of Engineering &rarr;</a></div></div>
-      <div class="tier reveal"><div class="cost">Any major</div><div><h3>Add the entrepreneurship minor</h3><p>The Burgess Institute&rsquo;s Minor in Entrepreneurship and Innovation is open to undergraduates of every major, and the institute&rsquo;s permanent home will be in the center.</p><a class="linkish" href="https://entrepreneurship.msu.edu">Visit the Burgess Institute &rarr;</a></div></div>
-      <div class="tier reveal"><div class="cost">2028</div><div><h3>Study and build in the center</h3><p>Classrooms, teaching labs, project studios, co-working space, and the esports arena open with the building. How students access each space is still being planned.</p><span class="samp">Access details in development</span></div></div>
-    </div>
-  </div></section>
-
-  <section class="next"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
-    <button class="nextcard" data-view="research" type="button"><span class="k">Research</span><b>Find your area</b><span>The five capability areas and what runs inside each.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>The spaces</b><span>Studios, labs, the arena, and the atrium.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="about" type="button"><span class="k">About</span><b>The six-college idea</b><span>Why the center is intentionally interdisciplinary.</span><span class="go">Go &rarr;</span></button>
-  </div></div></section>
-</div>
-
-<!-- ============ PARTNERS & FUNDERS ============ -->
+<!-- ============ PARTNER & COLOCATION ============ -->
 <div class="view" id="v-partners" hidden>
   <header class="hero"><div class="wrap">
     <div class="herosplit">
       <div>
         <p class="eyebrow">Leinweber Center</p>
-        <h1>Partners and funders</h1>
-        <p class="lede">The Leinweber Center is an opportunity to accelerate progress in areas where companies and MSU already work together. MSU welcomes conversations about what meaningful involvement at the center could look like for your company, and every path runs through one corporate engagement address.</p>
+        <h1>Partners and colocation</h1>
+        <p class="lede">Companies work with MSU today through sponsored research, hiring, and chip testing, and the center is designed so company teams can be present in the building itself, beside the labs, the faculty, and the students. MSU welcomes conversations about what meaningful involvement, including presence at the center, could look like for your company.</p>
         <div class="hero-ctas">
-          <a class="btn btn-solid" href="mailto:corporateengagement@egr.msu.edu">Email the corporate engagement team</a>
+          <a class="btn btn-solid" href="mailto:corporateengagement@egr.msu.edu">Start a conversation</a>
           <button class="btn btn-ghost" data-view="research" type="button">See the capabilities</button>
         </div>
       </div>
       <div class="herofacts">
         <span class="hf-lab">Ways to work with MSU</span>
-        <div class="hf-row"><b>Research</b><span>sponsor projects and license IP</span></div>
-        <div class="hf-row"><b>Talent</b><span>hire through the college pipelines</span></div>
-        <div class="hf-row"><b>Test</b><span>chip testing at FRIB</span></div>
-        <div class="hf-row"><b>Give</b><span>named spaces in the center</span></div>
+        <div class="hf-row"><b>Sponsor</b><span>research and licensing</span></div>
+        <div class="hf-row"><b>Hire</b><span>through 400+ employer pipelines</span></div>
+        <div class="hf-row"><b>Test</b><span>chips at FRIB</span></div>
+        <div class="hf-row"><b>Locate</b><span>a team at the center</span></div>
       </div>
     </div>
   </div></header>
 
   <section><div class="wrap">
-    <div class="twocol">
-      <div class="reveal">
-        <p class="eyebrow">For industry and government</p>
-        <h2 class="sec">Ways to work with MSU</h2>
-        <p class="intro">Each pathway is active today and deepens at the center.</p>
-        <ul class="paths mt">
-          <li><span class="pk">Sponsor</span><div><b>Sponsored research and licensing</b><p>MSU Business Connect is the university&rsquo;s front door for corporate research partnerships, contracting, and technology licensing.</p><a class="linkish" href="https://innovationcenter.msu.edu/business-connect">Visit Business Connect &rarr;</a></div></li>
-          <li><span class="pk">Hire</span><div><b>Recruit Spartan Engineers</b><p>The Center for Spartan Engineering connects more than 400 employers to co-op, internship, and full-time hiring pipelines across every engineering major.</p><a class="linkish" href="https://www.careers.egr.msu.edu">Visit the Center for Spartan Engineering &rarr;</a></div></li>
-          <li><span class="pk">Test</span><div><b>Chip testing at FRIB</b><p>Heavy-ion single event effects testing with up to 8,000 combined user hours per year. More than 40 companies have used the first facility.</p><a class="linkish" href="https://frib.msu.edu">Visit FRIB &rarr;</a></div></li>
-          <li><span class="pk">Locate</span><div><b>Presence at the center</b><p>The center is designed as a place where companies are present, not just visiting. MSU is finalizing the terms for company presence and will share them as they are set.</p><span class="samp">In development</span></div></li>
-        </ul>
-      </div>
-      <div class="reveal">
-        <p class="eyebrow">For funders</p>
-        <h2 class="sec">Founding gifts and named spaces</h2>
-        <p class="intro">Three gifts totaling $70 million established the center&rsquo;s name, its auditorium, and its atrium. MSU is grateful to the Leinweber Foundation, Mary and Mike Lamach, and David F. Spalding.</p>
-        <ul class="list mt">
-          <li><b>The Leinweber Center</b><span>$50 million from the Leinweber Foundation, February 2026, the largest gift ever made to a facility at MSU. <a href="https://spartan.msu.edu/spartan-story-hub/news/2026/02/leinweber-foundation-commits-$50m">Read the announcement</a></span></li>
-          <li><b>The Lamach Auditorium and Lobby</b><span>$10 million from Mary and Mike Lamach, October 2025, the project&rsquo;s first gift. <a href="https://msutoday.msu.edu/news/2025/10/lamach-gift-announcement">Read the announcement</a></span></li>
-          <li><b>The Spalding Family Atrium</b><span>$10 million from David F. Spalding, a 1967 mechanical engineering graduate. <a href="https://msutoday.msu.edu/news/2026/02/spalding-family-gift-announcement">Read the announcement</a></span></li>
-        </ul>
-        <div class="thin"><b>Named spaces within the center remain</b>, from research laboratories to learning and collaboration spaces, and MSU will share opportunities as they are set. <a href="https://givingto.msu.edu/far-better-world/campaign-ambitions/futures-built/engineering-and-digital-innovation-center">View giving opportunities</a></div>
-      </div>
+    <p class="eyebrow reveal">Active now</p>
+    <h2 class="sec reveal">Ways to work with MSU today</h2>
+    <ul class="paths mt reveal">
+      <li><span class="pk">Sponsor</span><div><b>Sponsored research and licensing</b><p>MSU Business Connect is the university&rsquo;s front door for corporate research partnerships, contracting, and technology licensing.</p><a class="linkish" href="https://innovationcenter.msu.edu/business-connect">Visit Business Connect &rarr;</a></div></li>
+      <li><span class="pk">Hire</span><div><b>Recruit Spartan Engineers</b><p>The Center for Spartan Engineering connects more than 400 employers to co-op, internship, and full-time hiring pipelines across every engineering major.</p><a class="linkish" href="https://www.careers.egr.msu.edu">Visit the Center for Spartan Engineering &rarr;</a></div></li>
+      <li><span class="pk">Test</span><div><b>Chip testing at FRIB</b><p>Heavy-ion single event effects testing with up to 8,000 combined user hours per year. More than 40 companies have used the first facility.</p><a class="linkish" href="https://frib.msu.edu">Visit FRIB &rarr;</a></div></li>
+    </ul>
+  </div></section>
+
+  <section class="dark"><div class="wrap">
+    <p class="eyebrow reveal" style="color:var(--leaf)">Colocation</p>
+    <h2 class="sec reveal">Why MSU for colocation</h2>
+    <p class="intro reveal">Any campus can offer square footage. Few can offer what sits beside it here: FRIB, the U.S. Department of Energy user facility whose heavy-ion chip testing serves industry at up to 8,000 user hours a year, alongside 85,000 square feet of materials science research, clean rooms, and microelectronics laboratories, in one academic district with six colleges under one roof.</p>
+    <p class="intro reveal">MSU is the nation&rsquo;s pioneer land-grant university, founded in 1855 as the model the others were built on, and pointing research at working problems has been its charter ever since. Today that mission looks like workforce: more than 6,800 engineering students, 1,000 more enabled by this building, and graduates who stay, with 60 percent starting their careers in Michigan.</p>
+    <div class="grid3 mt">
+      <article class="card reveal"><span class="lab">Beside the capabilities</span><h3>Work beside FRIB and the labs</h3><p>A Department of Energy user facility, materials science at scale, clean rooms, and microelectronics laboratories, steps away rather than a contract away.</p></article>
+      <article class="card reveal"><span class="lab">Beside the workforce</span><h3>A pipeline that stays</h3><p>More than 400 employers already hire Spartan Engineers, the college grows by 1,000 students with this building, and most graduates build their careers in Michigan.</p></article>
+      <article class="card reveal"><span class="lab">Inside the network</span><h3>560,000 living Spartans</h3><p>More than 314,800 Spartans live in Michigan, and MSU has a presence in all 83 counties. A company here sits inside its own future workforce, suppliers, and customers.</p></article>
     </div>
+    <p class="reveal mt-lg"><a class="btn btn-solid" href="mailto:corporateengagement@egr.msu.edu">Start a colocation conversation</a></p>
+  </div></section>
+
+  <section class="deep"><div class="wrap">
+    <div class="split">
+      <div>
+        <p class="eyebrow reveal">Contact</p>
+        <h2 class="sec reveal">One address reaches the team</h2>
+        <p class="intro reveal">The corporate engagement address reaches Corporate and Foundation Relations at the College of Engineering, Business Connect at the MSU Innovation Center, and University Advancement Corporate Relations. Whether the conversation is about research, hiring, testing, or presence at the center, it starts in the same place.</p>
+      </div>
+      <ul class="list list--dark reveal">
+        <li><b>Email</b><span><a href="mailto:corporateengagement@egr.msu.edu">corporateengagement@egr.msu.edu</a> <span class="samp">Proposed, pending provisioning</span></span></li>
+        <li><b>Corporate and Foundation Relations</b><span><a href="https://engineering.msu.edu/about/corporate-and-foundation-relations">College of Engineering CFR</a></span></li>
+        <li><b>Business Connect</b><span><a href="https://innovationcenter.msu.edu/business-connect">MSU Innovation Center</a></span></li>
+      </ul>
+    </div>
+  </div></section>
+
+  <section class="next"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="research" type="button"><span class="k">Research</span><b>The capabilities</b><span>What a colocated team would work beside.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>Inside the building</b><span>The laboratories, studios, and clean rooms taking shape.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="funders" type="button"><span class="k">Philanthropy</span><b>The founding gifts</b><span>The people behind the center and the names it carries.</span><span class="go">Go &rarr;</span></button>
+  </div></div></section>
+</div>
+
+<!-- ============ GIVING & RECOGNITION ============ -->
+<div class="view" id="v-funders" hidden>
+  <header class="hero"><div class="wrap">
+    <p class="eyebrow">Leinweber Center</p>
+    <h1>Founding gifts</h1>
+    <p class="lede">The center exists because people invested in it before the first shovel. Three gifts totaling $70 million established its name, its auditorium, and its atrium, and MSU is grateful to the Leinweber Foundation, Mary and Mike Lamach, and David F. Spalding. This page carries their stories and the names the building will teach under for decades.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-solid" data-view="news" type="button">Read the founding stories</button>
+      <button class="btn btn-ghost" data-view="building" type="button">See the building</button>
+    </div>
+  </div></header>
+
+  <section><div class="wrap">
+    <p class="eyebrow reveal">Philanthropy</p>
+    <h2 class="sec reveal">The people behind the center</h2>
+    <ul class="list mt reveal">
+      <li><b>The Leinweber Center</b><span>$50 million from the Leinweber Foundation, February 2026, the largest gift ever made to a facility at MSU. The foundation&rsquo;s Software Scholars and STEM Scholars programs already fund Michigan students in computer science, computer engineering, and other STEM fields. <a href="https://spartan.msu.edu/spartan-story-hub/news/2026/02/leinweber-foundation-commits-$50m">Read the announcement</a></span></li>
+      <li><b>The Lamach Auditorium and Lobby</b><span>$10 million from Mary and Mike Lamach, October 2025, the project&rsquo;s first gift. Mike Lamach is a former chair and CEO of Ingersoll Rand and Trane Technologies. <a href="https://msutoday.msu.edu/news/2025/10/lamach-gift-announcement">Read the announcement</a></span></li>
+      <li><b>The Spalding Family Atrium</b><span>$10 million from David F. Spalding, a 1967 mechanical engineering graduate and the founder of American Hydrotech. <a href="https://msutoday.msu.edu/news/2026/02/spalding-family-gift-announcement">Read the announcement</a></span></li>
+    </ul>
   </div></section>
 
   <section class="quoteband"><div class="wrap qb">
@@ -873,34 +912,15 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
   </div></section>
 
   <section class="alt tight"><div class="wrap">
-    <p class="eyebrow reveal">Status</p>
-    <h2 class="sec reveal">The center today, and what is in development</h2>
-    <div class="keyrows reveal mt">
-      <div class="keyrow"><div class="k">The center today</div><div class="v">265,000 square feet under construction; six colleges; laboratories for more than 75 principal investigators; the Burgess Institute&rsquo;s permanent home; $60 million in state investment and $70 million in private gifts; substantial completion expected December 2028</div></div>
-      <div class="keyrow"><div class="k">In development</div><div class="v">Terms for company presence at the center; the inventory and terms of named spaces; partner programming inside the building</div></div>
-      <div class="keyrow"><div class="k">Ways to connect</div><div class="v">Email the corporate engagement team, work through <a href="https://innovationcenter.msu.edu/business-connect">Business Connect</a>, or <a href="https://givingto.msu.edu/far-better-world/campaign-ambitions/futures-built/engineering-and-digital-innovation-center">review giving opportunities</a></div></div>
-    </div>
+    <p class="eyebrow reveal">Looking ahead</p>
+    <h2 class="sec reveal">Named spaces</h2>
+    <p class="intro reveal">Recognition at the center places a name beside the work itself, as the founding gifts above show. Conversations about named spaces are handled personally. If you are interested in a discussion, reach out to Mike Wallace with the College of Engineering&rsquo;s development and alumni relations team. <span class="samp">Add phone</span> <span class="samp">Add email</span></p>
   </div></section>
 
-  <section class="deep"><div class="wrap">
-    <div class="split">
-      <div>
-        <p class="eyebrow reveal">Contact</p>
-        <h2 class="sec reveal">One address reaches the team</h2>
-        <p class="intro reveal">The corporate engagement address reaches Corporate and Foundation Relations at the College of Engineering, Business Connect at the MSU Innovation Center, and University Advancement Corporate Relations.</p>
-      </div>
-      <ul class="list reveal" style="background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)">
-        <li style="border-color:rgba(255,255,255,.15)"><b style="color:#fff">Email</b><span style="color:rgba(255,255,255,.82)"><a href="mailto:corporateengagement@egr.msu.edu" style="color:var(--leaf-soft)">corporateengagement@egr.msu.edu</a> <span class="samp">Proposed, pending provisioning</span></span></li>
-        <li style="border-color:rgba(255,255,255,.15)"><b style="color:#fff">Corporate and Foundation Relations</b><span style="color:rgba(255,255,255,.82)"><a href="https://engineering.msu.edu/about/corporate-and-foundation-relations" style="color:var(--leaf-soft)">College of Engineering CFR</a></span></li>
-        <li style="border-color:rgba(255,255,255,.15)"><b style="color:#fff">Business Connect</b><span style="color:rgba(255,255,255,.82)"><a href="https://innovationcenter.msu.edu/business-connect" style="color:var(--leaf-soft)">MSU Innovation Center</a></span></li>
-      </ul>
-    </div>
-  </div></section>
-
-  <section class="next"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
-    <button class="nextcard" data-view="research" type="button"><span class="k">Research</span><b>The capabilities</b><span>Where a partnership would plug in.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>The named spaces</b><span>The atrium, the auditorium, and the spaces that remain.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="michigan" type="button"><span class="k">Michigan</span><b>The state case</b><span>What the investment builds for Michigan.</span><span class="go">Go &rarr;</span></button>
+  <section class="next deep"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>The atrium and auditorium</b><span>The gathering spaces the founding gifts created.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="michigan" type="button"><span class="k">Michigan</span><b>What the gifts build</b><span>The center as a strategic asset for the state.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="partners" type="button"><span class="k">Partner</span><b>Work with MSU</b><span>Sponsored research, hiring, testing, and colocation.</span><span class="go">Go &rarr;</span></button>
   </div></div></section>
 </div>
 
@@ -908,16 +928,20 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
 <div class="view" id="v-michigan" hidden>
   <header class="hero"><div class="wrap">
     <p class="eyebrow">Leinweber Center</p>
-    <h1>Michigan</h1>
-    <p class="lede">With more graduates contributing to Michigan&rsquo;s economy and communities than any other university, and a presence in all 83 counties, MSU is Michigan&rsquo;s State University. MSU is proud of its partnership with the state, grateful for its investment in the center, and looks forward to the transformative impacts on the state&rsquo;s economy from the talent and breakthroughs developed here. <span class="samp">Confirm comparative claim source</span></p>
+    <h1>Michigan&rsquo;s State University</h1>
+    <p class="lede" style="margin-bottom:0">With more graduates contributing to Michigan&rsquo;s economy and communities than any other university, and a presence in all 83 counties, MSU is Michigan&rsquo;s State University. MSU is proud of its partnership with the state, grateful for its investment in the center, and looks forward to the transformative impacts on the state&rsquo;s economy from the talent and breakthroughs developed here. <span class="samp">Confirm comparative claim source</span></p>
+    <div class="hero-ctas">
+      <button class="btn btn-solid" data-view="research" type="button">See the research</button>
+      <button class="btn btn-ghost" data-view="news" type="button">Read the news</button>
+    </div>
   </div></header>
 
   <section class="statband"><div class="wrap">
     <div class="statgrid reveal">
-      <div class="st"><b data-count="60" data-prefix="$" data-suffix="M">$60M</b><span>State of Michigan investment across two budgets</span></div>
-      <div class="st"><b data-count="70" data-prefix="$" data-suffix="M">$70M</b><span>Private naming gifts to the center</span></div>
-      <div class="st"><b data-count="60" data-suffix="%">60%</b><span>Of reporting engineering graduates employed in Michigan</span></div>
       <div class="st"><b data-count="83">83</b><span>Counties where MSU has a presence</span></div>
+      <div class="st"><b data-count="60" data-suffix="%">60%</b><span>Of reporting engineering graduates employed in Michigan</span></div>
+      <div class="st"><b data-count="75" data-suffix="+">75+</b><span>Research groups working under one roof</span></div>
+      <div class="st"><b data-count="1000">1,000</b><span>Additional engineering students enabled</span></div>
     </div>
   </div></section>
 
@@ -925,7 +949,7 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
     <p class="eyebrow reveal">The industries served</p>
     <h2 class="sec reveal">Disciplines essential to Michigan&rsquo;s economic future</h2>
     <p class="intro reveal">The center supports advanced manufacturing and materials for the mobility sector, microelectronics for the domestic semiconductor supply chain, and artificial intelligence and cybersecurity across industries. FRIB&rsquo;s chip testing facilities already serve national defense and space electronics needs, and automotive companies remain the top employers of MSU engineering graduates.</p>
-    <p class="intro reveal">The state invested $30 million in the center in the FY2023-24 budget and an additional $30 million with the FY2026-27 capital outlay budget. That investment buys shared infrastructure: laboratory capacity, a workforce pipeline, and testing facilities that serve many employers rather than any single company.</p>
+    <p class="intro reveal">Built through a partnership of private philanthropy, state investment, and the university&rsquo;s own commitment, the center is shared infrastructure for Michigan: laboratory capacity, a workforce pipeline, and testing facilities that serve many employers rather than any single company. As the state&rsquo;s industries navigate the mobility transition and the semiconductor supply chain takes root here, the center is designed as a durable asset for both, keeping talent in Michigan and putting breakthroughs to work in its economy.</p>
   </div></section>
 
   <section class="quoteband"><div class="wrap qb">
@@ -934,7 +958,7 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
   </div></section>
 
   <section class="next deep"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
-    <button class="nextcard" data-view="students" type="button"><span class="k">Students</span><b>The talent pipeline</b><span>Outcomes for the graduates who stay and build here.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="about" type="button"><span class="k">About</span><b>The six colleges</b><span>Who works in the center, with a link to each college.</span><span class="go">Go &rarr;</span></button>
     <button class="nextcard" data-view="research" type="button"><span class="k">Research</span><b>The breakthroughs</b><span>The capability areas serving the state&rsquo;s industries.</span><span class="go">Go &rarr;</span></button>
     <button class="nextcard" data-view="news" type="button"><span class="k">News</span><b>The record</b><span>Gifts, state action, and construction milestones.</span><span class="go">Go &rarr;</span></button>
   </div></div></section>
@@ -946,6 +970,10 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
     <p class="eyebrow">Leinweber Center</p>
     <h1>Newsroom</h1>
     <p class="lede">Gifts, state investment, construction milestones, and the research the center builds on, in one place.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-solid" data-view="building" type="button">See the building</button>
+      <button class="btn btn-ghost" data-view="about" type="button">About the center</button>
+    </div>
   </div></header>
 
   <section><div class="wrap">
@@ -996,18 +1024,18 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
     </div>
 
     <p class="reveal newsempty" id="newsempty" hidden style="text-align:center;color:var(--ink-soft);padding:30px 0">No stories in this category yet.</p>
-    <div class="thin reveal" style="margin-top:22px"><b>Headlines and dates reflect published MSU news.</b> Article bodies below are summaries; each links to the source story. <span class="samp">Summaries</span></div>
+    <div class="thin reveal mt-lg"><b>Headlines and dates reflect published MSU news.</b> Article bodies below are summaries; each links to the source story. <span class="samp">Summaries</span></div>
   </div></section>
 
   <section class="next deep"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
     <button class="nextcard" data-view="partners" type="button"><span class="k">Partner</span><b>Get involved</b><span>Ways for companies and funders to work with MSU.</span><span class="go">Go &rarr;</span></button>
     <button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>Construction status</b><span>Milestones from groundbreaking to completion.</span><span class="go">Go &rarr;</span></button>
-    <button class="nextcard" data-view="about" type="button"><span class="k">About</span><b>The center</b><span>The six-college idea behind the headlines.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="about" type="button"><span class="k">About</span><b>The six colleges</b><span>Who works in the center, and the idea behind it.</span><span class="go">Go &rarr;</span></button>
   </div></div></section>
 </div>
 
 <!-- ============ NEWS ARTICLE ============ -->
-<div class="view" id="v-article" hidden>
+<div class="view" id="v-article" hidden aria-live="polite">
   <article id="articlebody"><!-- filled by JS --></article>
 </div>
 
@@ -1024,18 +1052,27 @@ footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underlin
       <li><button data-view="about" type="button">About</button></li>
       <li><button data-view="building" type="button">The building</button></li>
       <li><button data-view="research" type="button">Research</button></li>
+      <li><button data-view="michigan" type="button">Michigan</button></li>
+      <li><button data-view="funders" type="button">Founding gifts</button></li>
       <li><button data-view="news" type="button">News</button></li>
     </ul></div>
     <div><h3 class="foot-h">Get involved</h3><ul>
-      <li><button data-view="students" type="button">Students</button></li>
-      <li><button data-view="partners" type="button">Partners &amp; funders</button></li>
-      <li><a href="https://givingto.msu.edu/far-better-world/campaign-ambitions/futures-built/engineering-and-digital-innovation-center">Giving</a></li>
+      <li><button data-view="partners" type="button">Partner &amp; colocation</button></li>
+      <li><a href="mailto:corporateengagement@egr.msu.edu">Email the team</a></li>
     </ul></div>
     <div><h3 class="foot-h">More MSU</h3><ul>
       <li><a href="https://msu.edu">Michigan State University</a></li>
       <li><a href="https://engineering.msu.edu">College of Engineering</a></li>
+      <li><a href="https://research.msu.edu">Research and Innovation</a></li>
       <li><a href="https://provost.msu.edu/edicenter">Office of the Provost</a></li>
       <li><a href="https://ipf.msu.edu/construction/current-projects/leinweber-center-engineering-and-digital-innovation">Construction (IPF)</a></li>
+    </ul></div>
+    <div><h3 class="foot-h">Partner colleges</h3><ul>
+      <li><a href="https://natsci.msu.edu">Natural Science</a></li>
+      <li><a href="https://broad.msu.edu">Broad College of Business</a></li>
+      <li><a href="https://cal.msu.edu">Arts and Letters</a></li>
+      <li><a href="https://comartsci.msu.edu">Communication Arts and Sciences</a></li>
+      <li><a href="https://socialscience.msu.edu">Social Science</a></li>
     </ul></div>
   </div>
   <p class="support"><b>About this mock-up:</b> a concept site for the Leinweber Center, built on published MSU sources. Facts should be re-confirmed before anything goes live. Items marked <span class="samp">Confirm</span> or <span class="samp">Proposed</span> are placeholders to verify, including the corporate engagement address, which is proposed and pending provisioning. This is not a live MSU site.</p>
@@ -1094,7 +1131,7 @@ function initCounts(root){
 }
 
 /* router */
-var VIEWS=['home','about','building','research','students','partners','michigan','news','article'];
+var VIEWS=['home','about','building','research','partners','funders','michigan','news','article'];
 function showView(name,push){
   if(VIEWS.indexOf(name)<0)name='home';
   VIEWS.forEach(function(v){var el=document.getElementById('v-'+v);if(el)el.hidden=(v!==name);});
@@ -1183,7 +1220,12 @@ function showArticle(id){
     '<div class="artimg"><span class="nfimglabel" aria-hidden="true">Photo</span></div>'+
     '<div class="artbody">'+paras+
     '<p class="artnote"><span class="samp">Summary</span> A summary of the published story. <a href="'+a.src+'">Read the source announcement</a>.</p>'+
-    '<p style="margin-top:20px"><button class="btn btn-green backnews" data-view="news" type="button">&larr; All news</button></p>'+
+    '<p class="mt-md"><button class="btn btn-green backnews" data-view="news" type="button">&larr; All news</button></p>'+
+    '</div></div></section>'+
+    '<section class="next tight"><div class="wrap"><h2 class="sec">Where to go next</h2><div class="nextgrid">'+
+    '<button class="nextcard" data-view="about" type="button"><span class="k">About</span><b>The center</b><span>The six colleges and the idea behind the building.</span><span class="go">Go &rarr;</span></button>'+
+    '<button class="nextcard" data-view="building" type="button"><span class="k">The building</span><b>Inside the building</b><span>How the space is used, and construction status.</span><span class="go">Go &rarr;</span></button>'+
+    '<button class="nextcard" data-view="partners" type="button"><span class="k">Partner</span><b>Work with MSU</b><span>Research, hiring, testing, and colocation.</span><span class="go">Go &rarr;</span></button>'+
     '</div></div></section>';
   showView('article',true);
 }
