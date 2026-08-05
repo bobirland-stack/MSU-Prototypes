@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSU Space Electronics Initiative | Michigan State University</title>
+<meta name="description" content="The MSU Space Electronics Initiative is an industry-membership research center led by the MSU College of Engineering and FRIB. Members test parts against real radiation at FRIB, collaborate with faculty, and hire from a space-electronics talent pipeline.">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --spartan:#18453B; --forest:#0B2E26;
+  --leaf:#7FB539; --leaf-dark:#4E7A1E; --leaf-soft:#A9CE7A;
+  --mist:#F6F7F4; --paper:#FFFFFF; --ink:#161A18; --ink-soft:#50564F;
+  --line:#E2E4E0; --amber:#8A5A1F;
+  --orbit:#3B5BA9; --orbit-soft:#8FA6D8; --orbit-mist:#EEF1F8;
+  --sans:'Public Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --display:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --maxw:1180px; --radius:6px; --shadow:0 10px 34px rgba(11,46,38,.12);
+  --shadow-sm:0 2px 8px rgba(11,46,38,.08);
+  --shadow-lg:0 20px 50px rgba(11,46,38,.18);
+  --ease:cubic-bezier(.4,0,.2,1); --ease-out:cubic-bezier(.16,1,.3,1); --ease-spring:cubic-bezier(.34,1.56,.64,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.62;font-size:16.5px;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.btn,.brand b{font-family:var(--display)}
+a{color:var(--spartan)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--leaf);outline-offset:2px;border-radius:3px;box-shadow:0 0 0 4px rgba(127,181,57,.22)}
+.hero a:focus-visible,.hero button:focus-visible,.dark button:focus-visible,.deep button:focus-visible,.orbitband button:focus-visible,.orbitband a:focus-visible,.statband button:focus-visible{box-shadow:0 0 0 4px rgba(127,181,57,.35)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.skip-link{position:absolute;left:-9999px;background:var(--spartan);color:#fff;padding:10px 18px;z-index:200;font-weight:700}
+.skip-link:focus{left:12px;top:12px}
+.samp{display:inline-block;font-family:var(--sans);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--amber);background:#FBF6E8;border:1px solid #E4D3A0;border-radius:99px;padding:2px 7px;margin-left:8px;vertical-align:middle}
+.hero .samp,.dark .samp,.deep .samp,.orbitband .samp,.statband .samp{color:#F2D98B;background:rgba(242,217,139,.12);border-color:rgba(242,217,139,.34)}
+
+/* mock ribbon */
+.mock-ribbon{background:#FBF6E8;border-bottom:1px dashed #C9AE5E;color:#6B5416;font-size:.72rem;padding:7px 16px;text-align:center}
+.mock-ribbon b{color:#4A3A0F}
+
+/* msu chrome */
+.msu-bar{background:var(--forest);color:#fff}
+.msu-bar-inner{max-width:var(--maxw);margin:0 auto;padding:9px 24px;display:flex;align-items:center;gap:16px}
+.msu-wordmark{font-family:var(--display);font-weight:800;font-size:.78rem;letter-spacing:.16em}
+.msu-bar nav{margin-left:auto;display:flex;gap:20px;font-size:.78rem}
+.msu-bar a{color:#fff;text-decoration:none}.msu-bar a:hover{text-decoration:underline}
+@media(max-width:640px){.msu-bar nav{display:none}}
+
+/* program nav */
+.nav{position:sticky;top:0;z-index:60;background:var(--spartan);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.06);transition:box-shadow .3s var(--ease),background .3s var(--ease)}
+.nav.scrolled{box-shadow:0 6px 24px rgba(11,46,38,.35);background:var(--forest)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;gap:18px}
+.brand{text-decoration:none;color:#fff;display:flex;flex-direction:column;line-height:1.2}
+.brand b{font-size:1.02rem;font-weight:700}
+.brand b em{font-style:normal;color:var(--leaf-soft)}
+.brand span{font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;opacity:.8;margin-top:2px}
+.navlinks{display:flex;align-items:center;gap:4px;list-style:none}
+.navlinks button{position:relative;background:none;border:none;font-family:var(--display);color:#fff;font-size:.87rem;font-weight:600;opacity:.82;cursor:pointer;padding:8px 12px;border-radius:var(--radius);transition:opacity .18s var(--ease),background .18s var(--ease)}
+.navlinks button:hover{opacity:1;background:rgba(255,255,255,.1)}
+.navlinks button[aria-current="page"]{opacity:1;background:rgba(255,255,255,.14)}
+.navlinks button[aria-current="page"]::after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:2px;background:var(--leaf);border-radius:2px}
+@media(max-width:1040px){.navlinks button[aria-current="page"]::after{display:none}}
+.navtoggle{display:none;background:none;border:1.5px solid rgba(255,255,255,.6);color:#fff;border-radius:var(--radius);padding:7px 12px;font-size:.85rem;font-family:var(--sans);cursor:pointer}
+@media(max-width:1040px){
+ .navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:var(--forest);flex-direction:column;gap:0;padding:6px 0 12px;border-top:1px solid rgba(255,255,255,.15);box-shadow:0 16px 32px rgba(0,0,0,.35);z-index:90}
+ .navlinks.open{display:flex;animation:menuDrop .26s var(--ease-out)}
+ @keyframes menuDrop{0%{opacity:0;transform:translateY(-8px)}100%{opacity:1;transform:none}}
+ @media (prefers-reduced-motion:reduce){.navlinks.open{animation:none}}
+ .navlinks li{width:100%}
+ .navlinks button{display:block;width:100%;text-align:left;padding:13px 24px;border-radius:0;border-bottom:1px solid rgba(255,255,255,.06);border-left:3px solid transparent}
+ .navlinks li:last-child button{border-bottom:none}
+ .navlinks button[aria-current="page"]{border-left-color:var(--leaf);padding-left:21px}
+ .navtoggle{display:block}.brand span{display:none}}
+
+/* sections + bands */
+.view[hidden]{display:none}
+section{padding:44px 0}
+section.tight{padding:32px 0}
+section.next,section.next.tight{padding:0}
+.alt{background:var(--mist)}
+.dark{background:var(--forest);color:#fff}
+.deep{background:var(--spartan);color:#fff}
+.eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--leaf-dark);margin-bottom:12px}
+h2.sec{font-size:clamp(1.5rem,2.7vw,1.98rem);color:var(--forest);max-width:32ch;line-height:1.24}
+.intro{margin-top:15px;max-width:66ch;color:var(--ink-soft);font-size:1.01rem}
+.dark .eyebrow,.deep .eyebrow{color:var(--leaf)}
+.dark h2.sec,.deep h2.sec{color:#fff}
+.dark .intro,.deep .intro{color:rgba(255,255,255,.82)}
+
+.hero{position:relative;background:linear-gradient(162deg,#1a4d42 0%,var(--spartan) 45%,var(--forest) 100%);color:#fff;padding:52px 0 52px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(127,181,57,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(127,181,57,.06) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(120% 100% at 78% 30%,#000 0%,transparent 70%);-webkit-mask-image:radial-gradient(120% 100% at 78% 30%,#000 0%,transparent 70%);pointer-events:none}
+.hero::after{content:"";position:absolute;right:-8%;top:-30%;width:520px;height:520px;background:radial-gradient(circle,rgba(59,91,169,.18) 0%,transparent 62%);pointer-events:none}
+.hero>.wrap{position:relative;z-index:1}
+/* orbit motif on interior heroes (suppressed where a fact panel fills the right) */
+.hero .orbit-motif{position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:340px;height:340px;pointer-events:none;z-index:0;opacity:.5}
+.hero .orbit-motif::before,.hero .orbit-motif::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid rgba(143,166,216,.28)}
+.hero .orbit-motif::after{inset:52px;border-color:rgba(127,181,57,.22)}
+.hero .orbit-motif i{position:absolute;top:50%;left:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;border:1px dashed rgba(255,255,255,.14)}
+.hero .orbit-motif i::after{content:"";position:absolute;top:-5px;left:calc(50% - 5px);width:10px;height:10px;border-radius:50%;background:var(--leaf-soft);box-shadow:0 0 12px rgba(169,206,122,.7)}
+.hero .orbit-motif b{position:absolute;top:calc(50% - 4px);right:-4px;width:8px;height:8px;border-radius:50%;background:var(--orbit-soft);box-shadow:0 0 10px rgba(143,166,216,.7)}
+@keyframes orbitspin{to{transform:rotate(360deg)}}
+.hero .orbit-motif{animation:orbitspin 90s linear infinite}
+@media (prefers-reduced-motion:reduce){.hero .orbit-motif{animation:none}}
+@media(max-width:900px){.hero .orbit-motif{display:none}}
+.hero .eyebrow{color:var(--leaf)}
+.hero h1{font-size:clamp(1.8rem,3.4vw,2.5rem);line-height:1.12;max-width:22ch}
+.hero .lede{margin-top:14px;max-width:60ch;font-size:1.02rem;color:rgba(255,255,255,.87)}
+.hero-ctas{margin-top:24px;display:flex;gap:13px;flex-wrap:wrap}
+.facts{margin-top:32px;padding-top:22px;border-top:1px solid rgba(255,255,255,.2);display:flex;gap:36px;flex-wrap:wrap}
+/* hero split with fact panel */
+.herosplit{display:grid;grid-template-columns:1.35fr .65fr;gap:44px;align-items:center}
+@media(max-width:860px){.herosplit{grid-template-columns:1fr;gap:28px}}
+.herofacts{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:22px 24px}
+.hf-lab{display:block;font-family:var(--display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--leaf-soft);margin-bottom:14px}
+.hf-row{display:flex;align-items:baseline;gap:16px;padding:11px 0;border-top:1px solid rgba(255,255,255,.12)}
+.hf-row:first-of-type{border-top:none}
+.hf-row b{font-family:var(--display);font-size:1.32rem;font-weight:800;color:#fff;flex:0 0 84px;line-height:1.05}
+.hf-row span{font-size:.85rem;color:rgba(255,255,255,.8);line-height:1.4}
+.facts div{font-size:.85rem;color:rgba(255,255,255,.74);max-width:220px}
+.facts strong{display:block;font-family:var(--display);font-size:1.35rem;color:#fff;font-weight:800}
+
+.btn{display:inline-block;font-weight:700;font-size:.92rem;padding:12px 22px;border-radius:var(--radius);text-decoration:none;border:none;cursor:pointer;transition:transform .2s var(--ease-out),background .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease);font-family:var(--display);will-change:transform}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0);transition-duration:.05s}
+.btn-solid{background:#fff;color:var(--spartan);box-shadow:var(--shadow-sm)}.btn-solid:hover{background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.btn-ghost{background:rgba(255,255,255,.04);color:#fff;border:1.5px solid rgba(255,255,255,.55)}.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+.btn-green{background:var(--spartan);color:#fff;box-shadow:var(--shadow-sm)}.btn-green:hover{background:var(--forest);box-shadow:0 8px 22px rgba(11,46,38,.28)}
+.btn-outline{background:transparent;color:var(--spartan);border:1.5px solid var(--spartan)}
+.btn-outline:hover{background:var(--spartan);color:#fff}
+.linkish{background:none;border:none;font-family:var(--sans);font-weight:700;color:var(--spartan);cursor:pointer;padding:0 0 2px;font-size:inherit;position:relative;transition:color .18s var(--ease)}
+.linkish::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--leaf);transform:scaleX(1);transform-origin:left;transition:transform .28s var(--ease-out)}
+.linkish:hover{color:var(--forest)}
+.linkish:hover::after{animation:underdash .5s var(--ease-out)}
+@keyframes underdash{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.linkish:hover::after{animation:none}}
+.dark .linkish,.deep .linkish{color:#fff}
+.dark .linkish::after,.deep .linkish::after{background:var(--leaf)}
+
+/* audience router */
+.router{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:760px){.router{grid-template-columns:1fr}}
+.router button{text-align:left;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.24);border-radius:var(--radius);padding:17px 19px 17px 19px;color:#fff;cursor:pointer;transition:background .25s var(--ease-out),transform .25s var(--ease-out),border-color .25s var(--ease-out),box-shadow .25s var(--ease-out);font-family:var(--sans);position:relative;overflow:hidden}
+.router button::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--leaf);transform:scaleY(0);transform-origin:top;transition:transform .25s var(--ease-out)}
+.router button:hover{background:rgba(255,255,255,.16);transform:translateY(-3px);border-color:rgba(255,255,255,.5);box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.router button:hover::before{transform:scaleY(1)}
+.router .rlab{display:block;font-family:var(--display);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf-soft);margin-bottom:6px}
+.router b{display:block;font-family:var(--display);font-size:1.02rem}
+.router span{display:block;font-size:.85rem;color:rgba(255,255,255,.78);margin-top:4px}
+.router button::after{content:"\2192";position:absolute;right:18px;bottom:16px;opacity:.4;transform:translateX(-4px);transition:opacity .25s var(--ease-out),transform .25s var(--ease-out);color:var(--leaf-soft);font-weight:700;font-size:1.1rem}
+.router button:hover::after,.router button:focus-visible::after{opacity:1;transform:none}
+
+/* grids + cards */
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;align-items:stretch}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}
+.grid2>.card,.grid3>.card,.grid4>.card{display:flex;flex-direction:column}
+.mt{margin-top:32px}
+@media(max-width:980px){.grid4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
+@media(max-width:560px){.grid4{grid-template-columns:1fr}}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:24px 22px;transition:box-shadow .28s var(--ease-out),transform .28s var(--ease-out),border-color .28s var(--ease-out)}
+.card--top{border-top:3px solid var(--spartan)}
+.card--leaf{border-top:3px solid var(--leaf)}
+.card--orbit{border-top:3px solid var(--orbit)}
+.card--top:hover,.card--leaf:hover,.card--orbit:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.card h3{font-size:1.04rem;color:var(--forest)}
+.card p{margin-top:9px;font-size:.92rem;color:var(--ink-soft)}
+.card .lab{font-size:.71rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--leaf-dark);display:block;margin-bottom:8px}
+.card .lab.orbit{color:var(--orbit)}
+.dark .card,.deep .card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)}
+.dark .card h3,.deep .card h3{color:#fff}
+.dark .card p,.deep .card p{color:rgba(255,255,255,.82)}
+.dark .card .lab,.deep .card .lab{color:var(--leaf-soft)}
+
+.note{margin-top:26px;background:var(--mist);border-left:4px solid var(--spartan);border-radius:0 var(--radius) var(--radius) 0;padding:20px 24px;font-size:.93rem;color:var(--ink-soft);max-width:84ch}
+.note h3{font-size:1.02rem;color:var(--forest);margin-bottom:8px}
+.note b{color:var(--ink)}
+.note.orbit{border-left-color:var(--orbit);background:var(--orbit-mist)}
+.note.orbit h3{color:var(--orbit)}
+.thin{background:#FBF6E8;border:1px solid #E4D3A0;border-radius:10px;padding:14px 18px;margin-top:18px;font-size:.86rem;color:#6B5416}
+.thin b{color:#4A3A0F}
+
+/* keyrows */
+.keyrows{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:8px}
+.keyrow{display:grid;grid-template-columns:230px 1fr;border-top:1px solid var(--line)}
+.keyrow:first-child{border-top:none}
+.keyrow .k{background:var(--mist);padding:14px 20px;font-family:var(--display);font-weight:700;color:var(--forest);font-size:.9rem}
+.keyrow .v{padding:14px 22px;font-size:.92rem;color:var(--ink-soft)}
+.keyrow .v b{color:var(--ink)}
+.keyrow:nth-child(even) .v{background:#FCFCFB}
+@media(max-width:640px){.keyrow{grid-template-columns:1fr}.keyrow .k{padding-bottom:4px}}
+
+/* split */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start}
+@media(max-width:900px){.split{grid-template-columns:1fr;gap:28px}}
+.list{list-style:none;background:var(--mist);border:1px solid var(--line);border-radius:10px;padding:8px 24px 16px}
+.list li{padding:13px 0;border-top:1px solid var(--line);font-size:.93rem}
+.list li:first-child{border-top:none}
+.list b{display:block;color:var(--forest);font-family:var(--display);font-weight:700;margin-bottom:2px;font-size:.95rem}
+.list span{color:var(--ink-soft)}
+
+/* benefit rows (membership spine) */
+.benefits{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:8px;background:#fff}
+.brow{display:grid;grid-template-columns:56px 1fr;border-top:1px solid var(--line);transition:background .15s}
+.brow:first-child{border-top:none}
+.brow:hover{background:var(--mist)}
+.brow .bn{padding:17px 0 18px 20px;font-family:var(--display);font-weight:800;color:var(--leaf-dark);font-size:1rem;letter-spacing:.02em}
+.brow.mark .bn{color:var(--orbit)}
+.brow .bd{padding:16px 22px 16px 6px}
+.brow .bd b{display:block;font-family:var(--display);color:var(--forest);font-size:1rem}
+.brow .bd p{margin-top:4px;font-size:.9rem;color:var(--ink-soft)}
+.brow .bd .flag{display:inline-block;margin-top:8px;font-family:var(--display);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--orbit);background:var(--orbit-mist);border:1px solid var(--orbit-soft);border-radius:99px;padding:3px 10px}
+@media(max-width:560px){.brow{grid-template-columns:1fr}.brow .bn{padding:16px 20px 0}.brow .bd{padding:8px 20px 18px}}
+
+/* orbit / FRIB feature band */
+.orbitband{background:radial-gradient(130% 150% at 84% 8%,#20334f 0%,#16233a 46%,#0d1626 100%);color:#fff;padding:48px 0}
+.orbitband .eyebrow{color:var(--orbit-soft)}
+.orbitband h2.sec{color:#fff}
+.orbitband .intro{color:rgba(255,255,255,.84)}
+.orbitcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:22px 24px}
+.orbitcard .oc-lab{font-family:var(--display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--orbit-soft);margin-bottom:8px}
+.orbitcard h3{font-size:1.06rem;color:#fff;line-height:1.24}
+.orbitcard p{margin-top:9px;font-size:.9rem;color:rgba(255,255,255,.82)}
+.orbitband .btn-ghost{border-color:rgba(143,166,216,.6)}
+.orbitband .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12)}
+.ostep{margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:820px){.ostep{grid-template-columns:1fr 1fr}}
+@media(max-width:440px){.ostep{grid-template-columns:1fr}}
+.ostep .os{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:16px 16px}
+.ostep .os .osn{font-family:var(--display);font-weight:800;color:var(--orbit-soft);font-size:.8rem;letter-spacing:.06em}
+.ostep .os b{display:block;margin-top:7px;font-family:var(--display);color:#fff;font-size:.96rem}
+.ostep .os span{display:block;margin-top:5px;font-size:.84rem;color:rgba(255,255,255,.76)}
+
+/* section header with inline action */
+.sechead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.sechead .linkish{white-space:nowrap;padding-bottom:2px}
+@media(max-width:420px){.sechead .linkish{white-space:normal}}
+
+/* pillars */
+.pillargrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+@media(max-width:900px){.pillargrid{grid-template-columns:1fr}}
+.pillar{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 24px 22px;overflow:hidden;transition:box-shadow .28s var(--ease-out),transform .28s var(--ease-out),border-color .28s var(--ease-out)}
+.pillar::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--spartan);transition:background .28s var(--ease-out)}
+.pillar:hover::before{background:var(--leaf)}
+.pillar:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:var(--leaf-soft)}
+.pillar .pn{font-family:var(--display);font-weight:800;color:var(--leaf-dark);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.pillar h3{margin-top:8px;font-size:1.1rem;color:var(--forest);line-height:1.24}
+.pillar p{margin-top:9px;font-size:.92rem;color:var(--ink-soft)}
+
+/* stat band */
+.statband{background:var(--forest);color:#fff;padding:48px 0}
+.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.statgrid .st b{display:block;font-family:var(--display);font-size:2.15rem;font-weight:800;color:#fff;line-height:1}
+.statgrid .st span{display:block;margin-top:9px;font-size:.88rem;color:rgba(255,255,255,.78)}
+.statgrid .st em{color:var(--leaf-soft);font-style:normal}
+@media(max-width:820px){.statgrid{grid-template-columns:1fr 1fr;gap:30px 20px}}
+@media(max-width:440px){.statgrid{grid-template-columns:1fr}}
+
+/* quote band */
+.quoteband{background:var(--mist);padding:46px 0}
+.qb{max-width:860px}
+.qb .q{font-size:1.22rem;line-height:1.55;color:var(--ink);border-left:4px solid var(--leaf);padding-left:22px;font-family:var(--display);font-weight:600}
+.qb .attrib{margin-top:14px;padding-left:26px;font-size:.9rem;color:var(--ink-soft)}
+.qb .attrib b{font-family:var(--display);color:var(--forest)}
+
+/* faculty roster */
+.facgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;align-items:stretch}
+@media(max-width:900px){.facgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.facgrid{grid-template-columns:1fr}}
+.fac{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 18px;display:flex;gap:14px;align-items:flex-start;transition:box-shadow .28s var(--ease-out),transform .28s var(--ease-out),border-color .28s var(--ease-out)}
+.fac:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--spartan)}
+.fac .av{flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:var(--spartan);color:#fff;font-family:var(--display);font-weight:800;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.fac.frib .av{background:var(--orbit)}
+.fac .who{flex:1;min-width:0}
+.fac .fname{font-family:var(--display);font-weight:700;color:var(--forest);font-size:.98rem}
+.fac .frole{font-size:.82rem;color:var(--ink-soft);margin-top:2px;line-height:1.35}
+.fac .ftag{display:inline-block;margin-top:8px;font-size:.68rem;font-family:var(--display);font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--leaf-dark);background:var(--mist);border:1px solid var(--line);border-radius:99px;padding:3px 9px}
+.fac.frib .ftag{color:var(--orbit);background:var(--orbit-mist);border-color:var(--orbit-soft)}
+
+/* leader card (director + contact) */
+.leadgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
+@media(max-width:760px){.leadgrid{grid-template-columns:1fr}}
+.leadcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px 24px;border-top:3px solid var(--spartan);transition:box-shadow .28s var(--ease-out),transform .28s var(--ease-out)}
+.leadcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.leadcard.contact{border-top-color:var(--leaf)}
+.leadcard .lc-lab{font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--leaf-dark);margin-bottom:12px}
+.leadcard .lc-name{font-family:var(--display);font-weight:700;color:var(--forest);font-size:1.14rem}
+.leadcard .lc-role{font-size:.88rem;color:var(--ink-soft);margin-top:3px}
+.leadcard .lc-bio{margin-top:12px;font-size:.9rem;color:var(--ink-soft)}
+.leadcard .lc-act{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+
+/* student pathways */
+.tier{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:16px 14px;border-bottom:1px solid var(--line);align-items:start;transition:background .15s;border-radius:8px}
+.tier:last-child{border-bottom:none}
+.tier:hover{background:var(--mist)}
+.tier .cost{font-family:var(--display);font-weight:800;color:var(--leaf-dark);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;padding-top:3px}
+.tier h3{font-size:1.02rem;color:var(--forest)}
+.tier p{margin-top:5px;font-size:.92rem;color:var(--ink-soft)}
+.tier a,.tier .linkish{display:inline-block;margin-top:9px;font-size:.88rem;font-weight:700;text-decoration:none;border-bottom:2px solid var(--leaf);padding-bottom:1px;background:none;border-left:none;border-right:none;border-top:none;cursor:pointer;font-family:var(--sans);color:var(--spartan)}
+@media(max-width:560px){.tier{grid-template-columns:1fr;gap:6px}}
+
+/* members / backers */
+.backers{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--mist)}
+.backline{font-size:.95rem;color:var(--ink-soft);max-width:80ch}
+.backline b{color:var(--forest);font-family:var(--display)}
+.backrows{margin-top:22px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.backrow{display:grid;grid-template-columns:250px 1fr;border-top:1px solid var(--line);transition:background .15s}
+.backrow:first-child{border-top:none}
+.backrow:hover .buys{background:#FCFCFB}
+.backrow .co{padding:16px 20px;font-family:var(--display);font-weight:700;color:var(--forest);font-size:.95rem;background:var(--mist)}
+.backrow .co span{display:block;font-family:var(--sans);font-weight:400;font-size:.78rem;color:var(--ink-soft);margin-top:2px}
+.backrow .buys{padding:16px 22px;font-size:.92rem;color:var(--ink-soft)}
+@media(max-width:640px){.backrow{grid-template-columns:1fr}.backrow .co{padding-bottom:6px}}
+
+/* news */
+.newshead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:22px}
+.newsfeat{display:grid;grid-template-columns:1.15fr .85fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;transition:box-shadow .28s var(--ease-out),transform .28s var(--ease-out);text-align:left;cursor:pointer;font-family:var(--sans);width:100%;padding:0}
+.newsfeat:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+@media(max-width:760px){.newsfeat{grid-template-columns:1fr}}
+.newsfeat .nfimg{background:linear-gradient(135deg,var(--spartan),var(--forest));min-height:230px;position:relative;overflow:hidden}
+.newsfeat .nfimg::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(59,91,169,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(59,91,169,.16) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(120% 100% at 70% 30%,#000,transparent 72%);-webkit-mask-image:radial-gradient(120% 100% at 70% 30%,#000,transparent 72%)}
+.newsfeat .nfimg .nftag{position:absolute;left:16px;top:16px;font-family:var(--display);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--forest);background:var(--leaf);border-radius:99px;padding:4px 11px}
+.newsfeat .nfimg .nfimglabel{position:absolute;right:14px;bottom:12px;font-family:var(--display);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.5)}
+.newsfeat .nfbody{padding:26px 28px;display:flex;flex-direction:column;justify-content:center}
+.newsfeat .nfdate{font-family:var(--display);font-size:.76rem;letter-spacing:.05em;text-transform:uppercase;color:var(--leaf-dark);font-weight:700}
+.newsfeat h3{margin-top:9px;font-size:1.35rem;color:var(--forest);line-height:1.24}
+.newsfeat p{margin-top:11px;font-size:.94rem;color:var(--ink-soft)}
+.newsfeat .nflink{margin-top:16px;font-family:var(--display);font-weight:700;color:var(--spartan);font-size:.9rem}
+.newslist{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+@media(max-width:760px){.newslist{grid-template-columns:1fr}}
+.newsitem{position:relative;display:block;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 20px 20px 23px;cursor:pointer;font-family:var(--sans);width:100%;overflow:hidden;transition:box-shadow .28s var(--ease-out),transform .28s var(--ease-out),border-color .28s var(--ease-out)}
+.newsitem::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line);transition:background .25s var(--ease-out)}
+.newsitem[data-ncat="Facility"]::before{background:var(--orbit)}
+.newsitem[data-ncat="Students"]::before{background:var(--leaf)}
+.newsitem[data-ncat="Members"]::before{background:var(--leaf-dark)}
+.newsitem[data-ncat="People"]::before{background:var(--spartan)}
+.newsitem:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--spartan)}
+.newsitem .nidate{display:flex;gap:10px;align-items:center;font-family:var(--display);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--leaf-dark);font-weight:700}
+.newsitem .nicat{color:var(--ink-soft);font-weight:600}
+.newsitem b{display:block;margin-top:8px;font-family:var(--display);font-size:1.02rem;color:var(--forest);line-height:1.28}
+.newsitem span.nidek{display:block;margin-top:7px;font-size:.88rem;color:var(--ink-soft)}
+.newsrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+@media(max-width:760px){.newsrow{grid-template-columns:1fr}}
+.newsfilter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.newsfilter button{font-family:var(--display);font-weight:700;font-size:.82rem;padding:8px 15px;border-radius:99px;border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);cursor:pointer;transition:all .15s}
+.newsfilter button:hover{border-color:var(--spartan);color:var(--spartan)}
+.newsfilter button[aria-pressed="true"]{background:var(--spartan);border-color:var(--spartan);color:#fff}
+.newsempty{margin-top:8px;color:var(--ink-soft);font-size:.93rem}
+/* news article reader */
+.arthero h1{max-width:24ch}
+.artwrap{max-width:760px}
+.artimg{height:300px;border-radius:12px;background:linear-gradient(135deg,var(--spartan),var(--forest));position:relative;overflow:hidden;margin-bottom:28px}
+.artimg::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(59,91,169,.16) 1px,transparent 1px),linear-gradient(90deg,rgba(59,91,169,.16) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(120% 100% at 68% 34%,#000,transparent 72%);-webkit-mask-image:radial-gradient(120% 100% at 68% 34%,#000,transparent 72%)}
+.artimg .nfimglabel{position:absolute;right:14px;bottom:12px;font-family:var(--display);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.5)}
+.artbody p{font-size:1.05rem;line-height:1.7;color:var(--ink);margin-bottom:18px;max-width:68ch}
+.artbody .artnote{font-size:.86rem;color:var(--ink-soft);border-left:3px solid var(--line);padding-left:14px;margin-top:24px}
+
+/* contact */
+.contactgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px}
+@media(max-width:760px){.contactgrid{grid-template-columns:1fr}}
+.contactcard{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px 24px;transition:box-shadow .28s var(--ease-out),transform .28s var(--ease-out)}
+.contactcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.contactcard h3{font-size:1.06rem;color:var(--forest)}
+.contactcard p{margin-top:9px;font-size:.92rem;color:var(--ink-soft)}
+.contactcard .cline{margin-top:12px;font-size:.92rem}
+.contactcard .cline b{font-family:var(--display);color:var(--forest);display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.contactcard a{color:var(--spartan);font-weight:600}
+
+/* next-steps band */
+.next{border-top:1px solid var(--line)}
+.next .wrap{padding-top:36px;padding-bottom:40px}
+.next.tight .wrap{padding-top:30px;padding-bottom:34px}
+.nextgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+@media(max-width:820px){.nextgrid{grid-template-columns:1fr}}
+.nextcard{position:relative;display:block;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;cursor:pointer;overflow:hidden;transition:box-shadow .28s var(--ease-out),transform .28s var(--ease-out),border-color .28s var(--ease-out);font-family:var(--sans);width:100%}
+.nextcard::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--leaf);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease-out)}
+.nextcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px);border-color:var(--spartan)}
+.nextcard:hover::before{transform:scaleX(1)}
+.nextcard .k{font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--leaf-dark);font-weight:700}
+.nextcard b{display:block;font-family:var(--display);font-size:1.02rem;color:var(--forest);margin-top:7px}
+.nextcard span{display:block;font-size:.88rem;color:var(--ink-soft);margin-top:6px}
+.nextcard .go{display:inline-block;margin-top:11px;font-family:var(--display);font-weight:700;font-size:.85rem;color:var(--spartan);transition:transform .25s var(--ease-out)}
+.nextcard:hover .go{transform:translateX(4px);color:var(--forest)}
+.deep .nextcard,.dark .nextcard{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)}
+.deep .nextcard b,.dark .nextcard b{color:#fff}
+.deep .nextcard span,.dark .nextcard span{color:rgba(255,255,255,.8)}
+.deep .nextcard .k,.dark .nextcard .k{color:var(--leaf-soft)}
+.deep .nextcard .go,.dark .nextcard .go{color:#fff}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+.vfade{animation:vfadein .4s var(--ease-out)}
+@keyframes vfadein{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.vfade{animation:none}}
+
+/* footer */
+footer.site{background:var(--forest);color:rgba(255,255,255,.8);padding:52px 0 30px;font-size:.87rem}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:38px}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
+footer.site .foot-h{color:#fff;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;font-family:var(--display)}
+footer.site ul{list-style:none}footer.site li{margin-bottom:8px}
+footer.site a,footer.site button{color:rgba(255,255,255,.8);text-decoration:none;background:none;border:none;font-family:var(--sans);font-size:.87rem;padding:0;cursor:pointer;text-align:left}
+footer.site a:hover,footer.site button:hover{color:#fff;text-decoration:underline}
+.foot-brand b{color:#fff;font-family:var(--display);font-size:1.05rem}
+.foot-brand b em{font-style:normal;color:var(--leaf-soft)}
+.foot-brand p{margin-top:11px;max-width:46ch}
+.foot-contact{margin-top:14px;font-size:.84rem;color:rgba(255,255,255,.72)}
+.foot-contact a{color:var(--leaf-soft)}
+.support{margin-top:34px;padding-top:20px;border-top:1px solid rgba(255,255,255,.15);font-size:.83rem;color:rgba(255,255,255,.62);max-width:92ch}
+.support b{color:#fff}
+.legal{margin-top:16px;font-size:.77rem;color:rgba(255,255,255,.5)}
+
+/* backtop + progress */
+.backtop{position:fixed;right:20px;bottom:22px;width:46px;height:46px;border-radius:50%;background:var(--spartan);color:#fff;border:none;box-shadow:var(--shadow-lg);cursor:pointer;font-size:1.2rem;line-height:1;opacity:0;pointer-events:none;transform:translateY(12px) scale(.9);transition:opacity .3s var(--ease-out),transform .3s var(--ease-spring),background .18s var(--ease);z-index:80}
+.backtop.show{opacity:1;pointer-events:auto;transform:none}
+.backtop:hover{background:var(--forest);transform:translateY(-2px)}
+@media(max-width:640px){.backtop{right:14px;bottom:16px}}
+.scrollprog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--leaf),var(--leaf-soft));width:0;z-index:70;transition:width .12s var(--ease);box-shadow:0 0 8px rgba(127,181,57,.5)}
+.view:focus{outline:none}
+.view h1{scroll-margin-top:96px}
+
+@media(max-width:640px){
+  .navlinks button{min-height:48px}
+  .btn{min-height:46px;display:inline-flex;align-items:center}
+}
+@media(max-width:560px){
+  section{padding:44px 0}
+  .facts{gap:24px}
+  .facts div{max-width:none}
+  h2.sec{font-size:1.35rem}
+}
+
+/* print */
+@media print{
+  .mock-ribbon,.msu-bar,.nav,.backtop,.scrollprog,.hero-ctas,.next,.navtoggle,.newsfilter,.orbit-motif,.hero::before,.hero::after{display:none!important}
+  body{font-size:11pt;color:#000}
+  .hero,.dark,.deep,.statband,.orbitband,.quoteband,.backers,.alt{background:#fff!important;color:#000!important}
+  .hero h1,.hero .lede,.hero .eyebrow,.deep h2.sec,.dark h2.sec,.deep .intro,.dark .intro,.statgrid .st b,.statgrid .st span,.statgrid .st em,.orbitband h2.sec,.orbitband .intro,.orbitband .eyebrow,.orbitcard h3,.orbitcard p,.herofacts .hf-lab,.herofacts .hf-row b,.herofacts .hf-row span,.ostep .os b,.ostep .os span,.ostep .os .osn{color:#000!important}
+  .herofacts,.orbitcard,.ostep .os,.router button{border:1px solid #999!important;background:#fff!important}
+  a{color:#000;text-decoration:underline}
+  section{padding:16px 0;break-inside:avoid}
+  .card,.fac,.backrow,.brow,.pillar,.leadcard,.contactcard,.tier,.newsitem{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div class="mock-ribbon"><b>Design mock-up.</b> A proposed reimagining of the MSU Space Electronics Initiative site. Facts come from public MSU and FRIB sources. Items marked <span class="samp">Confirm</span> are placeholders for the Initiative to verify.</div>
+
+<div class="msu-bar"><div class="msu-bar-inner">
+  <span class="msu-wordmark">MICHIGAN STATE UNIVERSITY</span>
+  <nav><a href="https://msu.edu">msu.edu</a><a href="https://engineering.msu.edu">College of Engineering</a><a href="https://frib.msu.edu">FRIB</a></nav>
+</div></div>
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#/home" data-view="home"><b>MSU <em>Space Electronics</em></b><span>Michigan State University</span></a>
+  <button class="navtoggle" id="navtoggle" aria-expanded="false" aria-controls="navlinks" type="button">Menu</button>
+  <ul class="navlinks" id="navlinks">
+    <li><button data-view="home" type="button">Overview</button></li>
+    <li><button data-view="membership" type="button">Membership</button></li>
+    <li><button data-view="testing" type="button">FRIB testing</button></li>
+    <li><button data-view="research" type="button">Research</button></li>
+    <li><button data-view="people" type="button">People</button></li>
+    <li><button data-view="students" type="button">Students</button></li>
+    <li><button data-view="news" type="button">News</button></li>
+    <li><button data-view="contact" type="button">Contact</button></li>
+  </ul>
+</div></header>
+
+<main id="main">
+
+<!-- ============ HOME ============ -->
+<div class="view" id="v-home">
+  <header class="hero"><div class="wrap">
+    <p class="eyebrow">Michigan State University &middot; College of Engineering &amp; FRIB</p>
+    <h1>Test your parts against real radiation, and build the space-electronics workforce.</h1>
+    <p class="lede">The MSU Space Electronics Initiative is an industry-membership research center for the design and testing of electronic devices, circuits, and systems that operate in space. Members test at FRIB, collaborate with MSU faculty and students, and hire from a growing talent pipeline. The College of Engineering leads it jointly with the Facility for Rare Isotope Beams.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-solid" data-view="membership" type="button">See what membership gets you</button>
+      <button class="btn btn-ghost" data-view="testing" type="button">How FRIB testing works</button>
+    </div>
+    <div class="facts">
+      <div><strong>FRIB access</strong>Monthly member access to radiation testing at a rare, hard-to-replicate facility</div>
+      <div><strong>Royalty-free</strong>A perpetual non-exclusive royalty-free license to shared research results</div>
+      <div><strong>Advisory board</strong>A voting seat on the research the Initiative pursues</div>
+    </div>
+  </div></header>
+
+  <!-- audience router -->
+  <section class="deep"><div class="wrap">
+    <p class="eyebrow reveal">Find your path</p>
+    <h2 class="sec reveal">Three ways to work with us</h2>
+    <div class="router reveal">
+      <button data-view="membership" type="button"><span class="rlab">Industry &amp; government</span><b>Join as a member</b><span>Test at FRIB, sponsor research, and shape the agenda from an advisory-board seat.</span></button>
+      <button data-view="students" type="button"><span class="rlab">Students</span><b>Get hands-on</b><span>Capstones, exchanges, radiation-testing boot camps, and workforce development.</span></button>
+      <button data-view="research" type="button"><span class="rlab">Researchers &amp; faculty</span><b>Collaborate</b><span>Work across engineering and the sciences on electronics for the harsh conditions of space.</span></button>
+    </div>
+  </div></section>
+
+  <!-- what we do: three pillars -->
+  <section><div class="wrap">
+    <p class="eyebrow reveal">What we do</p>
+    <h2 class="sec reveal">Design and test electronics for the harsh conditions of space</h2>
+    <p class="intro reveal">Faculty, students, and researchers work with industry and government on devices, circuits, and systems that have to survive radiation and extreme environments, from Low Earth Orbit and beyond. The Initiative rests on three things.</p>
+    <div class="pillargrid mt">
+      <div class="pillar reveal"><span class="pn">Pillar one</span><h3>MSU engineering and science talent</h3><p>Interdisciplinary faculty, students, and researchers across the College of Engineering and the sciences, most in Electrical and Computer Engineering.</p></div>
+      <div class="pillar reveal"><span class="pn">Pillar two</span><h3>FRIB testing at MSU</h3><p>The Facility for Rare Isotope Beams gives members a place to test electronics against the kind of radiation they will face in space. FRIB is a separate MSU facility that the Initiative works with.</p></div>
+      <div class="pillar reveal"><span class="pn">Pillar three</span><h3>Industrial member knowledge</h3><p>Member companies bring the problems, the parts, and the market pull. Their questions set much of what the Initiative works on.</p></div>
+    </div>
+    <div class="note reveal"><h3>Support</h3><p>The Initiative is supported by the <b>U.S. Department of Energy</b>, whose Office of Science owns FRIB, operated by MSU.</p></div>
+  </div></section>
+
+  <!-- FRIB testing feature (orbit band) -->
+  <section class="orbitband"><div class="wrap">
+    <div class="split">
+      <div>
+        <p class="eyebrow reveal">The marquee asset</p>
+        <h2 class="sec reveal">Radiation testing at FRIB</h2>
+        <p class="intro reveal">Qualifying electronics for space usually means finding a beam, waiting for time on it, and traveling to it. Members get monthly access to testing at FRIB, one of a small number of facilities in the world that can do this. Faster qualification means members can move parts toward flight sooner.</p>
+        <p class="reveal" style="margin-top:20px"><button class="btn btn-ghost" data-view="testing" type="button">See the testing thread</button></p>
+      </div>
+      <div class="reveal">
+        <div class="orbitcard">
+          <div class="oc-lab">At MSU, operated with FRIB</div>
+          <h3>The K500 Chip Testing Facility</h3>
+          <p>FRIB is building a high-bay addition that is set to triple the current chip-testing capacity with additional user vaults, aimed at the national shortfall in advanced-microelectronics testing. <span class="samp">Confirm timeline</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="ostep reveal">
+      <div class="os"><span class="osn">01</span><b>Bring a part</b><span>A device, circuit, or system that has to survive space.</span></div>
+      <div class="os"><span class="osn">02</span><b>Test the effects</b><span>Single-event effects and radiation response, with MSU physicists and engineers.</span></div>
+      <div class="os"><span class="osn">03</span><b>Get results</b><span>Shared results come with a royalty-free license; proprietary runs keep IP separate.</span></div>
+      <div class="os"><span class="osn">04</span><b>Move to flight</b><span>Qualify sooner and feed the data back into your design.</span></div>
+    </div>
+  </div></section>
+
+  <!-- membership teaser -->
+  <section><div class="wrap">
+    <div class="sechead">
+      <div>
+        <p class="eyebrow reveal">Why join</p>
+        <h2 class="sec reveal">Membership is the spine of the Initiative</h2>
+      </div>
+      <button class="linkish reveal" data-view="membership" type="button">See all benefits &rarr;</button>
+    </div>
+    <p class="intro reveal">Companies do not partner in the abstract. They join, get a voting seat, test at FRIB, and hire the students. Here is a sample of what a membership includes.</p>
+    <div class="grid3 mt">
+      <div class="card card--orbit reveal"><span class="lab orbit">FRIB testing</span><h3>Monthly access to radiation testing</h3><p>Qualify parts at a facility most companies cannot build or reach on their own schedule.</p></div>
+      <div class="card card--top reveal"><span class="lab">Advisory board</span><h3>A voting seat on the agenda</h3><p>Vote on the research projects the Initiative pursues and on administrative matters.</p></div>
+      <div class="card card--leaf reveal"><span class="lab">Talent</span><h3>First look at the pipeline</h3><p>Capstones, exchanges, and workforce development that feed engineers into member companies.</p></div>
+    </div>
+  </div></section>
+
+  <!-- members strip -->
+  <section class="backers"><div class="wrap">
+    <p class="eyebrow reveal">Who is in</p>
+    <h2 class="sec reveal">Members and supporters</h2>
+    <p class="backline reveal mt"><b>Texas Instruments</b> is a named member and early supporter, and worked with the FRIB team on some of the Initiative's first electronics-testing sessions. TI has built integrated circuits for space for more than 60 years. The Initiative is supported by the <b>U.S. Department of Energy</b>.</p>
+    <div class="thin reveal"><b>Confirm before launch:</b> the current member roster changes. Pull the live Members and Collaborators pages for the full, current list before this goes public.</div>
+  </div></section>
+
+  <!-- news teaser -->
+  <section class="alt"><div class="wrap">
+    <div class="sechead">
+      <div><p class="eyebrow reveal">Newsroom</p><h2 class="sec reveal">Latest from the Initiative</h2></div>
+      <button class="linkish reveal" data-view="news" type="button">All news &rarr;</button>
+    </div>
+    <div class="newsrow mt">
+      <button class="newsitem reveal" data-article="highbay" type="button"><span class="nidate"><span>Sep 2025</span><span class="nicat">Facility</span></span><b>MSU to triple chip-testing capacity at FRIB</b><span class="nidek">A high-bay addition adds user vaults to meet the national shortfall in microelectronics testing.</span></button>
+      <button class="newsitem reveal" data-article="bootcamp" type="button"><span class="nidate"><span>Jan 2025</span><span class="nicat">Students</span></span><b>Inaugural radiation-testing boot camp with TI</b><span class="nidek">Students worked alongside Texas Instruments and FRIB engineers on single-event-effects testing.</span></button>
+      <button class="newsitem reveal" data-article="director" type="button"><span class="nidate"><span>2024</span><span class="nicat">People</span></span><b>Papapolymerou named inaugural director</b><span class="nidek">The former ECE chair takes the lead of the Initiative, an alliance with FRIB.</span></button>
+    </div>
+  </div></section>
+
+  <!-- next -->
+  <section class="next deep"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="membership" type="button"><span class="k">Industry</span><b>Membership benefits</b><span>The full value proposition, laid out plainly, with a direct contact.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="testing" type="button"><span class="k">Testing</span><b>FRIB radiation testing</b><span>What members can test and how access works.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="students" type="button"><span class="k">Students</span><b>Ways to get involved</b><span>Capstones, exchanges, and boot camps sized by commitment.</span><span class="go">Go &rarr;</span></button>
+  </div></div></section>
+</div>
+
+<!-- ============ MEMBERSHIP ============ -->
+<div class="view" id="v-membership" hidden>
+  <header class="hero"><div class="wrap">
+    <div class="herosplit">
+      <div>
+        <p class="eyebrow">Membership</p>
+        <h1>What a company gets by joining the Initiative.</h1>
+        <p class="lede">The Initiative publishes concrete membership benefits, so this page lays them out plainly rather than in vague partnership language. Membership levels match the needs of the company. To start a conversation, contact Bill Harokopus.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-solid" data-view="contact" type="button">Start a membership conversation</button>
+          <button class="btn btn-ghost" data-view="testing" type="button">See FRIB testing</button>
+        </div>
+      </div>
+      <div class="herofacts">
+        <span class="hf-lab">Membership at a glance</span>
+        <div class="hf-row"><b>Monthly</b><span>Access to FRIB radiation testing</span></div>
+        <div class="hf-row"><b>Voting</b><span>Seat on the industry advisory board</span></div>
+        <div class="hf-row"><b>Free</b><span>Perpetual non-exclusive royalty-free license to shared results</span></div>
+        <div class="hf-row"><b>Tiered</b><span>Membership levels to match your needs <span class="samp">Confirm levels</span></span></div>
+      </div>
+    </div>
+  </div></header>
+
+  <section><div class="wrap">
+    <p class="eyebrow reveal">The value proposition</p>
+    <h2 class="sec reveal">Every benefit of membership</h2>
+    <p class="intro reveal">These are the benefits the Initiative lists for member organizations. The two marked below are the ones companies tell us are hardest to get anywhere else.</p>
+    <div class="benefits mt reveal">
+      <div class="brow mark"><div class="bn">01</div><div class="bd"><b>Monthly access to FRIB testing</b><p>Test electronics against radiation at FRIB on a regular cadence, at a facility that is genuinely hard to replicate or reach on your own schedule.</p><span class="flag">Marquee benefit</span></div></div>
+      <div class="brow mark"><div class="bn">02</div><div class="bd"><b>A seat on the industry advisory board, with voting rights</b><p>Vote on the general research projects the Initiative pursues and on administrative matters. Members help set the agenda rather than react to it.</p><span class="flag">Marquee benefit</span></div></div>
+      <div class="brow"><div class="bn">03</div><div class="bd"><b>Access to research results with a royalty-free license</b><p>Shared research results come with a perpetual non-exclusive royalty-free license.</p></div></div>
+      <div class="brow"><div class="bn">04</div><div class="bd"><b>Proprietary sponsored research</b><p>The option to sponsor proprietary research, with intellectual property negotiated separately.</p></div></div>
+      <div class="brow"><div class="bn">05</div><div class="bd"><b>Close collaboration with MSU faculty, students, and researchers</b><p>Through research projects, faculty and student exchanges, workforce development, senior capstone projects, technical workshops, and on-campus presence.</p></div></div>
+      <div class="brow"><div class="bn">06</div><div class="bd"><b>Participation in annual review meetings</b><p>Regular meetings where members review the year's work and shape what comes next.</p></div></div>
+      <div class="brow"><div class="bn">07</div><div class="bd"><b>A path to commercialization</b><p>Move results toward market through agreements with members or new start-ups.</p></div></div>
+      <div class="brow"><div class="bn">08</div><div class="bd"><b>Membership levels to match your needs</b><p>Different levels of participation and investment for different companies. <span class="samp">Confirm levels and pricing</span></p></div></div>
+    </div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <div class="split">
+      <div>
+        <p class="eyebrow reveal">The speed argument</p>
+        <h2 class="sec reveal">Membership shortens the path to flight</h2>
+        <p class="intro reveal">High-reliability, radiation-hardened electronics are in demand, and getting a part qualified is often the slow step. Regular access to FRIB testing shortens qualification, and the talent pipeline feeds engineers into member companies. The point is speed and capability, not slogans.</p>
+      </div>
+      <ul class="list reveal">
+        <li><b>Test sooner</b><span>Monthly FRIB access means you are not waiting months for beam time elsewhere.</span></li>
+        <li><b>Own the results</b><span>A royalty-free license on shared results, or a separate IP arrangement for proprietary work.</span></li>
+        <li><b>Hire the people</b><span>Capstones and exchanges give you a first look at engineers trained on exactly this work.</span></li>
+      </ul>
+    </div>
+  </div></section>
+
+  <section class="quoteband"><div class="wrap qb reveal">
+    <p class="q">This space boot camp along with the MSU Space Electronics Initiative is empowering the next generation of engineers and physicists to innovate for the final frontier.</p>
+    <p class="attrib"><b>Reza Tanha</b>, Texas Instruments, on the Single Event Effects Radiation Testing Boot Camp <span class="samp">Quoted from MSU news</span></p>
+  </div></section>
+
+  <section class="next"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="contact" type="button"><span class="k">Contact</span><b>Talk to the membership lead</b><span>Reach Bill Harokopus to start the conversation.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="testing" type="button"><span class="k">Testing</span><b>How FRIB testing works</b><span>The testing thread, step by step.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="people" type="button"><span class="k">People</span><b>Who you would work with</b><span>The director and faculty roster.</span><span class="go">Go &rarr;</span></button>
+  </div></div></section>
+</div>
+
+<!-- ============ FRIB TESTING ============ -->
+<div class="view" id="v-testing" hidden>
+  <header class="hero"><div class="wrap">
+    <div class="herosplit">
+      <div>
+        <p class="eyebrow">FRIB testing</p>
+        <h1>Radiation testing at a facility most companies cannot build.</h1>
+        <p class="lede">The Facility for Rare Isotope Beams is a U.S. Department of Energy Office of Science user facility, owned and operated by MSU and led by FRIB Laboratory Director Thomas Glasmacher. The Space Electronics Initiative works with FRIB to give members access to radiation testing. FRIB is its own entity; the Initiative uses it, and does not own it.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-solid" data-view="membership" type="button">Get access through membership</button>
+          <a class="btn btn-ghost" href="https://frib.msu.edu" target="_blank" rel="noopener">Visit FRIB</a>
+        </div>
+      </div>
+      <div class="herofacts">
+        <span class="hf-lab">The testing asset</span>
+        <div class="hf-row"><b>K500</b><span>The chip-testing facility at FRIB</span></div>
+        <div class="hf-row"><b>3&times;</b><span>A high-bay addition set to triple current chip-testing capacity <span class="samp">Confirm</span></span></div>
+        <div class="hf-row"><b>DOE</b><span>FRIB is a DOE Office of Science user facility, operated by MSU</span></div>
+      </div>
+    </div>
+  </div></header>
+
+  <section><div class="wrap">
+    <p class="eyebrow reveal">What members test</p>
+    <h2 class="sec reveal">Electronics that have to survive space</h2>
+    <p class="intro reveal">Space subjects electronics to radiation that causes single-event effects and long-term damage. Testing at FRIB helps members see how parts respond before they fly.</p>
+    <div class="grid3 mt">
+      <div class="card card--orbit reveal"><span class="lab orbit">Devices</span><h3>Solid-state devices</h3><p>The building blocks of satellite and spacecraft electronics, tested for radiation response.</p></div>
+      <div class="card card--orbit reveal"><span class="lab orbit">Circuits</span><h3>Integrated circuits</h3><p>Analog and embedded parts, including the high-reliability packaging used in space.</p></div>
+      <div class="card card--orbit reveal"><span class="lab orbit">Systems</span><h3>Systems in context</h3><p>How devices and circuits behave together under the conditions they will face in orbit and beyond.</p></div>
+    </div>
+  </div></section>
+
+  <section class="orbitband"><div class="wrap">
+    <p class="eyebrow reveal">How access works</p>
+    <h2 class="sec reveal">From a part to flight-ready data</h2>
+    <p class="intro reveal">Members get a regular cadence of testing rather than a one-off. The steps below describe the path in general terms; the Initiative confirms the specifics with each member.</p>
+    <div class="ostep reveal">
+      <div class="os"><span class="osn">01</span><b>Scope the run</b><span>Decide what to test and whether it is shared or proprietary.</span></div>
+      <div class="os"><span class="osn">02</span><b>Test at FRIB</b><span>Run single-event-effects and radiation testing with MSU engineers and physicists.</span></div>
+      <div class="os"><span class="osn">03</span><b>Read the results</b><span>Understand how the part responded and where it needs to change.</span></div>
+      <div class="os"><span class="osn">04</span><b>License and iterate</b><span>Shared results carry a royalty-free license; proprietary runs keep IP separate.</span></div>
+    </div>
+    <div class="note orbit reveal" style="background:rgba(255,255,255,.06);border-left-color:var(--orbit-soft);color:rgba(255,255,255,.86);max-width:84ch"><h3 style="color:#fff">A note on ownership</h3><p style="color:rgba(255,255,255,.82)">FRIB is a separate MSU facility with its own mandate and leadership. The Space Electronics Initiative works with FRIB to arrange member testing. We credit FRIB accurately and do not present its facility as our own.</p></div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <p class="eyebrow reveal">Learning to test</p>
+    <h2 class="sec reveal">The radiation-testing boot camp</h2>
+    <p class="intro reveal">Texas Instruments sponsored the inaugural Single Event Effects Radiation Testing Boot Camp in January 2025, in partnership with FRIB and the Initiative. Students worked alongside TI and MSU engineers and physicists on real testing at FRIB.</p>
+    <p class="reveal" style="margin-top:18px"><button class="linkish" data-article="bootcamp" type="button">Read about the boot camp &rarr;</button></p>
+  </div></section>
+
+  <section class="next deep"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="membership" type="button"><span class="k">Membership</span><b>Get testing access</b><span>Access to FRIB testing comes with membership.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="research" type="button"><span class="k">Research</span><b>The work behind it</b><span>What faculty study, from devices to systems.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="students" type="button"><span class="k">Students</span><b>Boot camps and capstones</b><span>How students learn this work.</span><span class="go">Go &rarr;</span></button>
+  </div></div></section>
+</div>
+
+<!-- ============ RESEARCH ============ -->
+<div class="view" id="v-research" hidden>
+  <header class="hero"><div class="wrap">
+    <span class="orbit-motif" aria-hidden="true"><i></i><b></b></span>
+    <p class="eyebrow">Research and testing</p>
+    <h1>Devices, circuits, and systems for the harsh conditions of space.</h1>
+    <p class="lede">The Initiative works on the design and testing of electronics that operate in space, drawing on faculty across Electrical and Computer Engineering and the sciences, plus FRIB physicists. Below is the shape of the work and the people who lead it.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-solid" data-view="people" type="button">Meet the faculty</button>
+      <button class="btn btn-ghost" data-view="testing" type="button">See FRIB testing</button>
+    </div>
+  </div></header>
+
+  <section><div class="wrap">
+    <p class="eyebrow reveal">What we work on</p>
+    <h2 class="sec reveal">Areas of work</h2>
+    <p class="intro reveal">The Initiative brings together several lines of engineering and science. The groupings below are a plain-language map of the work. <span class="samp">Confirm groupings with the Initiative</span></p>
+    <div class="grid2 mt">
+      <div class="card card--top reveal"><span class="lab">Radiation effects</span><h3>How electronics respond to radiation</h3><p>Single-event effects and radiation testing of semiconductor devices, the core of qualifying parts for space. Faculty including Bill Harokopus work on heavy-ion testing of semiconductor devices.</p></div>
+      <div class="card card--top reveal"><span class="lab">RF and antennas</span><h3>Radio-frequency and antenna systems</h3><p>Conformal antennas, arrays, radomes, and phased arrays, the systems that let spacecraft communicate and sense.</p></div>
+      <div class="card card--top reveal"><span class="lab">Devices and materials</span><h3>Device physics and materials</h3><p>The physics of the devices themselves, including the materials that make them work and fail in extreme environments.</p></div>
+      <div class="card card--top reveal"><span class="lab">Electromagnetics</span><h3>Applied electromagnetics</h3><p>Computational electromagnetics and the field behavior that underpins antennas, circuits, and sensing.</p></div>
+    </div>
+    <div class="note reveal"><h3>How the work reaches the field</h3><p>Shared results come with a <b>perpetual non-exclusive royalty-free license</b>. Members can also sponsor proprietary research with IP negotiated separately, and there is a path to commercialization through member agreements or new start-ups.</p></div>
+  </div></section>
+
+  <section class="statband"><div class="wrap">
+    <p class="eyebrow reveal" style="color:var(--leaf)">The shape of it</p>
+    <h2 class="sec reveal">By the numbers</h2>
+    <div class="statgrid mt reveal">
+      <div class="st"><b>~14</b><span>Faculty on the team, most in <em>Electrical and Computer Engineering</em> <span class="samp" style="color:var(--amber)">Confirm</span></span></div>
+      <div class="st"><b>2</b><span>Leading MSU units: the <em>College of Engineering</em> and <em>FRIB</em></span></div>
+      <div class="st"><b>60+</b><span>Years member TI has built <em>integrated circuits for space</em></span></div>
+      <div class="st"><b>DOE</b><span>Support from the U.S. <em>Department of Energy</em></span></div>
+    </div>
+  </div></section>
+
+  <section class="next alt"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="people" type="button"><span class="k">People</span><b>The faculty roster</b><span>Who does this work, and who you would collaborate with.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="testing" type="button"><span class="k">Testing</span><b>FRIB radiation testing</b><span>Where the testing side of this work happens.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="membership" type="button"><span class="k">Membership</span><b>Sponsor a project</b><span>How companies fund and shape the research.</span><span class="go">Go &rarr;</span></button>
+  </div></div></section>
+</div>
+
+<!-- ============ PEOPLE ============ -->
+<div class="view" id="v-people" hidden>
+  <header class="hero"><div class="wrap">
+    <span class="orbit-motif" aria-hidden="true"><i></i><b></b></span>
+    <p class="eyebrow">People</p>
+    <h1>The director, the membership lead, and the faculty you would work with.</h1>
+    <p class="lede">A company that joins works with real people. Here are the two to reach first, and the faculty roster behind the work. Names and roles change; confirm the current roster on the live Team page before launch.</p>
+  </div></header>
+
+  <section><div class="wrap">
+    <p class="eyebrow reveal">Start here</p>
+    <h2 class="sec reveal">Leadership and first contact</h2>
+    <div class="leadgrid mt">
+      <div class="leadcard reveal">
+        <div class="lc-lab">Director</div>
+        <div class="lc-name">John (Ioannis) Papapolymerou</div>
+        <div class="lc-role">Inaugural Director, MSU Space Electronics Initiative &middot; Dean's Office, College of Engineering</div>
+        <p class="lc-bio">MSU Research Foundation Professor and the Initiative's first director. He leads the alliance between the College of Engineering and FRIB and its collaboration with industry and government.</p>
+        <div class="lc-act"><button class="linkish" data-view="contact" type="button">Reach the office &rarr;</button></div>
+      </div>
+      <div class="leadcard contact reveal">
+        <div class="lc-lab" style="color:var(--leaf-dark)">Membership contact</div>
+        <div class="lc-name">William (Bill) Harokopus</div>
+        <div class="lc-role">Associate Professor, Electrical and Computer Engineering</div>
+        <p class="lc-bio">A computational-electromagnetics engineer with more than 30 years of experience and a former Principal Fellow at Raytheon, whose interests include heavy-ion testing of semiconductor devices. He is the person to contact about membership.</p>
+        <div class="lc-act"><a href="mailto:harokop1@msu.edu">harokop1@msu.edu</a></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <div class="sechead">
+      <div><p class="eyebrow reveal">The roster</p><h2 class="sec reveal">Faculty and researchers</h2></div>
+      <a class="linkish reveal" href="https://space-electronics.msu.edu/team" target="_blank" rel="noopener">Full profiles on the Team page &rarr;</a>
+    </div>
+    <p class="intro reveal">Most are in Electrical and Computer Engineering, with FRIB colleagues on the testing side. Each name below has a real MSU faculty profile to link. <span class="samp">Confirm current roster</span></p>
+    <div class="facgrid mt reveal">
+      <div class="fac"><div class="av">LK</div><div class="who"><div class="fname">Leo Kempel</div><div class="frole">University Distinguished Professor, Dennis P. Nyquist Endowed Professor in Electromagnetics, ECE</div><span class="ftag">Electromagnetics</span></div></div>
+      <div class="fac"><div class="av">JA</div><div class="who"><div class="fname">John Albrecht</div><div class="frole">Professor, ECE</div></div></div>
+      <div class="fac"><div class="av">VA</div><div class="who"><div class="fname">Virginia Ayres</div><div class="frole">Associate Professor, ECE</div></div></div>
+      <div class="fac"><div class="av">SB</div><div class="who"><div class="fname">Sergey Baryshev</div><div class="frole">Associate Professor, ECE</div></div></div>
+      <div class="fac"><div class="av">TC</div><div class="who"><div class="fname">Thomas Clark</div><div class="frole">Professor, ECE</div></div></div>
+      <div class="fac"><div class="av">ME</div><div class="who"><div class="fname">Mauro Ettorre</div><div class="frole">Professor, ECE</div></div></div>
+      <div class="fac"><div class="av">EG</div><div class="who"><div class="fname">Edward Gebara</div><div class="frole">Associate Professor, ECE</div></div></div>
+      <div class="fac"><div class="av">WH</div><div class="who"><div class="fname">William Harokopus</div><div class="frole">Associate Professor, ECE &middot; Membership contact</div><span class="ftag">Radiation testing</span></div></div>
+      <div class="fac"><div class="av">MH</div><div class="who"><div class="fname">Matthew Hodeck</div><div class="frole">Assistant Professor, ECE</div></div></div>
+      <div class="fac"><div class="av">NM</div><div class="who"><div class="fname">Nicholas Miller</div><div class="frole">Assistant Professor, ECE</div></div></div>
+      <div class="fac"><div class="av">SS</div><div class="who"><div class="fname">Stephen Schneider</div><div class="frole">Professor, ECE <span class="samp">Confirm title</span></div></div></div>
+      <div class="fac frib"><div class="av">TG</div><div class="who"><div class="fname">Thomas Glasmacher</div><div class="frole">FRIB Laboratory Director, Facility for Rare Isotope Beams</div><span class="ftag">FRIB</span></div></div>
+      <div class="fac frib"><div class="av">SL</div><div class="who"><div class="fname">Steve Lidia</div><div class="frole">Adjunct Professor, Facility for Rare Isotope Beams</div><span class="ftag">FRIB</span></div></div>
+    </div>
+  </div></section>
+
+  <section class="next deep"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="research" type="button"><span class="k">Research</span><b>What they work on</b><span>The areas of work behind these names.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="membership" type="button"><span class="k">Membership</span><b>Work with them</b><span>How a company collaborates with MSU faculty.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="contact" type="button"><span class="k">Contact</span><b>Reach out</b><span>The membership lead and the general office.</span><span class="go">Go &rarr;</span></button>
+  </div></div></section>
+</div>
+
+<!-- ============ STUDENTS ============ -->
+<div class="view" id="v-students" hidden>
+  <header class="hero"><div class="wrap">
+    <span class="orbit-motif" aria-hidden="true"><i></i><b></b></span>
+    <p class="eyebrow">Students</p>
+    <h1>Hands-on work in a high-demand field, sized to your commitment.</h1>
+    <p class="lede">Space electronics needs people, and member companies hire from here. The Initiative gives students real work: senior capstones, faculty and student exchanges, radiation-testing boot camps, and workforce development. Here are the ways in.</p>
+    <div class="hero-ctas">
+      <button class="btn btn-solid" data-view="contact" type="button">Ask how to get involved</button>
+      <button class="btn btn-ghost" data-view="testing" type="button">See the boot camp</button>
+    </div>
+  </div></header>
+
+  <section><div class="wrap">
+    <p class="eyebrow reveal">Ways to get involved</p>
+    <h2 class="sec reveal">Paths for students</h2>
+    <p class="intro reveal">These paths run through member collaboration, so many connect students directly to companies working on space electronics.</p>
+    <div class="mt reveal">
+      <div class="tier"><span class="cost">A semester</span><div><h3>Senior capstone projects</h3><p>Work a real problem with a member company as your capstone, on the same devices, circuits, and systems the Initiative tests.</p><button class="linkish" data-view="contact" type="button">Ask about capstones</button></div></div>
+      <div class="tier"><span class="cost">A few days</span><div><h3>Radiation-testing boot camp</h3><p>The Single Event Effects boot camp, sponsored by Texas Instruments with FRIB, put students alongside industry and MSU engineers on real testing. <span class="samp">Confirm next dates</span></p><button class="linkish" data-article="bootcamp" type="button">Read about it</button></div></div>
+      <div class="tier"><span class="cost">A term or more</span><div><h3>Faculty and student exchanges</h3><p>Exchanges between MSU and member organizations, a way to spend time inside a company or bring their engineers here.</p><button class="linkish" data-view="contact" type="button">Ask about exchanges</button></div></div>
+      <div class="tier"><span class="cost">Ongoing</span><div><h3>Workforce development</h3><p>Training aimed at the in-demand space-electronics and affiliated science and engineering workforce, built with the companies that hire.</p><button class="linkish" data-view="membership" type="button">See the member side</button></div></div>
+    </div>
+  </div></section>
+
+  <section class="quoteband"><div class="wrap qb reveal">
+    <p class="q">This was an experiential learning opportunity for students to gain insights on real-time space electronics and the harsh realities of intricate and expensive equipment experiences in space.</p>
+    <p class="attrib"><b>John Papapolymerou</b>, Director of the MSU Space Electronics Initiative, on the boot camp <span class="samp">Quoted from MSU news</span></p>
+  </div></section>
+
+  <section class="next alt"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="research" type="button"><span class="k">Research</span><b>The work you would join</b><span>Areas of work across the Initiative.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="people" type="button"><span class="k">People</span><b>Who teaches this</b><span>The faculty roster.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="contact" type="button"><span class="k">Contact</span><b>Get in touch</b><span>Ask about capstones, exchanges, and boot camps.</span><span class="go">Go &rarr;</span></button>
+  </div></div></section>
+</div>
+
+<!-- ============ NEWS ============ -->
+<div class="view" id="v-news" hidden>
+  <header class="hero"><div class="wrap">
+    <span class="orbit-motif" aria-hidden="true"><i></i><b></b></span>
+    <p class="eyebrow">Newsroom</p>
+    <h1>Testing milestones, new members, and student outcomes.</h1>
+    <p class="lede">A self-contained newsroom for the Initiative. The stories below draw on public MSU and FRIB reporting and are marked as sample where the full text is illustrative. Dates and headlines reflect published news; confirm details before republishing.</p>
+  </div></header>
+
+  <section><div class="wrap">
+    <div class="newshead">
+      <div><p class="eyebrow reveal">Featured</p></div>
+    </div>
+    <button class="newsfeat reveal" data-article="highbay" type="button">
+      <div class="nfimg"><span class="nftag">Facility</span><span class="nfimglabel">Photo &middot; FRIB</span></div>
+      <div class="nfbody">
+        <span class="nfdate">September 2025</span>
+        <h3>MSU to triple chip-testing capacity at FRIB</h3>
+        <p>The MSU Board of Trustees authorized a high-bay addition to FRIB that adds user vaults and helps meet the national shortfall in advanced-microelectronics testing.</p>
+        <span class="nflink">Read the story &rarr;</span>
+      </div>
+    </button>
+
+    <div class="newsfilter mt reveal" id="newsfilter" role="group" aria-label="Filter news by category">
+      <button data-nfilter="all" aria-pressed="true" type="button">All</button>
+      <button data-nfilter="Facility" aria-pressed="false" type="button">Facility</button>
+      <button data-nfilter="Students" aria-pressed="false" type="button">Students</button>
+      <button data-nfilter="Members" aria-pressed="false" type="button">Members</button>
+      <button data-nfilter="People" aria-pressed="false" type="button">People</button>
+    </div>
+
+    <div class="newslist reveal">
+      <button class="newsitem" data-ncat="Students" data-article="bootcamp" type="button"><span class="nidate"><span>Jan 2025</span><span class="nicat">Students</span></span><b>Inaugural Single Event Effects radiation-testing boot camp</b><span class="nidek">Texas Instruments sponsored a hands-on boot camp with FRIB and the Initiative, putting students on real radiation testing.</span></button>
+      <button class="newsitem" data-ncat="People" data-article="director" type="button"><span class="nidate"><span>2024</span><span class="nicat">People</span></span><b>Papapolymerou named inaugural director</b><span class="nidek">The former ECE chair takes the lead of the Initiative, an alliance with FRIB.</span></button>
+      <button class="newsitem" data-ncat="Members" data-article="ti" type="button"><span class="nidate"><span>2024</span><span class="nicat">Members</span></span><b>Texas Instruments joins as an early supporter</b><span class="nidek">TI, which has built integrated circuits for space for more than 60 years, worked with FRIB on some of the first testing sessions.</span></button>
+      <button class="newsitem" data-ncat="Facility" data-article="highbay" type="button"><span class="nidate"><span>Sep 2025</span><span class="nicat">Facility</span></span><b>A high-bay addition to triple testing capacity</b><span class="nidek">Two additional user vaults aimed at the national shortfall in advanced-microelectronics testing.</span></button>
+    </div>
+    <p class="newsempty" id="newsempty" hidden>No stories in this category yet.</p>
+    <div class="thin reveal"><b>Confirm before launch:</b> article bodies here are illustrative summaries drawn from public reporting. Replace them with the Initiative's own text and confirm every date before this newsroom goes live.</div>
+  </div></section>
+
+  <section class="next deep"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="testing" type="button"><span class="k">Testing</span><b>The FRIB testing thread</b><span>The work behind the facility news.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="students" type="button"><span class="k">Students</span><b>Boot camps and capstones</b><span>How students get into this work.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="membership" type="button"><span class="k">Membership</span><b>Become a member</b><span>Join the companies in these stories.</span><span class="go">Go &rarr;</span></button>
+  </div></div></section>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<div class="view" id="v-contact" hidden>
+  <header class="hero"><div class="wrap">
+    <span class="orbit-motif" aria-hidden="true"><i></i><b></b></span>
+    <p class="eyebrow">Contact</p>
+    <h1>Start a membership conversation, or reach the office.</h1>
+    <p class="lede">For membership, reach Bill Harokopus directly. For everything else, the Initiative's office is in the College of Engineering at MSU. Confirm the phone number and any current staff before launch.</p>
+  </div></header>
+
+  <section><div class="wrap">
+    <div class="contactgrid">
+      <div class="contactcard reveal" style="border-top:3px solid var(--leaf)">
+        <h3>Membership</h3>
+        <p>The sharpest reason to get in touch. If your company wants to test at FRIB, sponsor research, or take an advisory-board seat, start here.</p>
+        <div class="cline"><b>Contact</b>William (Bill) Harokopus, Associate Professor, ECE</div>
+        <div class="cline"><b>Email</b><a href="mailto:harokop1@msu.edu">harokop1@msu.edu</a></div>
+        <p style="margin-top:14px"><button class="btn btn-green" data-view="membership" type="button">Review membership first</button></p>
+      </div>
+      <div class="contactcard reveal" style="border-top:3px solid var(--spartan)">
+        <h3>General office</h3>
+        <p>For students, researchers, and press, the Initiative is based in the College of Engineering at Michigan State University.</p>
+        <div class="cline"><b>Address</b>426 Auditorium Road, East Lansing, MI 48824</div>
+        <div class="cline"><b>Phone</b>(517) 357-5817 <span class="samp">Confirm</span></div>
+        <div class="cline"><b>On the web</b><a href="https://space-electronics.msu.edu" target="_blank" rel="noopener">space-electronics.msu.edu</a></div>
+      </div>
+    </div>
+    <div class="note reveal"><h3>Who leads the Initiative</h3><p>The MSU <b>College of Engineering</b> leads the Initiative jointly with the <b>Facility for Rare Isotope Beams</b>. The director is John Papapolymerou. FRIB is a separate MSU facility led by Thomas Glasmacher; the Initiative works with it and does not speak for it.</p></div>
+  </div></section>
+
+  <section class="next alt"><div class="wrap"><h2 class="sec reveal">Where to go next</h2><div class="nextgrid reveal">
+    <button class="nextcard" data-view="membership" type="button"><span class="k">Membership</span><b>See the benefits</b><span>What joining gets a company.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="people" type="button"><span class="k">People</span><b>Who you would work with</b><span>The director and faculty roster.</span><span class="go">Go &rarr;</span></button>
+    <button class="nextcard" data-view="home" type="button"><span class="k">Overview</span><b>Back to the start</b><span>The whole Initiative at a glance.</span><span class="go">Go &rarr;</span></button>
+  </div></div></section>
+</div>
+
+<!-- ============ NEWS ARTICLE ============ -->
+<div class="view" id="v-article" hidden>
+  <article id="articlebody"><!-- filled by JS --></article>
+</div>
+
+</main>
+
+<div class="scrollprog" id="scrollprog" aria-hidden="true"></div>
+<button class="backtop" id="backtop" aria-label="Back to top" type="button">&#8593;</button>
+
+<footer class="site"><div class="wrap">
+  <div class="foot-grid">
+    <div class="foot-brand"><b>MSU <em>Space Electronics</em></b><p>An industry-membership research center for the design and testing of electronics for space, led by the MSU College of Engineering and the Facility for Rare Isotope Beams.</p>
+      <p class="foot-contact">426 Auditorium Road, East Lansing, MI 48824<br><a href="mailto:harokop1@msu.edu">harokop1@msu.edu</a> &middot; (517) 357-5817 <span class="samp">Confirm</span></p>
+    </div>
+    <div><h3 class="foot-h">Explore</h3><ul>
+      <li><button data-view="membership" type="button">Membership</button></li>
+      <li><button data-view="testing" type="button">FRIB testing</button></li>
+      <li><button data-view="research" type="button">Research</button></li>
+      <li><button data-view="people" type="button">People</button></li>
+      <li><button data-view="news" type="button">News</button></li>
+    </ul></div>
+    <div><h3 class="foot-h">Get involved</h3><ul>
+      <li><button data-view="students" type="button">Students</button></li>
+      <li><button data-view="membership" type="button">Join as a member</button></li>
+      <li><button data-view="contact" type="button">Contact</button></li>
+    </ul></div>
+    <div><h3 class="foot-h">More MSU</h3><ul>
+      <li><a href="https://msu.edu">Michigan State University</a></li>
+      <li><a href="https://engineering.msu.edu">College of Engineering</a></li>
+      <li><a href="https://frib.msu.edu">FRIB</a></li>
+    </ul></div>
+  </div>
+  <p class="support"><b>About this mock-up:</b> a proposed reimagining of the MSU Space Electronics Initiative website, built on public MSU and FRIB sources. Facts reflect published information and should be re-confirmed with the Initiative. Items marked <span class="samp">Confirm</span> or <span class="samp">Sample</span> are placeholders to review before anything goes live. FRIB is a separate MSU facility; this site does not speak for it. This is not the live Space Electronics Initiative site.</p>
+  <p class="legal">&copy; Michigan State University Board of Trustees. MSU is an affirmative-action, equal-opportunity employer.</p>
+</div></footer>
+
+<script>
+(function(){
+"use strict";
+var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* reveal */
+function initReveal(root){
+  var els=(root||document).querySelectorAll('.reveal');
+  if(RM||!('IntersectionObserver'in window)){els.forEach(function(e){e.classList.add('in');});return;}
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(x){
+      if(x.isIntersecting){
+        var el=x.target;
+        var sibs=el.parentNode?[].slice.call(el.parentNode.querySelectorAll(':scope > .reveal')):[el];
+        var idx=sibs.indexOf(el);
+        var delay=idx>0?Math.min(idx*70,420):0;
+        el.style.transitionDelay=delay+'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      }
+    });
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){io.observe(e);});
+}
+
+/* router */
+var VIEWS=['home','membership','testing','research','people','students','news','contact','article'];
+function showView(name,push){
+  if(VIEWS.indexOf(name)<0)name='home';
+  VIEWS.forEach(function(v){var el=document.getElementById('v-'+v);if(el)el.hidden=(v!==name);});
+  document.querySelectorAll('[data-view]').forEach(function(b){
+    var on=b.getAttribute('data-view')===name;
+    if(b.closest('.navlinks')){on?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current');}
+  });
+  if(push)history.pushState({v:name},'','#/'+name);
+  window.scrollTo({top:0,behavior:RM?'auto':'smooth'});
+  var nl=document.getElementById('navlinks');if(nl)nl.classList.remove('open');
+  var nt=document.getElementById('navtoggle');if(nt){nt.setAttribute('aria-expanded','false');nt.textContent='Menu';}
+  var vw=document.getElementById('v-'+name);
+  if(vw&&!RM){vw.classList.remove('vfade');void vw.offsetWidth;vw.classList.add('vfade');}
+  initReveal(vw);
+  if(push&&vw){var hd=vw.querySelector('h1');if(hd){hd.setAttribute('tabindex','-1');hd.focus({preventScroll:true});}}
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-view]');
+  if(b){e.preventDefault();showView(b.getAttribute('data-view'),true);}
+});
+window.addEventListener('popstate',function(){showView((location.hash||'#/home').replace('#/',''),false);});
+
+/* nav toggle */
+var nt=document.getElementById('navtoggle'),nl=document.getElementById('navlinks');
+if(nt)nt.addEventListener('click',function(){var o=nl.classList.toggle('open');nt.setAttribute('aria-expanded',o?'true':'false');nt.textContent=o?'Close':'Menu';});
+
+/* news filter */
+var nfbtns=[].slice.call(document.querySelectorAll('#newsfilter [data-nfilter]'));
+var nitems=[].slice.call(document.querySelectorAll('#v-news .newsitem'));
+var nempty=document.getElementById('newsempty');
+nfbtns.forEach(function(b){
+  b.addEventListener('click',function(){
+    var f=b.getAttribute('data-nfilter');
+    nfbtns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    var shown=0;
+    nitems.forEach(function(c){
+      var on=(f==='all'||c.getAttribute('data-ncat')===f);
+      c.style.display=on?'':'none';
+      if(on)shown++;
+    });
+    if(nempty)nempty.hidden=!!shown;
+  });
+});
+
+/* news articles */
+var ARTICLES={
+  highbay:{cat:'Facility',date:'September 2025',title:'MSU to triple chip-testing capacity at FRIB',
+    body:['The Michigan State University Board of Trustees authorized construction of a high-bay addition to the west end of the Facility for Rare Isotope Beams. The addition is set to triple the current chip-testing capacity by adding two user vaults.',
+    'The K500 Chip Testing Facility at FRIB helps meet a national shortfall in testing capacity for advanced microelectronics, including the parts used in commercial spaceflight, wireless technology, and autonomous vehicles.',
+    'For the Space Electronics Initiative, more testing capacity means members can qualify parts on a faster cadence, a direct benefit of the FRIB tie.']},
+  bootcamp:{cat:'Students',date:'January 2025',title:'Inaugural radiation-testing boot camp with Texas Instruments',
+    body:['Texas Instruments sponsored the inaugural Single Event Effects Radiation Testing Boot Camp in January 2025, in partnership with the Facility for Rare Isotope Beams and the MSU Space Electronics Initiative.',
+    'Students worked alongside TI engineers and MSU engineers and physicists at FRIB, learning how solid-state electronics behave under the conditions of space and why testing them matters for satellite design.',
+    'The boot camp is one way the Initiative builds the space-electronics workforce that member companies hire from.']},
+  director:{cat:'People',date:'2024',title:'Papapolymerou named inaugural director of the Initiative',
+    body:['MSU Research Foundation Professor John (Ioannis) Papapolymerou was named the first director of the MSU Space Electronics Initiative, an alliance with the Facility for Rare Isotope Beams.',
+    'He moved into the role from his position as chair of the Department of Electrical and Computer Engineering. The Initiative promotes collaboration among industry, government, and MSU on the design and testing of electronics for space.']},
+  ti:{cat:'Members',date:'2024',title:'Texas Instruments joins as an early supporter',
+    body:['Texas Instruments is a named member and early supporter of the Initiative. TI is a global semiconductor company that designs, manufactures, tests, and sells analog and embedded processing chips.',
+    'TI worked closely with the FRIB team on some of the Initiative\u2019s first electronics-testing sessions. It has developed integrated circuits for space for more than 60 years.']}
+};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function showArticle(id){
+  var a=ARTICLES[id];if(!a)return;
+  var el=document.getElementById('articlebody');
+  var paras=a.body.map(function(p){return '<p>'+esc(p)+'</p>';}).join('');
+  el.innerHTML=
+    '<header class="hero arthero"><div class="wrap">'+
+    '<span class="orbit-motif" aria-hidden="true"><i></i><b></b></span>'+
+    '<button class="linkish backnews" data-view="news" type="button" style="color:#fff">&larr; Back to newsroom</button>'+
+    '<p class="eyebrow" style="margin-top:14px">'+esc(a.cat)+'</p>'+
+    '<h1>'+esc(a.title)+'</h1>'+
+    '<p class="lede" style="opacity:.85">'+esc(a.date)+'</p>'+
+    '</div></header>'+
+    '<section><div class="wrap artwrap">'+
+    '<div class="artimg"><span class="nfimglabel">Photo</span></div>'+
+    '<div class="artbody">'+paras+
+    '<p class="artnote"><span class="samp">Sample article body</span> Text is an illustrative summary drawn from public MSU and FRIB reporting, for the Initiative to replace with its own.</p>'+
+    '<p style="margin-top:20px"><button class="btn btn-green backnews" data-view="news" type="button">&larr; All news</button></p>'+
+    '</div></div></section>';
+  showView('article',true);
+}
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-article]');
+  if(t){e.preventDefault();showArticle(t.getAttribute('data-article'));}
+});
+
+/* back-to-top + scroll progress */
+var backtop=document.getElementById('backtop'),sprog=document.getElementById('scrollprog');
+if(backtop)backtop.addEventListener('click',function(){window.scrollTo({top:0,behavior:RM?'auto':'smooth'});});
+var _sticking=false;
+function onScroll(){
+  var y=window.pageYOffset||document.documentElement.scrollTop;
+  if(backtop)backtop.classList.toggle('show',y>600);
+  var nav=document.querySelector('.nav');if(nav)nav.classList.toggle('scrolled',y>10);
+  if(sprog){var dh=document.documentElement.scrollHeight-window.innerHeight;sprog.style.width=dh>0?(y/dh*100)+'%':'0';}
+}
+window.addEventListener('scroll',function(){if(!_sticking){_sticking=true;requestAnimationFrame(function(){onScroll();_sticking=false;});}},{passive:true});
+onScroll();
+
+/* boot */
+showView((location.hash||'#/home').replace('#/',''),false);
+initReveal(document);
+})();
+</script>
+</body>
+</html>
