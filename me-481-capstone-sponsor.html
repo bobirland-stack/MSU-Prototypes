@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--
   MSU Department of Mechanical Engineering - ME 481 Capstone Sponsorship page (PROTOTYPE / REFERENCE DESIGN)
@@ -8,7 +9,8 @@
   This is a static, self-contained HTML page.
   - It does not transmit, collect, or store any data. No forms. No external scripts.
   - The only external resource is the Google Fonts stylesheet (production swaps in brand typefaces).
-  - Coordinator names, emails, and dates marked [in brackets] are placeholders pending department confirmation.
+  - Contacts are confirmed (coordinator: Jeff Vandenabeele; ME Capstone Alumni Advisory Board: Chair Minami Yoda).
+  - Timeline dates are representative and pending department confirmation.
   - Sponsor names are drawn from public Design Day program booklets, Spring 2023 - Fall 2025.
 -->
 <html lang="en">
@@ -53,7 +55,7 @@ a:focus-visible,.btn:focus-visible{outline:2.5px solid var(--green);outline-offs
 .btn-light:focus-visible{outline-color:#fff}
 .btn-ghost{background:transparent;color:var(--green)}
 .btn-ghost:hover{background:rgba(24,69,59,.06)}
-.btn-mail{margin-top:12px;font-size:13px;padding:9px 16px}
+.email{color:var(--green);font-weight:600;-webkit-user-select:all;user-select:all}
 .dept{display:flex;flex-direction:column}
 .dept .btn-mail{margin-top:auto;align-self:flex-start}
 nav .wrap{gap:16px}
@@ -146,8 +148,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
       <a class="link" href="#how">Process</a>
       <a class="link" href="#engage">Project ideas</a>
       <a class="link" href="#timeline">Timeline</a>
-      <a class="link" href="#advisory-board">Advisory board</a>
-      <a class="btn btn-solid" href="mailto:vand1357@msu.edu">Email the coordinator</a>
+      <a class="link" href="#advisory-board">ME Capstone Alumni Advisory Board</a>
     </div>
   </div>
 </nav>
@@ -158,7 +159,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
     <h1>Sponsor an ME 481 senior design project.</h1>
     <p class="sub">Each fall and spring, teams of mechanical engineering seniors complete one-semester capstone projects for sponsoring organizations and present the results at Design Day. This page describes how sponsorship works and how to get started.</p>
     <div class="cta-row">
-      <a class="btn btn-light" href="mailto:vand1357@msu.edu" style="background:#fff;color:var(--green)">Email the ME 481 coordinator</a>
+      <a class="btn btn-light" href="#start" style="background:#fff;color:var(--green)">How to sponsor a project</a>
       <a class="btn btn-light" href="https://designday.msu.edu" target="_blank" rel="noopener">See past projects on the Design Day website</a>
     </div>
     <div class="stats">
@@ -194,15 +195,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
         <h3>Sponsor a project</h3>
         <p class="course">ME 481 · fall &amp; spring</p>
         <ul><li>Typical areas: design, manufacturing, thermal &amp; fluids, mobility, robotics, energy</li><li>Teams of 4–6 seniors</li></ul>
-        <p class="contact"><b>To sponsor a project, contact the ME 481 coordinator:</b><br>Jeff Vandenabeele</p>
-        <a class="btn btn-solid btn-mail" href="mailto:vand1357@msu.edu">Email vand1357@msu.edu</a>
+        <p class="contact"><b>To sponsor a project, contact:</b><br>Jeff Vandenabeele, ME 481 Coordinator<br><span class="email">vand1357@msu.edu</span></p>
       </div>
       <div class="dept">
         <h3>Other ways to get involved</h3>
         <p class="course">Judging &amp; mentoring</p>
         <ul><li>Serve as a Design Day judge</li><li>Mentor a project team in your area of expertise</li></ul>
-        <p class="contact"><b>For more information, contact the ME 481 coordinator:</b><br>Jeff Vandenabeele</p>
-        <a class="btn btn-ghost btn-mail" href="mailto:vand1357@msu.edu">Email vand1357@msu.edu</a>
+        <p class="contact"><b>For judging &amp; mentoring, contact:</b><br>Jeff Vandenabeele, ME 481 Coordinator<br><span class="email">vand1357@msu.edu</span></p>
       </div>
     </div>
     <div class="inter-note"><b>Interdisciplinary projects.</b> Problems that span departments, such as mechanical design with embedded software, can be supported by cross-department teams. Mention this when you reach out, or contact Corporate &amp; Foundation Relations to coordinate across departments.</div>
@@ -269,9 +268,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
         <h3>Fall semester</h3>
         <p class="when">Roughly late August – early December</p>
         <ol>
-          <li><span class="d">Spring</span><span class="t">Inquiry and scoping conversations</span><span class="x">Initial discussion with the ME 481 coordinator; sample project briefs provided.</span></li>
+          <li><span class="d">Spring</span><span class="t">Inquiry and scoping conversations</span><span class="x">Initial discussion with the ME 481 coordinator; sample project briefs and a draft NDA provided.</span></li>
           <li><span class="d">Around mid-summer</span><span class="t">Proposal finalized</span><span class="x">A short problem statement, refined with the coordinator.</span></li>
-          <li><span class="d">Summer</span><span class="t">Scope finalized; agreement processed</span><span class="x">Sponsorship agreement completed before classes begin.</span></li>
+          <li><span class="d">Summer</span><span class="t">Scope finalized; agreement and NDA processed</span><span class="x">Sponsorship agreement and NDA finalized before classes begin.</span></li>
           <li><span class="d">Start of semester</span><span class="t">Team assigned; kickoff meeting</span><span class="x">Teams form in the opening weeks; kickoff with the sponsor contact.</span></li>
           <li><span class="d">Through the fall</span><span class="t">Project work and check-ins</span><span class="x">Regular sponsor check-ins; mid-semester design review.</span></li>
           <li class="dl"><span class="d">Early December</span><span class="t">Design Day and final deliverables</span><span class="x">Public presentation; final report and deliverables transferred.</span></li>
@@ -281,9 +280,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
         <h3>Spring semester</h3>
         <p class="when">Roughly mid-January – late April</p>
         <ol>
-          <li><span class="d">Fall</span><span class="t">Inquiry and scoping conversations</span><span class="x">Initial discussion with the ME 481 coordinator; sample project briefs provided.</span></li>
+          <li><span class="d">Fall</span><span class="t">Inquiry and scoping conversations</span><span class="x">Initial discussion with the ME 481 coordinator; sample project briefs and a draft NDA provided.</span></li>
           <li><span class="d">Around late fall</span><span class="t">Proposal finalized</span><span class="x">A short problem statement, refined with the coordinator.</span></li>
-          <li><span class="d">Late fall – winter break</span><span class="t">Scope finalized; agreement processed</span><span class="x">Sponsorship agreement completed before classes begin.</span></li>
+          <li><span class="d">Late fall – winter break</span><span class="t">Scope finalized; agreement and NDA processed</span><span class="x">Sponsorship agreement and NDA finalized before classes begin.</span></li>
           <li><span class="d">Start of semester</span><span class="t">Team assigned; kickoff meeting</span><span class="x">Teams form in the opening weeks; kickoff with the sponsor contact.</span></li>
           <li><span class="d">Through the spring</span><span class="t">Project work and check-ins</span><span class="x">Regular sponsor check-ins; mid-semester design review.</span></li>
           <li class="dl"><span class="d">Late April</span><span class="t">Design Day and final deliverables</span><span class="x">Public presentation; final report and deliverables transferred.</span></li>
@@ -301,13 +300,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 
 <section id="advisory-board">
   <div class="wrap">
-    <p class="kicker">Advisory board</p>
-    <h2>The ME Capstone Advisory Board</h2>
-    <p class="lede">The Mechanical Engineering Capstone Advisory Board builds alumni-to-alumni connections and creates opportunities for companies to participate in and sponsor ME 481 projects.</p>
+    <p class="kicker">ME Capstone Alumni Advisory Board</p>
+    <h2>The ME Capstone Alumni Advisory Board</h2>
+    <p class="lede">The ME Capstone Alumni Advisory Board builds alumni-to-alumni connections and creates opportunities for companies to participate in and sponsor ME 481 projects.</p>
     <div style="max-width:760px">
       <p style="font-size:15px;line-height:1.65;color:var(--ink);margin-bottom:14px">The best sponsored projects come out of relationships, not transactions. Alumni who have sponsored projects know how to scope a problem that fits a semester, and their experience helps new sponsors get it right the first time. The board keeps a steady pipeline of well-matched projects flowing into ME 481, keeps project work grounded in real industry problems, and connects students with the professional network they are about to join.</p>
       <div style="border:1px solid var(--line);border-radius:12px;padding:18px 22px;background:var(--surface)">
-        <p style="font-size:14.5px;line-height:1.6"><b>Interested in the advisory board?</b> Contact Mechanical Engineering Department Chair Minami Yoda at [email address]@msu.edu.</p>
+        <p style="font-size:14.5px;line-height:1.6"><b>Interested in the ME Capstone Alumni Advisory Board?</b> Contact Mechanical Engineering Department Chair Minami Yoda at <span class="email">yodamina@msu.edu</span>.</p>
       </div>
     </div>
   </div>
@@ -332,14 +331,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
         <p style="font-size:15px;font-weight:700;margin-bottom:3px">Start with a conversation.</p>
         <p style="font-size:14px;color:var(--muted);line-height:1.55">For general questions about sponsorship, or if your project spans departments or sits outside mechanical engineering, contact Bob Irland, Associate Director of Corporate and Foundation Relations, College of Engineering.</p>
       </div>
-      <p style="font-size:14.5px;white-space:nowrap;font-weight:500">Bob Irland<br><a href="mailto:irlandro@msu.edu" style="color:var(--green)">irlandro@msu.edu</a></p>
+      <p style="font-size:14.5px;white-space:nowrap;font-weight:500">Bob Irland<br><span class="email">irlandro@msu.edu</span></p>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p><b>Prototype / reference design.</b> Sponsor names drawn from public Design Day program booklets, Spring 2023 – Fall 2025 (designday.msu.edu).<br>Dates and the advisory board contact email are representative placeholders pending confirmation.</p>
+    <p><b>Prototype / reference design.</b> Sponsor names drawn from public Design Day program booklets, Spring 2023 – Fall 2025 (designday.msu.edu).<br>Dates are representative placeholders pending confirmation.</p>
     <p>MSU College of Engineering<br>Department of Mechanical Engineering</p>
   </div>
 </footer>
