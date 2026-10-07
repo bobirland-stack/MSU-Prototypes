@@ -1,4 +1,5 @@
 
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <!--
   MSU Department of Mechanical Engineering - ME 481 Capstone Sponsorship page (PROTOTYPE / REFERENCE DESIGN)
@@ -11,6 +12,10 @@
   - The only external resource is the Google Fonts stylesheet (production swaps in brand typefaces).
   - Contacts are confirmed (coordinator: Jeff Vandenabeele; ME Capstone Alumni Advisory Board: Chair Minami Yoda).
   - Timeline dates are representative and pending department confirmation.
+  - Project highlights are real award-winning ME 481 projects from the public Spring 2025 Design Day booklet.
+  - Testimonials are FICTIONAL, clearly labeled illustrative placeholders pending real quotes.
+  - The distribution-list form is a non-functional demonstration: no data is transmitted or stored.
+    Production version should be an MSU-licensed form tool (Qualtrics / Microsoft Forms) owned by the department.
   - Sponsor names are drawn from public Design Day program booklets, Spring 2023 - Fall 2025.
 -->
 <html lang="en">
@@ -49,17 +54,17 @@ nav a.link:hover{color:var(--green)}
 .btn-solid:hover{background:var(--green-deep)}
 .btn-light{border-color:#fff;color:#fff;background:transparent}
 .btn-light:hover{background:rgba(255,255,255,.12)}
-nav .btn{padding:8px 16px;font-size:13px}
+nav .btn{padding:8px 16px;font-size:13px;flex:none}
 /* UX pass: keyboard focus, mobile nav, actionable contact buttons */
 a:focus-visible,.btn:focus-visible{outline:2.5px solid var(--green);outline-offset:2px;border-radius:4px}
-.btn-light:focus-visible{outline-color:#fff}
+.btn-light:focus-visible,.cta-band .btn:focus-visible,.linkband a:focus-visible{outline-color:#fff}
 .btn-ghost{background:transparent;color:var(--green)}
 .btn-ghost:hover{background:rgba(24,69,59,.06)}
 .email{color:var(--green);font-weight:600;-webkit-user-select:all;user-select:all}
 .dept{display:flex;flex-direction:column}
 .dept .btn-mail{margin-top:auto;align-self:flex-start}
 nav .wrap{gap:16px}
-.navlinks{gap:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;white-space:nowrap}
+.navlinks{gap:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;white-space:nowrap}
 .navlinks::-webkit-scrollbar{display:none}
 @media (max-width:820px){
   .brand span{display:none}
@@ -136,19 +141,79 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .alt{background:var(--surface)}
 .group-h{font-size:18px;font-weight:800;margin-top:34px;color:var(--green)}
 .group-sub{font-size:14.5px;color:var(--muted);margin:6px 0 18px;max-width:660px;line-height:1.55}
+/* Distribution list CTA band + form */
+.cta-band{background:var(--green);color:#fff;padding:34px 0}
+.cta-band .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.cta-band h3{font-size:20px;font-weight:800}
+.cta-band p{font-size:14px;color:#D7E4DE;line-height:1.55;max-width:560px;margin-top:4px}
+.cta-band .btn{border-color:#fff;background:#fff;color:var(--green);margin-left:auto}
+@media (max-width:700px){.cta-band .btn{margin-left:0}}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;margin-top:28px;max-width:760px}
+.formgrid .full{grid-column:1/-1}
+@media (max-width:640px){.formgrid{grid-template-columns:1fr}}
+.formgrid label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.formgrid input[type=text],.formgrid input[type=email],.formgrid select{width:100%;font-family:'Poppins',sans-serif;font-size:14.5px;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:11px 12px;background:#fff}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:flex;align-items:center;gap:7px;font-weight:400;font-size:13.5px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;margin:0;background:#fff}
+.checks label:has(input:checked){border-color:var(--green);background:var(--surface);color:var(--green);font-weight:600}
+.form-hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+.success{display:none;max-width:760px;margin-top:24px;background:var(--surface);border:1px solid var(--green);border-radius:12px;padding:24px}
+.success h3{color:var(--green);font-size:17px;margin-bottom:6px}
+.success p{font-size:14px;line-height:1.6}
+/* Impact: highlights + testimonials */
+.hl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin-top:28px}
+.hl{border:1px solid var(--line);border-left:4px solid var(--green);border-radius:12px;background:#fff;padding:22px}
+.hl .award{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:8px}
+.hl h3{font-size:16.5px;font-weight:700;margin-bottom:6px}
+.hl p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.hl .src{font-size:12px;color:var(--muted);margin-top:12px;padding-top:10px;border-top:1px solid var(--surface)}
+.quote-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+@media (max-width:760px){.quote-grid{grid-template-columns:1fr}}
+.quote{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:22px}
+.quote p.q{font-size:14.5px;line-height:1.65;color:var(--ink)}
+.quote p.who{margin-top:14px;font-size:13px;font-weight:600;color:var(--green)}
+.quote p.who span{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:1px}
+.illus-note{margin-top:18px;font-size:12.5px;color:var(--muted);border:1px dashed var(--line);border-radius:8px;padding:10px 14px;max-width:760px}
+/* ME Capstone Alumni Advisory Board */
+.board-cols{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;margin-top:34px;align-items:start}
+@media (max-width:860px){.board-cols{grid-template-columns:1fr}}
+.board-does h3,.board-members h3{font-size:17px;font-weight:700;margin-bottom:14px;color:var(--green)}
+.board-does ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.board-does li{position:relative;padding-left:26px;font-size:14.5px;line-height:1.6;color:var(--ink)}
+.board-does li::before{content:'';position:absolute;left:0;top:7px;width:10px;height:10px;border-radius:3px;background:var(--green)}
+.board-members{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:24px}
+.board-members ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.board-members li{font-size:14px;line-height:1.5;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.board-members li:last-child{padding-bottom:0;border-bottom:none}
+.board-members b{display:block;font-weight:600}
+.board-members span{color:var(--muted);font-size:13px}
+.board-join{margin-top:30px;border:1px solid var(--line);border-radius:12px;padding:20px 24px;background:var(--surface);max-width:760px}
+/* Collapsible detail rows */
+details.row{border:1px solid var(--line);border-radius:12px;background:#fff;margin-top:12px}
+details.row summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:12px;padding:16px 20px;font-weight:700;font-size:15.5px}
+details.row summary::-webkit-details-marker{display:none}
+details.row summary .sub{font-weight:400;font-size:13px;color:var(--muted)}
+details.row summary::after{content:'+';margin-left:auto;font-size:19px;font-weight:400;color:var(--green);line-height:1}
+details.row[open] summary::after{content:'\2212'}
+details.row .body{padding:0 20px 18px;font-size:14px;color:var(--muted);line-height:1.6;max-width:760px}
+details.row .body.tl{border:none;background:transparent;padding:4px 20px 22px;max-width:none}
+details.row .body .fit{margin-top:10px;font-size:12.5px;color:var(--ink)}
+details.row .body .fit b{font-weight:500;color:var(--muted)}
+details.row summary:focus-visible{outline:2.5px solid var(--green);outline-offset:2px;border-radius:12px}
+.board-join p{font-size:14.5px;line-height:1.6}
 </style>
 </head>
 <body>
-<div class="demo-strip"><b>PROTOTYPE: not an official MSU page</b> · reference design for internal review · some contacts &amp; dates are placeholders pending confirmation</div>
+<div class="demo-strip"><b>PROTOTYPE: not an official MSU page</b> · reference design for internal review · testimonials are illustrative · form is a non-functional demo</div>
 <nav aria-label="Page navigation">
   <div class="wrap">
     <a class="brand" href="#top">MSU Engineering <span>/ Mechanical Engineering</span></a>
     <div class="navlinks">
       <a class="link" href="#start">Sponsor a project</a>
-      <a class="link" href="#how">Process</a>
-      <a class="link" href="#engage">Project ideas</a>
+      <a class="link" href="#impact">Why it matters</a>
       <a class="link" href="#timeline">Timeline</a>
       <a class="link" href="#advisory-board">ME Capstone Alumni Advisory Board</a>
+      <a class="btn btn-solid" href="#list">Join the distribution list</a>
     </div>
   </div>
 </nav>
@@ -160,7 +225,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
     <p class="sub">Each fall and spring, teams of mechanical engineering seniors complete one-semester capstone projects for sponsoring organizations and present the results at Design Day. This page describes how sponsorship works and how to get started.</p>
     <div class="cta-row">
       <a class="btn btn-light" href="#start" style="background:#fff;color:var(--green)">How to sponsor a project</a>
-      <a class="btn btn-light" href="https://designday.msu.edu" target="_blank" rel="noopener">See past projects on the Design Day website</a>
+      <a class="btn btn-light" href="#list">Join the capstone distribution list</a>
     </div>
     <div class="stats">
       <div class="stat"><div class="n">ME 481</div><div class="l">Fall &amp; spring semesters</div></div>
@@ -185,6 +250,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
   </div>
 </div>
 
+
+
 <section id="start">
   <div class="wrap">
     <p class="kicker">Getting started</p>
@@ -205,16 +272,53 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
       </div>
       <div class="dept">
         <h3>Keep in touch</h3>
-        <p class="course">Capstone interest list</p>
-        <ul><li>No project identified yet? Raise your hand anyway.</li><li>Hear about upcoming opportunities, semester timelines, and Design Day, and share them within your team when the timing is right.</li></ul>
-        <p class="contact"><b>To join the interest list:</b><br>Email Jeff Vandenabeele and ask to be added<br><span class="email">vand1357@msu.edu</span></p>
+        <p class="course">ME Capstone Distribution List</p>
+        <ul><li>No project identified yet? Raise your hand anyway.</li><li>Receive semester timelines, invitations to sponsor, and project updates you can socialize within your team when the timing is right.</li></ul>
+        <p class="contact"><b>To stay connected:</b><br><a href="#list" style="color:var(--green);font-weight:600">Join the ME Capstone Distribution List &darr;</a></p>
       </div>
     </div>
     <div class="inter-note"><b>Interdisciplinary projects.</b> Problems that span departments, such as mechanical design with embedded software, can be supported by cross-department teams. Mention this when you reach out, or contact Corporate &amp; Foundation Relations to coordinate across departments.</div>
   </div>
 </section>
 
-<section class="alt" id="how">
+<section class="alt" id="impact">
+  <div class="wrap">
+    <p class="kicker">Why it matters</p>
+    <h2>Real problems. Real stakes. Real impact.</h2>
+    <p class="lede">A sponsored capstone is not a class exercise. Teams work an open engineering problem for a real organization for a full semester, and the results matter on both sides: sponsors get fresh engineering work and a semester-long look at future hires, and students graduate having delivered for a real client.</p>
+
+    <h3 class="group-h">Recent award-winning projects</h3>
+    <div class="hl-grid">
+      <div class="hl">
+        <p class="award">Edison Award &middot; Best Capstone Design Project</p>
+        <h3>Redesign of a Biomedical Injector</h3>
+        <p>An ME 481 team working with sponsor BONWRx redesigned a biomedical injector, earning the Edison Undergraduate Design Award for the best technical design project of the semester.</p>
+        <p class="src">Spring 2025 Design Day awards, MSU College of Engineering</p>
+      </div>
+      <div class="hl">
+        <p class="award">Best Project Presentation Award</p>
+        <h3>Design &amp; Manufacture of Custom Brake Calipers</h3>
+        <p>Working with MSU Baja Racing, an ME 481 team designed and manufactured custom brake calipers, taking the award for the best presentation of a design project.</p>
+        <p class="src">Spring 2025 Design Day awards, MSU College of Engineering</p>
+      </div>
+    </div>
+
+    <h3 class="group-h">What sponsors and students say</h3>
+    <div class="quote-grid">
+      <div class="quote">
+        <p class="q">&ldquo;We brought a fixture problem our own team had parked for two years. The students attacked it from angles we hadn't considered, and we hired two of them.&rdquo;</p>
+        <p class="who">Pat Gearhart<span>Director of Engineering, Red Cedar Gearworks (fictional)</span></p>
+      </div>
+      <div class="quote">
+        <p class="q">&ldquo;Everything before capstone was practice. This was the first time an actual company was counting on my work, and that changed how I engineer.&rdquo;</p>
+        <p class="who">Riley Sparten<span>Mechanical Engineering senior (fictional)</span></p>
+      </div>
+    </div>
+    <p class="illus-note"><b>Illustrative content:</b> the quotes above are fictional placeholders written to show how this section would work. Names and companies are invented. Production replaces them with real, permissioned testimonials gathered by the department. The two award-winning projects above are real and drawn from the public Design Day booklet.</p>
+  </div>
+</section>
+
+<section id="how">
   <div class="wrap">
     <p class="kicker">How it works</p>
     <h2>The sponsorship process</h2>
@@ -233,46 +337,43 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
   </div>
 </section>
 
-<section id="engage">
+<section class="alt" id="engage">
   <div class="wrap">
     <p class="kicker">Sponsored projects</p>
     <h2>Projects take many forms</h2>
     <p class="lede">There is no single template for a sponsored project. The examples below illustrate the range; the ME 481 coordinator will work with you to shape your idea, whatever form it takes, into a one-semester scope with defined deliverables.</p>
-    <div class="cards4">
-      <div class="opt">
-        <h3>A current engineering problem</h3>
-        <p>A design, build, analysis, or software challenge your organization is actively working on or has deferred for lack of capacity.</p>
-        <p class="fit"><b>Example:</b> redesign a test fixture; build an internal tool; evaluate three design alternatives</p>
-      </div>
-      <div class="opt">
-        <h3>A problem you've already solved</h3>
-        <p>A challenge your team previously addressed, approached independently by students as a point of comparison. Useful where confidentiality limits what can be shared about current work.</p>
-        <p class="fit"><b>Example:</b> a component design or process problem from a recent program</p>
-      </div>
-      <div class="opt">
-        <h3>An area you're evaluating</h3>
-        <p>A technology survey, feasibility study, or benchmarking analysis in a space your organization is considering but has not staffed.</p>
-        <p class="fit"><b>Example:</b> assess AI-based visual inspection methods; benchmark competitor approaches</p>
-      </div>
-      <div class="opt">
-        <h3>A project for the community</h3>
-        <p>Your organization funds a project for a Michigan nonprofit or public agency that could not otherwise commission engineering work. MSU identifies and matches the partner organization.</p>
-        <p class="fit"><b>Example:</b> assistive equipment for an adaptive sports program; a tool for a regional food bank</p>
-      </div>
-    </div>
-    <p class="formats-close">If your idea does not resemble any of these, reach out anyway. Projects are shaped collaboratively with the coordinator during scoping, and sample project briefs from past semesters are available on request.</p>
+    <details class="row">
+      <summary>A current engineering problem</summary>
+      <div class="body"><p>A design, build, analysis, or software challenge your organization is actively working on or has deferred for lack of capacity.</p>
+      <p class="fit"><b>Example:</b> redesign a test fixture; build an internal tool; evaluate three design alternatives</p></div>
+    </details>
+    <details class="row">
+      <summary>A problem you've already solved</summary>
+      <div class="body"><p>A challenge your team previously addressed, approached independently by students as a point of comparison. Useful where confidentiality limits what can be shared about current work.</p>
+      <p class="fit"><b>Example:</b> a component design or process problem from a recent program</p></div>
+    </details>
+    <details class="row">
+      <summary>An area you're evaluating</summary>
+      <div class="body"><p>A technology survey, feasibility study, or benchmarking analysis in a space your organization is considering but has not staffed.</p>
+      <p class="fit"><b>Example:</b> assess AI-based visual inspection methods; benchmark competitor approaches</p></div>
+    </details>
+    <details class="row">
+      <summary>A project for the community</summary>
+      <div class="body"><p>Your organization funds a project for a Michigan nonprofit or public agency that could not otherwise commission engineering work. MSU identifies and matches the partner organization.</p>
+      <p class="fit"><b>Example:</b> assistive equipment for an adaptive sports program; a tool for a regional food bank</p></div>
+    </details>
+        <p class="formats-close">If your idea does not resemble any of these, reach out anyway. Projects are shaped collaboratively with the coordinator during scoping, and sample project briefs from past semesters are available on request.</p>
   </div>
 </section>
 
-<section class="alt" id="timeline">
+<section id="timeline">
   <div class="wrap">
     <p class="kicker">Timeline</p>
     <h2>The general rhythm of a semester</h2>
     <p class="lede">Project scoping happens in the months before the semester begins, so conversations are best started early. The ME 481 coordinator will confirm exact dates for your semester.</p>
-    <div class="tl-grid">
-      <div class="tl">
-        <h3>Fall semester</h3>
-        <p class="when">Roughly late August – early December</p>
+    <details class="row">
+      <summary>Fall semester <span class="sub">roughly late August to early December</span></summary>
+      <div class="body tl">
         <ol>
           <li><span class="d">Spring</span><span class="t">Inquiry and scoping conversations</span><span class="x">Initial discussion with the ME 481 coordinator; sample project briefs and a draft NDA provided.</span></li>
           <li><span class="d">Around mid-summer</span><span class="t">Proposal finalized</span><span class="x">A short problem statement, refined with the coordinator.</span></li>
@@ -282,9 +383,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
           <li class="dl"><span class="d">Early December</span><span class="t">Design Day and final deliverables</span><span class="x">Public presentation; final report and deliverables transferred.</span></li>
         </ol>
       </div>
-      <div class="tl">
-        <h3>Spring semester</h3>
-        <p class="when">Roughly mid-January – late April</p>
+    </details>
+    <details class="row">
+      <summary>Spring semester <span class="sub">roughly mid-January to late April</span></summary>
+      <div class="body tl">
         <ol>
           <li><span class="d">Fall</span><span class="t">Inquiry and scoping conversations</span><span class="x">Initial discussion with the ME 481 coordinator; sample project briefs and a draft NDA provided.</span></li>
           <li><span class="d">Around late fall</span><span class="t">Proposal finalized</span><span class="x">A short problem statement, refined with the coordinator.</span></li>
@@ -294,8 +396,43 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
           <li class="dl"><span class="d">Late April</span><span class="t">Design Day and final deliverables</span><span class="x">Public presentation; final report and deliverables transferred.</span></li>
         </ol>
       </div>
+    </details>
+        <p class="tl-note">Timing is approximate. The coordinator will confirm exact dates when you reach out.</p>
+  </div>
+</section>
+
+<section class="alt" id="list">
+  <div class="wrap">
+    <p class="kicker">ME Capstone Distribution List</p>
+    <h2>Join the ME Capstone Distribution List</h2>
+    <p class="lede">A low-commitment way to stay connected to the ME 481 capstone program. Subscribers receive semester timelines for upcoming capstones, invitations to sponsor, updates on semesters and projects, and highlights of the impact capstones make for students and partner organizations. Join with or without a project in mind.</p>
+    <form class="formgrid" id="listform">
+      <div><label for="lf-name">Name</label><input type="text" id="lf-name" required></div>
+      <div><label for="lf-email">Email</label><input type="email" id="lf-email" required></div>
+      <div><label for="lf-org">Organization</label><input type="text" id="lf-org"></div>
+      <div><label for="lf-affil">I am</label>
+        <select id="lf-affil">
+          <option>An MSU alum</option>
+          <option>A company representative</option>
+          <option>An MSU alum at a company</option>
+          <option>Other / just interested</option>
+        </select>
+      </div>
+      <div class="full"><label>I'd like to receive <span style="font-weight:400;color:var(--muted)">(select any)</span></label>
+        <div class="checks">
+          <label><input type="checkbox" checked> Semester timelines &amp; sponsorship invitations</label>
+          <label><input type="checkbox" checked> Project &amp; semester updates</label>
+          <label><input type="checkbox"> Student &amp; sponsor impact highlights</label>
+          <label><input type="checkbox"> Design Day invitations</label>
+        </div>
+      </div>
+      <div class="full"><button class="btn btn-solid" type="submit">Join the list</button>
+        <p class="form-hint">Demonstration form &mdash; no data is transmitted or stored. The production version runs on an MSU form tool owned by the department.</p></div>
+    </form>
+    <div class="success" id="listsuccess">
+      <h3>You're on the list</h3>
+      <p>In a live implementation, this signup routes to the ME 481 program's distribution list, a confirmation email is sent, and you begin receiving the updates you selected. This demonstration stores nothing.</p>
     </div>
-    <p class="tl-note">Timing is approximate. The coordinator will confirm exact dates when you reach out.</p>
   </div>
 </section>
 
@@ -308,12 +445,30 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
   <div class="wrap">
     <p class="kicker">ME Capstone Alumni Advisory Board</p>
     <h2>The ME Capstone Alumni Advisory Board</h2>
-    <p class="lede">The ME Capstone Alumni Advisory Board builds alumni-to-alumni connections and creates opportunities for companies to participate in and sponsor ME 481 projects.</p>
-    <div style="max-width:760px">
-      <p style="font-size:15px;line-height:1.65;color:var(--ink);margin-bottom:14px">The best sponsored projects come out of relationships, not transactions. Alumni who have sponsored projects know how to scope a problem that fits a semester, and their experience helps new sponsors get it right the first time. The board keeps a steady pipeline of well-matched projects flowing into ME 481, keeps project work grounded in real industry problems, and connects students with the professional network they are about to join.</p>
-      <div style="border:1px solid var(--line);border-radius:12px;padding:18px 22px;background:var(--surface)">
-        <p style="font-size:14.5px;line-height:1.6"><b>Interested in the ME Capstone Alumni Advisory Board?</b> Contact Mechanical Engineering Department Chair Minami Yoda at <span class="email">yodamina@msu.edu</span>.</p>
+    <p class="lede">An alumni-led board that strengthens the ME 481 capstone program by connecting it to the people and organizations best positioned to support it.</p>
+    <div class="board-cols">
+      <div class="board-does">
+        <h3>What the board does</h3>
+        <ul>
+          <li>Provides input and industry perspective to the ME 481 capstone program.</li>
+          <li>Socializes capstone sponsorship across the network of alumni and industry contacts whose organizations could benefit from a project.</li>
+          <li>Activates alumni networks to create meaningful pathways for engagement with current students, from sponsorship to judging and mentoring.</li>
+          <li>Builds members' own professional networks through alumni-to-alumni connection.</li>
+        </ul>
       </div>
+      <div class="board-members">
+        <h3>Current members</h3>
+        <ul>
+          <li><b>[Member name]</b><span>[Title], [Organization] &middot; ME '[yr]</span></li>
+          <li><b>[Member name]</b><span>[Title], [Organization] &middot; ME '[yr]</span></li>
+          <li><b>[Member name]</b><span>[Title] (retired), [Organization] &middot; ME '[yr]</span></li>
+          <li><b>[Member name]</b><span>[Title], [Organization] &middot; ME '[yr]</span></li>
+          <li><b>[Member name]</b><span>[Title] (retired), [Organization] &middot; ME '[yr]</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="board-join">
+      <p><b>Interested in the ME Capstone Alumni Advisory Board?</b> Contact Mechanical Engineering Department Chair Minami Yoda at <span class="email">yodamina@msu.edu</span>.</p>
     </div>
   </div>
 </section>
@@ -324,10 +479,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
       <h3>Visit the Design Day website <span class="arr">→</span></h3>
       <p>Browse hundreds of past sponsored projects in the Design Day program booklets at designday.msu.edu, and attend the twice-yearly showcase as a prospective sponsor.</p>
     </a>
+    <a class="linkcard" href="#list">
+      <h3>Join the ME Capstone Distribution List <span class="arr">&#8594;</span></h3>
+      <p>Semester timelines, invitations to sponsor, and impact highlights. Join with or without a project in mind.</p>
+    </a>
   </div>
 </div>
 
-<!-- FUTURE: restore the structured inquiry form in a later revision, once routing/ownership is confirmed. -->
 <section id="contact">
   <div class="wrap">
     <p class="kicker">Questions</p>
@@ -344,11 +502,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 
 <footer>
   <div class="wrap">
-    <p><b>Prototype / reference design.</b> Sponsor names drawn from public Design Day program booklets, Spring 2023 – Fall 2025 (designday.msu.edu).<br>Dates are representative placeholders pending confirmation.</p>
+    <p><b>Prototype / reference design.</b> Sponsor names drawn from public Design Day program booklets, Spring 2023 – Fall 2025 (designday.msu.edu).<br>Dates and advisory board member listings are representative placeholders pending confirmation. Testimonials are fictional, clearly labeled illustrative placeholders. The distribution-list form is a demonstration and stores nothing.</p>
     <p>MSU College of Engineering<br>Department of Mechanical Engineering</p>
   </div>
 </footer>
 
 
+<script>
+document.getElementById("listform").addEventListener("submit",function(e){
+  e.preventDefault();
+  this.style.display="none";
+  var ok=document.getElementById("listsuccess");
+  ok.style.display="block";
+  ok.scrollIntoView({behavior:"smooth",block:"center"});
+});
+</script>
 </body>
 </html>
+</body></html>
