@@ -1,0 +1,984 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Work with MSU</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a company-facing guide. Goal cards and search on home; topic pages list people with evidence; a routed inquiry form; staff and faculty screens behind a demo switch. */
+:root{
+  --paper:#F6F7F4; --card:#FFFFFF; --ink:#1C2924; --muted:#58675F; --line:#D9E1DB;
+  --green:#18453B; --green-2:#2D6A55; --tint:#E5EEE8; --on-green:#FFFFFF;
+  --ok-bg:#E1F0E6; --ok-ink:#1D5A3D; --warn-bg:#F7EACB; --warn-ink:#684710; --unk-bg:#ECEEEB; --unk-ink:#525C57; --bad-bg:#F6DFDA; --bad-ink:#7A2A1F;
+  --demo-bg:#F3E6C3; --demo-ink:#5E4510;
+  --f-display:"Source Serif 4", Georgia, serif;
+  --f-body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#111814; --card:#18211C; --ink:#E5EEE8; --muted:#9CAEA4; --line:#2A3932;
+  --green:#86C2A3; --green-2:#A9D5BE; --tint:#1D2D25; --on-green:#0F1F18;
+  --ok-bg:#1C3A2B; --ok-ink:#A8DDBE; --warn-bg:#41331A; --warn-ink:#EFD9A3; --unk-bg:#252D29; --unk-ink:#B3BFB9; --bad-bg:#42221D; --bad-ink:#F1C1B6;
+  --demo-bg:#3E3216; --demo-ink:#EAD8A6; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#111814; --card:#18211C; --ink:#E5EEE8; --muted:#9CAEA4; --line:#2A3932;
+  --green:#86C2A3; --green-2:#A9D5BE; --tint:#1D2D25; --on-green:#0F1F18;
+  --ok-bg:#1C3A2B; --ok-ink:#A8DDBE; --warn-bg:#41331A; --warn-ink:#EFD9A3; --unk-bg:#252D29; --unk-ink:#B3BFB9; --bad-bg:#42221D; --bad-ink:#F1C1B6;
+  --demo-bg:#3E3216; --demo-ink:#EAD8A6; color-scheme:dark;}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--f-body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--green)}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1120px;margin:0 auto}
+a{color:var(--green)} a:hover{color:var(--green-2)}
+:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(1.75rem,4.2vw,2.5rem)} h2{font-size:1.4rem} h3{font-size:1.05rem}
+p{margin:0} .muted{color:var(--muted)} .small{font-size:.86rem} .mono{font-family:var(--f-mono);font-size:.82rem}
+button{font:inherit;cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+/* top */
+.demo{background:var(--demo-bg);color:var(--demo-ink);font-size:.8rem}
+.demo .wrap{display:flex;gap:.4rem 1rem;justify-content:space-between;align-items:center;flex-wrap:wrap;padding-block:.4rem}
+.demo .views{display:flex;gap:.3rem;flex-wrap:wrap;align-items:center}
+.demo .views button{border:1px solid currentColor;background:transparent;color:inherit;border-radius:999px;padding:.08rem .6rem;font-size:.78rem}
+.demo .views button[aria-pressed="true"]{background:var(--demo-ink);color:var(--demo-bg)}
+header.mast{background:var(--green);color:var(--on-green);position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+header.mast .wrap{display:flex;gap:.5rem 1.4rem;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:.75rem}
+.brand{background:none;border:none;color:inherit;text-align:left;padding:0;display:grid;line-height:1.15}
+.brand .org{font-size:.72rem;opacity:.8;letter-spacing:.03em}
+.brand .name{font-family:var(--f-display);font-size:1.3rem;font-weight:600}
+nav.main{display:flex;gap:.2rem;flex-wrap:wrap}
+nav.main button{background:transparent;border:none;color:inherit;opacity:.85;padding:.4rem .7rem;border-radius:6px;font-size:.92rem}
+nav.main button:hover{opacity:1}
+nav.main button[aria-current="page"]{opacity:1;background:rgba(255,255,255,.14);font-weight:600}
+main{padding-block:1.6rem 3rem}
+.view{display:grid;gap:1.6rem}
+section.block{display:grid;gap:.9rem}
+.lede{font-size:1.06rem;max-width:68ch}
+.crumb{background:none;border:none;color:var(--green);padding:0;font-size:.9rem;justify-self:start}
+/* hero */
+.hero{display:grid;gap:1rem;padding-block:.6rem 0}
+.searchbar{display:flex;gap:.5rem;flex-wrap:wrap;max-width:760px}
+.searchbar input{flex:1 1 280px;min-width:0;font:inherit;font-size:1.02rem;padding:.75rem .9rem;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--green);color:var(--on-green);border:none;border-radius:8px;padding:.62rem 1.05rem;font-weight:600;font-size:.94rem;text-decoration:none}
+.btn:hover{filter:brightness(1.08);color:var(--on-green)}
+.btn.ghost{background:transparent;color:var(--green);border:1.5px solid var(--green)}
+.btn.ghost:hover{color:var(--green)}
+.tries{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;font-size:.86rem}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:.25rem .7rem;font-size:.84rem}
+.pill:hover{border-color:var(--green)}
+/* goal cards */
+.goals{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.8rem}
+.goal{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem;text-align:left;color:var(--ink);display:grid;gap:.35rem;align-content:start}
+.goal:hover{border-color:var(--green)}
+.goal .t{font-family:var(--f-display);font-weight:600;font-size:1.06rem}
+.goal .d{font-size:.88rem;color:var(--muted)}
+.goal .o{font-size:.78rem;color:var(--green);margin-top:.2rem}
+/* topics grid */
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.7rem}
+.topic{background:var(--tint);border:none;border-radius:10px;padding:.85rem 1rem;text-align:left;color:var(--ink);display:grid;gap:.2rem}
+.topic:hover{outline:1.5px solid var(--green)}
+.topic .t{font-weight:600}
+.topic .c{font-size:.8rem;color:var(--muted)}
+/* events */
+.evlist{display:grid;gap:0;border-top:1px solid var(--line)}
+.ev{display:grid;grid-template-columns:64px 1fr auto;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--line);align-items:start}
+.ev .d{text-align:center;line-height:1.05}
+.ev .d b{display:block;font-family:var(--f-display);font-size:1.45rem;font-weight:600}
+.ev .d span{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.ev .b{display:grid;gap:.15rem;min-width:0}
+.ev .k{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.ev .tt{font-weight:600}
+.ev .m{font-size:.86rem;color:var(--muted)}
+.ev .a{font-size:.86rem;white-space:nowrap;padding-top:.2rem}
+@media (max-width:560px){.ev{grid-template-columns:52px 1fr}.ev .a{grid-column:2;padding-top:0}}
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:.3rem;font-size:.74rem;font-weight:500;border-radius:999px;padding:.12rem .55rem;white-space:nowrap}
+.c-ok{background:var(--ok-bg);color:var(--ok-ink)} .c-warn{background:var(--warn-bg);color:var(--warn-ink)} .c-unk{background:var(--unk-bg);color:var(--unk-ink)} .c-bad{background:var(--bad-bg);color:var(--bad-ink)}
+.c-sample{background:var(--demo-bg);color:var(--demo-ink)}
+/* two-col pages */
+.cols{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:1.4rem;align-items:start}
+@media (max-width:860px){.cols{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.15rem;display:grid;gap:.6rem;align-content:start}
+.owner{border-left:4px solid var(--green)}
+.steps{counter-reset:s;display:grid;gap:.7rem;margin:0;padding:0;list-style:none}
+.steps li{position:relative;padding-left:2.3rem}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:1.6rem;height:1.6rem;border-radius:50%;background:var(--green);color:var(--on-green);display:grid;place-items:center;font-size:.82rem;font-weight:600}
+.steps li b{display:block}
+ul.plain{margin:0;padding-left:1.1rem;display:grid;gap:.35rem}
+dl.facts{margin:0;display:grid;grid-template-columns:8.5rem 1fr;gap:.35rem .8rem;font-size:.9rem}
+dl.facts dt{color:var(--muted)} dl.facts dd{margin:0;min-width:0;overflow-wrap:anywhere}
+@media (max-width:480px){dl.facts{grid-template-columns:1fr}}
+.srcline{font-size:.8rem;color:var(--muted)}
+/* people */
+.notice{background:var(--demo-bg);color:var(--demo-ink);border-radius:8px;padding:.5rem .8rem;font-size:.85rem}
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.9rem}
+.person{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem;display:grid;gap:.5rem;align-content:start;text-align:left;color:var(--ink)}
+.person .hd{display:flex;gap:.7rem;align-items:center}
+.av{width:42px;height:42px;border-radius:50%;background:var(--tint);color:var(--green);display:grid;place-items:center;font-family:var(--f-display);font-weight:600;flex-shrink:0}
+.person .nm{font-weight:600}
+.person .ti{font-size:.84rem;color:var(--muted)}
+.ev-row{display:flex;gap:.35rem;flex-wrap:wrap}
+.evid{font-size:.76rem;border:1px solid var(--line);border-radius:6px;padding:.1rem .45rem;font-variant-numeric:tabular-nums}
+.person .why{font-size:.88rem}
+.linkbtn{background:none;border:none;padding:0;color:var(--green);text-decoration:underline;font-size:.88rem;text-align:left}
+.labs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.7rem}
+/* forms */
+form.f{display:grid;gap:1rem;max-width:640px}
+.field{display:grid;gap:.3rem}
+.field label,.field .lab{font-weight:600;font-size:.9rem}
+.hint{font-weight:400;color:var(--muted);font-size:.8rem}
+input[type=text],input[type=email],textarea,select{font:inherit;padding:.58rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);width:100%}
+textarea{min-height:110px;resize:vertical}
+.route{background:var(--tint);border-radius:8px;padding:.7rem .9rem;font-size:.9rem}
+.err{background:var(--bad-bg);color:var(--bad-ink);border-radius:8px;padding:.5rem .75rem;font-size:.88rem}
+/* filters */
+.fbar{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.fbar button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:.28rem .8rem;font-size:.85rem}
+.fbar button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--on-green)}
+/* staff */
+.staff{display:grid;grid-template-columns:210px minmax(0,1fr);gap:1.6rem;align-items:start}
+.snav{display:grid;gap:.1rem;position:sticky;top:5.5rem}
+.snav button{background:none;border:none;text-align:left;padding:.45rem .6rem;border-radius:6px;color:var(--muted);display:flex;justify-content:space-between;gap:.5rem;font-size:.92rem}
+.snav button[aria-current="true"]{background:var(--tint);color:var(--ink);font-weight:600}
+.snav .n{font-size:.78rem}
+@media (max-width:760px){.staff{grid-template-columns:1fr}.snav{position:static;display:flex;flex-wrap:wrap}}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem}
+.kpi b{display:block;font-family:var(--f-display);font-size:1.6rem;color:var(--green);font-variant-numeric:tabular-nums}
+.kpi span{font-size:.8rem;color:var(--muted)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.87rem}
+th,td{text-align:left;vertical-align:top;padding:.55rem .7rem;border-bottom:1px solid var(--line)}
+th{font-size:.76rem;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:none}
+table.w{min-width:760px}
+.acts{display:flex;gap:.7rem;flex-wrap:wrap}
+.tl{background:none;border:none;padding:0;color:var(--green);text-decoration:underline;font-size:.86rem}
+.tl:disabled{color:var(--muted);text-decoration:none;cursor:default}
+.queue{display:grid;gap:.7rem}
+.qitem{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem;display:grid;gap:.45rem}
+.qitem.done{opacity:.55}
+footer{border-top:1px solid var(--line);padding-block:1.2rem;font-size:.82rem;color:var(--muted)}
+footer .wrap{display:flex;gap:.6rem 1.5rem;flex-wrap:wrap;justify-content:space-between}
+footer button{background:none;border:none;padding:0;color:inherit;text-decoration:underline;font-size:.82rem}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+.howband{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.howband > div{padding:.9rem 1.1rem;display:grid;gap:.2rem;border-right:1px solid var(--line)}
+.howband > div:last-child{border-right:none}
+.howband b{font-family:var(--f-display);font-size:1.02rem}
+.howband span{font-size:.88rem;color:var(--muted)}
+@media (max-width:700px){.howband > div{border-right:none;border-bottom:1px solid var(--line)}.howband > div:last-child{border-bottom:none}}
+.grp-hd{display:grid;gap:.2rem}
+.grp-hd p{max-width:70ch}
+.notsure{background:var(--tint);border-radius:10px;padding:1.1rem 1.2rem;display:flex;gap:1rem;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.notsure > div{display:grid;gap:.2rem;min-width:0}
+.stories{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem}
+.story{border-top:3px solid var(--green);padding-top:.6rem;display:grid;gap:.3rem;align-content:start}
+.story h3{font-size:1rem}
+.story .chip,.mitem .chip{justify-self:start}
+#app:focus{outline:none}
+.faq{display:grid;gap:0;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line);padding:.7rem 0}
+.faq summary{cursor:pointer;font-weight:600}
+.faq details p{margin-top:.4rem;color:var(--muted);max-width:70ch}
+.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.9rem 1.1rem}
+.glance > div{display:grid;gap:.3rem;align-content:start}
+.menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.6rem}
+.mitem{background:var(--tint);border-radius:8px;padding:.7rem .85rem;display:grid;gap:.2rem}
+.stats{display:flex;gap:.5rem 1.4rem;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.stats b{color:var(--ink);font-family:var(--f-display);font-size:1.15rem;margin-right:.25rem}
+.labs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.8rem}
+.lab{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem;display:grid;gap:.45rem;align-content:start;scroll-margin-top:7rem}
+.lab.flash{outline:2px solid var(--green)}
+.lab-hd{display:flex;justify-content:space-between;gap:.6rem;align-items:flex-start}
+.lab-people{display:flex;gap:.5rem;align-items:center;font-size:.86rem}
+.av.sm{width:30px;height:30px;font-size:.78rem}
+.rec{display:grid;gap:.75rem}
+.rec > div{display:grid;gap:.1rem}
+.skip{position:absolute;left:-9999px;top:0;z-index:50;background:var(--card);color:var(--green);padding:.6rem .9rem;border-radius:0 0 8px 0;font-weight:600}
+.skip:focus{left:0}
+.demo .short{display:none}
+.nowrap{white-space:nowrap}
+@media (max-width:640px){.demo .long{display:none}.demo .short{display:inline}
+  .demo .views{flex-wrap:nowrap;gap:.3rem}.demo .views .lbl{display:none}.demo .views button{padding:.3rem .6rem;font-size:.8rem;white-space:nowrap;min-height:36px}
+  header.mast{position:static}
+  nav.main{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}
+  nav.main::-webkit-scrollbar{display:none}
+  nav.main button{flex-shrink:0}
+  .linkbtn,.tl,.pill,.ev .a a,.more,.waygrid a{min-height:44px;display:inline-flex;align-items:center}
+  .goal,.topic{min-height:44px}}
+a.goal,a.topic{text-decoration:none}
+.pill.strong{border-color:var(--green);color:var(--green);font-weight:600;text-decoration:none}
+.waygrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem 1.6rem}
+.wgroup{display:grid;gap:.35rem;align-content:start;border-top:3px solid var(--green);padding-top:.7rem}
+.wgroup h3{font-size:1.08rem}
+.wgroup ul{list-style:none;margin:.3rem 0 0;padding:0;display:grid;gap:0}
+.wgroup li{border-bottom:1px solid var(--line)}
+.wgroup li:last-child{border-bottom:none}
+.wgroup a{display:grid;gap:.05rem;padding:.55rem 0;text-decoration:none;color:var(--ink)}
+.wgroup a:hover .wt{color:var(--green);text-decoration:underline}
+.wgroup .wt{font-weight:600}
+.wgroup .wd{font-size:.84rem;color:var(--muted)}
+.row-hd{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.more{font-size:.92rem}
+.howline{font-size:.92rem;color:var(--muted);border-top:1px solid var(--line);padding-top:1rem;max-width:80ch}
+.cta-top{display:none}
+@media (max-width:860px){.cta-top{display:flex;gap:.6rem 1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--tint);border-radius:10px;padding:.8rem .95rem}
+  .cta-top > div{min-width:0;flex:1 1 220px}}
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.path{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;display:grid;gap:.4rem;align-content:start}
+.path h2{font-size:1.1rem}
+.path ul{list-style:none;margin:.2rem 0 0;padding:0;display:grid;gap:.15rem}
+.path a{display:inline-flex;min-height:36px;align-items:center}
+.btn.sm{padding:.4rem .75rem;font-size:.86rem}
+.btn.danger{background:var(--bad-bg);color:var(--bad-ink);border:1px solid var(--bad-ink)}
+.btn.danger:hover{color:var(--bad-ink)}
+.acts{align-items:center}
+.routeas{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.routeas select{width:auto;max-width:220px}
+td.qtext{min-width:220px}
+.hubn{display:none}
+body.hub .pub{display:none}
+body.hub .hubn{display:inline}
+body.hub nav.main{display:none}
+.snote{padding:.6rem .6rem 0;margin:0}
+.paths2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin-bottom:1.2rem}
+.p2{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.75rem .9rem;display:grid;gap:.35rem;align-content:start}
+.p2 .chip{justify-self:start}
+.p2 p{margin:0}
+.iq{display:grid;gap:.8rem}
+.iqi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem;display:grid;gap:.45rem}
+.iqi p{margin:0}
+.iqh{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;align-items:baseline}
+.rec{background:var(--tint);border-radius:8px;padding:.5rem .7rem}
+</style>
+
+<a class="skip" href="#app">Skip to content</a>
+<div class="demo gut"><div class="wrap">
+  <span><span class="long">Demonstration prototype. Not an official MSU site. Offices and links are real; people, publications and some events are samples.</span><span class="short">Prototype · offices real, people sample</span></span>
+  <span class="views" role="group" aria-label="Demo view"><span class="lbl">See it as:</span>
+    <button type="button" data-as="company" aria-pressed="true">A company</button>
+    <button type="button" data-as="faculty" aria-pressed="false">A faculty member</button>
+    <button type="button" data-as="staff" aria-pressed="false">Staff, in the Hub</button></span>
+</div></div>
+<header class="mast gut"><div class="wrap">
+  <button class="brand" type="button" data-go="home"><span class="org">Michigan State University</span><span class="name"><span class="pub">Work with MSU</span><span class="hubn">Engagement Hub</span></span></button>
+  <nav class="main" aria-label="Main">
+    <button type="button" data-go="home">Ways to work</button>
+    <button type="button" data-go="topics">Research expertise</button>
+    <button type="button" data-go="events">Events</button>
+    <button type="button" data-go="contact">Talk to us</button>
+  </nav>
+</div></header>
+
+<main class="gut"><div class="wrap" id="app" tabindex="-1"></div></main>
+
+<footer class="gut"><div class="wrap">
+  <span>Every page here points to the office that owns it. If something here and an official MSU page disagree, the official page is right.</span>
+  <span><button type="button" data-go="about">How this site works</button></span>
+</div></footer>
+
+<script>
+/* ================= data ================= */
+const TODAY = "2026-10-23";
+const esc = s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ini = n=>n.replace(/^Dr\.\s*/,"").split(/\s+/).slice(0,2).map(w=>w[0]).join("");
+
+const OFFICES = {
+  bc:{n:"MSU Business Connect",u:"https://innovationcenter.msu.edu/corporate-engagement/",c:"(517) 355-2186",d:"MSU's front door for companies on research. Staff are assigned by college."},
+  msut:{n:"MSU Technologies",u:"https://innovationcenter.msu.edu/tech-transfer-commercialization/",c:"Agreement portal on their site",d:"Patenting and licensing of MSU inventions."},
+  rf:{n:"MSU Research Foundation",u:"https://msufoundation.org/",c:"Contact form on their site",d:"Venture funds, incubators and research parks. An affiliated organization, not an MSU office."},
+  si:{n:"Spartan Innovations",u:"https://msufoundation.org/startup-services/",c:"Through the Research Foundation",d:"Startup services and accelerators."},
+  csn:{n:"Career Services Network",u:"https://careernetwork.msu.edu/channels/for-employers/",c:"CareerServices@csp.msu.edu · (517) 884-1302",d:"Recruiting across all majors: Handshake, 25+ fairs a year, on-campus interviews."},
+  cse:{n:"The Center for Spartan Engineering",u:"https://engineering.msu.edu/career-center/recruit-spartans",c:"(517) 355-5113",d:"Recruiting engineering and computer science students."},
+  palmer:{n:"Russell Palmer Career Management Center",u:"https://broad.msu.edu/career-management/employers",c:"palmer@broad.msu.edu · (517) 432-0830",d:"Recruiting business students."},
+  dd:{n:"Design Day and Engineering capstone",u:"https://designday.msu.edu/",c:"Department capstone coordinators",d:"Senior design projects sponsored by companies, shown at Design Day each semester."},
+  srr:{n:"Shared Research Resources",u:"https://research.msu.edu/srr",c:"Through Research and Innovation",d:"Core facilities, computing and user facilities."},
+  rtsf:{n:"Research Technology Support Facility",u:"https://rtsf.natsci.msu.edu/",c:"Each core's page",d:"Genomics, mass spectrometry, proteomics, cryo-EM and flow cytometry."},
+  egr:{n:"Engineering Outreach and Engagement",u:"https://engineering.msu.edu/about/outreach-and-engagement",c:"(517) 355-5113",d:"Engineering's partner page: testing centers, recruiting, classroom connections and professional development."},
+  edp:{n:"Broad Executive Development Programs",u:"https://execed.broad.msu.edu/",c:"edp@broad.msu.edu · (517) 353-8711",d:"Seminars, certificates and custom programs for working professionals."},
+  ext:{n:"MSU Extension Product Center",u:"https://www.canr.msu.edu/productcenter/",c:"Through their site",d:"Business development for food and agriculture companies."},
+  mob:{n:"MSU Mobility",u:"https://mobility.msu.edu/",c:"Through their site",d:"Cross-campus mobility research, an industry advisory council and a campus testbed."},
+  cee:{n:"CEE Corporate Partners Program",u:"https://engineering.msu.edu/departments/cee/corporate-partners-program",c:"Department contact",d:"Membership for firms that recruit civil and environmental engineers."},
+  centers:{n:"Research centers and institutes",u:"https://research.msu.edu/research-centers",c:"Each center's page",d:"More than 100 centers across MSU."},
+  ua:{n:"University Advancement, Corporate Relations",u:"https://givingto.msu.edu/ways-to-give/corporate-and-foundation-relations/corporate-relations",c:"univdev@msu.edu · (517) 884-1000",d:"Corporate gifts, sponsorships and naming."},
+  ecfr:{n:"Engineering Corporate and Foundation Relations",u:"https://engineering.msu.edu/about/corporate-and-foundation-relations",c:"Through the page",d:"Corporate giving and partnerships in Engineering, including support for student teams."},
+  eal:{n:"Engineering alumni relations",u:"https://engineering.msu.edu/alumni/get-involved",c:"Through the page",d:"Ways for engineers, alumni or not, to get involved with students and the College."},
+  orgs:{n:"Student organizations directory",u:"https://msu.campuslabs.com/engage/",c:"Each organization's page",d:"MSU's directory of registered student organizations."},
+  rd:{n:"Research Development and Proposal Services",u:"https://research.msu.edu/proposal-services",c:"Through Research and Innovation",d:"Support for large federal proposals."},
+  osp:{n:"Office of Sponsored Programs",u:"https://osp.msu.edu/",c:"Through their portal",d:"Federal awards and contract administration."},
+  exp:{n:"Export Control and Trade Sanctions",u:"https://exportcontrols.msu.edu/",c:"export@msu.edu",d:"Reviews agreements involving controlled technology."}
+};
+
+const GROUPS = [
+ ["research","Research and technology","Work with faculty, use MSU's labs, license inventions and partner with startups."],
+ ["talent","Students and talent","Recruit, sponsor student projects and support student teams."],
+ ["people","Get your people involved","Your engineers in classrooms, conversations and mentoring. Often the most valued thing a company can give students."],
+ ["support","Learn, give and visit","Train your team, support MSU, and see it in person."]
+];
+
+const WAYS = [
+ {id:"research",g:"research",t:"Sponsor research",d:"Fund a faculty team to work on a problem you care about.",owner:"bc",also:["osp","exp"],
+  what:"A sponsored research agreement funds an MSU faculty member and their team, usually including graduate students, to work on a defined problem. It sets the scope, budget, timeline, and who owns the results.",
+  good:["You have a technical question you can't answer in-house","You want access to a group's expertise and equipment","You'd like to get to know students who might join you later"],
+  commit:"Projects range from a single semester to several years. Budgets depend on scope.",
+  steps:[["Tell us the problem","What you want to learn or build, and roughly when. You don't need to know who at MSU to ask."],["Meet the right faculty","Business Connect suggests people, often from more than one department, and sets up a first conversation."],["Agree on scope and terms","Business Connect negotiates the agreement, including intellectual property. Export control reviews it if the work involves controlled technology."],["Start the work","The faculty lead runs the project and reports to you on the schedule you agreed."]],
+  prepare:["A one-paragraph description of the problem","A rough budget range and timeline","Any confidentiality needs","Who on your side decides"],
+  terms:"MSU doesn't publish a minimum or a standard timeline. Business Connect can give you a realistic range once they understand the project.",
+  examples:[["A battery supplier funds a two-year study of electrolyte failure","Two graduate students work on the company's cells; the company hires one of them at graduation."],["A first, one-semester project","A small scoped study to test the fit before a larger agreement."]],
+  faq:[["Who owns the results?","It's set in the agreement. Business Connect explains the options before you sign."],["Can we work with more than one department?","Yes. Many projects involve faculty from two or three departments."],["Is a gift the same thing?","No. A gift doesn't buy specific results or rights. See Give or sponsor."]],
+  pairs:["facilities","capstone","federal"],topics:["battery","mobility","composites","ai","manufacturing","water","cyber"]},
+ {id:"license",g:"research",t:"License a technology",d:"Use an MSU invention in your product.",owner:"msut",also:["bc"],
+  what:"MSU Technologies patents faculty inventions and licenses them to companies of every size, from startups to large manufacturers.",
+  good:["You've found an MSU invention that fits your product","You want exclusive rights in a field of use","You'd like the inventors' help bringing it to market"],
+  commit:"From an evaluation license to a full exclusive license.",
+  steps:[["Browse available technologies","MSU Technologies lists inventions open for licensing."],["Ask about fit","A licensing manager explains the invention, its patent status and the inventors' work since."],["Agree on terms","Options, evaluation licenses and full licenses, through MSU Technologies' agreement portal."]],
+  prepare:["The technology or problem you're interested in","Your intended field of use","Whether you'd need the inventors' help"],
+  terms:"Terms depend on the technology and the field of use.",
+  examples:[["An option to evaluate before committing","A company takes a short option, tests the invention, then licenses it."]],
+  faq:[["Can we sponsor more research on the invention?","Yes. Licensing and sponsored research are often combined; Business Connect coordinates both."]],
+  pairs:["research","startups"],topics:["battery","water","food"]},
+ {id:"facilities",g:"research",t:"Use labs, equipment and testing",d:"Run tests or analysis on MSU instruments.",owner:"bc",also:["srr","rtsf","egr"],
+  what:"Many MSU core facilities and testing centers take outside work on a fee-for-service basis, from genomics and mass spectrometry to composites and materials testing.",
+  good:["You need an instrument you don't own","You need an independent test","You want quick results without a research project"],
+  commit:"Single samples to ongoing service agreements.",
+  steps:[["Find the facility","Search by instrument or test here, or browse Shared Research Resources."],["Check availability and rates","Each facility sets its own rates and schedule."],["Sign a service agreement","Business Connect's sponsored programs administrator handles fee-for-service agreements for companies."]],
+  prepare:["The test or measurement you need","Sample types and volumes","Timeline and any confidentiality needs"],
+  terms:"Rates are set by each facility.",
+  examples:[["A coatings company sends samples for analysis each month","A standing service agreement with one core facility."]],
+  faq:[["Will MSU interpret the results?","Facilities run the work; interpretation can be added as a small research project."]],
+  pairs:["research"],topics:["composites","battery","food","manufacturing","water"]},
+ {id:"centers",g:"research",t:"Join a center or consortium",d:"Membership in a research center or industry council.",owner:"centers",also:["mob","cee","bc"],
+  what:"Some MSU centers have industry memberships or advisory councils that give members early access to research, students and events. MSU Mobility has an industry advisory council.",
+  good:["You care about a research area over several years","You want to shape what MSU works on","You want regular access to faculty and students in one field"],
+  commit:"Usually an annual membership.",
+  steps:[["Find the center","Browse by topic here, or the full list of MSU centers."],["Talk to the center director","Membership terms are set by each center."]],
+  prepare:["The research area you care about","What you want from membership: research, talent, influence"],
+  terms:"Terms aren't published centrally.",
+  examples:[["A mobility company joins an advisory council","Its engineers attend twice-yearly reviews and meet students working on related projects."]],
+  faq:[["Is membership the same as sponsored research?","No. Membership supports a center's shared work; sponsored research funds a specific project for you."]],
+  pairs:["research","visit"],topics:["mobility","composites","water"]},
+ {id:"federal",g:"research",t:"Partner on a federal proposal",d:"Join MSU on an NSF, DOE or DoD proposal.",owner:"rd",also:["osp","bc"],
+  what:"Federal programs often ask for industry partners: letters of support, cost share or a role on the project. MSU's research development team supports large proposals.",
+  good:["A federal program fits your roadmap","You can offer data, testing, cost share or a commercialization path"],
+  commit:"From a letter of support to a funded role on the project.",
+  steps:[["Tell us about the opportunity","Or ask whether MSU is pursuing one in your area."],["Agree on your role","A letter, cost share, data, or a subcontract."]],
+  prepare:["The program or solicitation","The role you'd play","Any deadline"],
+  terms:"MSU doesn't publish a process for companies. Your question goes to research development.",
+  examples:[["A letter of support for a center proposal","Two weeks' notice is usually enough for a letter; cost share takes longer."]],
+  faq:[["How early should we start?","As early as you can. Cost share and subcontracts need internal approvals on both sides."]],
+  pairs:["research","centers"],topics:["battery","mobility","ai","water"]},
+ {id:"startups",g:"research",t:"Partner with startups",d:"Invest in, house or work with MSU startups.",owner:"rf",also:["si","ext"],
+  what:"The MSU Research Foundation runs venture funds, incubators and research parks, and supports startups built on MSU research. A new $20 million building, the Rosenberg Center, is due to open in summer 2027.",
+  good:["You invest in early-stage companies","You want to pilot new technology","You want space near campus"],
+  commit:"Varies by program.",
+  steps:[["Tell the Foundation what you're looking for","Investment, a pilot customer relationship, or space near campus."],["Meet startups","Through accelerators, summits and introductions."]],
+  prepare:["Your interest: investing, piloting, acquiring or co-locating","Sectors you care about"],
+  terms:"Set by each fund or program.",
+  examples:[["A food company pilots a startup's sensor","The Foundation introduces them; the pilot runs at the company's plant."]],
+  faq:[["Is the Research Foundation part of MSU?","It's an affiliated, independent organization that works closely with MSU."]],
+  pairs:["license"],topics:["food","ai","battery"]},
+ {id:"hire",g:"talent",t:"Hire students and graduates",d:"Internships, co-ops, full-time roles and career fairs.",owner:"csn",also:["cse","palmer"],
+  what:"Recruiting runs through Handshake, MSU's job and events platform, plus career fairs and on-campus interviews. Engineering and business students also have their own career centers.",
+  good:["You hire interns, co-ops or new graduates","You want to be known to students before they start their search"],
+  commit:"Posting is free; fairs and events vary.",
+  steps:[["Create a free Handshake account","Post jobs and internships to all MSU students, or target majors."],["Pick your fairs","The Career Services Network runs more than 25 fairs a year. The Engineering Career Fair is Feb 9, 2027; registration opens Nov 1."],["Meet students earlier","Engineering's Career Café sessions, info sessions and Intern for a Day put you in front of students before the fair."],["Interview on campus","Reserve interview rooms through the career office for your majors."]],
+  prepare:["Roles and the majors you want","Your preferred fairs and dates","Whether you'll sponsor visas"],
+  terms:"Posting on Handshake is free. An Engineering Career Café session costs $250. Fair and sponsorship prices are set by each career office.",
+  examples:[["A supplier builds a co-op pipeline","Sophomores do two co-op rotations; most return full time."]],
+  faq:[["Do we need to go through every career office?","No. Handshake reaches all students; the college career centers help you reach their majors in more depth."]],
+  pairs:["capstone","speak","volunteer"],topics:[]},
+ {id:"capstone",g:"talent",t:"Sponsor a senior design project",d:"A team of seniors works on your problem for a semester.",owner:"dd",also:["ecfr"],
+  what:"Engineering seniors spend 15 weeks on a real problem from a sponsor, guided by faculty and your engineers. Teams present at Design Day at the end of each semester. In spring 2026 more than 1,100 students took part.",
+  good:["You have a real problem that isn't on your critical path","You want to watch future hires work for a semester"],
+  commit:"A problem statement and a technical contact for one semester.",
+  steps:[["Propose a problem","Something real, with a contact who can meet the team a few times."],["Match with a department","Each department's capstone coordinator scopes the project and sets the sponsorship terms."],["Work with the team","Usually a kickoff, a few check-ins and a final review."],["See it at Design Day","Teams present in December and April. Many sponsors recruit from their team."]],
+  prepare:["A problem statement","A technical contact","Any data or parts the team will need","Your position on IP and confidentiality"],
+  terms:"Sponsorship terms are set by each department and aren't published centrally.",
+  examples:[["A test fixture for a seating supplier","The team's design went into the company's lab; two team members were hired."]],
+  faq:[["What if the result isn't usable?","It happens. Sponsors say the semester with the team is worth it either way."]],
+  pairs:["hire","volunteer"],topics:["mobility","composites","manufacturing","ai"]},
+ {id:"teams",g:"talent",t:"Support student teams and organizations",d:"Competition teams, professional societies and student groups.",owner:"ecfr",also:["orgs","cse"],
+  what:"Student design and competition teams, and chapters of professional societies, rely on companies for money, parts, software, test time and mentors. Examples include racing and robotics teams and chapters of societies such as SWE, NSBE and SHPE.",
+  good:["You want to be known to the most hands-on students","You can give parts, software or test time","You care about who enters engineering"],
+  commit:"Cash, in-kind support or mentors, usually by academic year.",
+  steps:[["Tell us who you'd like to support","A kind of team, a society, or let us suggest."],["Agree on support","Engineering corporate relations makes sure it's recognized properly and doesn't collide with other requests to your company."],["Meet the students","Shop visits, competitions and chapter meetings."]],
+  prepare:["What you can offer: money, parts, software, test time, mentors","Any recognition you'd like"],
+  terms:"Gifts to teams are receipted through MSU; in-kind support is valued with the team.",
+  examples:[["A software company donates licenses and a mentor","The team uses the software all year and invites the mentor to design reviews."]],
+  faq:[["Can we give directly to a team?","Going through the College means the gift is receipted, recognized and coordinated with your other MSU relationships."]],
+  pairs:["hire","give","volunteer"],topics:["mobility","manufacturing","composites"]},
+ {id:"volunteer",g:"people",t:"Get your employees involved with students",d:"Mentoring, conversations, judging and mock interviews.",owner:"eal",also:["cse","dd"],
+  what:"Your engineers can give students something MSU can't: a first-hand view of the work. Opportunities range from a single 25-minute conversation to a semester of mentoring, and employees choose what fits.",
+  menu:[["Informational conversations","25 minutes with a student about your work, through Spartan Engineering Conversations (proposed)."],["Mentor a capstone team","A few calls a semester as the industry voice a team can turn to."],["Mentor a student","Regular check-ins with one student, including first-generation students."],["Judge Design Day","One afternoon in December or April."],["Mock interviews and résumé reviews","With the Center for Spartan Engineering, before recruiting season."],["Host a site visit or job shadow","Show students what the work looks like where you do it."],["Join a department advisory board","Help shape what students learn. By invitation."]],
+  good:["Your employees want to give back","You have MSU alumni who'd like to stay connected","You want students to know what your engineers are like"],
+  commit:"Each employee sets their own time, from 25 minutes to a semester.",
+  steps:[["Tell us who's interested","Share the link with your teams, or send us a list of volunteers."],["Each person picks what fits","Employees sign up individually and set their own limits."],["See what it added up to","Once a year we can tell you how many of your employees took part and in what. Counts only, never student names."]],
+  prepare:["A contact who can share opportunities internally","Any company volunteer program it should count toward"],
+  terms:"No cost. Volunteers agree to the College's community standards.",
+  examples:[["An employer resource group adopts a student society","Members mentor students and run two workshops a year."]],
+  faq:[["Do employees have to be MSU alumni?","No. Most opportunities are open to any professional."],["Will students ask our employees for jobs?","Students are asked not to. Conversations are about the work, not job requests."]],
+  pairs:["speak","capstone","hire"],topics:[]},
+ {id:"speak",g:"people",t:"Speak in a class",d:"Bring how your work really happens into a course.",owner:"egr",also:["eal"],
+  what:"Students remember the class where someone from industry showed how the ideas they're learning get used: the trade-offs, the constraints, what goes wrong. Instructors welcome visitors who can show that, and it gives students a reason to care about the material.",
+  menu:[["A guest talk","One class session on how your team uses what the course covers."],["A real problem for an assignment","A problem, case or anonymized data set students work through, with you there for the debrief."],["Review student work","Sit in on project presentations and give feedback from practice."],["Help a course stay current","A conversation with an instructor about what's changed in your field."]],
+  good:["Your engineers can explain how they make decisions, not just what the company does","You have a real example you can share","You'd like students to understand your field before they choose a path"],
+  commit:"Usually one class period, plus an hour with the instructor beforehand.",
+  steps:[["Tell us the topic","What your people could speak to, and which level of student it fits."],["We find the right course","Engineering connects you with an instructor whose course fits."],["Plan it with the instructor","Agree on format and one example students can work through."],["Come to class","Leave time for questions. Students' questions are often the best part."]],
+  prepare:["A speaker and a topic","One real example or problem","Any limits on what you can share"],
+  terms:"No cost. Instructors decide what fits their course and schedule.",
+  examples:[["A process engineer walks through a real plant upset","Students work out what went wrong before she shows what her team did."]],
+  faq:[["Can we talk about jobs?","A short note at the end about internships is usually welcome. The session itself should be about the work."],["Can we share real data?","Yes, if you can. Anonymized data works well for assignments."]],
+  pairs:["volunteer","capstone","hire"],topics:["ai","manufacturing","water","mobility","battery"]},
+ {id:"training",g:"support",t:"Train your team",d:"Executive education, certificates and short courses.",owner:"edp",also:["egr","ext"],
+  what:"MSU runs open seminars, online certificates and custom programs for working professionals. Engineering offers professional development in technical areas, and some colleges offer part-time graduate programs.",
+  good:["You're developing leaders or upskilling engineers","You want a program built around your company"],
+  commit:"From a one-day seminar to a multi-month program.",
+  steps:[["Choose open or custom","Join an open program, or design one with MSU for your team."],["Talk to the program office","Broad for business and leadership topics; Engineering for technical ones."]],
+  prepare:["Who you want to train and how many","Topics and preferred format","Timing"],
+  terms:"Prices are set by each program.",
+  examples:[["A leadership program for new engineering managers","Built with Broad Executive Development for one company's cohort."]],
+  faq:[["Can courses count toward a degree?","Ask the program; some certificates can."]],
+  pairs:["research"],topics:[]},
+ {id:"give",g:"support",t:"Give or sponsor",d:"Scholarships, labs, student teams and naming.",owner:"ua",also:["ecfr"],
+  what:"Corporate gifts support scholarships, labs, student teams and programs. A gift is different from a research contract: it doesn't buy specific results or intellectual property.",
+  good:["You want to support students or a program you care about","You have a matching-gift or community investment program"],
+  commit:"Any size, from employee matching gifts to named spaces.",
+  steps:[["Tell us what you'd like to support","A program, a student population, a lab or a team."],["Work with a development officer","University Advancement, or the college's corporate relations team, shapes the gift with you."]],
+  prepare:["What you want to support","Your company's giving priorities","Any matching-gift program you have"],
+  terms:"Gift agreements are drawn up with University Advancement.",
+  examples:[["A scholarship for first-generation engineering students","Recipients meet the company's engineers each year."]],
+  faq:[["How do we see the difference it made?","Your development officer reports on how the gift was used and what came of it."]],
+  pairs:["teams","volunteer"],topics:[]},
+ {id:"visit",g:"support",t:"Visit campus",d:"Design Day, lab tours and a visit built around your interests.",owner:"egr",also:["ecfr","dd"],
+  what:"The easiest way to see what MSU could do with you is to come. We can build a half-day around your interests: labs in your field, students working on related projects, and the offices you'd work with.",
+  good:["You're new to MSU","You're bringing leaders who haven't been to campus","You want to see students' work first hand"],
+  commit:"Half a day.",
+  steps:[["Tell us what you'd like to see","Fields, labs, students, or a specific event like Design Day."],["We plan the visit","Lab visits, a lunch with students, and time with the offices that matter to you."]],
+  prepare:["Who's coming and what they care about","Preferred dates"],
+  terms:"No cost.",
+  examples:[["A leadership team's first visit","Two labs, a capstone team and lunch with student society officers."]],
+  faq:[["When's the best time?","Design Day in December or April shows the most student work in one place."]],
+  pairs:["research","capstone","centers"],topics:[]},
+ {id:"unsure",g:null,t:"Not sure yet",d:"Tell us what you're trying to do and we'll find the right office.",owner:null}
+];
+
+const TOPICS = [
+ {id:"battery",t:"Battery technology",sub:"Electrode materials, solid-state batteries, battery management and recycling",related:["Energy storage","Electric vehicles","Materials"]},
+ {id:"mobility",t:"Autonomous vehicles and mobility",sub:"Vehicle autonomy, sensing, connected vehicles and transportation systems",related:["Transportation","Robotics","Sensors"]},
+ {id:"composites",t:"Composites and lightweighting",sub:"Composite materials, structures, testing and manufacturing",related:["Materials","Automotive","Aerospace"]},
+ {id:"ai",t:"AI and machine learning",sub:"Machine learning methods and their use in engineering, health and manufacturing",related:["Data science","Computer vision","Robotics"]},
+ {id:"manufacturing",t:"Advanced manufacturing",sub:"Additive manufacturing, automation, process control and quality",related:["Robotics","Materials","Automation"]},
+ {id:"water",t:"Water and environment",sub:"Water treatment, contaminants, infrastructure and environmental monitoring",related:["Civil engineering","Sensors","Public health"]},
+ {id:"food",t:"Food and agriculture technology",sub:"Food processing, packaging, precision agriculture and biosystems",related:["Packaging","Sensors","Biosystems"]},
+ {id:"cyber",t:"Cybersecurity",sub:"Secure systems, privacy, vehicle and infrastructure security",related:["Software","Networks","Automotive"]}
+];
+
+/* Sample people and evidence. Not real MSU faculty. */
+const P = (id,n,ti,dept,topics,why,ev,status,papers)=>({id,n,ti,dept,topics,why,ev,status,papers});
+const PEOPLE = [
+ P("p1","Dr. Mara Linden","Associate Professor","Chemical Engineering and Materials Science",["battery","manufacturing"],"Solid-state electrolytes and how they fail at the interface with lithium metal.",{pubs:24,awards:2,patents:3,since:2021},"faculty",["Interface stability of sulfide solid electrolytes under fast charging (2025)","Scalable dry-processing of composite cathodes (2024)"]),
+ P("p2","Dr. Owen Castellano","Professor","Electrical and Computer Engineering",["battery","mobility"],"Battery management systems: estimating state of health in real time for vehicle packs.",{pubs:31,awards:3,patents:1,since:2021},"faculty",["Online state-of-health estimation for EV packs with limited sensing (2026)","Thermal-aware fast charging control (2023)"]),
+ P("p3","Dr. Ines Halvorsen","Assistant Professor","Chemistry",["battery"],"Recovering metals from spent batteries with lower-energy chemistry.",{pubs:12,awards:1,patents:0,since:2022},"staff",["Low-temperature leaching of mixed cathode scrap (2025)"]),
+ P("p4","Dr. Ravi Okonkwo","Professor","Mechanical Engineering",["battery","composites"],"Battery enclosures and crash safety for lightweight vehicle structures.",{pubs:19,awards:1,patents:2,since:2021},"faculty",["Composite battery enclosures under side impact (2024)"]),
+ P("p5","Dr. Leah Brandvold","Professor","Electrical and Computer Engineering",["mobility","ai"],"Perception for automated vehicles in snow and low light.",{pubs:38,awards:4,patents:2,since:2021},"faculty",["Radar-camera fusion in adverse weather (2026)","Benchmarking perception under winter conditions (2024)"]),
+ P("p6","Dr. Samuel Achterberg","Associate Professor","Civil and Environmental Engineering",["mobility","water"],"Connected-vehicle data for traffic operations and road safety.",{pubs:22,awards:2,patents:0,since:2021},"faculty",["Signal timing from connected-vehicle trajectories (2025)"]),
+ P("p7","Dr. Nadia Freitas","Assistant Professor","Computer Science and Engineering",["mobility","cyber"],"Security of in-vehicle networks and over-the-air updates.",{pubs:15,awards:1,patents:1,since:2022},"staff",["Detecting spoofed CAN messages with lightweight models (2025)"]),
+ P("p8","Dr. Thomas Ekwueme","Professor","Mechanical Engineering",["composites","manufacturing"],"Fast-cure composites for high-volume automotive parts.",{pubs:41,awards:3,patents:4,since:2021},"faculty",["Rapid-cure thermoset systems for compression molding (2024)"]),
+ P("p9","Dr. Hannah Vos","Associate Professor","Chemical Engineering and Materials Science",["composites"],"Recyclable thermoplastic composites and joining.",{pubs:18,awards:1,patents:1,since:2021},"faculty",["Induction welding of recycled thermoplastic laminates (2025)"]),
+ P("p10","Dr. Daniel Moreau","Professor","Computer Science and Engineering",["ai","cyber"],"Machine learning that stays reliable when data shifts.",{pubs:47,awards:5,patents:0,since:2021},"faculty",["Robust training under distribution shift (2026)"]),
+ P("p11","Dr. Aiko Brennan","Assistant Professor","Biosystems and Agricultural Engineering",["ai","food"],"Computer vision for crop and food quality inspection.",{pubs:14,awards:1,patents:1,since:2022},"staff",["Hyperspectral sorting of fresh produce (2025)"]),
+ P("p12","Dr. Victor Lindqvist","Associate Professor","Mechanical Engineering",["manufacturing","ai"],"Process monitoring for metal additive manufacturing.",{pubs:26,awards:2,patents:2,since:2021},"faculty",["In-situ defect detection in laser powder bed fusion (2025)"]),
+ P("p13","Dr. Grace Oyelaran","Professor","Civil and Environmental Engineering",["water"],"PFAS treatment and removal from drinking water.",{pubs:33,awards:4,patents:2,since:2021},"faculty",["Electrochemical destruction of short-chain PFAS (2026)"]),
+ P("p14","Dr. Peter Kowalczyk","Associate Professor","Civil and Environmental Engineering",["water","ai"],"Sensors and models for aging water infrastructure.",{pubs:20,awards:2,patents:0,since:2021},"faculty",["Predicting main breaks from pressure transients (2024)"]),
+ P("p15","Dr. Elif Narayan","Professor","Food Science and Human Nutrition",["food"],"Shelf life and safety of minimally processed foods.",{pubs:29,awards:2,patents:1,since:2021},"faculty",["High-pressure processing of ready-to-eat produce (2025)"]),
+ P("p16","Dr. Marcus Teague","Associate Professor","Packaging",["food","manufacturing"],"Sustainable packaging materials and their performance.",{pubs:21,awards:1,patents:2,since:2021},"faculty",["Barrier performance of compostable films (2024)"]),
+ P("p17","Dr. Sofia Raghunathan","Professor","Computer Science and Engineering",["cyber"],"Privacy-preserving data sharing between organizations.",{pubs:36,awards:3,patents:1,since:2021},"faculty",["Federated analytics with formal privacy guarantees (2026)"])
+];
+
+/* Labs: sample labs are led by sample people; real MSU centers are listed without people. */
+const L = (id,n,topics,focus,lead,people,equip,open,u,sample)=>({id,n,topics,focus,lead,people,equip,open,u,sample});
+const LABS = [
+ L("l1","Solid-State Battery Lab",["battery"],"Making and testing solid-state cells, and finding out why they fail.","p1",["p1","p3"],["Argon gloveboxes","96-channel cell cycling","Cross-section microscopy"],["research","facilities","capstone"],null,true),
+ L("l2","Battery Systems and Controls Lab",["battery","mobility"],"Battery management software tested on full vehicle packs.","p2",["p2","p4"],["Pack test chamber, -40 to 60 °C","Hardware-in-the-loop rigs"],["research","capstone"],null,true),
+ L("l3","Automated Vehicle Perception Lab",["mobility","ai"],"Sensing and perception for vehicles in Michigan winters.","p5",["p5","p7"],["Instrumented research vehicle","Radar, lidar and camera suites"],["research","capstone","speak"],null,true),
+ L("l4","Transportation Data Lab",["mobility"],"Using connected-vehicle data to make roads safer and traffic smoother.","p6",["p6"],["City traffic data feeds","Signal controller test bench"],["research","federal"],null,true),
+ L("l5","Lightweight Structures Lab",["composites","manufacturing"],"High-volume composite parts, from cure chemistry to crash tests.","p8",["p8","p9","p4"],["Compression molding press","Drop tower"],["research","facilities","capstone"],null,true),
+ L("l6","Robust Machine Learning Group",["ai","cyber"],"Machine learning that keeps working when the data changes.","p10",["p10"],["GPU cluster time through MSU research computing"],["research","speak"],null,true),
+ L("l7","Agricultural Vision Lab",["food","ai"],"Cameras and models that judge crop and food quality.","p11",["p11"],["Hyperspectral imaging line"],["research","startups"],null,true),
+ L("l8","Additive Manufacturing Lab",["manufacturing","ai"],"Metal and polymer printing with in-process monitoring.","p12",["p12"],["Laser powder bed fusion printer","Melt-pool cameras"],["research","facilities","capstone"],null,true),
+ L("l9","Water Treatment Lab",["water"],"Removing PFAS and other contaminants from drinking water, bench to pilot scale.","p13",["p13","p14"],["Pilot treatment skid","Electrochemical reactors"],["research","facilities","federal"],null,true),
+ L("l10","Food Processing Pilot Plant",["food"],"Scaling up food processes and testing shelf life.","p15",["p15","p16"],["High-pressure processing unit","Shelf-life chambers"],["facilities","research"],null,true),
+ L("l11","Privacy and Security Lab",["cyber"],"Sharing data between organizations without exposing it.","p17",["p17","p7"],["Vehicle network test bench"],["research"],null,true),
+ L("r1","MSU Mobility",["mobility"],"Cross-campus mobility research, an industry advisory council and a campus testbed.",null,[],[],["centers","research"],"https://mobility.msu.edu/",false),
+ L("r2","Composite Vehicle Research Center",["composites"],"Composites research and testing for vehicles.",null,[],[],["facilities","research"],"https://engineering.msu.edu/about/outreach-and-engagement",false),
+ L("r3","Composite Materials and Structures Center",["composites","battery"],"Material and structural testing.",null,[],[],["facilities"],"https://engineering.msu.edu/about/outreach-and-engagement",false),
+ L("r4","Research Technology Support Facility",["water","food"],"Mass spectrometry, genomics and other analysis services.",null,[],[],["facilities"],"https://rtsf.natsci.msu.edu/",false),
+ L("r5","MSU Extension Product Center",["food"],"Business development for food and agriculture companies.",null,[],[],["startups"],"https://www.canr.msu.edu/productcenter/",false),
+ L("r6","Research computing (Shared Research Resources)",["ai"],"High-performance computing for training and simulation.",null,[],[],["facilities"],"https://research.msu.edu/srr",false)
+];
+
+const EVENTS = [
+ {d:"2026-11-12",t:"Solid-state batteries: what's ready for industry",k:"Seminar",h:"Chemical Engineering and Materials Science",topics:["battery"],where:"Engineering Building · 3:00 PM",sample:true},
+ {d:"2026-11-18",t:"Composites open lab day",k:"Open house",h:"Composite Vehicle Research Center",topics:["composites","manufacturing"],where:"Campus · 10:00 AM",sample:true},
+ {d:"2026-12-04",t:"Fall Design Day",k:"Showcase",h:"College of Engineering",topics:["mobility","manufacturing","ai","composites"],where:"Campus · date and details on the official site",u:"https://designday.msu.edu/",approx:true},
+ {d:"2027-01-20",t:"AgTech Summit",k:"Summit",h:"MSU Research Foundation",topics:["food","ai"],where:"East Lansing",u:"https://msufoundation.org/"},
+ {d:"2027-02-09",t:"Engineering Career Fair",k:"Career fair",h:"The Center for Spartan Engineering",topics:[],where:"Campus · employer registration opens Nov 1",u:"https://engineering.msu.edu/career-center/recruit-spartans"},
+ {d:"2027-02-17",t:"Civil and Environmental Engineering Career Fair",k:"Career fair",h:"The Center for Spartan Engineering",topics:["water"],where:"Campus · employer registration opens Nov 1",u:"https://engineering.msu.edu/career-center/recruit-spartans"},
+ {d:"2027-03-03",t:"Winter driving and automated vehicles",k:"Seminar",h:"MSU Mobility",topics:["mobility","ai"],where:"Video call · noon",sample:true},
+ {d:"2027-03-24",t:"PFAS in drinking water: treatment options",k:"Seminar",h:"Civil and Environmental Engineering",topics:["water"],where:"Engineering Building · 3:00 PM",sample:true}
+];
+const RECURRING = [
+ ["Career fairs","Fall and spring","More than 25 a year across MSU, plus Engineering's own fairs.","https://careernetwork.msu.edu/channels/for-employers/"],
+ ["Design Day","December and April","Senior design teams present their sponsored projects.","https://designday.msu.edu/"],
+ ["MSU Innovation Celebration","Spring","Inventors, startups and partners; more than 400 guests in 2026.","https://innovationcenter.msu.edu/events/msu-innovation-celebration/2026-msu-innovation-celebration/"],
+ ["Research Foundation summits","Through the year","AgTech, data science and AI, and mobility.","https://msufoundation.org/"]
+];
+const STORIES = [
+ ["From a capstone team to a research agreement","A seating supplier sponsored a senior design project, hired two of the team, and a year later funded the faculty advisor's lab to keep going."],
+ ["One afternoon a semester","A software company's engineers judge Design Day, speak in two courses and mentor a student society. They now get more applications from MSU than any other school."],
+ ["A test first","A coatings maker started with fee-for-service analysis, then licensed an MSU invention the facility staff pointed them to."]
+];
+const HOME_FAQ = [
+ ["We don't know who at MSU to talk to. Where do we start?","Tell us what you're trying to do. Your note goes to the office that handles it, and a person replies."],
+ ["Can we contact faculty directly?","You can, but for research, Business Connect knows who's available and handles the agreement, which saves time on both sides."],
+ ["What's the difference between a gift and a research contract?","A gift supports students or programs and doesn't buy results or rights. A contract funds specific work, with terms on results and intellectual property."],
+ ["Do we have to be a large company?","No. Many partners are small and mid-sized firms, and several ways to work cost nothing."]
+];
+
+const ENG_OFFICES = ["bc","cse","dd","egr","cee","ecfr","eal"];
+const INQ = [
+ {who:"Northfield Aerospace (sample)",co:"Aerospace supplier, about 2,000 employees",msg:"We're looking at thermoplastic composites for brackets and want to know who at MSU tests joining methods.",way:"research",topic:"composites",to:"bc",when:"Oct 22",st:"Claimed by K. Abbot, Business Connect",rec:{lead:"J. Ortiz",has:"Recruits at the Engineering Career Fair · sponsored 2 capstone projects since 2024"}},
+ {who:"Lakeshore Mobility (sample)",co:"Mobility startup, 40 employees",msg:"Could a senior team build a test rig for our sensor brackets next spring?",way:"capstone",topic:"mobility",to:"dd",when:"Oct 21",st:"Assigned to the ECE capstone coordinator",rec:{lead:null,has:"New to Engineering. A company record was created from this question."}},
+ {who:"Great Lakes Foods (sample)",co:"Food manufacturer, 600 employees",msg:"We'd like to recruit food science interns for next summer.",way:"hire",topic:"food",to:"csn",when:"Oct 20",st:"Answered by Career Services",rec:null},
+ {who:"Meridian Battery Works (sample)",co:"Battery maker, 300 employees",msg:"We're opening a plant in Lansing and want to work with MSU on research, hiring and maybe a scholarship. Not sure where to start.",way:"unsure",topic:"battery",to:null,when:"Oct 19",st:"Needs routing",rec:{lead:"J. Ortiz",has:"Hired 6 Engineering co-ops in 2025 · no research or giving yet"}}
+];
+
+/* ================= helpers ================= */
+const app = document.getElementById("app");
+let viewAs = "company";
+const topicById = id=>TOPICS.find(t=>t.id===id);
+const wayById = id=>WAYS.find(w=>w.id===id);
+const personById = id=>PEOPLE.find(p=>p.id===id);
+const peopleIn = tid=>PEOPLE.filter(p=>p.topics.includes(tid) && (viewAs==="staff" || p.status!=="hidden"));
+const labsIn = tid=>LABS.filter(l=>l.topics.includes(tid));
+const labOf = pid=>LABS.find(l=>l.people.includes(pid));
+const fmtD = d=>{const x=new Date(d+"T12:00");return {day:x.getDate(),mon:x.toLocaleString("en-US",{month:"short"}),long:x.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"})}};
+const upcoming = (filter)=>EVENTS.filter(e=>e.d>=TODAY && (!filter||filter(e))).sort((a,b)=>a.d.localeCompare(b.d));
+const statusChip = s=>s==="faculty"?'<span class="chip c-ok">Confirmed by faculty</span>':s==="staff"?'<span class="chip c-unk">Confirmed by staff</span>':'<span class="chip c-warn">Suggested</span>';
+const ext = (u,label)=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(label||u.replace(/^https?:\/\//,"").replace(/\/$/,""))}</a>`;
+function officeCard(key, heading){
+  const o = OFFICES[key]; if(!o) return "";
+  return `<div class="panel owner"><div class="small muted">${esc(heading||"Who handles this")}</div><h3>${esc(o.n)}</h3><p class="small">${esc(o.d)}</p>
+    <dl class="facts"><dt>Contact</dt><dd>${esc(o.c)}</dd><dt>Official page</dt><dd>${ext(o.u)}</dd></dl></div>`;
+}
+function eventRows(list){
+  if(!list.length) return '<p class="muted">Nothing scheduled right now. New events appear here as offices post them.</p>';
+  return `<div class="evlist">${list.map(e=>{const f=fmtD(e.d);return `<div class="ev"><div class="d"><b>${e.approx?"Dec":f.day}</b><span>${e.approx?"2026":f.mon}</span></div>
+    <div class="b"><div class="k">${esc(e.k)} · ${esc(e.h)}</div><div class="tt">${esc(e.t)} ${e.sample?'<span class="chip c-sample">Sample event</span>':""}</div><div class="m">${e.approx?"December 2026":esc(f.long)} · ${esc(e.where)}</div></div>
+    <div class="a">${e.u?ext(e.u,"Official page"):""}</div></div>`}).join("")}</div>
+    <p class="srcline">Collected from MSU calendars and office pages. Last checked today, 6:00 AM. Details on the official page are what count.</p>`;
+}
+function personCard(p){
+  const lab = labOf(p.id);
+  return `<div class="person"><div class="hd"><div class="av" aria-hidden="true">${esc(ini(p.n))}</div><div><div class="nm">${esc(p.n)}</div><div class="ti">${esc(p.ti)}, ${esc(p.dept)}</div></div></div>
+    <p class="why">${esc(p.why)}</p>
+    ${lab?`<div class="small">Lab: <button type="button" class="linkbtn" data-lab="${lab.id}">${esc(lab.n)}</button></div>`:""}
+    <div class="ev-row"><span class="evid">${p.ev.pubs} publications since ${p.ev.since}</span><span class="evid">${p.ev.awards} federal award${p.ev.awards===1?"":"s"}</span>${p.ev.patents?`<span class="evid">${p.ev.patents} patent${p.ev.patents===1?"":"s"}</span>`:""}</div>
+    <div>${statusChip(p.status)}</div>
+    <button type="button" class="linkbtn" data-person="${p.id}">See the evidence</button></div>`;
+}
+function labCard(l){
+  const lead = l.lead && personById(l.lead), others = l.people.filter(x=>x!==l.lead).map(personById);
+  return `<div class="lab" id="lab-${l.id}"><div class="lab-hd"><h3>${esc(l.n)}</h3>${l.sample?'<span class="chip c-sample">Sample lab</span>':'<span class="chip c-ok">MSU center</span>'}</div>
+    <p class="small">${esc(l.focus)}</p>
+    ${lead?`<div class="lab-people"><span class="av sm" aria-hidden="true">${esc(ini(lead.n))}</span><span><strong>${esc(lead.n)}</strong>, lab lead${others.length?` · with ${others.map(o=>esc(o.n)).join(", ")}`:""}</span></div>`:""}
+    ${l.equip.length?`<div class="small"><span class="muted">Equipment:</span> ${l.equip.map(esc).join(" · ")}</div>`:""}
+    <div class="small"><span class="muted">Open to companies for:</span> ${l.open.map(w=>`<button type="button" class="linkbtn" data-go="way" data-id="${w}">${esc(wayById(w).t.toLowerCase())}</button>`).join(", ")}</div>
+    ${l.u?`<div class="small">${ext(l.u,"Official page")}</div>`:""}</div>`;
+}
+const goalCard = w=>`<a class="goal" href="#${w.id}" data-go="way" data-id="${w.id}" aria-describedby="gd-${w.id}"><span class="t">${esc(w.t)}</span><span class="d" id="gd-${w.id}">${esc(w.d)}</span>${w.owner?`<span class="o">${esc(OFFICES[w.owner].n)}</span>`:'<span class="o">We\'ll route it for you</span>'}</a>`;
+const plural = (n,w,ws)=>`${n} ${n===1?w:(ws||w+"s")}`;
+const topicCard = t=>`<a class="topic" href="#${t.id}" data-go="topic" data-id="${t.id}"><span class="t">${esc(t.t)}</span><span class="c">${plural(labsIn(t.id).length,"lab or center","labs and centers")} · ${plural(peopleIn(t.id).length,"person","people")}</span></a>`;
+
+/* ================= views ================= */
+const V = {};
+V.home = ()=>`
+  <div class="hero">
+    <h1>How can your company work with MSU?</h1>
+    <p class="lede muted">Pick what you're trying to do, or search for a research area. Every option names the MSU office that handles it.</p>
+    <form class="searchbar" id="homeSearch" role="search"><label for="hq" class="sr">Search research areas, labs, people and events</label>
+      <input type="search" id="hq" placeholder="Try: batteries, PFAS, autonomous vehicles, internships"><button class="btn" type="submit">Search</button></form>
+    <div class="tries"><span class="muted">Popular:</span>${["batteries","composites testing","PFAS","AI","mentoring"].map(q=>`<button type="button" class="pill" data-q="${esc(q)}">${esc(q)}</button>`).join("")}<span class="muted">or</span><a class="pill strong" href="#unsure" data-go="unsure">Not sure where to start?</a></div>
+  </div>
+  <section class="block" aria-labelledby="h-ways"><h2 id="h-ways">Ways to work with MSU</h2>
+    <div class="waygrid">${GROUPS.map(([g,label,desc])=>`<div class="wgroup"><h3>${esc(label)}</h3><p class="small muted">${esc(desc)}</p><ul>${WAYS.filter(w=>w.g===g).map(w=>`<li><a href="#${w.id}" data-go="way" data-id="${w.id}"><span class="wt">${esc(w.t)}</span><span class="wd">${esc(w.d)}</span></a></li>`).join("")}</ul></div>`).join("")}</div>
+  </section>
+  <section class="block" aria-labelledby="h-exp"><div class="grp-hd"><h2 id="h-exp">Research expertise</h2><p class="muted">Labs and people by topic, with the publications, awards and patents behind each listing.</p></div>
+    <div class="topics">${TOPICS.map(topicCard).join("")}</div></section>
+  <section class="block" aria-labelledby="h-ev"><div class="row-hd"><h2 id="h-ev">Coming up on campus</h2><a href="#events" data-go="events" class="more">All events</a></div>${eventRows(upcoming().slice(0,3))}</section>
+  <p class="howline"><b>How it works:</b> tell us what you need, we connect you with the office that handles it, and a person follows up. <a href="#about" data-go="about">More about this site, stories and common questions</a></p>`;
+
+V.way = id=>{
+  const w = wayById(id);
+  if(w.id==="unsure") return V.unsure();
+  const rel = (w.topics||[]).map(topicById);
+  const grp = GROUPS.find(g=>g[0]===w.g);
+  return `<button type="button" class="crumb" data-go="home">← All ways to work</button>
+  <div class="cols"><div class="view">
+    <div><div class="small muted">${esc(grp?grp[1]:"Ways to work")}</div><h1>${esc(w.t)}</h1></div>
+    <p class="lede">${esc(w.what)}</p>
+    <div class="cta-top"><div><span class="small muted">Handled by</span> <strong>${esc(OFFICES[w.owner].n)}</strong> <span class="small muted nowrap">· ${esc(OFFICES[w.owner].c)}</span></div><a class="btn" href="#contact" data-go="contact" data-id="${w.id}">Send a question</a></div>
+    <div class="glance"><div><span class="muted small">Good fit if</span><ul class="plain small">${w.good.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div><div><span class="muted small">Typical commitment</span><p class="small">${esc(w.commit)}</p></div></div>
+    ${w.menu?`<section class="block"><h2>Ways to take part</h2><div class="menu">${w.menu.map(m=>`<div class="mitem"><b>${esc(m[0])}</b><span class="small">${esc(m[1])}</span></div>`).join("")}</div></section>`:""}
+    <section class="block"><h2>How it works</h2><ol class="steps">${w.steps.map(s=>`<li><b>${esc(s[0])}</b><span class="muted">${esc(s[1])}</span></li>`).join("")}</ol></section>
+    <section class="block"><h2>What to have ready</h2><ul class="plain">${w.prepare.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></section>
+    <section class="block"><h2>Cost and timing</h2><p>${esc(w.terms)}</p></section>
+    <section class="block"><h2>What this can look like</h2><div class="stories">${w.examples.map(s=>`<div class="story"><span class="chip c-sample">Sample</span><h3>${esc(s[0])}</h3><p class="small">${esc(s[1])}</p></div>`).join("")}</div></section>
+    <section class="block"><h2>Questions</h2><div class="faq">${w.faq.map(f=>`<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join("")}</div></section>
+    ${rel.length?`<section class="block"><h2>Topics companies often start with</h2><div class="topics">${rel.map(topicCard).join("")}</div></section>`:""}
+  </div>
+  <aside class="view">
+    ${officeCard(w.owner)}
+    <div class="panel"><h3>Ask a question first</h3><p class="small">Not ready to call? Send a note. It goes to ${esc(OFFICES[w.owner].n)}, and a person replies.</p><button type="button" class="btn" data-go="contact" data-id="${w.id}">Send a question</button></div>
+    ${w.also.length?`<div class="panel"><h3>Also involved</h3><ul class="plain small">${w.also.map(k=>`<li>${ext(OFFICES[k].u,OFFICES[k].n)}: ${esc(OFFICES[k].d)}</li>`).join("")}</ul></div>`:""}
+    <div class="panel"><h3>Often paired with</h3><ul class="plain small">${w.pairs.map(p=>`<li><button type="button" class="linkbtn" data-go="way" data-id="${p}">${esc(wayById(p).t)}</button></li>`).join("")}</ul></div>
+    <p class="srcline">Summarized from the offices' official pages, last checked Oct 23, 2026.</p>
+  </aside></div>`;
+};
+
+let labTopic = "";
+V.topics = ()=>`<div><h1>Research expertise</h1><p class="lede muted">Labs, centers and people, organized by topics written for companies. Each listing shows the evidence behind it, and faculty can correct or hide what's shown.</p></div>
+  <div class="topics">${TOPICS.map(topicCard).join("")}</div>
+  <section class="block"><div class="grp-hd"><h2>Labs and centers</h2><p class="muted">Sample labs are led by sample people. MSU centers link to their official pages.</p></div>
+    <div class="fbar" role="group" aria-label="Filter labs by topic" id="labFilter"><button type="button" data-t="" aria-pressed="${!labTopic}">All topics</button>${TOPICS.map(t=>`<button type="button" data-t="${t.id}" aria-pressed="${labTopic===t.id}">${esc(t.t)}</button>`).join("")}</div>
+    <div class="labs" id="labOut">${LABS.filter(l=>!labTopic||l.topics.includes(labTopic)).map(labCard).join("")}</div></section>
+  <p class="srcline">Full faculty profiles are on ${ext("https://scholars.msu.edu/","MSU Scholars")}. This site adds company-facing topics and links back to it.</p>`;
+
+V.topic = id=>{
+  const t = topicById(id), ppl = peopleIn(id), labs = labsIn(id), ways = WAYS.filter(w=>(w.topics||[]).includes(id)), ev = upcoming(e=>e.topics.includes(id));
+  return `<button type="button" class="crumb" data-go="topics">← All research expertise</button>
+  <div><div class="small muted">Research expertise</div><h1>${esc(t.t)}</h1><p class="lede muted">${esc(t.sub)}</p></div>
+  <div class="stats"><span><b>${labs.length}</b> ${labs.length===1?"lab or center":"labs and centers"}</span><span><b>${ppl.length}</b> ${ppl.length===1?"person":"people"}</span><span><b>${ev.length}</b> upcoming ${ev.length===1?"event":"events"}</span><span><b>${ways.length}</b> ways to work</span></div>
+  <div class="cta-top"><div><strong>Talk to MSU about ${esc(t.t.toLowerCase())}</strong> <span class="small muted">· MSU Business Connect sets up the first conversation</span></div><a class="btn" href="#contact" data-go="contact" data-id="research" data-topic="${id}">Send a question</a></div>
+  <div class="cols"><div class="view">
+    <div class="notice">Sample labs, people and publications for this prototype. They are not real MSU faculty. MSU centers listed are real.</div>
+    <section class="block"><h2>Labs and centers</h2><div class="labs">${labs.map(labCard).join("")}</div></section>
+    <section class="block"><h2>People</h2><div class="people">${ppl.map(personCard).join("")}</div>
+      <p class="srcline">Listed from publications, federal awards and patents in public databases, MSU web pages and staff knowledge. Listings are confirmed by faculty or staff before they appear.</p></section>
+    <section class="block"><h2>Events on this topic</h2>${eventRows(ev)}</section>
+  </div>
+  <aside class="view">
+    <div class="panel owner"><h3>Talk to us about ${esc(t.t.toLowerCase())}</h3><p class="small">Your question goes to MSU Business Connect, who know these labs and will set up the first conversation. Faculty aren't contacted directly from this site.</p><button type="button" class="btn" data-go="contact" data-id="research" data-topic="${id}">Send a question</button></div>
+    <div class="panel"><h3>Ways to work on this</h3><ul class="plain small">${ways.map(w=>`<li><button type="button" class="linkbtn" data-go="way" data-id="${w.id}">${esc(w.t)}</button></li>`).join("")}</ul></div>
+    <div class="panel"><h3>Bring it to students</h3><p class="small">Engineers working in ${esc(t.t.toLowerCase())} can speak in a related course or mentor a capstone team.</p><button type="button" class="linkbtn" data-go="way" data-id="speak">Speak in a class</button></div>
+    <div class="panel"><h3>Related searches</h3><div class="tries">${t.related.map(r=>`<button type="button" class="pill" data-q="${esc(r)}">${esc(r)}</button>`).join("")}</div></div>
+  </aside></div>`;
+};
+
+V.unsure = ()=>{
+  const paths = [
+    ["We have a technical problem","Research, testing or a technology to license.",["research","facilities","license","capstone"]],
+    ["We need people","Interns, graduates, or a look at students' work.",["hire","capstone","teams"]],
+    ["We want to give back","Time, expertise or support.",["volunteer","speak","teams","give"]],
+    ["We want to learn what MSU does","Before deciding anything.",["visit","centers"]]
+  ];
+  return `<div><h1>Not sure where to start?</h1><p class="lede muted">Pick the closest one. Each shows a few places companies usually begin.</p></div>
+  <div class="paths">${paths.map(([t,d,ids])=>`<div class="path"><h2>${esc(t)}</h2><p class="small muted">${esc(d)}</p><ul>${ids.map(id=>`<li><a href="#${id}" data-go="way" data-id="${id}">${esc(wayById(id).t)}</a></li>`).join("")}</ul></div>`).join("")}</div>
+  <section class="block notsure"><div><h2>Still not sure?</h2><p class="muted">Tell us in your own words. The Work with MSU team, staff from MSU Business Connect and Engineering corporate relations, reads every question that isn't for a single office and passes it to the right one within one business day.</p></div><a class="btn" href="#contact" data-go="contact" data-id="unsure">Write to us</a></section>`;
+};
+
+V.events = ()=>{
+  const kinds = ["All",...new Set(EVENTS.map(e=>e.k))];
+  return `<div><h1>Events</h1><p class="lede muted">Public events across MSU that are useful to companies, in one list. Registration and details are always on the official page.</p></div>
+  <div class="cols"><div class="view">
+  <div class="fbar" role="group" aria-label="Kind of event" id="evKinds">${kinds.map((k,i)=>`<button type="button" data-k="${esc(k)}" aria-pressed="${i===0}">${esc(k)}</button>`).join("")}</div>
+  <div class="fbar" role="group" aria-label="Topic" id="evTopics"><button type="button" data-t="" aria-pressed="true">Any topic</button>${TOPICS.map(t=>`<button type="button" data-t="${t.id}" aria-pressed="false">${esc(t.t)}</button>`).join("")}</div>
+  <div id="evOut">${eventRows(upcoming())}</div>
+  </div><aside class="view">
+   <div class="panel"><h3>Every year</h3><div class="rec">${RECURRING.map(r=>`<div><b>${esc(r[0])}</b><span class="small muted">${esc(r[1])}</span><span class="small">${esc(r[2])}</span><span class="small">${ext(r[3],"Official page")}</span></div>`).join("")}</div></div>
+   <div class="panel"><h3>Want to be part of one?</h3><p class="small">Judge Design Day, speak at a seminar or host students at your site.</p><button type="button" class="linkbtn" data-go="way" data-id="volunteer">Get your employees involved</button></div>
+   <p class="srcline">Employer events in Handshake need a login; see ${ext("https://careernetwork.msu.edu/channels/for-employers/","the Career Services Network")}.</p>
+  </aside></div>`;
+};
+
+V.contact = (wayId, topicId)=>{
+  const opts = WAYS.map(w=>`<option value="${w.id}" ${w.id===(wayId||"unsure")?"selected":""}>${esc(w.t)}</option>`).join("");
+  const topts = `<option value="">Not specific</option>`+TOPICS.map(t=>`<option value="${t.id}" ${t.id===topicId?"selected":""}>${esc(t.t)}</option>`).join("");
+  return `<div><h1>Talk to us</h1><p class="lede muted">Tell us what you're hoping to do. Your note goes to the MSU office that handles it, and a person replies.</p></div>
+  <div class="cols"><div>
+  <form class="f" id="cForm" novalidate>
+    <div class="field"><label for="cWay">What are you hoping to do?</label><select id="cWay">${opts}</select></div>
+    <div class="field"><label for="cTopic">Research area <span class="hint">(optional)</span></label><select id="cTopic">${topts}</select></div>
+    <div class="route" id="cRoute" aria-live="polite"></div>
+    <div class="field"><label for="cMsg">Your question</label><textarea id="cMsg" maxlength="2000" placeholder="What you're trying to do, any timing, and anything we should know."></textarea></div>
+    <div class="field"><label for="cName">Your name</label><input type="text" id="cName" autocomplete="name" maxlength="100"></div>
+    <div class="field"><label for="cCo">Company</label><input type="text" id="cCo" autocomplete="organization" maxlength="120"></div>
+    <div class="field"><label for="cEmail">Work email</label><input type="email" id="cEmail" autocomplete="email" maxlength="120"></div>
+    <p class="err" id="cErr" role="alert" hidden></p>
+    <div><button class="btn" type="submit">Send</button></div>
+    <p class="small muted">We use your details only to answer this question. They're shared with the MSU office that replies.</p>
+  </form>
+  <div id="cDone" hidden class="view"></div>
+  </div>
+  <aside class="view">
+   <div class="panel"><h3>What happens next</h3><ol class="steps"><li><b>Your note arrives</b><span class="muted">With the office shown above, and a copy goes to you.</span></li><li><b>A person reads it</b><span class="muted">If another office is better placed, they pass it on and tell you.</span></li><li><b>They reply</b><span class="muted">Usually to set up a short call.</span></li></ol></div>
+   <div class="panel"><h3>Prefer to call?</h3><p class="small" id="cCall"></p></div></aside></div>`;
+};
+
+V.about = ()=>`<div><h1>How this site works</h1></div>
+  <div class="cols"><div class="view">
+  <section class="block"><h2>A guide, not a replacement</h2><p>MSU's offices own their programs and pages. This site organizes them around what companies are trying to do and sends you to the right one. If anything here disagrees with an official page, the official page is right.</p></section>
+  <section class="block"><h2>Where the information comes from</h2><ul class="plain"><li>Public MSU web pages, checked every day for changes</li><li>Public databases of publications, federal awards and patents</li><li>MSU calendars and office event pages</li><li>MSU staff who know the research and the offices</li></ul></section>
+  <section class="block"><h2>How labs and people are listed</h2><p>A lab or researcher appears under a topic only when there's evidence: publications, awards, patents or their own pages. Staff or the faculty member confirm the listing before it appears. Faculty can correct their topics or hide themselves at any time, and companies reach them through MSU Business Connect rather than directly from this site.</p></section>
+  <section class="block"><h2>Common questions</h2><div class="faq">${HOME_FAQ.map(f=>`<details><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join("")}</div></section>
+  <section class="block"><h2>How companies have started</h2><p class="small muted">Sample stories for this prototype.</p><div class="stories">${STORIES.map(x=>`<div class="story"><h3>${esc(x[0])}</h3><p class="small">${esc(x[1])}</p></div>`).join("")}</div></section>
+  <section class="block"><h2>What we don't do</h2><ul class="plain"><li>No tracking of who you are while you browse. We count searches, not people.</li><li>No ratings or rankings of researchers.</li><li>No private MSU information. Everything here is already public or was written for this site.</li></ul></section>
+  </div><aside class="view">${officeCard("bc","Questions about research at MSU")}</aside></div>`;
+
+/* ----- faculty ----- */
+let facultyTags = [
+ {t:"battery",st:"faculty",src:"24 publications (2021–2026), 2 NSF awards"},
+ {t:"manufacturing",st:"suggested",src:"6 publications on dry electrode processing; 1 patent"},
+ {t:"ai",st:"suggested",src:"2 publications using machine learning to predict cell failure"}
+];
+V.faculty = ()=>`<div class="sec"><div class="small muted">Signed in with MSU NetID · sample faculty member</div><h1>Your listing</h1><p class="lede muted">Dr. Mara Linden, Chemical Engineering and Materials Science. This is what companies see about you, and why.</p><div><a class="btn ghost" href="#battery" data-go="topic" data-id="battery">See my public listing</a></div></div>
+  <div class="cols"><div class="view">
+   <section class="block"><h2>Your topics</h2><div class="queue">${facultyTags.map((x,i)=>`<div class="qitem ${x.st==="hidden"?"done":""}"><div style="display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap"><strong>${esc(topicById(x.t).t)}</strong>${x.st==="faculty"?'<span class="chip c-ok">You confirmed this</span>':x.st==="hidden"?'<span class="chip c-unk">Hidden</span>':'<span class="chip c-warn">Suggested, not shown yet</span>'}</div><p class="small muted">Evidence: ${esc(x.src)}</p>
+     <div class="acts">${x.st==="suggested"?`<button type="button" class="tl" data-ftag="${i}" data-act="faculty">Yes, list me under this</button>`:""}${x.st!=="hidden"?`<button type="button" class="tl" data-ftag="${i}" data-act="hidden">Don't show this</button>`:`<button type="button" class="tl" data-ftag="${i}" data-act="faculty">Show it again</button>`}</div></div>`).join("")}</div></section>
+   <section class="block"><h2>Add a topic</h2><div class="field"><label for="fAdd">Topic</label><select id="fAdd"><option value="">Choose a topic</option>${TOPICS.filter(t=>!facultyTags.some(x=>x.t===t.id)).map(t=>`<option value="${t.id}">${esc(t.t)}</option>`).join("")}</select></div><div><button type="button" class="btn ghost" id="fAddBtn">Suggest topic</button><p class="small muted">Staff check the evidence before it's shown.</p></div></section>
+  </div><aside class="view">
+   <div class="panel"><h3>How companies reach you</h3><p class="small">Through MSU Business Connect, who check with you before making an introduction. Your email isn't shown on this site.</p></div>
+   <div class="panel"><h3>Leave the site</h3><p class="small">Remove yourself from all topics. Your MSU Scholars profile isn't affected.</p><div><button type="button" class="btn danger" id="fLeave">Remove me from Work with MSU</button></div><p class="small muted" id="fLeaveMsg" aria-live="polite"></p></div>
+  </aside></div>`;
+
+/* ----- staff ----- */
+let staffTab = "inquiries";
+let tagQueue = [
+ {p:"Dr. Ines Halvorsen",t:"battery",why:"9 publications on cathode recycling (2022–2026); NSF award 2025",src:"Publications database, NSF",st:"open"},
+ {p:"Dr. Aiko Brennan",t:"food",why:"Department page lists 'food quality inspection'; 4 publications",src:"MSU web page, publications",st:"open"},
+ {p:"Dr. Nadia Freitas",t:"cyber",why:"Added by K. Abbot, Business Connect: 'leads our vehicle security work with two OEMs'",src:"Staff",st:"open"},
+ {p:"Dr. Victor Lindqvist",t:"battery",why:"1 publication mentioning batteries (2021)",src:"Publications database",st:"open",weak:true}
+];
+const FINDINGS_FOR_OWNERS = [
+ ["CEE Corporate Partners Program","Two pages with different department chair titles","engineering.msu.edu"],
+ ["Center for Spartan Engineering","Career Café dates say Wednesdays from Sept 28, but Sept 28, 2026 is a Monday","engineering.msu.edu"],
+ ["MSU Business Connect","An older page lists a phone number that is now an assistant VP's direct line","innovationcenter.msu.edu"],
+ ["RCPD Design Day partnership","Content dates from 2019","rcpd.msu.edu"]
+];
+const SOURCES = [
+ ["MSU web pages","4,812 pages","12 changed this week","Daily"],["Publications (OpenAlex)","1,240 Engineering authors matched","38 need review","Weekly"],["NSF and NIH awards","412 active awards","Up to date","Weekly"],["Patents","286 MSU patents","Up to date","Quarterly"],
+ ["events.msu.edu feeds","3 categories","OK","Daily"],["Engineering events page","Read from the page (no feed)","1 event changed","Daily"],["Research Foundation events","Read from the page (no feed)","Page layout changed; check reader","Daily"]
+];
+const isEng = k=>ENG_OFFICES.includes(k);
+const inqPath = q=>{
+  if(!q.to) return {cls:"c-warn", lab:"Needs routing", note:"Open questions come to the Hub for the Work with MSU team to route."};
+  if(isEng(q.to)) return {cls:"c-ok", lab:"In the Hub inbox", note:`Assigned to ${OFFICES[q.to].n}. Tracked in the shared inbox until someone replies.`};
+  if(q.rec) return {cls:"c-unk", lab:"Emailed to another office", note:`Sent to ${OFFICES[q.to].n} by email. A copy is on the company's Hub record.`};
+  return {cls:"c-unk", lab:"Emailed to another office", note:`Sent to ${OFFICES[q.to].n} by email. Not kept in the Hub: the company has no Hub record.`};
+};
+V.staff = ()=>{
+  const tabs = [["inquiries","Work with MSU questions",INQ.filter(x=>!x.to).length],["tags","Topic review",tagQueue.filter(x=>x.st==="open").length]];
+  if(!tabs.some(t=>t[0]===staffTab)) staffTab = "inquiries";
+  return `<div class="sec"><div class="small muted">Signed in as J. Ortiz, Engineering Corporate Relations · sample</div><h1>Work with MSU in the Hub</h1>
+  <p class="muted" style="max-width:72ch">Work with MSU is co-sponsored by MSU Business Connect and Engineering Corporate Relations. The public site has no back office of its own: both teams handle its questions and faculty topics here, in the Engagement Hub, next to everything already known about each company.</p></div>
+  <div class="staff"><nav class="snav" aria-label="Hub sections">${tabs.map(([k,l,n])=>`<button type="button" data-st="${k}" aria-current="${k===staffTab}">${esc(l)}${n?`<span class="n">${n}</span>`:""}</button>`).join("")}
+    <p class="small muted snote">The rest of the Hub (companies, opportunities, reports) isn't shown in this prototype.</p></nav>
+  <div class="view" id="stOut">${ST[staffTab]()}</div></div>`;
+};
+const ST = {};
+ST.inquiries = ()=>`<div class="paths2">
+    <div class="p2"><span class="chip c-ok">In the Hub inbox</span><p class="small">Questions for the co-sponsors land here, on the company's record: research, testing and contracts (Business Connect), and Engineering offices (capstone, careers, outreach, alumni, corporate relations).</p></div>
+    <div class="p2"><span class="chip c-unk">Emailed to another office</span><p class="small">Questions for other offices (MSU Technologies, Career Services, Advancement, other colleges) go to that office by email. The Hub keeps a copy when the company already has a Hub record.</p></div>
+    <div class="p2"><span class="chip c-warn">Needs routing</span><p class="small">"Not sure yet" questions come here. The Work with MSU team, from Business Connect and Engineering, sends them on within one business day.</p></div></div>
+  <div class="iq">${INQ.map((q,i)=>{ const pth = inqPath(q); return `<article class="iqi">
+    <div class="iqh"><div><strong>${esc(q.who)}</strong> <span class="small muted">· ${esc(q.co||"")} · ${esc(q.when)}</span></div><span class="chip ${pth.cls}">${pth.lab}</span></div>
+    <p>“${esc(q.msg)}”</p>
+    <p class="small muted">Chose: ${esc(wayById(q.way).t)}${q.topic?` · Topic: ${esc(topicById(q.topic).t)}`:""}</p>
+    ${q.rec?`<div class="rec"><span class="small"><strong>On the Hub record:</strong> ${esc(q.rec.has)}${q.rec.lead?` · Relationship lead: ${esc(q.rec.lead)}`:""}</span></div>`:""}
+    <p class="small">${esc(pth.note)}${q.to?` <span class="muted">Status: ${esc(q.st)}.</span>`:""}</p>
+    ${q.to?"":`<div class="routeas"><select id="route${i}" aria-label="Send ${esc(q.who)}'s question to"><option value="">Choose an office</option><optgroup label="Business Connect and Engineering (stays in the Hub)">${ENG_OFFICES.map(k=>`<option value="${k}">${esc(OFFICES[k].n)}</option>`).join("")}</optgroup><optgroup label="Other MSU offices (sent by email)">${Object.keys(OFFICES).filter(k=>!isEng(k)).map(k=>`<option value="${k}">${esc(OFFICES[k].n)}</option>`).join("")}</optgroup></select><button type="button" class="btn sm" data-route="${i}">Send</button></div>`}
+  </article>`; }).join("")}</div>
+  <p class="srcline">Sample questions. Site upkeep (which office owns each option, the sources the site reads, and what companies search for) lives in the Hub's Admin area.</p>`;
+ST.tags = ()=>`<p class="muted">Topics live on faculty profiles in the Hub, for every college. Business Connect staff review their assigned colleges; Engineering Corporate Relations reviews Engineering. Suggestions come from publications, awards, patents, MSU pages and staff. A topic appears on Work with MSU only after you or the faculty member confirm it. Faculty are told about every confirmed topic and can hide it.</p>
+  <div class="queue">${tagQueue.map((x,i)=>`<div class="qitem ${x.st!=="open"?"done":""}"><div style="display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap"><strong>${esc(x.p)} → ${esc(topicById(x.t).t)}</strong><span class="chip ${x.weak?"c-warn":"c-unk"}">${x.weak?"Weak evidence":esc(x.src)}</span></div>
+   <p class="small">${esc(x.why)}</p>
+   <div class="acts">${x.st==="open"?`<button type="button" class="btn sm" data-tag="${i}" data-act="ok">Confirm</button><button type="button" class="btn sm ghost" data-tag="${i}" data-act="ask">Ask the faculty member</button><button type="button" class="tl" data-tag="${i}" data-act="no">Reject</button>`:`<span class="small muted">${esc(x.st)}</span><button type="button" class="tl" data-undo="${i}">Undo</button>`}</div></div>`).join("")}</div>`;
+
+
+/* ================= routing ================= */
+let current = {v:"home"};
+function go(v, id, extra){
+  if(viewAs!=="company" && !["faculty","staff"].includes(v)) setAs("company", true);
+  current = {v,id,extra};
+  let html;
+  if(v==="way") html = V.way(id);
+  else if(v==="topic") html = V.topic(id);
+  else if(v==="contact") html = V.contact(id, extra);
+  else if(v==="search") html = V.search(id);
+  else if(v==="unsure") html = V.unsure();
+  else html = (V[v]||V.home)();
+  document.body.classList.toggle("hub", v==="staff");
+  app.innerHTML = `<div class="view">${html}</div>`;
+  document.querySelectorAll("nav.main button").forEach(b=>{
+    const on = b.dataset.go===v || (v==="way"&&b.dataset.go==="home") || (v==="topic"&&b.dataset.go==="topics") || (v==="unsure"&&b.dataset.go==="contact");
+    if(on) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
+  });
+  const tok = v==="way"||v==="topic" ? id : v==="search" ? "search" : v;
+  if(!fromHistory){ try{ (first ? history.replaceState : history.pushState).call(history, {v,id,extra,as:viewAs}, "", "#"+tok); }catch(e){} }
+  first = false;
+  const cur=document.querySelector("nav.main [aria-current]"); const nav=document.querySelector("nav.main"); if(cur&&nav&&nav.scrollWidth>nav.clientWidth) nav.scrollLeft = cur.offsetLeft - 16;
+  bind(); window.scrollTo({top:0}); app.focus({preventScroll:true});
+}
+let first = true, fromHistory = false;
+window.addEventListener("popstate", e=>{
+  const st = e.state; if(!st) return;
+  fromHistory = true;
+  if(st.as && st.as!==viewAs){ viewAs = st.as; document.querySelectorAll(".demo .views button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.as===viewAs))); }
+  go(st.v, st.id, st.extra);
+  fromHistory = false;
+});
+function setAs(a, silent){
+  viewAs = a;
+  document.querySelectorAll(".demo .views button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.as===a)));
+  if(!silent) go(a==="company"?"home":a);
+}
+document.querySelectorAll(".demo .views button").forEach(b=>b.addEventListener("click",()=>setAs(b.dataset.as)));
+document.addEventListener("click",e=>{
+  const g = e.target.closest("[data-go]");
+  if(g){ e.preventDefault(); go(g.dataset.go, g.dataset.id, g.dataset.topic); return; }
+  const q = e.target.closest("[data-q]"); if(q){ go("search", q.dataset.q); return; }
+  const pr = e.target.closest("[data-person]"); if(pr){ showPerson(pr.dataset.person, pr); return; }
+  const lb = e.target.closest("[data-lab]"); if(lb){ const l = LABS.find(x=>x.id===lb.dataset.lab); labTopic = l.topics[0]; go("topics"); const el = document.getElementById("lab-"+l.id); if(el){ el.scrollIntoView({block:"center"}); el.classList.add("flash"); } return; }
+});
+
+/* ----- search ----- */
+const SYN = {ai:["machine learning","ai"],ml:["machine learning"],ev:["electric vehicle","battery"],evs:["electric vehicle","battery"],av:["autonomous","automated vehicle"],avs:["autonomous"],"co-op":["co-op","intern"],coop:["co-op","intern"],coops:["co-op","intern"],intern:["intern","hire"],interns:["intern","hire"],internship:["intern","hire"],internships:["intern","hire"],mentor:["mentor"],mentoring:["mentor"],volunteer:["volunteer","mentor"],hiring:["hire","recruit"],recruit:["recruit","hire"],recruiting:["recruit","hire"],donate:["gift","give"],donation:["gift","give"],scholarship:["scholarship","give"],license:["licens"],licensing:["licens"],patent:["patent","licens"],testing:["test"],lecture:["class","course"],class:["class","course"],speaker:["class","speak"],cyber:["security","cyber"]};
+const stem = w=>w.replace(/ies$/,"y").replace(/(ss|us)$/,"$1").replace(/(ches|shes|xes|ses)$/,m=>m.slice(0,-2)).replace(/(ing|ers|ed)$/,"").replace(/s$/,"");
+const lev = (a,b)=>{ const d=[...Array(b.length+1).keys()]; for(let i=1;i<=a.length;i++){ let prev=d[0]; d[0]=i; for(let j=1;j<=b.length;j++){ const t=d[j]; d[j]=Math.min(d[j]+1,d[j-1]+1,prev+(a[i-1]===b[j-1]?0:1)); prev=t; } } return d[b.length]; };
+const searchText = {
+  topic:t=>t.t+" "+t.sub+" "+t.related.join(" "),
+  lab:l=>l.n+" "+l.focus+" "+l.equip.join(" ")+" "+l.topics.map(x=>topicById(x).t).join(" "),
+  person:p=>p.why+" "+p.dept+" "+p.papers.join(" ")+" "+p.topics.map(x=>topicById(x).t).join(" "),
+  way:w=>w.t+" "+w.d+" "+(w.what||"")+" "+(w.menu||[]).map(m=>m.join(" ")).join(" "),
+  ev:e=>e.t+" "+e.k+" "+e.h+" "+e.topics.map(x=>topicById(x).t).join(" ")
+};
+function terms(q){
+  return q.toLowerCase().split(/[\s,]+/).filter(Boolean).flatMap(w=>SYN[w] ? SYN[w] : (w.length<2||["and","the","for","with","msu"].includes(w)) ? [] : [w]);
+}
+function matcher(ts){
+  const parts = ts.map(t=>t.split(" ").map(stem));
+  return txt=>{ const low = " "+txt.toLowerCase().replace(/[^a-z0-9\- ]/g," ")+" "; return parts.some(ws=>ws.every(w=>w.length<=2 ? new RegExp("\\b"+w+"\\b").test(low) : low.includes(w))); };
+}
+function runSearch(q){
+  const hit = matcher(terms(q));
+  return { tps:TOPICS.filter(t=>hit(searchText.topic(t))), labs:LABS.filter(l=>hit(searchText.lab(l))), ppl:PEOPLE.filter(p=>p.status!=="hidden"&&hit(searchText.person(p))), ways:WAYS.filter(w=>w.what&&hit(searchText.way(w))), evs:upcoming(e=>hit(searchText.ev(e))) };
+}
+let VOCAB = null;
+function suggest(q){
+  if(!VOCAB){ VOCAB = new Set(); [...TOPICS.map(searchText.topic),...LABS.map(searchText.lab),...PEOPLE.map(searchText.person),...WAYS.map(searchText.way)].join(" ").toLowerCase().replace(/[^a-z\- ]/g," ").split(/\s+/).forEach(w=>{ if(w.length>=4) VOCAB.add(w); }); }
+  let changed = false;
+  const fixed = q.toLowerCase().split(/\s+/).map(w=>{ if(w.length<4 || VOCAB.has(w) || SYN[w]) return w; let best=null, bd=3; VOCAB.forEach(v=>{ if(Math.abs(v.length-w.length)>2) return; const d=lev(w,v); if(d<bd){ bd=d; best=v; } }); if(best && bd<=2){ changed=true; return best; } return w; }).join(" ");
+  return changed ? fixed : null;
+}
+V.search = q=>{
+  let r = runSearch(q), corrected = null;
+  const count = x=>x.tps.length+x.labs.length+x.ppl.length+x.ways.length+x.evs.length;
+  if(!count(r)){ const s2 = suggest(q); if(s2){ const r2 = runSearch(s2); if(count(r2)){ r = r2; corrected = s2; } } }
+  const {tps,labs,ppl,ways,evs} = r, none = !count(r);
+  return `<form class="searchbar" id="homeSearch" role="search"><label for="hq" class="sr">Search</label><input type="search" id="hq" value="${esc(q)}"><button class="btn" type="submit">Search</button></form>
+  <h1 style="font-size:1.5rem">Results for “${esc(corrected||q)}”</h1>
+  ${corrected?`<p class="small muted">No results for “${esc(q)}”. Showing results for “${esc(corrected)}” instead.</p>`:""}
+  ${none?`<div class="panel"><h3>We don't list anything for this yet</h3><p class="small">That doesn't mean no one at MSU works on it. Send a question and MSU Business Connect will look.</p><div><a class="btn" href="#contact" data-go="contact" data-id="research">Ask Business Connect</a></div></div>`:""}
+  ${ways.length?`<section class="block"><h2>Ways to work</h2><div class="goals">${ways.map(goalCard).join("")}</div></section>`:""}
+  ${tps.length?`<section class="block"><h2>Research expertise</h2><div class="topics">${tps.map(topicCard).join("")}</div></section>`:""}
+  ${(labs.length||ppl.length)?'<div class="notice">Sample labs and people for this prototype. They are not real MSU faculty. MSU centers listed are real.</div>':""}
+  ${labs.length?`<section class="block"><h2>Labs and centers</h2><div class="labs">${labs.map(labCard).join("")}</div></section>`:""}
+  ${ppl.length?`<section class="block"><h2>People</h2><div class="people">${ppl.map(personCard).join("")}</div></section>`:""}
+  ${evs.length?`<section class="block"><h2>Events</h2>${eventRows(evs)}</section>`:""}`;
+};
+
+/* ----- person detail (inline) ----- */
+function showPerson(id, btn){
+  const p = PEOPLE.find(x=>x.id===id), card = btn.closest(".person");
+  const open = card.querySelector(".detail");
+  if(open){ open.remove(); btn.textContent="See the evidence"; return; }
+  const d = document.createElement("div"); d.className = "detail";
+  d.innerHTML = `<div class="small" style="display:grid;gap:.35rem;border-top:1px solid var(--line);padding-top:.5rem">
+    <strong>Recent work (sample)</strong><ul class="plain">${p.papers.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+    <span>Topics: ${p.topics.map(x=>esc(topicById(x).t)).join(", ")}</span>
+    <span class="muted">Full profile on <a href="https://scholars.msu.edu/" target="_blank" rel="noopener">MSU Scholars</a>. To talk with ${esc(p.n.replace("Dr. ","").split(" ")[0])}, send a question and Business Connect will make the introduction.</span>
+    <button type="button" class="btn ghost" data-go="contact" data-id="research" data-topic="${p.topics[0]}">Ask about working with ${esc(p.n.split(" ").slice(-1)[0])}'s group</button></div>`;
+  card.appendChild(d); btn.textContent = "Hide the evidence";
+}
+
+/* ----- bindings per view ----- */
+const ROUTE = {research:"bc",hire:"csn",capstone:"dd",license:"msut",facilities:"bc",training:"edp",startups:"rf",centers:"centers",give:"ua",federal:"rd",teams:"ecfr",volunteer:"eal",speak:"egr",visit:"egr",unsure:null};
+function bind(){
+  document.querySelectorAll(".tw").forEach(t=>{ t.tabIndex=0; t.setAttribute("role","region"); if(!t.hasAttribute("aria-label")) t.setAttribute("aria-label","Scrollable table"); });
+  const hs = document.getElementById("homeSearch");
+  if(hs) hs.addEventListener("submit",e=>{ e.preventDefault(); const q=document.getElementById("hq").value.trim(); if(q) go("search", q); });
+  const cf = document.getElementById("cForm");
+  if(cf){
+    const upd = ()=>{
+      const w = document.getElementById("cWay").value, t = document.getElementById("cTopic").value, k = ROUTE[w];
+      let to = k ? OFFICES[k].n : "the Work with MSU team, who will find the right office within one business day";
+      if(w==="hire" && ["battery","mobility","composites","manufacturing","ai","cyber","water"].includes(t)) to = OFFICES.cse.n+", with a copy to the Career Services Network";
+      document.getElementById("cRoute").innerHTML = `<strong>Your note goes to:</strong> ${esc(to)}.`;
+      const ok = w==="hire" && /Spartan Engineering/.test(to) ? "cse" : k;
+      document.getElementById("cCall").textContent = ok ? `${OFFICES[ok].n}: ${OFFICES[ok].c}` : "MSU Business Connect: (517) 355-2186. They'll point you to the right office.";
+    };
+    ["cWay","cTopic"].forEach(id=>document.getElementById(id).addEventListener("change",upd)); upd();
+    cf.addEventListener("submit",e=>{
+      e.preventDefault();
+      const err = document.getElementById("cErr"), m = document.getElementById("cMsg").value.trim(), em = document.getElementById("cEmail").value.trim(), co = document.getElementById("cCo").value.trim(), nm = document.getElementById("cName").value.trim();
+      const fail = (msg,id)=>{ err.textContent = msg; err.hidden = false; document.getElementById(id).focus(); };
+      if(m.length<20) return fail("Tell us a little more about what you're hoping to do, so the right person can answer.","cMsg");
+      if(!nm) return fail("Add your name.","cName");
+      if(!co) return fail("Add your company.","cCo");
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) return fail("Add a work email we can reply to.","cEmail");
+      err.hidden = true;
+      const to = document.getElementById("cRoute").textContent.replace(/^Your note goes to:\s*/,"").replace(/\.$/,"");
+      cf.hidden = true; const d = document.getElementById("cDone"); d.hidden = false;
+      d.innerHTML = `<div class="panel owner"><h2 id="sentH" tabindex="-1">Sent</h2><p>Your question went to ${esc(to)}. A copy is on its way to ${esc(em)}.</p><p class="small muted">A person reads every question. If it turns out another office is better placed, they'll pass it on and tell you.</p><p class="small"><span class="chip c-sample">Prototype</span> Nothing was actually sent.</p><div><button type="button" class="btn ghost" data-go="home">Back to ways to work</button></div></div>`;
+      document.getElementById("sentH").focus();
+    });
+  }
+  const lf = document.getElementById("labFilter");
+  if(lf) lf.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; labTopic=b.dataset.t; lf.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); document.getElementById("labOut").innerHTML = LABS.filter(l=>!labTopic||l.topics.includes(labTopic)).map(labCard).join(""); });
+  const ek = document.getElementById("evKinds");
+  if(ek){
+    let k="All", t="";
+    const render = ()=>{ document.getElementById("evOut").innerHTML = eventRows(upcoming(e=>(k==="All"||e.k===k)&&(!t||e.topics.includes(t)))); };
+    ek.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; k=b.dataset.k; ek.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); render(); });
+    const et = document.getElementById("evTopics");
+    et.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; t=b.dataset.t; et.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); render(); });
+  }
+  document.querySelectorAll("[data-ftag]").forEach(b=>b.addEventListener("click",()=>{ facultyTags[+b.dataset.ftag].st = b.dataset.act; go("faculty"); }));
+  const fa = document.getElementById("fAddBtn");
+  if(fa) fa.addEventListener("click",()=>{ const v=document.getElementById("fAdd").value; if(!v){ document.getElementById("fAdd").focus(); return; } facultyTags.push({t:v,st:"suggested",src:"Added by you; staff will check the evidence before it's shown"}); go("faculty"); });
+  const fl = document.getElementById("fLeave");
+  if(fl) fl.addEventListener("click",()=>{ if(!fl.dataset.armed){ fl.dataset.armed="1"; fl.textContent="Confirm: remove me"; document.getElementById("fLeaveMsg").textContent="You'll be removed from every topic. Select again to confirm."; return; } facultyTags.forEach(x=>x.st="hidden"); go("faculty"); document.getElementById("fLeaveMsg").textContent="Removed. You can come back any time from this page."; });
+  document.querySelectorAll("[data-st]").forEach(b=>b.addEventListener("click",()=>{ staffTab = b.dataset.st; go("staff"); }));
+  document.querySelectorAll("[data-tag]").forEach(b=>b.addEventListener("click",()=>{ const x=tagQueue[+b.dataset.tag]; x.st = {ok:"Confirmed. The faculty member has been told and can hide it.",no:"Rejected. It won't be suggested again without new evidence.",ask:"Sent to the faculty member to confirm."}[b.dataset.act]; if(b.dataset.act==="ok"){ const p=PEOPLE.find(p=>p.n===x.p); if(p&&!p.topics.includes(x.t)){ p.topics.push(x.t); x.added=true; } } go("staff"); }));
+  document.querySelectorAll("[data-undo]").forEach(b=>b.addEventListener("click",()=>{ const x=tagQueue[+b.dataset.undo]; if(/^Confirmed/.test(x.st)){ const p=PEOPLE.find(p=>p.n===x.p); if(p && x.added) p.topics = p.topics.filter(t=>t!==x.t); } x.st="open"; go("staff"); }));
+  document.querySelectorAll("[data-route]").forEach(b=>b.addEventListener("click",()=>{ const i=+b.dataset.route, v=document.getElementById("route"+i).value; if(!v){ document.getElementById("route"+i).focus(); return; } INQ[i].to=v; INQ[i].st="Sent by J. Ortiz just now"; go("staff"); }));
+  document.querySelectorAll("[data-owner]").forEach(b=>b.addEventListener("click",()=>{ b.disabled=true; b.textContent="Sent to the site owner ✓"; }));
+}
+
+/* ================= start ================= */
+document.documentElement.lang = "en";
+const start = ()=>{
+  const h = (location.hash||"").slice(1);
+  if(WAYS.some(w=>w.id===h)) go("way",h);
+  else if(TOPICS.some(t=>t.id===h)) go("topic",h);
+  else if(["topics","events","contact","about","unsure"].includes(h)) go(h);
+  else if(["faculty","staff"].includes(h)) setAs(h);
+  else go("home");
+};
+start();
+</script>
+
+</body></html>
