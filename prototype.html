@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spartan Engineering Conversations (demo)</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20120%20120%22%3E%3Cpath%20d%3D%22M54%2026%20H90%20A14%2014%200%200%201%20104%2040%20V72%20A14%2014%200%200%201%2090%2086%20L100%2098%20L78%2086%20H54%20A14%2014%200%200%201%2040%2072%20V40%20A14%2014%200%200%201%2054%2026%20Z%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%2318453B%22%20stroke-width%3D%226%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M18%2046%20H64%20A14%2014%200%200%201%2078%2060%20V86%20A14%2014%200%200%201%2064%20100%20H34%20L22%20112%20V100%20H18%20A14%2014%200%200%201%204%2086%20V60%20A14%2014%200%200%201%2018%2046%20Z%22%20fill%3D%22%2318453B%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%225%22%20stroke-linejoin%3D%22round%22/%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2273%22%20r%3D%224%22%20fill%3D%22%23FFFFFF%22/%3E%3Ccircle%20cx%3D%2243%22%20cy%3D%2273%22%20r%3D%224%22%20fill%3D%22%23FFFFFF%22/%3E%3Ccircle%20cx%3D%2256%22%20cy%3D%2273%22%20r%3D%224%22%20fill%3D%22%23FFFFFF%22/%3E%3C/svg%3E">
+<meta name="description" content="25-minute career conversations between MSU College of Engineering students and alumni. Browse the directory, request a conversation, and build your network.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#18453B;
+  --green-deep:#0E2B24;
+  --green-soft:#E7F0EA;
+  --paper:#FBFAF7;
+  --card:#FFFFFF;
+  --ink:#22302B;
+  --ink-soft:#5B6A63;
+  --line:#DDE4DE;
+  --leaf:#8FBF9F;
+  --cta-text:#FBFAF7;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%;}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --green:#7FB89A; --green-deep:#0E2B24; --green-soft:#1C2E27;
+    --paper:#121A16; --card:#1A241F; --ink:#E8EFE9; --ink-soft:#9AABA0;
+    --line:#2C3A33; --leaf:#4E7A63; --cta-text:#0E2B24;
+  }
+}
+:root[data-theme="dark"]{
+  --green:#7FB89A; --green-deep:#0E2B24; --green-soft:#1C2E27;
+  --paper:#121A16; --card:#1A241F; --ink:#E8EFE9; --ink-soft:#9AABA0;
+  --line:#2C3A33; --leaf:#4E7A63; --cta-text:#0E2B24;
+}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0;}
+[hidden]{display:none !important;}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Instrument Sans",system-ui,sans-serif;
+  font-size:16px; line-height:1.55; min-height:100%;
+}
+img{max-width:100%;}
+a{color:var(--green);}
+button{font:inherit;cursor:pointer;}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--green); outline-offset:2px;
+}
+
+/* ---------- header ---------- */
+.demo-bar{background:#F6E7C6;color:#6B4E12;font-size:.8rem;text-align:center;padding:.4rem 1rem;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .demo-bar{background:#4A3A14;color:#EBD9A8;}}
+:root[data-theme="dark"] .demo-bar{background:#4A3A14;color:#EBD9A8;}
+.masthead{
+  background:var(--green-deep);
+  color:#E9F1EB;
+  padding-top:env(safe-area-inset-top,0px);
+  position:sticky; top:0; z-index:40;
+}
+.masthead .inner{
+  max-width:1020px; margin:0 auto; padding:.8rem 1.1rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:.7rem;line-height:1.2;}
+.brand .logo{width:38px;height:38px;flex-shrink:0;}
+.brand-text{display:flex;flex-direction:column;}
+.brand .org{font-size:.72rem;color:#A9BFB2;letter-spacing:.02em;}
+.brand .name{font-family:"Fraunces",Georgia,serif;font-size:1.12rem;font-weight:600;color:#fff;}
+nav.main{display:flex;gap:.15rem;flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+nav.main::-webkit-scrollbar{display:none;}
+nav.main button{flex-shrink:0;}
+nav.main button{
+  background:transparent;border:none;color:#C4D5CA;
+  padding:.45rem .75rem;border-radius:7px;font-size:.92rem;
+}
+nav.main button:hover{color:#fff;}
+nav.main button.active{background:rgba(255,255,255,.13);color:#fff;font-weight:600;}
+
+main{max-width:1020px;margin:0 auto;padding:0 1.1rem 4rem;}
+.view{display:none;}
+.view.active{display:block;}
+
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;line-height:1.18;letter-spacing:-.01em;}
+.lede{color:var(--ink-soft);max-width:60ch;}
+.btn{
+  display:inline-block;background:var(--green);color:var(--cta-text);
+  border:none;border-radius:8px;padding:.68rem 1.2rem;
+  font-weight:600;font-size:.95rem;text-decoration:none;
+}
+.btn:hover{filter:brightness(1.08);}
+.btn.ghost{background:transparent;color:var(--green);border:1.5px solid var(--green);}
+.pill{display:inline-block;background:var(--green-soft);color:var(--ink);border-radius:999px;padding:.15rem .6rem;font-size:.78rem;}
+.muted{color:var(--ink-soft);}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.15rem 1.2rem;}
+
+/* ---------- home / directory ---------- */
+.hero{padding:2.6rem 0 1.9rem;display:grid;gap:.9rem;max-width:680px;}
+.svgfig{width:100%;height:auto;display:block;}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:.2rem 0 .4rem;}
+.flow div{display:grid;gap:.35rem;justify-items:start;font-size:.85rem;color:var(--ink-soft);}
+.flow svg{width:34px;height:34px;color:var(--green);}
+.flow b{color:var(--ink);font-weight:600;}
+@media (max-width:600px){.flow{grid-template-columns:repeat(2,1fr);}}
+.confirm-head{display:flex;align-items:center;gap:.8rem;}
+.confirm-head svg{width:40px;height:40px;color:var(--green);flex-shrink:0;}
+#directory-list{scroll-margin-top:5.5rem;}
+.hero h1{font-size:clamp(2rem,5.5vw,3rem);}
+.hero .actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.3rem;}
+.trustline{font-size:.85rem;color:var(--ink-soft);border-left:3px solid var(--leaf);padding-left:.75rem;max-width:52ch;}
+
+.track{
+  display:inline-flex;gap:.25rem;background:var(--green-soft);
+  padding:.28rem;border-radius:11px;margin-top:1.1rem;
+}
+.track-wrap{border-top:1px solid var(--line);}
+.seg{
+  border:none;background:transparent;color:var(--ink);
+  padding:.44rem 1rem;border-radius:8px;font-size:.92rem;
+}
+.seg.on{background:var(--card);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.12);}
+.controls{
+  display:flex;gap:.6rem;align-items:stretch;
+  padding:1.1rem 0 .75rem;border-top:1px solid var(--line);
+}
+.searchwrap{position:relative;flex:1;min-width:0;}
+.sicon{
+  position:absolute;left:.8rem;top:50%;transform:translateY(-50%);
+  width:16px;height:16px;color:var(--ink-soft);pointer-events:none;
+}
+.search{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:10px;font:inherit;min-width:0;
+}
+.search.big{width:100%;padding:.66rem .9rem .66rem 2.35rem;font-size:.96rem;}
+@media (max-width:679px){.search.big,.fselect{font-size:1rem;}}
+.search.big:focus{border-color:var(--green);outline:none;box-shadow:0 0 0 3px var(--green-soft);}
+.filterbtn{
+  display:flex;align-items:center;gap:.42rem;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:10px;padding:0 1rem;font-size:.92rem;font-weight:500;white-space:nowrap;
+}
+.filterbtn:hover{border-color:var(--green);}
+.fbadge{
+  background:var(--green);color:var(--cta-text);border-radius:999px;
+  min-width:1.2rem;height:1.2rem;display:inline-flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:600;padding:0 .3rem;
+}
+.cats-wrap{position:relative;}
+.cats-wrap::after{
+  content:"";position:absolute;top:0;right:0;bottom:.9rem;width:2.2rem;
+  background:linear-gradient(to right,transparent,var(--paper));
+  pointer-events:none;
+}
+.cats{
+  display:flex;gap:.4rem;overflow-x:auto;padding:0 0 .9rem;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.cats::-webkit-scrollbar{display:none;}
+.cats .chip{flex-shrink:0;}
+.listmeta{display:flex;justify-content:flex-end;padding:0 0 .6rem;}
+.chip{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:999px;padding:.36rem .9rem;font-size:.87rem;white-space:nowrap;
+}
+.chip.on{background:var(--green);border-color:var(--green);color:var(--cta-text);}
+.count{font-size:.82rem;color:var(--ink-soft);}
+.fselect{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:8px;padding:.55rem .6rem;font:inherit;font-size:.92rem;width:100%;max-width:100%;
+}
+.fgroup{display:grid;gap:.35rem;}
+.fgroup>label{font-size:.8rem;font-weight:600;color:var(--ink-soft);}
+.clear-link{
+  background:none;border:none;color:var(--ink-soft);text-decoration:underline;
+  font-size:.86rem;padding:.3rem 0;
+}
+.clear-link:hover{color:var(--green);}
+
+/* filter sheet */
+.scrim{
+  position:fixed;inset:0;z-index:60;
+  background:rgba(0,0,0,.55);
+  -webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-top:env(safe-area-inset-top,0px);
+}
+.sheet{
+  background:var(--card);width:100%;max-width:540px;
+  border-radius:16px 16px 0 0;
+  padding:.6rem 1.25rem calc(1rem + env(safe-area-inset-bottom,0px));
+  display:grid;gap:.85rem;
+  max-height:70vh;overflow-y:auto;
+  box-shadow:0 -8px 30px rgba(0,0,0,.25);
+}
+.sheet::before{
+  content:"";justify-self:center;
+  width:2.4rem;height:.28rem;border-radius:999px;
+  background:var(--line);margin-bottom:.2rem;
+}
+@media (min-width:680px){
+  .scrim{align-items:center;padding:2rem 1rem;}
+  .sheet{border-radius:14px;padding:1.1rem 1.25rem;max-height:none;}
+  .sheet::before{display:none;}
+}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;}
+.sheet-head h2{font-size:1.2rem;}
+.sheet-close{
+  background:var(--green-soft);border:none;color:var(--ink);
+  width:2rem;height:2rem;border-radius:50%;font-size:.9rem;
+}
+.sheet-body{display:grid;gap:.85rem;}
+.switchrow{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.switchlabel{font-size:.93rem;font-weight:600;}
+.switchhint{font-size:.8rem;color:var(--ink-soft);}
+.switch{
+  flex-shrink:0;width:2.9rem;height:1.65rem;border-radius:999px;
+  border:1px solid var(--line);background:var(--green-soft);position:relative;padding:0;
+}
+.switch .knob{
+  position:absolute;top:.14rem;left:.14rem;width:1.3rem;height:1.3rem;border-radius:50%;
+  background:var(--card);border:1px solid var(--line);
+}
+@media (prefers-reduced-motion: no-preference){
+  .switch .knob{transition:left .15s ease;}
+}
+.switch[aria-checked="true"]{background:var(--green);border-color:var(--green);}
+.switch[aria-checked="true"] .knob{left:calc(100% - 1.44rem);border-color:var(--green);}
+.sheet-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:.9rem;}
+.alum-card{
+  background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;
+  padding:1rem 1rem .9rem;display:flex;flex-direction:column;gap:.45rem;text-align:left;
+}
+.alum-card:hover{border-color:var(--green);}
+.alum-card .who{display:flex;gap:.7rem;align-items:center;}
+.avatar{
+  width:44px;height:44px;border-radius:50%;background:var(--green);color:var(--cta-text);
+  background:var(--av,var(--green));
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Fraunces",serif;font-size:1.05rem;flex-shrink:0;
+}
+.alum-card h3{font-size:1.06rem;}
+.alum-card .role{font-size:.85rem;color:var(--ink-soft);}
+.alum-card .talks{font-size:.78rem;color:var(--ink-soft);margin-top:auto;padding-top:.3rem;}
+.tags{display:flex;gap:.35rem;flex-wrap:wrap;}
+.outside{font-size:.82rem;color:var(--ink-soft);}
+.sess-when{font-size:.86rem;font-weight:600;}
+.ev-list{display:grid;gap:0;margin-top:.6rem;}
+.ev-month{font-family:"Fraunces",Georgia,serif;font-size:1.05rem;color:var(--green);padding:1.1rem 0 .4rem;border-bottom:1px solid var(--line);}
+.ev-row{display:grid;grid-template-columns:64px 1fr auto;gap:1rem;align-items:start;padding:.9rem 0;border-bottom:1px solid var(--line);text-align:left;background:none;border-left:none;border-right:none;border-top:none;color:var(--ink);font:inherit;width:100%;}
+button.ev-row:hover .ev-title{color:var(--green);}
+.ev-date{text-align:center;line-height:1.1;}
+.ev-date .d{font-family:"Fraunces",Georgia,serif;font-size:1.5rem;color:var(--ink);}
+.ev-date .m{font-size:.72rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;}
+.ev-body{min-width:0;display:grid;gap:.15rem;}
+.ev-kind{font-size:.72rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;}
+.ev-title{font-weight:600;font-size:1rem;}
+.ev-meta{font-size:.85rem;color:var(--ink-soft);}
+.ev-sub{font-size:.9rem;color:var(--ink);opacity:.85;}
+.ev-action{font-size:.85rem;color:var(--green);white-space:nowrap;padding-top:.2rem;}
+@media (max-width:560px){.ev-row{grid-template-columns:52px 1fr;}.ev-action{grid-column:2;padding-top:0;}}
+.seats{font-size:.8rem;color:var(--ink-soft);}
+.seats.full{color:var(--ink-soft);font-style:italic;}
+.first-pill{background:var(--green);color:var(--cta-text);}
+.ent-pill{background:transparent;border:1.5px solid var(--green);color:var(--green);font-weight:600;}
+.pill.full{background:transparent;border:1px solid var(--line);color:var(--ink-soft);}
+.empty{padding:2rem 0;color:var(--ink-soft);}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem;}
+.quote .attr{margin-top:.55rem;font-size:.8rem;color:var(--ink-soft);}
+.quotes.advice{margin:.2rem 0 .4rem;}
+.onpage{display:flex;gap:1rem;flex-wrap:wrap;font-size:.86rem;margin:.2rem 0 .6rem;}
+.onpage a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:.1rem;}
+.onpage a:hover{color:var(--green);border-bottom-color:var(--green);}
+.more-btn{margin:0 0 .4rem;}
+.steps-acc{display:grid;gap:.5rem;margin:.6rem 0 1rem;}
+.three-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8rem;}
+.steps-acc details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:0;}
+.steps-acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.7rem;padding:.85rem 1rem;font-weight:600;font-size:1rem;}
+.steps-acc summary::-webkit-details-marker{display:none;}
+.steps-acc summary::after{content:"+";margin-left:auto;color:var(--ink-soft);font-weight:400;font-size:1.2rem;}
+.steps-acc details[open] summary::after{content:"–";}
+.steps-acc .num{width:1.6rem;height:1.6rem;border-radius:50%;background:var(--green);color:var(--cta-text);display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+.sum-hint{font-weight:400;color:var(--ink-soft);font-size:.86rem;}
+@media (max-width:480px){.steps-acc summary{flex-wrap:wrap;}.steps-acc summary::after{order:2;}.sum-hint{flex-basis:calc(100% - 2.3rem);padding-left:2.3rem;order:3;}}
+.steps-acc details > *:not(summary){margin:0 1rem 1rem 1rem;}
+.steps-acc details > p, .steps-acc details > ul{font-size:.95rem;}
+.steps-acc ul{padding-left:1.1rem;display:grid;gap:.4rem;}
+.checklist{list-style:none;padding-left:0 !important;}
+.checklist label{display:flex;gap:.6rem;align-items:flex-start;cursor:pointer;}
+.checklist input{margin-top:.3rem;}
+.example{background:var(--green-soft);border:none;font-size:.92rem;}
+.eyebrow{font-size:.72rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.4rem;}
+.brief-list{display:grid;gap:.6rem;margin:.4rem 0 .6rem;}
+.brief{display:flex;justify-content:space-between;gap:1rem;align-items:center;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:.8rem 1rem;}
+.brief .btn{white-space:nowrap;}
+@media (max-width:560px){.brief{flex-direction:column;align-items:flex-start;}}
+.term-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem;margin:.6rem 0 1rem;}
+.term{padding:1rem 1.1rem 1rem 1.2rem;background:var(--green-soft);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;}
+.term-t{font-weight:600;font-size:1rem;margin-bottom:.3rem;color:var(--ink);}
+.term-d{font-size:.9rem;color:var(--ink);opacity:.85;}
+.linkcard{text-decoration:none;color:var(--ink);display:block;background:var(--green-soft);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:1rem 1.1rem 1rem 1.2rem;}
+.linkcard:hover{border-color:var(--green);background:var(--card);}
+.linkcard .term-t::after{content:" ↗";color:var(--green);font-weight:400;}
+.example{background:var(--green-soft);border:1px solid var(--line);border-left:4px solid var(--green);font-size:.92rem;}
+.quote{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--leaf);border-radius:10px;padding:1rem 1.1rem 1rem 1.2rem;font-size:.93rem;}
+.two-col > .panel:not(.term):not(.linkcard):not(.example){border-left:4px solid var(--leaf);}
+
+/* ---------- profile ---------- */
+.back{background:none;border:none;color:var(--green);font-size:.9rem;padding:1rem 0 .2rem;}
+.profile-head{display:flex;gap:1rem;align-items:center;padding:.6rem 0 1rem;flex-wrap:wrap;}
+.profile-head .avatar{width:64px;height:64px;font-size:1.5rem;}
+.profile-head h1{font-size:1.75rem;}
+.profile-cols{display:grid;grid-template-columns:1.6fr 1fr;gap:1.3rem;align-items:start;}
+@media (max-width:720px){.profile-cols{grid-template-columns:1fr;}}
+.panel h2{font-size:1.1rem;margin-bottom:.55rem;}
+.panel ul{padding-left:1.15rem;display:grid;gap:.4rem;font-size:.94rem;}
+.factline{display:flex;justify-content:space-between;gap:1rem;font-size:.9rem;padding:.42rem 0;border-bottom:1px solid var(--line);}
+.factline:last-child{border-bottom:none;}
+.factline.stack{flex-direction:column;align-items:flex-start;gap:.15rem;}
+.factline.stack dd{line-height:1.4;}
+.factline dt{color:var(--ink-soft);}
+.availability{font-size:.86rem;color:var(--ink-soft);margin-top:.65rem;}
+.profile-cta{display:flex;flex-direction:column;gap:.55rem;margin-top:1rem;}
+
+/* ---------- request ---------- */
+form{display:grid;gap:1.15rem;max-width:640px;}
+.field{display:grid;gap:.32rem;}
+.field label{font-weight:600;font-size:.92rem;}
+.field .hint{font-size:.8rem;color:var(--ink-soft);font-weight:400;}
+input[type=text],input[type=email],textarea{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  border-radius:8px;padding:.62rem .72rem;font:inherit;width:100%;
+}
+textarea{min-height:84px;resize:vertical;}
+.stage-pills{display:flex;gap:.5rem;flex-wrap:wrap;}
+.stage-pills .chip{padding:.46rem 1rem;}
+.primer{background:var(--green-soft);border-radius:10px;padding:.95rem 1rem;}
+.primer h3{font-size:.95rem;margin-bottom:.35rem;}
+.primer p{font-size:.82rem;color:var(--ink-soft);margin-bottom:.55rem;}
+.primer button{
+  display:block;width:100%;text-align:left;background:var(--card);
+  border:1px solid var(--line);border-radius:8px;padding:.5rem .72rem;
+  margin-bottom:.4rem;font-size:.87rem;color:var(--ink);
+}
+.primer button:hover{border-color:var(--green);}
+.consent{display:flex;gap:.6rem;align-items:flex-start;font-size:.85rem;color:var(--ink-soft);}
+.consent input{margin-top:.22rem;}
+
+/* ---------- confirmation ---------- */
+.confirm-wrap{max-width:600px;padding-top:2.2rem;display:grid;gap:.7rem;}
+.confirm-wrap h1{font-size:1.8rem;}
+.steps{counter-reset:step;margin-top:1rem;display:grid;}
+.step{position:relative;padding:0 0 1.35rem 2.45rem;}
+.step::before{
+  counter-increment:step;content:counter(step);
+  position:absolute;left:0;top:0;width:1.65rem;height:1.65rem;border-radius:50%;
+  background:var(--green);color:var(--cta-text);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:600;
+}
+.step::after{content:"";position:absolute;left:.78rem;top:1.78rem;bottom:.15rem;width:2px;background:var(--line);}
+.step:last-child::after{display:none;}
+.step h3{font-size:1rem;}
+.step p{font-size:.89rem;color:var(--ink-soft);}
+
+/* ---------- how it works / static pages ---------- */
+.page{max-width:720px;padding-top:1.8rem;display:grid;gap:1.1rem;}
+.page h1{font-size:clamp(1.7rem,4.5vw,2.3rem);}
+.page h2{font-size:1.25rem;margin-top:.6rem;}
+.page p, .page li{font-size:.97rem;}
+.page ul{padding-left:1.2rem;display:grid;gap:.45rem;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start;}
+@media (max-width:680px){.two-col{grid-template-columns:1fr;}}
+.qbank h3{font-size:1rem;margin-bottom:.4rem;}
+.qbank ul{padding-left:1.1rem;display:grid;gap:.35rem;font-size:.92rem;}
+.standards li{margin-bottom:.2rem;}
+
+/* ---------- staff ---------- */
+.staff{display:grid;grid-template-columns:200px 1fr;gap:2.2rem;padding-top:1.6rem;align-items:start;}
+.staff-nav{position:sticky;top:5.2rem;display:flex;flex-direction:column;gap:.1rem;}
+.staff-who{font-size:.75rem;color:var(--ink-soft);padding:0 .6rem .6rem;}
+.snav{background:none;border:none;text-align:left;padding:.45rem .6rem;border-radius:6px;color:var(--ink-soft);font-size:.92rem;display:flex;justify-content:space-between;gap:.5rem;border-left:2px solid transparent;}
+.snav:hover{color:var(--ink);}
+.snav.active{color:var(--ink);font-weight:600;border-left-color:var(--green);background:var(--green-soft);border-radius:0 6px 6px 0;}
+.scount{font-size:.78rem;color:var(--ink-soft);font-weight:400;}
+.staff-main{min-width:0;}
+.stitle{font-size:1.5rem;margin-bottom:.4rem;}
+.status{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem 1.5rem;font-size:.88rem;margin-top:.4rem;}
+.status dt{color:var(--ink-soft);font-size:.78rem;}
+.tlink{background:none;border:none;color:var(--green);font-size:.86rem;padding:.2rem 0;text-decoration:underline;text-underline-offset:2px;}
+.tlink:disabled{color:var(--ink-soft);text-decoration:none;}
+.range{display:flex;gap:1rem;margin:.2rem 0 1rem;}
+.rlink{background:none;border:none;font-size:.86rem;color:var(--ink-soft);padding:.2rem 0;border-bottom:2px solid transparent;}
+.rlink.on{color:var(--ink);font-weight:600;border-bottom-color:var(--green);}
+@media (max-width:760px){
+  .staff{grid-template-columns:1fr;gap:1rem;}
+  .staff-nav{position:static;flex-direction:row;overflow-x:auto;gap:.2rem;scrollbar-width:none;border-bottom:1px solid var(--line);padding-bottom:.4rem;}
+  .staff-nav::-webkit-scrollbar{display:none;}
+  .staff-who{display:none;}
+  .snav{flex-shrink:0;border-left:none;border-bottom:2px solid transparent;border-radius:0;}
+  .snav.active{background:none;border-bottom-color:var(--green);}
+}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:.8rem 0 1.2rem;}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;}
+.kpi .n{font-family:"Fraunces",serif;font-size:1.7rem;color:var(--green);}
+.kpi .l{font-size:.8rem;color:var(--ink-soft);}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card);}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem;}
+th,td{text-align:left;padding:.6rem .8rem;border-bottom:1px solid var(--line);}
+th{font-size:.78rem;color:var(--ink-soft);font-weight:600;}
+tr:last-child td{border-bottom:none;}
+.state{border-radius:999px;padding:.12rem .6rem;font-size:.76rem;white-space:nowrap;background:var(--green-soft);}
+.state.warn{background:#F6E7C6;color:#6B4E12;}
+:root[data-theme="dark"] .state.warn{background:#4A3A14;color:#EBD9A8;}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .state.warn{background:#4A3A14;color:#EBD9A8;}
+}
+.nudge{background:none;border:1.5px solid var(--green);color:var(--green);border-radius:7px;padding:.25rem .7rem;font-size:.8rem;}
+.stab{margin-top:1rem;}
+.today{display:grid;gap:0;border-top:1px solid var(--line);}
+.today-row{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.6rem 0;border:none;border-bottom:1px solid var(--line);background:none;text-align:left;font:inherit;color:var(--ink);width:100%;cursor:pointer;}
+.today-row:hover span:first-child{color:var(--green);}
+.cue-list{display:grid;gap:0;margin-top:.6rem;}
+.cue{padding:.9rem 0;border-top:1px solid var(--line);display:flex;gap:1rem;justify-content:space-between;align-items:flex-start;}
+.cue:last-child{border-bottom:1px solid var(--line);}
+.cue-main{display:grid;gap:.3rem;min-width:0;}
+.cue-title{font-weight:600;font-size:.95rem;}
+.owner{display:inline-block;margin-left:.4rem;font-size:.72rem;font-weight:500;color:var(--ink-soft);background:var(--green-soft);border-radius:999px;padding:.05rem .5rem;vertical-align:middle;}
+.cue-why{font-size:.85rem;color:var(--ink-soft);}
+.cue-tpl summary{font-size:.82rem;color:var(--green);cursor:pointer;margin-top:.2rem;}
+.cue-tpl p{font-size:.86rem;color:var(--ink);background:var(--green-soft);border-radius:8px;padding:.6rem .75rem;margin-top:.4rem;}
+.cue-actions{display:flex;gap:1rem;flex-shrink:0;padding-top:.15rem;}
+.cue.closed{opacity:.5;}
+.rep-block{margin:1.2rem 0 1.6rem;}
+.rep-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.5rem;}
+.rep-head h3{font-size:1.02rem;}
+.bars{display:flex;align-items:flex-end;gap:.35rem;height:90px;margin:.2rem 0 .8rem;padding:0 .2rem;}
+.bars div{flex:1;background:var(--green);border-radius:4px 4px 0 0;position:relative;min-width:0;}
+.bars div span{position:absolute;top:-1.2rem;left:0;right:0;text-align:center;font-size:.7rem;color:var(--ink-soft);}
+.bars div i{position:absolute;bottom:-1.2rem;left:0;right:0;text-align:center;font-size:.68rem;color:var(--ink-soft);font-style:normal;}
+#stab-reports table{min-width:0;}
+@media (max-width:600px){.cue{flex-direction:column;}.cue-actions{flex-direction:row;}}
+#staffTabs .fbadge{margin-left:.35rem;}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--line);margin-top:3rem;
+  padding:1.6rem 1.1rem calc(1.4rem + env(safe-area-inset-bottom,0px));
+}
+footer .inner{
+  max-width:1020px;margin:0 auto;display:flex;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;font-size:.83rem;color:var(--ink-soft);
+}
+footer .links{display:flex;gap:1.1rem;flex-wrap:wrap;}
+footer button.linklike, footer a{background:none;border:none;color:var(--ink-soft);text-decoration:underline;font-size:.83rem;padding:0;}
+footer button.linklike:hover, footer a:hover{color:var(--green);}
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Demonstration prototype. Not an official MSU site; all people, companies, and numbers are fictional.</div>
+<header class="masthead">
+  <div class="inner">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 120 120" aria-hidden="true"><path d="M54 26 H90 A14 14 0 0 1 104 40 V72 A14 14 0 0 1 90 86 L100 98 L78 86 H54 A14 14 0 0 1 40 72 V40 A14 14 0 0 1 54 26 Z" fill="#0E2B24" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round"/><path d="M18 46 H64 A14 14 0 0 1 78 60 V86 A14 14 0 0 1 64 100 H34 L22 112 V100 H18 A14 14 0 0 1 4 86 V60 A14 14 0 0 1 18 46 Z" fill="#FFFFFF" stroke="#0E2B24" stroke-width="5" stroke-linejoin="round"/><circle cx="30" cy="73" r="4" fill="#0E2B24"/><circle cx="43" cy="73" r="4" fill="#0E2B24"/><circle cx="56" cy="73" r="4" fill="#0E2B24"/></svg>
+      <div class="brand-text">
+        <span class="org">Michigan State University · College of Engineering</span>
+        <span class="name">Spartan Engineering Conversations</span>
+      </div>
+    </div>
+    <nav class="main" aria-label="Main">
+      <button data-view="directory" class="active">Find an alum</button>
+      <button data-view="sessions">Sessions</button>
+      <button data-view="yearone">Year One</button>
+      <button data-view="how">How it works</button>
+      <button data-view="resources">Advice</button>
+      <button data-view="alumni">For alumni</button>
+      <button data-view="staff">Staff</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ DIRECTORY ============ -->
+<section class="view active" id="view-directory">
+  <div class="hero">
+    <h1>Talk with a Spartan who's been where you're going.</h1>
+    <p class="lede">Request a 25-minute conversation with a Spartan alum about their work, or join a small-group session on a field you're curious about.</p>
+    <div class="actions">
+      <a class="btn" href="#directory-list" id="browseBtn">Find an alum to talk with</a>
+      <button class="btn ghost" data-view-link="sessions">See small-group sessions</button>
+    </div>
+    <p class="muted" style="font-size:.9rem;margin-top:.6rem;">First-year student? <button class="linklike" data-view-link="yearone" style="font-size:inherit;color:var(--green);">Start with Year One</button>.</p>
+    <div hidden>
+    </div>
+    <p class="trustline">Everyone here asked to be here. You verify with your @msu.edu email, staff review every profile, and no contact information is shown until an alum accepts your request.</p>
+  </div>
+
+  <div class="controls" id="directory-list">
+    <div class="searchwrap">
+      <svg class="sicon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="13.5" y1="13.5" x2="18" y2="18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <input class="search big" type="text" id="search" placeholder="Search by field, company, or topic" aria-label="Search alumni">
+    </div>
+    <button class="filterbtn" id="moreFilters" aria-haspopup="dialog">
+      <svg viewBox="0 0 20 20" aria-hidden="true" width="15" height="15"><line x1="3" y1="6" x2="17" y2="6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><line x1="3" y1="14" x2="17" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12.5" cy="6" r="2.2" fill="var(--card)" stroke="currentColor" stroke-width="1.8"/><circle cx="7.5" cy="14" r="2.2" fill="var(--card)" stroke="currentColor" stroke-width="1.8"/></svg>
+      Filters<span class="fbadge" id="fbadge" hidden></span>
+    </button>
+  </div>
+  <div class="cats-wrap"><div class="cats" role="group" aria-label="Browse by category" id="catRow"></div></div>
+  <div class="listmeta"><span id="resultCount" aria-live="polite"></span></div>
+
+  <div class="grid" id="alumGrid"></div>
+  <p class="empty" id="emptyMsg" hidden>No results for that combination. <button class="chip" id="clearFilters" style="margin-left:.4rem;">Clear all filters</button></p>
+
+</section>
+
+<!-- ============ PROFILE ============ -->
+<section class="view" id="view-profile">
+  <button class="back" data-view-link="directory">← Back to alumni</button>
+  <div id="profileBody"></div>
+</section>
+
+<!-- ============ REQUEST ============ -->
+<section class="view" id="view-request">
+  <button class="back" data-view-link="profile">← Back to profile</button>
+  <div class="page" style="padding-top:1rem;max-width:660px;">
+    <h1 id="requestTitle" style="font-size:1.65rem;">Request a conversation</h1>
+    <div class="panel" id="reqContext" style="display:flex;gap:.8rem;align-items:center;padding:.8rem 1rem;"></div>
+    <p class="muted" style="max-width:56ch;">This form takes about five minutes and doubles as your preparation: what you write here is shared with them before your conversation, so you can skip introductions and get straight to what matters.</p>
+  </div>
+
+  <form id="requestForm" style="margin-top:1.2rem;">
+    <div class="field">
+      <label for="fName">Name</label>
+      <input type="text" id="fName" autocomplete="name" maxlength="80" required>
+    </div>
+    <div class="field">
+      <label for="fEmail">MSU email <span class="hint">(a verification link will be sent to this address)</span></label>
+      <input type="email" id="fEmail" placeholder="netid@msu.edu" maxlength="100" required>
+    </div>
+    <div class="field">
+      <label for="fMajor">Year and major</label>
+      <input type="text" id="fMajor" placeholder="Junior, Mechanical Engineering" maxlength="80">
+    </div>
+
+    <div class="field">
+      <label>Where are you right now?</label>
+      <div class="stage-pills" id="stagePills"></div>
+    </div>
+
+    <div class="field">
+      <label for="fGoal">What are you hoping to learn from this conversation?</label>
+      <textarea id="fGoal" placeholder="One or two sentences about what you want to figure out." maxlength="400"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="fWhy">Why you chose this person <span class="hint">(one sentence; they read this first)</span></label>
+      <input type="text" id="fWhy" placeholder="You've worked in both design and manufacturing, and I'm deciding between them." maxlength="200" required>
+    </div>
+
+    <div class="primer">
+      <h3>Suggested questions</h3>
+      <p id="primerIntro">Questions that work well when you're exploring careers. Select any that fit, then edit them into your own words below.</p>
+      <div id="primerList"></div>
+    </div>
+
+    <div class="field">
+      <label for="fQs">What do you want to ask them? <span class="hint">(two or three questions is about right; one per line; you can revise them any time before the conversation)</span></label>
+      <textarea id="fQs" maxlength="600" minlength="40" placeholder="Write the questions you actually want answered. Pick from the suggestions above or write your own."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Preferred format</label>
+      <div class="stage-pills" id="formatPills">
+        <button type="button" class="chip on">Video call</button>
+        <button type="button" class="chip">In person, if they are local</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <button type="button" class="btn ghost" id="previewBtn">Preview what they'll receive</button>
+      <div class="panel" id="reqPreview" hidden style="font-size:.9rem;margin-top:.6rem;">
+        <div class="muted" style="font-size:.78rem;margin-bottom:.5rem;">This is the email your request becomes. If it reads well to you, it will read well to them.</div>
+        <div id="reqPreviewBody"></div>
+      </div>
+    </div>
+
+    <label class="consent">
+      <input type="checkbox" required>
+      <span>I've read the <button type="button" class="inline-link" data-view-link="standards" style="background:none;border:none;color:var(--green);text-decoration:underline;padding:0;font-size:inherit;">community standards</button> and understand that conversations are professional, career-focused meetings.</span>
+    </label>
+
+    <button class="btn" type="submit">Send request</button>
+    <p class="muted" style="font-size:.83rem;">You'll receive an email to verify your MSU address. After you confirm, your request goes to them. No account or password is created.</p>
+  </form>
+</section>
+
+<!-- ============ CONFIRMATION ============ -->
+<section class="view" id="view-confirm">
+  <div class="confirm-wrap">
+    <div class="confirm-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><h1>Check your inbox</h1></div>
+    <p class="muted">A verification link has been sent to <strong id="confirmEmail">your MSU email</strong>. If it hasn't arrived in a few minutes, check your junk folder. Once you confirm, your request goes to <strong id="confirmAlum">the alum</strong>. From there:</p>
+    <div class="steps">
+      <div class="step"><h3>They review your request</h3><p>They receive your note and questions. If there's no response within 5 days, we'll let you know and suggest alumni with similar backgrounds and open availability.</p></div>
+      <div class="step"><h3>You're connected</h3><p>When they accept, they offer up to three times and you pick one. Then you both receive an email with each other's address, and you send the calendar invitation with a video meeting link (Teams, Zoom, or similar) within a day; a ready-to-paste invitation is included. From there you coordinate directly.</p></div>
+      <div class="step"><h3>You meet for 25 minutes</h3><p>The day before, you'll both receive a short reminder with advice from the Center for Spartan Engineering and from alumni on making the most of the time.</p></div>
+      <div class="step"><h3>Afterward</h3><p>The next morning you'll get a two-question check-in (did the conversation happen, and how was it) along with a thank-you template and their LinkedIn profile. Sending the thank-you and connecting on LinkedIn is the standard final step.</p></div>
+    </div>
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem;">
+      <button class="btn ghost" id="resendBtn">Resend email</button>
+      <button class="btn ghost" data-view-link="directory">Find another alum</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="view" id="view-how">
+  <div class="page">
+    <h1>How it works</h1>
+    <p class="lede">The College of Engineering arranges 25-minute conversations between students and alumni who have volunteered to talk about their careers. Some conversations lead to a second one or an introduction. Most are a single conversation.</p>
+    <nav class="onpage" aria-label="On this page">
+      <a href="#hw-students">For students</a>
+      <a href="#hw-two">Two ways in</a>
+      <a href="#hw-good">A good conversation</a>
+      <a href="#hw-time">Time commitment</a>
+      <a href="#hw-trust">Verification and privacy</a>
+    </nav>
+
+    <h2 id="hw-students">For students</h2>
+    <div class="flow" aria-hidden="true">
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><b>Browse</b><span>Pick a person</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 4h11l3 3v13H5z"/><path d="M8 11h8M8 15h8"/></svg><b>Request</b><span>Say what you want to ask</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11v9H8l-4 3z"/><path d="M15 9h5v9l-3-2h-5v-3"/></svg><b>Meet</b><span>25 minutes</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><b>Follow up</b><span>Thank-you, LinkedIn</span></div>
+    </div>
+    <ul>
+      <li><strong>Find an alum.</strong> Search by field, company, or the kind of decision you're working through, and choose who you'd like to talk with.</li>
+      <li><strong>Send a request.</strong> The form asks what you hope to learn and what you want to ask. The alum receives this before the conversation, so you can start with substance rather than introductions.</li>
+      <li><strong>Meet.</strong> Conversations last about 25 minutes, by video call or in person if the alum is nearby. When the alum accepts they offer up to three times; you pick one and send the calendar invitation with the meeting link. Reminders are automatic.</li>
+      <li><strong>Follow up.</strong> Send a thank-you within a day and connect on LinkedIn. The Advice page explains how to prepare and how to follow up well.</li>
+    </ul>
+
+    <h2 id="hw-two">By year</h2>
+    <p>First year: a session with your cohort in the fall, a first one-to-one conversation in the spring, and an hour with upperclassmen before year-two courses (see <button class="linklike" data-view-link="yearone" style="font-size:inherit;color:var(--green);">Year One</button>). Second year: sessions and first conversations with alumni open to early conversations. Third year: the directory as designed, choosing a person for a decision you're making. Fourth year: job search, founders, and the people at the companies you're applying to. Same alumni, same site; the door changes with the task.</p>
+    <h2>Two ways in</h2>
+    <p>Find an alum: browse alumni and request a 25-minute conversation. Sessions: small-group sessions hosted by alumni, in date order. Sessions are 45 minutes with four to six students on one topic; you request a seat and say what you want to ask, and the host reads that beforehand. Sessions suit students early in their thinking and are the easiest first step before a one-to-one conversation. A session runs only when four seats are confirmed. Employer events and career fairs stay on Handshake.</p>
+
+    <h2 id="hw-good">What a good conversation looks like</h2>
+    <div class="two-col">
+      <div class="panel">
+        <h2 style="font-size:1rem;">For students</h2>
+        <ul style="font-size:.92rem;">
+          <li>You have a clearer picture of a career path and what it would take to get there</li>
+          <li>You understand what a role involves day to day</li>
+          <li>You have a specific next step</li>
+          <li>You've added a professional contact</li>
+          <li>You've practiced a professional conversation</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2 style="font-size:1rem;">For alumni</h2>
+        <ul style="font-size:.92rem;">
+          <li>You gave a student a clearer picture than they could get elsewhere</li>
+          <li>You met a student in your field</li>
+          <li>You stayed connected to the College</li>
+          <li>Your time commitment stayed within what you agreed to</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 id="hw-time">Time commitment</h2>
+    <p>Alumni set their own capacity, usually two or three conversations a semester. Students can have up to two open requests at a time, and most have two to four conversations a year with people in different fields. Nobody commits to anything beyond the scheduled conversation. There is no cost to participate.</p>
+
+    <h2>If a conversation goes well</h2>
+    <p>Alumni sometimes offer a second conversation, a resume review, or an introduction. That is how longer mentoring relationships tend to begin, and it happens at the alum's initiative.</p>
+
+    <h2 id="hw-trust">Verification and privacy</h2>
+    <p>Students verify enrollment with their @msu.edu email. Alumni sign up themselves, and College of Engineering staff review each profile before it appears. Contact information isn't shown in the directory. When an alum accepts a request and a time is settled, both people receive each other's email; the student sends the calendar invitation with a video meeting link, and they coordinate directly from there. Both parties agree to the <button class="inline-link" data-view-link="standards" style="background:none;border:none;color:var(--green);text-decoration:underline;padding:0;font-size:inherit;">community standards</button>, and concerns can be reported to College of Engineering staff. Video calls on Teams and Zoom support live captions; for other accommodations, contact engr.conversations@msu.edu.</p>
+
+  </div>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="view" id="view-resources">
+  <div class="page" style="max-width:820px;">
+    <h1>Advice</h1>
+    <p class="lede">How to get something real out of a 25-minute conversation, from the staff who help students do this every day and from alumni who take the calls. Most of it applies to a small-group session too.</p>
+
+    <nav class="onpage" aria-label="On this page">
+      <a href="#adv-people">From people</a>
+      <a href="#adv-prep">Prepare</a>
+      <a href="#adv-intro">Introduce yourself</a>
+      <a href="#adv-ask">What to ask</a>
+      <a href="#adv-after">Follow up</a>
+      <a href="#adv-mistakes">Mistakes</a>
+    </nav>
+
+    <h2 id="adv-people">From the Center for Spartan Engineering</h2>
+    <div class="quotes advice">
+      <div class="quote">"Students often wait until they feel ready. Send the request when you have two questions you actually want answered. The third will come up in the conversation."<div class="attr">Career advisor, Center for Spartan Engineering</div></div>
+      <div class="quote">"Go in to learn, not to impress. The conversations students describe as most useful are the ones where they came out with a clearer sense of what to do next."<div class="attr">Career advisor, Center for Spartan Engineering</div></div>
+      <div class="quote">"Alumni tell us that students who spent ten minutes learning about them got better answers. It shows you took the conversation seriously."<div class="attr">Employer relations, Center for Spartan Engineering</div></div>
+      <div class="quote more" hidden>"The students who get the most out of this come back and tell us what they learned, and usually who they would like to talk to next."<div class="attr">Co-op and internship coordinator, Center for Spartan Engineering</div></div>
+      <div class="quote more" hidden>"Write the thank-you note the same day. It is short, and it is the part alumni mention when they tell us a conversation went well."<div class="attr">Career advisor, Center for Spartan Engineering</div></div>
+      <div class="quote more" hidden>"If you would like to practice your introduction out loud before your first conversation, bring it to a career advising appointment. It takes a few minutes and it helps."<div class="attr">Career advisor, Center for Spartan Engineering</div></div>
+    </div>
+    <button class="tlink more-btn" data-target="center">Show three more</button>
+
+    <h2>From alumni</h2>
+    <div class="quotes advice">
+      <div class="quote">"Ask me what I would do in your position. It is the question I can answer best."<div class="attr">Cedar Redmond, BS Mechanical Engineering '11 · Principal Engineer, Northfield Medical</div></div>
+      <div class="quote">"You do not need a plan to talk with me. You need a question or two you actually want answered."<div class="attr">Grant Rivers, BS Civil Engineering '92 · Retired, state transportation agency</div></div>
+      <div class="quote">"The students I remember told me what they were unsure about. That gave me something useful to say."<div class="attr">Shawna Lane, BS Chemical Engineering '09 · Plant Manager, Midland Chemical</div></div>
+      <div class="quote more2" hidden>"Look at my LinkedIn, then ask about the changes between jobs. That is where most of the useful decisions were."<div class="attr">Jake Trowbridge, BS Computer Engineering '98 · Co-founder, Detroit fintech</div></div>
+      <div class="quote more2" hidden>"Take notes. When a student writes back and mentions something specific I said, I know the time was well spent."<div class="attr">Kelly Munn, BS Computer Science '12 · Founder, LoopWell</div></div>
+      <div class="quote more2" hidden>"Ask about the parts of the job nobody describes on a careers page: the pace, the people, what a hard week looks like."<div class="attr">Wendy Wonders, BS Environmental Engineering '17 · Project Engineer, Riverbend Engineering</div></div>
+    </div>
+    <button class="tlink more-btn" data-target="alumni">Show three more</button>
+    <h2>From upperclassmen</h2>
+    <div class="quotes advice">
+      <div class="quote">"Write the questions the night before, not in the waiting room. Mine were better and I was calmer."<div class="attr">Junior, Chemical Engineering</div></div>
+      <div class="quote">"Ask what they'd do in your position. Every alum I've talked to lit up at that one."<div class="attr">Senior, Computer Engineering</div></div>
+      <div class="quote">"The thank-you note matters more than you think. One alum replied and that became a second conversation on its own."<div class="attr">Senior, Civil Engineering</div></div>
+    </div>
+    <p class="muted" style="font-size:.85rem;margin-top:.8rem;">Alumni and students: if you have advice you'd like added, send it to engr.conversations@msu.edu. The Center reviews it. Students' names are optional; year and major are shown.</p>
+
+    <h2 id="adv-prep">The short version</h2>
+    <p>An informational interview is a conversation with someone doing work you're considering. You're there to learn from their experience, not to ask for a job. Everyone in the directory has agreed to one 25-minute conversation; they have not agreed to make introductions or review resumes, though some will offer. Accept if they do, and don't ask.</p>
+
+    <div class="steps-acc">
+      <details open>
+        <summary><span class="num">1</span> Prepare <span class="sum-hint">ten minutes, the day before</span></summary>
+        <ul class="checklist">
+          <li><label><input type="checkbox"> Read their profile and LinkedIn, and spend a few minutes on their company, role, and industry. It takes little time and it improves both your questions and your confidence.</label></li>
+          <li><label><input type="checkbox"> Decide which decision this conversation should help with, and write two or three questions tied to it.</label></li>
+          <li><label><input type="checkbox"> Prepare a one-minute introduction (below).</label></li>
+          <li><label><input type="checkbox"> Test your camera and microphone, or plan to arrive five minutes early.</label></li>
+        </ul>
+      </details>
+
+      <details id="adv-intro">
+        <summary><span class="num">2</span> Introduce yourself <span class="sum-hint">one minute</span></summary>
+        <p>Four parts, one or two sentences each: your year and major; one or two relevant things you've done; the decision you're working through; why you chose them.</p>
+        <div class="panel example">
+          <div class="eyebrow">Example</div>
+          <p>"I'm a junior in mechanical engineering. I've spent two semesters on the Formula SAE team, mostly on powertrain, and I had a summer internship at a supplier that I liked more than I expected. I'm trying to decide whether to aim for design roles or manufacturing roles after graduation, and I wanted to talk with you because you've worked in both."</p>
+        </div>
+        <p class="muted" style="font-size:.9rem;">That gives them a clear starting point. From there, go to your first question.</p>
+      </details>
+
+      <details id="adv-ask">
+        <summary><span class="num">3</span> What to ask <span class="sum-hint">their experience and judgment</span></summary>
+        <p>Ask how they made decisions, what they learned, and what they'd suggest for someone in your position. Avoid anything the company website answers, and anything so broad the honest answer is "it depends."</p>
+        <ul>
+          <li>What does your work involve day to day, and what takes up most of your time?</li>
+          <li>How did you decide on this path over the alternatives you were considering?</li>
+          <li>What did you learn about this kind of work only after you started doing it?</li>
+          <li>What do people who do well in your field tend to do differently?</li>
+          <li>If you were in my position, what would you focus on over the next year?</li>
+        </ul>
+        <p class="muted" style="font-size:.9rem;">Adjust them to the person. The request form suggests questions by career stage too.</p>
+      </details>
+
+      <details>
+        <summary><span class="num">4</span> During <span class="sum-hint">25 minutes</span></summary>
+        <ul>
+          <li>Take the lead: open with your introduction and your first question. Listen more than you talk, and follow up on what they say.</li>
+          <li>Take notes. Keep to the time; at about twenty minutes, move to your last question and thank them.</li>
+        </ul>
+      </details>
+
+      <details id="adv-after">
+        <summary><span class="num">5</span> Follow up <span class="sum-hint">within a day</span></summary>
+        <p>Send a thank-you that mentions one specific thing you took from the conversation and what you plan to do with it, then a LinkedIn connection request that references the conversation.</p>
+        <div class="panel example">
+          <div class="eyebrow">Template</div>
+          <p>Hi [name],</p>
+          <p style="margin-top:.5rem;">Thank you for taking the time to talk yesterday. [One specific thing you took from the conversation.] Based on what you said, I'm planning to [the next step you're taking].</p>
+          <p style="margin-top:.5rem;">I've sent you a connection request on LinkedIn. I'd like to keep you posted on how this goes.</p>
+          <p style="margin-top:.5rem;">Best,<br>[your name]</p>
+        </div>
+        <p>Stay in touch occasionally without asking for anything: when you act on their advice, land an internship, or graduate.</p>
+        <h3 style="font-size:1rem;margin-top:.8rem;">Sending the invitation</h3>
+        <p>After the alum accepts and you pick one of the times they offered, you send the calendar invitation. The connection email includes a ready-to-paste version. In Outlook or Google Calendar, create an event at the agreed time, add the alum's email as a guest, paste the invitation text, and add a video link: in Outlook, turn on the Teams meeting toggle; in Google Calendar, add a Google Meet link; or paste a Zoom link from your MSU Zoom account. Send it the same day. If you've never done this, the Center can walk you through it in five minutes.</p>
+      </details>
+
+      <details id="adv-mistakes">
+        <summary><span class="num">6</span> Common mistakes</summary>
+        <ul>
+          <li>Treating it as a job interview, or asking for a referral or an introduction.</li>
+          <li>Arriving without questions, or asking things their profile already answers.</li>
+          <li>Going over time.</li>
+          <li>Skipping the follow-up.</li>
+        </ul>
+      </details>
+    </div>
+
+    <h2>If you're interested in starting a company or building something yourself</h2>
+    <p>Filter the directory by <strong>Founders &amp; owners</strong> to find alumni who have started companies of different kinds, from venture-backed startups to machine shops and consulting firms. Good questions for founders include what they tested before committing, how they found their first customers, and what the first year cost in money and time. MSU's entrepreneurship resources include the Burgess Institute for Entrepreneurship &amp; Innovation, the Conquer Accelerator, and The Hatch student incubator.</p>
+
+    <h2>If you're not sure where to start</h2>
+    <p>Use "Not sure? Start here" in the directory, or filter by "Exploring careers" and choose someone whose work you can't picture. Not knowing what you want to do yet is one of the most common and useful reasons to have one of these conversations. The Center for Spartan Engineering can also help you choose a first person to talk with.</p>
+  </div>
+</section>
+
+<!-- ============ SESSIONS ============ -->
+<section class="view" id="view-sessions">
+  <div class="page" style="max-width:820px;">
+    <h1>Small-group sessions</h1>
+    <p class="lede">An alum hosts 45 minutes with four to six students on one topic or industry, by video call or on campus. You come with something you want to ask. Good if you're early in your thinking and not ready for a one-to-one yet.</p>
+    <div class="panel" style="margin:.6rem 0 .2rem;border-left:4px solid var(--green);background:var(--green-soft);">
+      <div class="eyebrow">Year One this semester</div>
+      <div style="font-size:.92rem;">October: cohort sessions, and open first-year sessions in the Engineering Building, Tuesdays 4:10 PM · February: first one-to-one conversations · April: planning year two, with upperclassmen. <button class="linklike" data-view-link="yearone" style="font-size:inherit;color:var(--green);">Year One</button></div>
+    </div>
+    <p class="muted" style="font-size:.88rem;">Looking for employer information sessions, career fairs, or site visits? Those are on <a href="https://msu.joinhandshake.com" target="_blank" rel="noopener">Handshake</a>.</p>
+    <div class="ev-list" id="sessGrid"></div>
+
+    <div class="three-col" style="margin-top:2rem;">
+      <div class="panel">
+        <h2 style="font-size:1rem;margin-bottom:.3rem;">Weekly note</h2>
+        <p class="muted" style="font-size:.85rem;margin-bottom:.6rem;">New sessions and new alumni in the areas you choose. One email a week, only when there's something. No account; unsubscribe from any email.</p>
+        <form id="alertForm" style="display:grid;gap:.6rem;max-width:none;">
+          <input type="email" id="alEmail" placeholder="netid@msu.edu" maxlength="100" required aria-label="MSU email">
+          <div class="stage-pills" id="alPills" role="group" aria-label="Areas">
+            <button type="button" class="chip on">New sessions</button>
+            <button type="button" class="chip on">New alumni</button>
+            <button type="button" class="chip">Automotive</button>
+            <button type="button" class="chip">Energy</button>
+            <button type="button" class="chip">Medical devices</button>
+            <button type="button" class="chip">Software</button>
+            <button type="button" class="chip">Manufacturing</button>
+            <button type="button" class="chip">Founders</button>
+            <button type="button" class="chip">Civil & environmental</button>
+          </div>
+          <div><button class="btn ghost" type="submit">Subscribe</button> <span class="muted" id="alDone" style="font-size:.82rem;margin-left:.5rem;" hidden>Check your inbox to confirm.</span></div>
+        </form>
+      </div>
+      <div class="panel">
+        <h2 style="font-size:1rem;margin-bottom:.3rem;">CoRe cohort leaders</h2>
+        <p class="muted" style="font-size:.85rem;margin-bottom:.6rem;">Request a session for your cohort at a time you already meet. Alumni who host on that topic get your slots; the first to accept books it.</p>
+        <button class="btn ghost" type="button" data-view-link="cohort">Request a cohort session</button>
+      </div>
+      <div class="panel">
+        <h2 style="font-size:1rem;margin-bottom:.3rem;">Suggest a session</h2>
+        <p class="muted" style="font-size:.85rem;margin-bottom:.6rem;">A topic or an industry you'd like a session on. Staff use these to decide whom to ask to host next.</p>
+        <form id="suggestForm" style="display:grid;gap:.6rem;max-width:none;">
+          <input type="text" id="sgText" placeholder="What aerospace hiring managers look for" maxlength="140" required aria-label="Session topic">
+          <div><button class="btn ghost" type="submit">Suggest</button> <span class="muted" id="sgDone" style="font-size:.82rem;margin-left:.5rem;" hidden>Thanks. Topics with the most interest get scheduled first.</span></div>
+        </form>
+      </div>
+    </div>
+    <p class="muted" style="font-size:.82rem;margin-top:1.2rem;">Sessions run with at least four confirmed seats; if fewer are confirmed 48 hours before, the session is cancelled and everyone is notified.</p>
+  </div>
+</section>
+
+<section class="view" id="view-session">
+  <button class="back" data-view-link="sessions">← Back to sessions</button>
+  <div id="sessionBody"></div>
+</section>
+
+<section class="view" id="view-seat">
+  <button class="back" id="seatBack">← Back to session</button>
+  <div class="page" style="padding-top:1rem;max-width:660px;">
+    <h1 id="seatTitle" style="font-size:1.65rem;">Request a seat</h1>
+    <div class="panel" id="seatContext" style="display:flex;gap:.8rem;align-items:center;padding:.8rem 1rem;"></div>
+    <p class="muted" style="max-width:56ch;">Tell the host what you want to ask. They read everything before the session and use it to shape it.</p>
+  </div>
+  <form id="seatForm" style="margin-top:1.2rem;">
+    <div class="field"><label for="sName">Name</label><input type="text" id="sName" autocomplete="name" maxlength="80" required></div>
+    <div class="field"><label for="sEmail">MSU email <span class="hint">(a verification link will be sent to this address)</span></label><input type="email" id="sEmail" placeholder="netid@msu.edu" maxlength="100" required></div>
+    <div class="field"><label for="sMajor">Year and major</label><input type="text" id="sMajor" placeholder="First-year, Mechanical Engineering" maxlength="80"></div>
+    <div class="field" id="bringField" hidden><label for="sBring">Bring someone <span class="hint">(optional; their MSU email; two seats, one verification)</span></label><input type="email" id="sBring" placeholder="friend@msu.edu" maxlength="100"></div>
+    <div class="field"><label for="sQ">What do you want to ask? <span class="hint">(a question or two, specific to this topic)</span></label><textarea id="sQ" maxlength="400" minlength="25" placeholder="What does the first year at a utility actually look like?" required></textarea></div>
+    <label class="consent"><input type="checkbox" required><span>I've read the <button type="button" data-view-link="standards" style="background:none;border:none;color:var(--green);text-decoration:underline;padding:0;font-size:inherit;">community standards</button> and I'll cancel my seat in advance if I can't attend.</span></label>
+    <button class="btn" type="submit">Request a seat</button>
+  </form>
+  <div class="confirm-wrap" id="seatDone" hidden style="padding-top:1rem;">
+    <div class="confirm-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><h1>Check your inbox</h1></div>
+    <p class="muted">A verification link has been sent to <strong id="seatEmail">your MSU email</strong>. Once you confirm, your seat is held and you'll get a calendar hold to add in one tap. You'll get the host's video link or the room the day before, a reminder an hour before, and a short check-in afterward: did it happen, how was it, and one line on whether you can picture the work.</p>
+    <div><button class="btn ghost" data-view-link="sessions" style="margin-top:.6rem;">Back to sessions</button></div>
+  </div>
+</section>
+
+<!-- ============ YEAR ONE ============ -->
+<section class="view" id="view-yearone">
+  <div class="page" style="max-width:780px;">
+    <div class="eyebrow">Spartan Engineering Conversations</div>
+    <h1>Year One</h1>
+    <p class="lede">For first-year engineering students: a way to see what the work is like and to start the career habits you'll use for four years, one step at a time.</p>
+    <p>The first year is when students start figuring out what engineers do, which majors lead where, and how to talk with a professional about their work. Those are skills, and nobody has them on the first day. This page lays out three steps across the year. Each one is small, most happen in a room with other first-years, and none is required.</p>
+
+    <nav class="onpage" aria-label="On this page">
+      <a href="#y1-three">Three steps</a>
+      <a href="#y1Grid">This fall's sessions</a>
+      <a href="#y1-alone">Going with someone</a>
+      <a href="#y1-after">After a session</a>
+      <a href="#y1-peers">From upperclassmen</a>
+      <a href="#y1-already">How this fits with your other resources</a>
+    </nav>
+
+    <h2 id="y1-three">Three steps across the year</h2>
+    <div class="steps">
+      <div class="step"><h3>October and November: a session</h3><p>Two ways in. Your CoRe leader can book a 45-minute session at a meeting time you already have, with an alum in your room if they're within an hour of campus or on video if not. Or pick any first-year session below: some are in the Engineering Building at a set hour each week, some are video calls in the evening. You don't need to prepare anything; after you have a seat you'll get a link to send one question if you have one.</p></div>
+      <div class="step"><h3>February: your first one-to-one conversation</h3><p>If a session made you curious about a field, request 25 minutes with one alum. Alumni marked <strong>Open to first-years</strong> expect early-stage questions, and the request form has a first-year option where one question is enough. In person is better than video when the alum is local. This is practice for the conversations you'll have as an upperclassman.</p><p><button class="btn ghost" id="y1FindBtn">Find an alum open to first-years</button></p></div>
+      <div class="step"><h3>April: planning year two, with upperclassmen</h3><p>Before you choose year-two courses, an hour with three sophomores and juniors from different majors on picking courses, joining a design team, and how a first internship actually happens. Hosted by students and arranged by the Center for Spartan Engineering.</p></div>
+    </div>
+
+    <h2>First-year sessions this fall</h2>
+    <div class="ev-list" id="y1Grid"></div>
+    <p class="muted" style="font-size:.85rem;">Titles say why to come; the line under each says what it is. All first-year sessions are 45 minutes with four to six students, eight at most. <button class="linklike" data-view-link="sessions" style="font-size:inherit;color:var(--green);">All sessions</button></p>
+
+    <h2 id="y1-alone">Going with someone</h2>
+    <div class="term-grid">
+      <div class="panel term"><div class="term-t">Bring a classmate</div><div class="term-d">Any first-year seat request has a "bring someone" option: two seats, one verification, their MSU email.</div></div>
+      <div class="panel term"><div class="term-t">See who's going</div><div class="term-d">First-year sessions show how many seats are taken and how many are from your major. Names aren't shown.</div></div>
+    </div>
+
+    <h2 id="y1-after">After a session</h2>
+    <p>Each first-year session ends with one specific next step, stated by the host and included in your reminder email: book fifteen minutes with a Center advisor, attend a design team's open meeting, or come to next month's session on the field you found interesting. Taking that step is how a session turns into something.</p>
+
+    <h2 id="y1-peers">From upperclassmen</h2>
+    <div class="quotes advice">
+      <div class="quote">"I didn't know what any of the majors actually did until a session in October. I switched from CE to ME in November and I've never regretted it."<div class="attr">Sophomore, Mechanical Engineering</div></div>
+      <div class="quote">"Everyone in my cohort felt behind. Nobody was. The alum said the same thing about her first year and that was the most useful thing anyone told me."<div class="attr">Sophomore, Computer Science</div></div>
+      <div class="quote">"Go to the session even if the topic isn't your major. I went to a utilities one with my roommate and now I have a co-op there."<div class="attr">Junior, Electrical Engineering</div></div>
+    </div>
+    <p class="muted" style="font-size:.85rem;">Upperclassmen: if you have advice for first-years, send it through the Advice page. The Center reviews it; your name is optional.</p>
+
+    <h2 id="y1-already">How this fits with your other resources</h2>
+    <div class="term-grid">
+      <div class="panel term"><div class="term-t">CoRe</div><div class="term-d">Your cohort and its meeting time are where the October session happens.</div></div>
+      <div class="panel term"><div class="term-t">EGR 100</div><div class="term-d">Your coursework. Nothing on this site is graded or required.</div></div>
+      <div class="panel term"><div class="term-t">The Center for Spartan Engineering</div><div class="term-d">Advising, resume help, and the fifteen-minute appointment that's usually the next step after a session.</div></div>
+      <div class="panel term"><div class="term-t">Design teams and student organizations</div><div class="term-d">Where to go once a session made you interested in a field. Hosts name one on the way out.</div></div>
+    </div>
+    <p class="muted" style="font-size:.85rem;">Advisors and CoRe leaders: every session and alum on this site has a link you can send a student directly.</p>
+  </div>
+</section>
+
+<!-- ============ COHORT SESSION REQUEST ============ -->
+<section class="view" id="view-cohort">
+  <button class="back" data-view-link="sessions">← Back to sessions</button>
+  <div class="page" style="padding-top:1rem;max-width:660px;">
+    <h1 style="font-size:1.65rem;">Request a session for your cohort</h1>
+    <p class="muted" style="max-width:56ch;">For CoRe cohort leaders. Tell us the topic, when your cohort meets, and where. We email alumni who host on that topic; the first to accept picks one of your slots, and you'll hear within a few days. Your students each get an optional one-line "one thing you'd like to ask" after it's booked.</p>
+  </div>
+  <form id="cohortForm" style="margin-top:1.2rem;">
+    <div class="field"><label for="cName">Your name</label><input type="text" id="cName" maxlength="80" required></div>
+    <div class="field"><label for="cEmail">MSU email</label><input type="email" id="cEmail" placeholder="netid@msu.edu" maxlength="100" required></div>
+    <div class="field"><label for="cCohort">Cohort <span class="hint">(name or number, and about how many students)</span></label><input type="text" id="cCohort" placeholder="CoRe cohort 14, about 16 students" maxlength="100" required></div>
+    <div class="field">
+      <label id="cTopicLabel">Topic or industry</label>
+      <div class="stage-pills" id="cTopicPills" role="group" aria-labelledby="cTopicLabel">
+        <button type="button" class="chip on">What engineers actually do all day</button>
+        <button type="button" class="chip">Choosing a major (and changing it)</button>
+        <button type="button" class="chip">What I wish I'd known in year one</button>
+        <button type="button" class="chip">Co-ops and internships: how they really happen</button>
+        <button type="button" class="chip">Automotive</button>
+        <button type="button" class="chip">Energy &amp; utilities</button>
+        <button type="button" class="chip">Medical devices</button>
+        <button type="button" class="chip">Software</button>
+        <button type="button" class="chip">Manufacturing</button>
+        <button type="button" class="chip">Starting a company</button>
+      </div>
+    </div>
+    <div class="field"><label for="cSlots">When your cohort meets <span class="hint">(two or three slots over the next few weeks)</span></label><textarea id="cSlots" maxlength="300" placeholder="Tuesdays 4:10 to 5:00 PM, Oct 6, 13, 20&#10;Thursdays 4:10 to 5:00 PM, Oct 8, 15" required></textarea></div>
+    <div class="field">
+      <label>Where</label>
+      <div class="stage-pills" id="cWherePills">
+        <button type="button" class="chip on">Our classroom, alum in person if within an hour of campus</button>
+        <button type="button" class="chip">Our classroom, with the alum on video</button>
+      </div>
+    </div>
+    <button class="btn" type="submit">Send the request</button>
+  </form>
+  <div class="confirm-wrap" id="cohortDone" hidden style="padding-top:1rem;">
+    <div class="confirm-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><h1>Request sent</h1></div>
+    <p class="muted">We've emailed the alumni who host on this topic with your slots. When one accepts, you'll get the booking with the alum's name, the slot they picked, and a link to share with your cohort for questions. If nobody accepts within a week, the Center will follow up with you directly.</p>
+    <div><button class="btn ghost" data-view-link="sessions" style="margin-top:.6rem;">Back to sessions</button></div>
+  </div>
+</section>
+
+<!-- ============ FOR ALUMNI ============ -->
+<section class="view" id="view-alumni">
+  <div class="page">
+    <h1>For alumni</h1>
+    <p class="lede">Short conversations with students about your work: what it's like, how you got there, and what you'd suggest to someone starting out. Most volunteers offer two or three a semester, 25 minutes each, at times they choose.</p>
+    <p><button class="btn" data-view-link="join">Join the directory</button> <span class="muted" style="font-size:.85rem;margin-left:.5rem;">Five minutes. Staff review before anything is published.</span></p>
+    <p class="muted" style="font-size:.88rem;">Not a Spartan, but you've worked with the College? Friends of the College are welcome by invitation. Write to engr.conversations@msu.edu and we'll follow up.</p>
+
+    <nav class="onpage" aria-label="On this page">
+      <a href="#al-terms">What you're agreeing to</a>
+      <a href="#al-useful">Making it useful</a>
+      <a href="#al-briefs">Sessions to host</a>
+      <a href="#al-join">How joining works</a>
+      <a href="#al-other">Other ways to help</a>
+    </nav>
+
+    <h2 id="al-terms">What you're agreeing to</h2>
+    <div class="term-grid">
+      <div class="panel term"><div class="term-t">One conversation at a time</div><div class="term-d">Within the number per semester you set. Nothing is scheduled beyond it, and you can decline any request with one click and no explanation.</div></div>
+      <div class="panel term"><div class="term-t">A couple of minutes of preparation</div><div class="term-d">Each request includes the student's background, what they hope to learn, and their questions. Afterward, a two-question check-in asks whether it happened and how it went.</div></div>
+      <div class="panel term"><div class="term-t">Minimal logistics</div><div class="term-d">When you accept, you offer up to three times and the student picks one. They send the calendar invitation with a video link; reminders are automatic; you get a one-tap link if it hasn't arrived. Your contact information isn't shown in the directory.</div></div>
+      <div class="panel term"><div class="term-t">Talking about your company is fine</div><div class="term-d">Describing how your company hires and telling a student to apply is useful and welcome. The rule is against pitches for money and against asking students for anything.</div></div>
+      <div class="panel term"><div class="term-t">Nothing beyond the conversation</div><div class="term-d">If one goes well and you'd like to offer more, a second conversation, a resume review, an introduction, that is your choice. Students are asked not to request these.</div></div>
+      <div class="panel term"><div class="term-t">Optional: host a session</div><div class="term-d">45 minutes with four to six students on one topic you choose, at a time you set, or with a first-year cohort at a time they already meet. A first-year room is a different ask: you'll do more of the talking, and they'll remember it longer than you think. Students say what they want to ask in advance. If fewer than four seats are confirmed two days out, you choose whether to run it or cancel.</div></div>
+    </div>
+
+    <h2 id="al-useful">Making the conversation useful</h2>
+    <div class="steps-acc">
+      <details open>
+        <summary><span class="num">1</span> Read the request first <span class="sum-hint">two minutes</span></summary>
+        <p>Start from the student's questions rather than a general introduction. They wrote why they chose you; lead with that part of your story.</p>
+      </details>
+      <details>
+        <summary><span class="num">2</span> Be specific <span class="sum-hint">including what didn't go to plan</span></summary>
+        <p>Students learn the most from how you made decisions, what surprised you, and what you would do differently. Include the parts that didn't go to plan.</p>
+      </details>
+      <details>
+        <summary><span class="num">3</span> Ask what they're uncertain about <span class="sum-hint">not only what they're interested in</span></summary>
+        <p>That's usually where you can help most.</p>
+      </details>
+      <details>
+        <summary><span class="num">4</span> If they ask about jobs you can't help with</summary>
+        <p>Say so plainly and tell them what you would do in their position.</p>
+      </details>
+      <details>
+        <summary><span class="num">5</span> Close with one suggestion <span class="sum-hint">if you have one</span></summary>
+        <p>Something to read, someone to look into, or a next step.</p>
+      </details>
+    </div>
+
+    <details class="panel" style="margin:.4rem 0 1rem;">
+      <summary style="cursor:pointer;font-weight:600;">If you host a session: a one-page guide</summary>
+      <p style="margin:.6rem 0 .3rem;font-size:.95rem;"><strong>Prepare four things.</strong> The brief you claimed tells you the topic; these are the parts every session needs.</p>
+      <ul style="margin:0 0 0 1.1rem;display:grid;gap:.4rem;font-size:.95rem;">
+        <li>One specific day: a real Tuesday, a real problem, the tools you used.</li>
+        <li>One mistake or struggle from your first two years, and how it went. This is required, not optional; students learn more from it than from anything that went well.</li>
+        <li>If it's true, one moment you felt you didn't belong, and how that faded.</li>
+        <li>One next step you'll invite them to take, with a real time and place.</li>
+      </ul>
+      <p style="margin:.9rem 0 .3rem;font-size:.95rem;"><strong>The 45 minutes.</strong> Questions first, not a talk.</p>
+      <ul style="margin:0 0 0 1.1rem;display:grid;gap:.4rem;font-size:.95rem;">
+        <li><strong>0 to 5:</strong> names, and one thing each student is curious about. Before you say anything.</li>
+        <li><strong>5 to 15:</strong> your day, and what the job actually involves.</li>
+        <li><strong>15 to 20:</strong> the mistake, and that it's normal.</li>
+        <li><strong>20 to 40:</strong> their questions; you'll have the ones they sent the day before.</li>
+        <li><strong>40 to 45:</strong> the next step, and have each student say when and where they'll do it: "Thursday at 4, the Formula SAE open meeting, room 1220." Saying it out loud is what makes it happen.</li>
+      </ul>
+      <p style="margin:.9rem 0 .3rem;font-size:.95rem;"><strong>Logistics.</strong> You supply the video link or, for a cohort, they supply the room. With co-hosts, whoever created the session is the organizer: supplies the link and receives the questions, with co-hosts copied. Four to six students is the right size; eight is the most; three with questions is a good session.</p>
+      <p style="margin:.6rem 0 0;font-size:.95rem;"><strong>Don't:</strong> narrate a highlight reel; imply you were always confident; promise in the room more than the title did.</p>
+    </details>
+
+    <div class="quote" style="max-width:52ch;margin:1rem 0;">
+      "It's the rare volunteer ask that respects your calendar. I read the student's note for two minutes, talk for twenty-five, and I'm done, unless I decide I want more."
+      <div class="attr">Hagan Dorne, BS Mechanical Engineering '01 · Director of Manufacturing, Huron Motors</div>
+    </div>
+
+    <h2 id="al-briefs">Sessions we're looking for hosts for</h2>
+    <p>Rather than ask what you'd like to talk about, the Center writes short session briefs it knows first-years and sophomores want, and you pick one. Each is 45 minutes, four to six students (eight at most), in the Engineering Building or on video. The title says why students will come; the line under it says what it is, honestly. For first-year sessions we're asking alumni one to five years out first: students act on what they can picture themselves doing in three years, and a recent graduate is that picture.</p>
+    <div class="brief-list">
+      <div class="brief"><div><div class="ev-title">Four things that surprised me about working in [your field]</div><div class="ev-sub">Your first two years on the job, told as the four things nobody mentioned at the career fair. First-years.</div></div><button class="btn ghost">I'll host this</button></div>
+      <div class="brief"><div><div class="ev-title">The thing about my first year nobody told me</div><div class="ev-sub">Not job advice. What you'd do differently as a freshman: courses, habits, the one decision you got wrong. First-years, with two other alumni.</div></div><button class="btn ghost">I'll host this</button></div>
+      <div class="brief"><div><div class="ev-title">I changed my major. It was fine.</div><div class="ev-sub">For anyone who switched majors and turned out well. What you knew, what you didn't, and how you decided. First-years.</div></div><button class="btn ghost">I'll host this</button></div>
+      <div class="brief"><div><div class="ev-title">What a co-op actually pays, and what you actually do</div><div class="ev-sub">Money, hours, the real work, and how the co-op became the job. First-years and sophomores.</div></div><button class="btn ghost">I'll host this</button></div>
+      <div class="brief"><div><div class="ev-title">Why I left my first job after a year</div><div class="ev-sub">What to look for in a first employer, from someone who picked wrong the first time. Juniors and seniors.</div></div><button class="btn ghost">I'll host this</button></div>
+    </div>
+    <p class="muted" style="font-size:.85rem;">Have a different one in mind? Say so on the join form; the Center writes the brief with you.</p>
+
+    <h2 id="al-join">How joining works</h2>
+    <div class="steps">
+      <div class="step"><h3>Five minutes</h3><p>Your degree and year, current role, the topics you're willing to discuss, how many conversations you'll take per semester, and optionally who you're most useful to (a fit signal students see; not a limit on who can request you).</p></div>
+      <div class="step"><h3>Staff review</h3><p>College of Engineering staff review your submission, usually within a week, and email you a preview of your profile before it's published.</p></div>
+      <div class="step"><h3>Live, on your terms</h3><p>You get one email when your profile goes live and one at the end of each semester with your numbers and the reset date. Your email address is never displayed and your profile is visible only to verified MSU students. Pause or change your availability at any time through a link sent to your email. No account required.</p></div>
+    </div>
+    <p><button class="btn" data-view-link="join">Join the directory</button></p>
+
+    <h2>Thank you</h2>
+    <p>Alumni who make time for students give the College something it can't produce on its own: a firsthand account of what comes after graduation, from someone who sat in the same classrooms. A single conversation can change what a student applies for, what they stop worrying about, or how they see their own prospects. The College is grateful for it.</p>
+
+    <h2 id="al-other">Other ways to help</h2>
+    <div class="two-col">
+      <a class="panel linkcard" href="https://engineering.msu.edu/career-center" target="_blank" rel="noopener"><div class="term-t">The Center for Spartan Engineering</div><div class="term-d">Recruiting Spartan engineers, co-op and internship placements, employer information sessions, career fairs, and speaking to students about your field.</div></a>
+      <a class="panel linkcard" href="https://engineering.msu.edu/alumni/get-involved" target="_blank" rel="noopener"><div class="term-t">College of Engineering alumni relations</div><div class="term-d">Alumni events and the Alumni Board, engaging with student organizations, nominating a fellow alum for an award, corporate partnerships, and giving.</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ALUMNI JOIN ============ -->
+<section class="view" id="view-join">
+  <button class="back" data-view-link="alumni">← Back to For alumni</button>
+  <div class="page" style="padding-top:.6rem;max-width:660px;">
+    <h1 style="font-size:1.65rem;">Join the directory</h1>
+    <p class="muted">Five minutes now, and we handle the rest. College of Engineering staff review your submission, typically within a week, and your profile goes live once you approve the preview.</p>
+  </div>
+  <form id="joinForm" style="margin-top:1.2rem;">
+    <div class="field">
+      <label for="jName">Name</label>
+      <input type="text" id="jName" autocomplete="name" maxlength="80" required>
+    </div>
+    <div class="field">
+      <label for="jEmail">Email <span class="hint">(never displayed; used for verification and scheduling)</span></label>
+      <input type="email" id="jEmail" maxlength="100" required>
+    </div>
+    <div class="field">
+      <label for="jDegree">MSU degree and year</label>
+      <input type="text" id="jDegree" placeholder="BS Mechanical Engineering '11" maxlength="80" required>
+    </div>
+    <div class="field">
+      <label for="jRole">Current role and organization</label>
+      <input type="text" id="jRole" placeholder="Principal Engineer, Northfield Medical" maxlength="100">
+    </div>
+    <div class="field">
+      <label id="jTopicsLabel">Topics you're willing to discuss <span class="hint">(select up to five; these appear on your card)</span></label>
+      <div class="stage-pills" id="jTopicsPills" role="group" aria-labelledby="jTopicsLabel">
+        <button type="button" class="chip">Choosing a career path</button>
+        <button type="button" class="chip">Day-to-day in my field</button>
+        <button type="button" class="chip">Internships &amp; co-ops</button>
+        <button type="button" class="chip">Job search &amp; interviewing</button>
+        <button type="button" class="chip">Graduate school</button>
+        <button type="button" class="chip">Starting a company</button>
+        <button type="button" class="chip">Leadership &amp; management</button>
+        <button type="button" class="chip">Work-life balance</button>
+        <button type="button" class="chip">Career pivots</button>
+        <button type="button" class="chip">First-generation experiences</button>
+        <button type="button" class="chip">International student paths</button>
+        <button type="button" class="chip">Professional licensure</button>
+      </div>
+    </div>
+    <div class="field">
+      <label id="jMajorsLabel">Most useful for students in <span class="hint">(optional; a preference students see, not a limit on who can request you)</span></label>
+      <div class="stage-pills" id="jMajorsPills" role="group" aria-labelledby="jMajorsLabel">
+        <button type="button" class="chip on">Any major</button>
+        <button type="button" class="chip">Applied Engineering Sciences</button>
+        <button type="button" class="chip">Biosystems Engineering</button>
+        <button type="button" class="chip">Chemical Engineering</button>
+        <button type="button" class="chip">Civil Engineering</button>
+        <button type="button" class="chip">Computational Data Science</button>
+        <button type="button" class="chip">Computer Engineering</button>
+        <button type="button" class="chip">Computer Science</button>
+        <button type="button" class="chip">Electrical Engineering</button>
+        <button type="button" class="chip">Environmental Engineering</button>
+        <button type="button" class="chip">Materials Science and Engineering</button>
+        <button type="button" class="chip">Mechanical Engineering</button>
+        <button type="button" class="chip">Technology Engineering</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="jFor">Who you can help most <span class="hint">(optional, one line; shown on your profile)</span></label>
+      <input type="text" id="jFor" placeholder="Students weighing consulting against industry" maxlength="120">
+    </div>
+    <div class="field">
+      <label for="jTech">Technical areas <span class="hint">(three to five, comma separated; these become searchable tags on your card)</span></label>
+      <input type="text" id="jTech" placeholder="Power systems, Grid modernization, SCADA" maxlength="160">
+    </div>
+    <div class="field">
+      <label for="jInterests">Interests <span class="hint">(optional; a shared interest often gives a student an easier opening question)</span></label>
+      <input type="text" id="jInterests" placeholder="FIRST Robotics mentor, sailing, MSU hockey" maxlength="120">
+    </div>
+    <div class="field">
+      <label>Conversations per semester</label>
+      <div class="stage-pills" id="capPills">
+        <button type="button" class="chip">1–2</button>
+        <button type="button" class="chip on">2–3</button>
+        <button type="button" class="chip">4 or more</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Host a small-group session? <span class="hint">(optional; pick a brief on the For alumni page or say yes here and staff will send you the current briefs)</span></label>
+      <div class="stage-pills" id="hostPills">
+        <button type="button" class="chip on">Not now</button>
+        <button type="button" class="chip">Maybe, ask me</button>
+        <button type="button" class="chip">Yes</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Format</label>
+      <div class="stage-pills" id="jFormatPills">
+        <button type="button" class="chip on">Video call only</button>
+        <button type="button" class="chip">Video call, or in person near me</button>
+      </div>
+    </div>
+    <label class="consent">
+      <input type="checkbox" id="jFirstYears">
+      <span><strong>Open to first-years.</strong> They may not have questions yet; you'll do more of the talking, and it's about letting them picture the work.</span>
+    </label>
+    <label class="consent">
+      <input type="checkbox" required>
+      <span>I've read the <button type="button" data-view-link="standards" style="background:none;border:none;color:var(--green);text-decoration:underline;padding:0;font-size:inherit;">community standards</button> and agree to them.</span>
+    </label>
+    <button class="btn" type="submit">Submit for verification</button>
+  </form>
+  <div class="confirm-wrap" id="joinDone" hidden style="padding-top:1rem;">
+    <h1 style="font-size:1.5rem;">Thank you</h1>
+    <p class="muted">College of Engineering staff will review your submission and email you a preview of your profile, typically within a week. You can update your availability or pause your profile at any time through a link in that email. No account needed.</p>
+    <div><button class="btn ghost" data-view-link="alumni">Back to For alumni</button></div>
+  </div>
+</section>
+
+<!-- ============ COMMUNITY STANDARDS ============ -->
+<section class="view" id="view-standards">
+  <button class="back" id="standardsBack">← Back</button>
+  <div class="page" style="padding-top:.6rem;">
+    <h1>Community standards</h1>
+    <p class="lede">Spartan Engineering Conversations connects adult students with alumni for professional career conversations. These standards keep it that way.</p>
+    <h2>Both parties agree to</h2>
+    <ul class="standards">
+      <li>Keep conversations professional and career-focused</li>
+      <li>Show up on time, or reschedule with notice by email. Repeated no-shows may pause a participant's access</li>
+      <li>Respect that either person may end a conversation or decline further contact at any time, without explanation</li>
+      <li>No soliciting: no sales, recruiting fees, investment pitches, or requests for money in either direction. Talking about how a company hires, and suggesting a student apply, is fine</li>
+      <li>Treat personal information shared in conversation as private</li>
+      <li>Meet in-person conversations in public settings, such as a campus building, a coffee shop, or a workplace</li>
+      <li>Cancel a session seat in advance if you can't attend; a held seat is a seat another student can't have</li>
+    </ul>
+    <h2>Verification</h2>
+    <p>Students are verified through their MSU email. Alumni sign up themselves, and College of Engineering staff review each profile before it appears in the directory. Contact details are not published in the directory. They are shared between the two people when a request is accepted.</p>
+    <h2>Reporting a concern</h2>
+    <p>Any participant can report a concern to College of Engineering staff at any time. Reports are reviewed by College of Engineering staff, and participants who violate these standards lose access to the directory. Reports involving harassment or discrimination are referred through MSU's established Office for Civil Rights processes.</p>
+    <p class="muted">Questions about these standards: engr.conversations@msu.edu</p>
+  </div>
+</section>
+
+<!-- ============ STAFF ============ -->
+<section class="view" id="view-staff">
+  <div class="staff">
+    <aside class="staff-nav" id="staffTabs" aria-label="Dashboard sections">
+      <div class="staff-who">College of Engineering staff<br><span style="font-size:.72rem">Center for Spartan Engineering · Alumni relations</span></div>
+      <button class="snav active" data-tab="overview">Overview</button>
+      <button class="snav" data-tab="attention">Needs attention <span class="scount">2</span></button>
+      <button class="snav" data-tab="steward">Stewardship <span class="scount">4</span></button>
+      <button class="snav" data-tab="roster">Alumni</button>
+      <button class="snav" data-tab="verify">Verification <span class="scount">2</span></button>
+      <button class="snav" data-tab="sessions">Sessions <span class="scount">3</span></button>
+      <button class="snav" data-tab="concerns">Concerns <span class="scount">0</span></button>
+      <button class="snav" data-tab="reports">Reports</button>
+    </aside>
+    <div class="staff-main">
+
+    <div class="stab" id="stab-overview">
+      <h1 class="stitle">Overview</h1>
+      <div class="kpis">
+        <div class="kpi"><div class="n">41 / 150</div><div class="l">Confirmed conversations, year-one goal</div></div>
+        <div class="kpi"><div class="n">84%</div><div class="l">Requests accepted within 5 days</div></div>
+        <div class="kpi"><div class="n">19%</div><div class="l">Second request within 90 days</div></div>
+      </div>
+      <div class="muted" style="font-size:.85rem;margin:.2rem 0 .6rem;">Signed in as <strong>K. Abbot</strong>, Center for Spartan Engineering. Owners: Center, K. Abbot · Alumni relations, R. Pine · Administrator, J. Moss.</div>
+      <h2 style="font-size:1rem;margin:.6rem 0 .4rem;">Needs you</h2>
+      <div class="today">
+        <button class="today-row" data-tab="attention"><span>2 requests stalled past the second reminder</span><span class="ev-action">Open</span></button>
+        <button class="today-row" data-tab="attention"><span>1 alum reported no calendar invitation</span><span class="ev-action">Open</span></button>
+        <button class="today-row" data-tab="steward"><span>1 stewardship note worth writing (first conversation)</span><span class="ev-action">Open</span></button>
+        <button class="today-row" data-tab="sessions"><span>1 session below the four-seat minimum; 1 cohort request with no reply in 2 days</span><span class="ev-action">Open</span></button>
+      </div>
+      <details style="margin-top:.6rem;">
+        <summary class="muted" style="font-size:.88rem;cursor:pointer;">Needs alumni relations (4)</summary>
+        <div class="today" style="margin-top:.4rem;">
+          <button class="today-row" data-tab="verify"><span>2 alumni sign-ups to review</span><span class="ev-action">Open</span></button>
+          <button class="today-row" data-tab="steward"><span>3 stewardship notes worth writing</span><span class="ev-action">Open</span></button>
+          <button class="today-row" data-tab="sessions"><span>2 alumni offered to host; topic and time needed</span><span class="ev-action">Open</span></button>
+        </div>
+      </details>
+      <dl class="status" style="margin-top:1rem;">
+        <div><dt>Directory</dt><dd>14 alumni published · 1 paused · 2 awaiting review</dd></div>
+        <div><dt>Automations</dt><dd>Ran today, 6:05 AM</dd></div>
+        <div><dt>Email delivery</dt><dd>0.8% bounce rate</dd></div>
+        <div><dt>Weekly note</dt><dd>38 students subscribed · next Monday</dd></div>
+        <div><dt>Staff actions this week</dt><dd>K. Abbot 6 · R. Pine 4 · J. Moss 0</dd></div>
+      </dl>
+      <details class="panel" style="margin-top:1rem;">
+        <summary style="cursor:pointer;font-weight:600;font-size:.95rem;">First-run checklist for a new staff user <span class="muted" style="font-weight:400;">(3 of 5 done)</span></summary>
+        <ul class="checklist" style="margin-top:.6rem;">
+          <li><label><input type="checkbox" checked> Read the runbook</label></li>
+          <li><label><input type="checkbox" checked> Confirm semester dates in settings (Fall: Aug 24 to Dec 11)</label></li>
+          <li><label><input type="checkbox" checked> Confirm enrollment shares for the participation report</label></li>
+          <li><label><input type="checkbox"> Review the topic list and the staff allow-list</label></li>
+          <li><label><input type="checkbox"> Send yourself every email template</label></li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="stab" id="stab-attention" hidden>
+      <h1 class="stitle">Needs attention</h1>
+      <p class="muted" style="font-size:.85rem;">Owned by the Center for Spartan Engineering. Requests past their second automatic reminder, students who haven't picked a time, and alumni who reported no calendar invitation. Rows clear when the other person acts.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Student</th><th>Alum</th><th>Status</th><th>Time in status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>K. Abbot</td><td>S. Lane</td><td><span class="state warn">Request pending</span></td><td>6 days</td><td><button class="tlink">Send reminder</button> · <button class="tlink">Snooze 3 days</button></td></tr>
+            <tr><td>R. Cedar</td><td>C. Redmond</td><td><span class="state warn">No invitation received</span></td><td>1 day</td><td><button class="tlink">Nudge student</button> · <button class="tlink">Snooze 3 days</button></td></tr>
+            <tr><td>M. Farmlane</td><td>H. Hubbard</td><td><span class="state warn">Awaiting student reply</span></td><td>4 days</td><td><button class="tlink">Send reminder</button> · <button class="tlink">Snooze 3 days</button></td></tr>
+            <tr><td>R. Cedar</td><td>C. Redmond</td><td><span class="state">Scheduled Oct 8 · awaiting check-in</span></td><td>2 days</td><td></td></tr>
+            <tr><td>J. Hagadorn</td><td>W. Wells</td><td><span class="state">Check-in sent</span></td><td>1 day</td><td></td></tr>
+            <tr><td>A. Bogue</td><td>C. Holden</td><td><span class="state">Second conversation requested</span></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="stab" id="stab-steward" hidden>
+      <h1 class="stitle">Stewardship</h1>
+      <p class="muted" style="font-size:.85rem;">Moments worth a personal note. Student-side cues go to the Center for Spartan Engineering; alumni-side cues go to alumni relations. Each has a starting template. Snooze returns it in a week.</p>
+      <div class="cue-list">
+        <div class="cue">
+          <div class="cue-main">
+            <div class="cue-title">R. Cedar completed a first conversation <span class="owner">Center</span></div>
+            <div class="cue-why">Yesterday, with C. Redmond. Rated it 5. First conversations are where students decide whether to come back.</div>
+            <details class="cue-tpl"><summary>Suggested note</summary><p>Hi Riley, saw you finished your first conversation with Cedar. Most students find the second one easier. If you want a suggestion for who to talk to next, reply and I'll point you somewhere.</p></details>
+          </div>
+          <div class="cue-actions"><button class="tlink">Copy note</button><button class="tlink cue-done">Done, note sent</button><button class="tlink cue-snooze">Snooze a week</button></div>
+        </div>
+        <div class="cue">
+          <div class="cue-main">
+            <div class="cue-title">B. Mont crossed five conversations this year <span class="owner">Alumni relations</span></div>
+            <div class="cue-why">Five confirmed, every one rated 4 or 5. Worth a personal thank-you.<br><span class="muted">This semester 3 of 4 · this year 5 · declines 0 · last conversation Oct 16</span></div>
+            <details class="cue-tpl"><summary>Suggested note</summary><p>Beau, five confirmed conversations this year, and the students rated every one of them highly. Thank you for the time you keep giving Spartan engineers.</p></details>
+          </div>
+          <div class="cue-actions"><button class="tlink">Copy note</button><button class="tlink cue-done">Done, note sent</button><button class="tlink cue-snooze">Snooze a week</button></div>
+        </div>
+        <div class="cue">
+          <div class="cue-main">
+            <div class="cue-title">T. Shaw told the Center about an outcome: co-op offer at a tier-one supplier <span class="owner">Alumni relations</span></div>
+            <div class="cue-why">Sent to the Center in the 60-day note. The student talked internships with B. Mont in September. Nothing is relayed by the system; if you tell Beau, it comes from you.<br><span class="muted">B. Mont: this semester 3 of 4 · this year 5 · declines 0</span></div>
+            <details class="cue-tpl"><summary>Suggested note</summary><p>Beau, a student you talked with in September just accepted a co-op at a tier-one supplier and asked us to tell you. This is the part volunteers rarely get to hear. Thank you.</p></details>
+          </div>
+          <div class="cue-actions"><button class="tlink">Copy note</button><button class="tlink cue-done">Done, note sent</button><button class="tlink cue-snooze">Snooze a week</button></div>
+        </div>
+        <div class="cue">
+          <div class="cue-main">
+            <div class="cue-title">J. Trowbridge declined three requests in a row <span class="owner">Alumni relations</span></div>
+            <div class="cue-why">Pattern suggests capacity or fit, not disinterest. A check-in beats silently routing around him.<br><span class="muted">This semester 0 of 2 · this year 2 · declines 3 · last conversation Sep 26</span></div>
+            <details class="cue-tpl"><summary>Suggested note</summary><p>Jake, noticed a few requests didn't land at a good time. Want us to pause your profile until January, or adjust the topics students see? Either is fine; we'd rather ask than guess.</p></details>
+          </div>
+          <div class="cue-actions"><button class="tlink">Copy note</button><button class="tlink cue-done">Done, note sent</button><button class="tlink cue-snooze">Snooze a week</button></div>
+        </div>
+      </div>
+      <p class="muted" style="font-size:.8rem;margin-top:.8rem;">Triggers: first conversation completed · five conversations in a year · student-reported outcome (opt-in) · three declines in a row</p>
+    </div>
+
+    <div class="stab" id="stab-roster" hidden>
+      <h1 class="stitle">Alumni</h1>
+      <p class="muted" style="font-size:.85rem;">Owned by alumni relations. Enough to see who is active, who is carrying the load, and who has gone quiet. No student names.</p>
+      <div class="rep-head"><span></span><button class="tlink rep-export" data-table="roster">Export CSV</button></div>
+      <div class="table-wrap"><table id="tblRoster"></table></div>
+    </div>
+
+    <div class="stab" id="stab-verify" hidden>
+      <h1 class="stitle">Verification</h1>
+      <p class="muted" style="font-size:.85rem;">Owned by College of Engineering alumni relations. Alumni sign-ups only in version one; friends of the College come by invitation through the shared mailbox. "View as a student" shows the card as it will publish. Approve publishes and emails; Needs info emails the applicant for whatever is missing. A one-line reviewer note (how the degree was checked) is saved with each decision. Host session forms are approved here too.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Applicant</th><th>Degree</th><th>Submitted</th><th>Submission</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>Wells Kalamazoo</td><td>BS ME '19</td><td>2 days ago</td><td><span class="state">Degree listed · <a href="#" onclick="return false">LinkedIn ↗</a></span></td><td><button class="tlink">View as a student</button> <button class="tlink v-approve">Approve</button> <button class="tlink v-info">Needs info</button></td></tr>
+            <tr><td>Tess Ting</td><td>BS CE '14</td><td>3 days ago</td><td><span class="state warn">Missing LinkedIn</span></td><td><button class="tlink">View as a student</button> <button class="tlink v-approve">Approve</button> <button class="tlink v-info">Needs info</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="stab" id="stab-reports" hidden>
+      <h1 class="stitle">Reports</h1>
+      <p class="muted" style="font-size:.85rem;">Four views, each answering one question: are conversations happening, is the bench keeping up, who is using the directory, and which topics to recruit for. Aggregate only; each exports as CSV. <button class="tlink">Download the semester pack</button> bundles all four, the roster, and the metric definitions with the tracker's column names, so the May review pastes straight in. "Compared with last semester" appears once there is one.</p>
+      <div class="range" id="reportRange">
+        <button type="button" class="rlink on">This semester</button><button type="button" class="rlink">Last 12 months</button><button type="button" class="rlink">All time</button>
+      </div>
+
+      <div class="rep-block">
+        <div class="rep-head"><h3>Conversations by month</h3><button class="tlink rep-export" data-table="months">Export CSV</button></div>
+        <div class="bars" id="barMonths"></div>
+        <div class="table-wrap"><table id="tblMonths"></table></div>
+      </div>
+
+
+      <div class="rep-block">
+        <div class="rep-head"><h3>Program health</h3><button class="tlink rep-export" data-table="flow">Export CSV</button></div>
+        <div class="table-wrap"><table id="tblFlow"></table></div>
+      </div>
+
+      <div class="rep-block">
+        <div class="rep-head"><h3>Topics: requested vs offered</h3><button class="tlink rep-export" data-table="topics">Export CSV</button></div>
+        <div class="table-wrap"><table id="tblTopics"></table></div>
+      </div>
+
+      <div class="rep-block">
+        <div class="rep-head"><h3>Student participation by year and major</h3><button class="tlink rep-export" data-table="participation">Export CSV</button></div>
+        <p class="muted" style="font-size:.82rem;margin-bottom:.5rem;">From the request form. Compare against enrollment to see who is and isn't using the directory. First-generation, transfer, and international breakdowns require a data agreement with the Registrar and are not collected here.</p>
+        <div class="table-wrap"><table id="tblPart"></table></div>
+      </div>
+
+    </div>
+
+    <div class="stab" id="stab-sessions" hidden>
+      <h1 class="stitle">Sessions</h1>
+      <p class="muted" style="font-size:.85rem;">Owned by the Center. Three short lists: sessions and their seats, alumni who offered to host, and what students asked for. Each session's row shows the four numbers that matter: signed up, showed up, next steps completed (an advising appointment booked or a team meeting attended, from the Center's records or a one-tap reply), and returned for a later session. The seat check-in carries one extra item for first-years, "I can picture what an engineer actually does," on a five-point scale. Cohort leaders' check-ins carry one line the Center reads as color, not as a measure: what the room wanted to do next.</p>
+
+      <h2 style="font-size:1rem;margin:.8rem 0 .3rem;">Upcoming sessions</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Date</th><th>Session</th><th>Host</th><th>Seats</th><th>Showed · next step · returned</th></tr></thead>
+        <tbody>
+          <tr><td>Sep 29</td><td>Four things that surprised me about working in aerospace</td><td>G. Rivers</td><td>6 of 6 · ran</td><td>5 · 3 · 2</td></tr>
+          <tr><td>Oct 13</td><td>What working at a utility is actually like</td><td>W. Wells</td><td>3 of 6 confirmed</td><td></td></tr>
+          <tr><td>Oct 22</td><td>Three founders on the first year</td><td>H. Hubbard, B. Hall, K. Munn</td><td>5 of 8</td><td></td></tr>
+          <tr><td>Oct 28</td><td>Grad school or industry</td><td>C. Redmond</td><td>6 of 6 · full</td><td></td></tr>
+          <tr><td>Nov 2</td><td>First internship in automotive</td><td>B. Mont, H. Dorne</td><td><span class="state warn">2 of 8 · below minimum</span></td><td><button class="tlink">Feature in weekly note</button> · host decides Oct 31</td></tr>
+          <tr><td>Nov 12</td><td>Consulting vs industry, civil &amp; environmental</td><td>W. Wonders, G. Rivers</td><td>1 of 6</td><td></td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 style="font-size:1rem;margin:1rem 0 .3rem;">Cohort requests</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Cohort</th><th>Topic</th><th>Slots</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>CoRe 14 (16 students)</td><td>What engineers actually do all day</td><td>Tue Oct 6, 13, 20 · 4:10 PM</td><td><span class="state ok">Booked · H. Dorne · Oct 13</span></td></tr>
+          <tr><td>CoRe 7 (18 students)</td><td>Energy &amp; utilities</td><td>Thu Oct 8, 15 · 4:10 PM</td><td><span class="state warn">Emailed 1 of 3 alumni · 2 days, no reply</span> · <button class="tlink">Email the next alum now</button></td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 style="font-size:1rem;margin:1rem 0 .3rem;">Session briefs</h2>
+      <p class="muted" style="font-size:.85rem;">The Center writes these; alumni claim them from the For alumni page. Title says why to come, subtitle says what it is. Add one when students ask for a topic three times.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Brief</th><th>Audience</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Four things that surprised me about working in [field]</td><td>First-years</td><td><span class="state ok">2 hosts claimed · aerospace, automotive</span></td><td></td></tr>
+          <tr><td>The thing about my first year nobody told me</td><td>First-years</td><td><span class="state ok">3 hosts · scheduled Oct 20</span></td><td></td></tr>
+          <tr><td>What a co-op actually pays, and what you actually do</td><td>First-years, sophomores</td><td><span class="state ok">2 hosts · scheduled Nov 5</span></td><td></td></tr>
+          <tr><td>Why I left my first job after a year</td><td>Juniors, seniors</td><td><span class="state warn">Seeking a host · 11 days</span></td><td><button class="tlink">Email three alumni</button></td></tr>
+          <tr><td>Aerospace hiring managers (from 7 student suggestions)</td><td>Juniors, seniors</td><td><span class="state warn">Draft the brief</span></td><td><button class="tlink">Write brief</button></td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 style="font-size:1rem;margin:1rem 0 .3rem;">Offered to host</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Alum</th><th>Said</th><th>Topic, time</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Casey Holden</td><td>Yes</td><td>Not set</td><td><button class="tlink">Email to arrange</button></td></tr>
+          <tr><td>Jake Trowbridge</td><td>Maybe, ask me</td><td>Not set</td><td><button class="tlink">Email to arrange</button></td></tr>
+        </tbody>
+      </table></div>
+
+      <h2 style="font-size:1rem;margin:1rem 0 .3rem;">Students asked for</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Topic</th><th>Times suggested</th></tr></thead>
+        <tbody>
+          <tr><td>Aerospace hiring managers</td><td>7</td></tr>
+          <tr><td>Working in medical devices without a BME degree</td><td>5</td></tr>
+          <tr><td>Grad school funding</td><td>4</td></tr>
+        </tbody>
+      </table></div>
+
+    </div>
+
+    <div class="stab" id="stab-concerns" hidden>
+      <h1 class="stitle">Concerns</h1>
+      <p class="muted" style="font-size:.85rem;">Reports from participants, reviewed by the Center for Spartan Engineering with alumni relations looped in when an alum is involved. Each open concern carries two one-click actions, pause the student and pause the alum (both logged), and the escalation checklist from the runbook: who to call, what not to do, and what to write down.</p>
+      <div class="panel muted" style="font-size:.92rem;">No open concerns. Last report: none this semester.</div>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="inner">
+    <div style="display:flex;align-items:center;gap:.5rem;"><svg viewBox="0 0 120 120" width="22" height="22" aria-hidden="true"><path d="M54 26 H90 A14 14 0 0 1 104 40 V72 A14 14 0 0 1 90 86 L100 98 L78 86 H54 A14 14 0 0 1 40 72 V40 A14 14 0 0 1 54 26 Z" fill="var(--paper)" stroke="var(--green)" stroke-width="6" stroke-linejoin="round"/><path d="M18 46 H64 A14 14 0 0 1 78 60 V86 A14 14 0 0 1 64 100 H34 L22 112 V100 H18 A14 14 0 0 1 4 86 V60 A14 14 0 0 1 18 46 Z" fill="var(--green)" stroke="var(--paper)" stroke-width="5" stroke-linejoin="round"/></svg><span>MSU College of Engineering · Demonstration prototype, not an official MSU site</span></div>
+    <div class="links">
+      <button class="linklike" data-view-link="standards">Community standards</button>
+      <a href="https://www.msu.edu/accessibility" target="_blank" rel="noopener">Accessibility</a>
+      <a href="mailto:engr.conversations@msu.edu">Contact us</a>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" id="filterScrim" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Filters">
+    <div class="sheet-head">
+      <h2>Filters</h2>
+      <button class="sheet-close" id="sheetClose" aria-label="Close filters">✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="fgroup">
+        <label for="majorFilter">Major</label>
+        <select class="fselect" id="majorFilter"></select>
+      </div>
+      <div class="fgroup">
+        <label for="industryFilter">Industry</label>
+        <select class="fselect" id="industryFilter"></select>
+      </div>
+      <div class="switchrow">
+        <div>
+          <div class="switchlabel">Open to first-years</div>
+          <div class="switchhint">Alumni who expect you not to have questions yet</div>
+        </div>
+        <button class="switch" id="fySwitch" role="switch" aria-checked="false" aria-label="Open to first-years"><span class="knob"></span></button>
+      </div>
+      <div class="switchrow">
+        <div>
+          <div class="switchlabel">Open to meeting in person</div>
+          <div class="switchhint">Alumni who offer in-person conversations</div>
+        </div>
+        <button class="switch" id="ipSwitch" role="switch" aria-checked="false" aria-label="Open to meeting in person"><span class="knob"></span></button>
+      </div>
+    </div>
+    <div class="sheet-foot">
+      <button class="clear-link" id="clearAllBtn">Clear all</button>
+      <button class="btn" id="applyFilters">Show all alumni</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ALUMNI = [
+ {id:1,forMajors:["Mechanical Engineering","Materials Science and Engineering"],forNote:"Students considering medical devices, or a master's while working",semUsed:1,semCap:3,confirmed:"Aug 2026",topics:["Day-to-day in my field","Graduate school","Choosing a career path"],industry:"Medical devices & healthcare",name:"Cedar Redmond",deg:"BS Mechanical Engineering '11",role:"Principal Engineer, Northfield Medical",city:"Kalamazoo, MI",tech:["Mechanical design","Medical devices","CAD & FEA"],interests:["Marathon running","FIRST Robotics mentor","Cooking"],stages:["exploring","deciding"],talks:6,avail:"Three conversations per semester · video call · late afternoons"},
+ {id:2,forMajors:["Computer Science","Computer Engineering"],forNote:"First-generation students, and anyone nervous about the first job search",semUsed:2,semCap:4,confirmed:"Sep 2026",topics:["Job search & interviewing","First-generation experiences","Internships & co-ops"],industry:"Automotive",name:"Beau Mont",deg:"BS Computer Science '16",role:"Staff Software Engineer, Great Lakes Motors",city:"Dearborn, MI",tech:["Embedded software","Vehicle systems","C++"],interests:["Pickup basketball","PC building","Detroit food scene"],stages:["exploring","hunting"],talks:11,firstPick:true,avail:"Four conversations per semester · video call, or in person in Dearborn"},
+ {id:3,firstYears:true,semUsed:0,semCap:2,confirmed:"Jul 2026",topics:["Leadership & management","Day-to-day in my field","Career pivots"],industry:"Chemicals & manufacturing",name:"Shawna Lane",deg:"BS Chemical Engineering '09",role:"Plant Manager, Midland Chemical",city:"Midland, MI",tech:["Process engineering","Plant operations","Lean manufacturing"],interests:["Gardening","Travel","Youth science outreach"],stages:["deciding","hunting"],talks:4,avail:"Two conversations per semester · video call"},
+ {id:4,semUsed:1,semCap:4,confirmed:"Aug 2026",topics:["Choosing a career path","Professional licensure","Work-life balance"],industry:"Government & infrastructure",name:"Grant Rivers",deg:"BS Civil Engineering '92",role:"Retired VP of Infrastructure, state transportation agency",city:"Lansing, MI",tech:["Bridge design","Transportation planning","Public infrastructure"],interests:["Woodworking","MSU hockey","Grandkids' robotics team"],stages:["exploring"],talks:9,firstPick:true,avail:"Four conversations per semester · video call, or in person near campus"},
+ {id:5,semUsed:1,semCap:2,confirmed:"Sep 2026",topics:["Starting a company","Choosing a career path","Career pivots"],industry:"Agriculture & food tech",name:"Hallie Hubbard",deg:"BS Biosystems Engineering '18",role:"Co-founder, AgSense",city:"Ann Arbor, MI",tech:["IoT sensors","Precision agriculture","Product development"],interests:["Trail running","Farmers markets","Science fiction"],stages:["exploring","deciding"],ent:true,firstPick:true,talks:7,avail:"Two conversations per semester · video call · evenings"},
+ {id:6,forMajors:["Electrical Engineering","Computer Engineering","Mechanical Engineering"],forNote:"Anyone curious about the power grid, whatever their major",semUsed:0,semCap:2,confirmed:"Jun 2026",topics:["Day-to-day in my field","Job search & interviewing","Internships & co-ops"],industry:"Energy & utilities",name:"Wilson Wells",deg:"BS Electrical Engineering '05",role:"Grid Modernization Lead, Peninsula Power",city:"Jackson, MI",tech:["Power systems","Grid modernization","SCADA"],interests:["Ice fishing","Amateur radio","Coaching Little League"],stages:["deciding","hunting"],talks:5,avail:"Two conversations per semester · video call"},
+ {id:7,firstYears:true,semUsed:1,semCap:3,confirmed:"Aug 2026",topics:["Leadership & management","Work-life balance","Day-to-day in my field"],industry:"Consumer products",name:"Casey Holden",deg:"BS Materials Science and Engineering '13",role:"R&D Manager, Lakeshore Appliance",city:"Benton Harbor, MI",tech:["Polymer materials","R&D management","Product testing"],interests:["Pottery","Lake Michigan sailing","True crime podcasts"],stages:["deciding"],talks:8,avail:"Three conversations per semester · video call"},
+ {id:8,forMajors:["Computer Science","Computer Engineering"],forNote:"International students navigating the U.S. job market",semUsed:4,semCap:4,confirmed:"Sep 2026",topics:["Job search & interviewing","International student paths","Leadership & management"],industry:"Technology & software",name:"Bogue Sterling",deg:"MS Computer Science '14",role:"Engineering Manager, Meridian Cloud",city:"Mountain View, CA",tech:["Distributed systems","ML infrastructure","Engineering management"],interests:["Cricket","Hiking","Chess"],stages:["hunting","deciding"],talks:12,avail:"Four conversations per semester · weekends · video call"},
+ {id:9,forMajors:["Environmental Engineering","Civil Engineering"],forNote:"Students weighing consulting against industry",semUsed:0,semCap:2,confirmed:"May 2026",topics:["Professional licensure","Day-to-day in my field","Internships & co-ops"],industry:"Consulting & environmental",name:"Wendy Wonders",deg:"BS Environmental Engineering '17",role:"Project Engineer, Riverbend Engineering",city:"Grand Rapids, MI",tech:["Water resources","Site remediation","Environmental permitting"],interests:["Kayaking","Birding","Community gardens"],stages:["exploring","hunting"],talks:3,avail:"Two conversations per semester · video call, or in person in Grand Rapids"},
+ {id:10,firstYears:true,semUsed:1,semCap:2,confirmed:"Aug 2026",topics:["Leadership & management","Choosing a career path","Day-to-day in my field"],industry:"Automotive",name:"Hagan Dorne",deg:"BS Mechanical Engineering '01",role:"Director of Manufacturing, Huron Motors",city:"Warren, MI",tech:["Manufacturing systems","EV assembly","Automation"],interests:["Restoring a '72 Chevelle","Tailgating","Grilling"],stages:["exploring","deciding"],talks:10,avail:"Two conversations per semester · video call · mornings"},
+ {id:11,semUsed:2,semCap:4,confirmed:"Sep 2026",topics:["Job search & interviewing","Internships & co-ops","Choosing a career path"],industry:"Medical devices & healthcare",name:"Sparty Greene",deg:"BS Biosystems Engineering '20",role:"Clinical Engineer, Capital Region Health",city:"Grand Rapids, MI",tech:["Clinical systems","Medical device support","Healthcare IT"],interests:["Rock climbing","Animal shelter volunteer","Live music"],stages:["exploring","hunting"],talks:5,firstPick:true,avail:"Four conversations per semester · video call · evenings"},
+ {id:12,semUsed:0,semCap:2,confirmed:"Jul 2026",topics:["Starting a company","Career pivots","Leadership & management"],industry:"Financial technology",name:"Jake Trowbridge",deg:"BS Computer Engineering '98",role:"Co-founder & CTO, Detroit fintech",city:"Detroit, MI",tech:["Software architecture","Payments systems","Team leadership"],interests:["Detroit Tigers","Homebrewing","Vinyl records"],stages:["deciding","hunting"],ent:true,talks:6,avail:"Two conversations per semester · video call, or in person downtown"},
+ {id:13,forMajors:["Mechanical Engineering"],forNote:"Students who want to own a shop or a business someday",semUsed:1,semCap:2,confirmed:"Aug 2026",topics:["Starting a company","Day-to-day in my field","Work-life balance"],industry:"Manufacturing",name:"Brody Hall",deg:"BS Mechanical Engineering '08",role:"Founder & President, Hall Precision Machining",city:"Grand Ledge, MI",tech:["CNC machining","Shop operations","Quality systems"],interests:["Youth wrestling coach","Snowmobiling","Smoking brisket"],stages:["exploring","deciding"],ent:true,talks:4,avail:"Two conversations per semester · video call, or at the shop"},
+ {id:14,semUsed:1,semCap:2,confirmed:"Sep 2026",topics:["Starting a company","Job search & interviewing","Leadership & management"],industry:"Technology & software",name:"Kelly Munn",deg:"BS Computer Science '12",role:"Founder & CEO, LoopWell",city:"Chicago, IL",tech:["Full-stack development","Product strategy","Healthcare software"],interests:["Half marathons","Improv comedy","Mentoring women in tech"],stages:["deciding","hunting"],ent:true,talks:8,avail:"Two conversations per semester · video call"}
+];
+
+const CATS = [["all","All"],["exploring","Exploring careers"],["deciding","Deciding between paths"],["hunting","Job searching"],["ent","Founders & owners"],["first","Not sure? Start here"]];
+
+const STAGES = [["firstyear","First year"],["exploring","Exploring careers"],["deciding","Deciding between paths"],["hunting","Job searching"],["venture","Thinking about starting something"]];
+const PRIMERS = {
+  firstyear:{intro:"Questions that work when you're in your first year and don't have many yet. One is enough.",qs:["How did you decide on your major, and did you ever doubt it?","What does a first job in your field actually look like, day to day?","What would you tell yourself at nineteen?","What surprised you most about the work once you started?"]},
+  exploring:{intro:"Questions that work well when you're exploring careers. Select one to add it below, or write your own.",qs:["What does the work actually consist of, day to day?","What did you not understand about this work until you were doing it?","What adjacent roles do people in your field move into?","Which class mattered more than you expected?"]},
+  deciding:{intro:"Questions that work well when you're deciding between paths. Select one to add it below, or write your own.",qs:["What kind of person thrives in your environment, and who tends to leave?","Knowing what you know now, would you take the same first job?","What did you give up by choosing this path?","How reversible was your choice, in practice?"]},
+  hunting:{intro:"Questions that work well during a job search. Select one to add it below, or write your own.",qs:["What separated the candidates who received offers on your team?","What do strong candidates for your team understand that weaker ones don't?","What would you want to see on a resume for your group?","How did you decide between your own offers?"]},
+  venture:{intro:"Questions that work well when you're thinking about starting something. Select one to add it below, or write your own.",qs:["What did you build or test before you quit your job?","How did you get your first customer?","How did you pay for the first year?","What do you wish you had known at my stage?"]}
+};
+
+const SESSIONS = [
+ {id:"s1",audience:"firstyear",date:"2026-10-13",title:"What working at a utility is actually like",sub:"A day, a week, and a bad week at Peninsula Power, from a distribution engineer",hosts:[6],when:"Tue Oct 13, 2026 · 4:10 PM ET",format:"Engineering Building, room 1225",seats:6,taken:3,major:2,topics:["Day-to-day in my field","Energy & utilities"],about:"The grid, the pace, the people, and what a first year looks like. Bring the question you'd be embarrassed to ask in an interview."},
+ {id:"s7",audience:"firstyear",date:"2026-10-15",title:"Four things that surprised me about working in aerospace",sub:"A design engineer at a defense contractor on the first two years",hosts:[4],when:"Thu Oct 15, 2026 · 5:00 PM ET",format:"Video call",seats:8,taken:4,major:1,topics:["Day-to-day in my field","Aerospace"],about:"What the job is, what it isn't, and the four things nobody mentioned at the career fair."},
+ {id:"s8",audience:"firstyear",date:"2026-10-20",title:"The thing about my first year nobody told me",sub:"Three alumni from three majors on what they'd do differently, freshman year",hosts:[3,9,12],when:"Tue Oct 20, 2026 · 4:10 PM ET",format:"Engineering Building, room 1225",seats:8,taken:6,major:3,topics:["Choosing a career path"],about:"Not advice about jobs. Advice about the first year: courses, study habits, and the one decision each of them got wrong."},
+ {id:"s2",date:"2026-10-22",title:"Three founders on the first year",sub:"A venture-backed founder, a machine-shop owner, and a fintech co-founder on what year one cost",hosts:[5,13,14],when:"Thu Oct 22, 2026 · 6:30 PM ET",format:"Video call",seats:8,taken:5,topics:["Starting a company"],about:"What the first year cost in money and time, and what they'd do differently."},
+ {id:"s3",audience:"firstyear",date:"2026-10-27",title:"I changed my major twice. It was fine.",sub:"Choosing a major, from someone who decided late and turned out well",hosts:[1],when:"Tue Oct 27, 2026 · 4:10 PM ET",format:"Engineering Building, room 1225",seats:6,taken:6,major:1,topics:["Choosing a major (and changing it)"],about:"Doing a master's while working, and how to tell whether you want one at all."},
+ {id:"s4",date:"2026-11-02",title:"Getting your first internship in automotive",sub:"What actually gets a sophomore an offer, from someone who hires and someone who was just hired",hosts:[2,10],when:"Mon Nov 2, 2026 · 5:30 PM ET",format:"Video call",seats:8,taken:2,topics:["Internships & co-ops","Automotive"],about:"What actually gets a first-year or sophomore an offer."},
+ {id:"s9",audience:"firstyear",date:"2026-11-05",title:"What a co-op actually pays, and what you actually do",sub:"Two alumni who did co-ops from sophomore year to full time",hosts:[7,11],when:"Thu Nov 5, 2026 · 4:10 PM ET",format:"Engineering Building, room 1225",seats:8,taken:1,major:0,topics:["Internships & co-ops"],about:"Money, hours, what the work was, and how the co-op turned into the job."},
+ {id:"s5",date:"2026-11-12",title:"Consulting versus industry for civil and environmental",sub:"Travel, variety, licensure, and the public-sector path, from two people who took different roads",hosts:[9,4],when:"Thu Nov 12, 2026 · 5:00 PM ET",format:"Video call",seats:6,taken:1,topics:["Choosing a career path","Professional licensure"],about:"Two roads through civil and environmental work."},
+ {id:"s6",audience:"firstyear",peer:true,date:"2027-04-14",title:"Planning year two: courses, design teams, and a first internship",sub:"An hour with three upperclassmen from different majors before you choose year-two courses",hosts:[],peerHosts:["Sophomore, Mechanical Engineering","Junior, Computer Science","Sophomore, Chemical Engineering"],when:"Wed Apr 14, 2027 · 4:10 PM ET",format:"Engineering Building, room 1225",seats:12,taken:0,topics:["Planning year two"],about:"Hosted by students and arranged by the Center for Spartan Engineering."}
+];
+let currentSession = null;
+function hostsOf(sess){ return sess.hosts.map(id=>ALUMNI.find(a=>a.id===id)).filter(Boolean); }
+function hostNames(sess){ const hs=hostsOf(sess).map(h=>h.name); return sess.peer?(sess.peerHosts||[]).join(", "):hs.join(", "); }
+function renderSessions(targetId="sessGrid",filter=null){
+  const g=document.getElementById(targetId); g.innerHTML="";
+  const items=SESSIONS.filter(x=>!filter||filter(x)).slice().sort((a,b)=>a.date.localeCompare(b.date));
+  const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const abbr=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  let lastMonth="";
+  items.forEach(x=>{
+    const dt=new Date(x.date+"T12:00:00"); const mk=months[dt.getMonth()]+" "+dt.getFullYear();
+    if(mk!==lastMonth){ const h=document.createElement("div"); h.className="ev-month"; h.textContent=mk; g.appendChild(h); lastMonth=mk; }
+    const hs=hostsOf(x); const open=x.seats-x.taken;
+    const row=document.createElement("button"); row.className="ev-row"; row.setAttribute("aria-label","View session: "+x.title);
+    row.innerHTML=`<div class="ev-date"><div class="d">${dt.getDate()}</div><div class="m">${abbr[dt.getMonth()]}</div></div><div class="ev-body"><div class="ev-kind">${x.audience==="firstyear"?"For first-years · ":""}${x.peer?"Hosted by upperclassmen · ":""}${hostNames(x)}</div><div class="ev-title">${x.title}</div>${x.sub?`<div class="ev-sub">${x.sub}</div>`:""}<div class="ev-meta">${x.when.replace(/^[^·]*· /,"")} · ${x.format} · ${open<=0?"Full":open+" of "+x.seats+" seats open"}${x.audience==="firstyear"&&x.major?" · "+x.major+" from your major":""}</div></div><div class="ev-action">${open<=0?"Full":"Request a seat"}</div>`;
+    row.addEventListener("click",()=>openSession(x));
+    g.appendChild(row);
+  });
+}
+function openSession(x){
+  currentSession=x; const hs=hostsOf(x); const open=x.seats-x.taken;
+  document.getElementById("sessionBody").innerHTML=`
+    <div class="page" style="padding-top:.6rem;max-width:760px;">
+      <div class="sess-when">${x.when} · ${x.format}</div>
+      <h1 style="font-size:1.7rem;">${x.title}</h1>
+      ${x.sub?`<p style="font-size:1.02rem;margin-top:-.2rem;">${x.sub}</p>`:""}
+      <p class="lede">${x.about}</p>
+      <div class="profile-cta" style="margin:.2rem 0 1rem;">
+        <button class="btn${open<=0?" ghost":""}" id="seatBtn" ${open<=0?"disabled":""}>${open<=0?"Session is full":"Request a seat"}</button>
+        <span class="muted" style="font-size:.82rem;">${open<=0?"Similar sessions are listed on the sessions page.":open+" of "+x.seats+" seats open. Your seat is held once you verify your MSU email."}</span>
+      </div>
+      <h2>Hosted by</h2>
+      <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+        ${x.peer?(x.peerHosts||[]).map(n=>`<div class="panel"><div style="font-weight:600;">${n}</div><div class="muted" style="font-size:.85rem;">Student host, arranged by the Center</div></div>`).join(""):hs.map(h=>`<div class="panel" style="display:flex;gap:.7rem;align-items:center;"><div class="avatar" aria-hidden="true" style="--av:${tint(h.id)}">${initials(h.name)}</div><div><div style="font-weight:600;">${h.name}</div><div class="muted" style="font-size:.85rem;">${h.deg} · ${h.role}</div></div></div>`).join("")}
+      </div>
+      ${x.audience==="firstyear"?`<p class="muted" style="font-size:.88rem;">Ends with one specific next step, stated by the host and included in your reminder email.</p>`:""}
+      <div class="panel" style="margin-top:1rem;">
+        <dl>
+          <div class="factline"><dt>Length</dt><dd>45 minutes</dd></div>
+          <div class="factline"><dt>Seats</dt><dd>${open<=0?"Full":open+" of "+x.seats+" open"}</dd></div>
+          <div class="factline"><dt>Runs if</dt><dd>At least 4 seats are confirmed 48 hours before</dd></div>
+          <div class="factline"><dt>You bring</dt><dd>What you want to ask, submitted with your request</dd></div>
+        </dl>
+      </div>
+    </div>`;
+  const b=document.getElementById("seatBtn");
+  if(b && !b.disabled) b.addEventListener("click",()=>{
+    document.getElementById("seatTitle").textContent="Request a seat: "+x.title;
+    document.getElementById("seatContext").innerHTML=`<div><div style="font-weight:600;">${x.title}</div><div class="muted" style="font-size:.83rem;">${x.when} · ${x.format} · hosted by ${hs.map(h=>h.name.split(" ")[0]).join(", ")}</div></div>`;
+    document.getElementById("seatForm").hidden=false; document.getElementById("seatDone").hidden=true;
+    document.getElementById("bringField").hidden = x.audience!=="firstyear";
+    showView("seat");
+  });
+  showView("session");
+}
+document.getElementById("seatBack").addEventListener("click",()=>{ if(currentSession) openSession(currentSession); else showView("sessions"); });
+document.getElementById("seatForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  document.getElementById("seatEmail").textContent=document.getElementById("sEmail").value||"your MSU email";
+  document.getElementById("seatForm").hidden=true; document.getElementById("seatDone").hidden=false; window.scrollTo({top:0});
+});
+document.getElementById("alPills").addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) b.classList.toggle("on"); });
+document.getElementById("alertForm").addEventListener("submit",e=>{ e.preventDefault(); document.getElementById("alDone").hidden=false; });
+for(const pid of ["cTopicPills","cWherePills"]){
+  document.getElementById(pid).addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; document.querySelectorAll("#"+pid+" .chip").forEach(c=>c.classList.toggle("on",c===b)); });
+}
+document.getElementById("cohortForm").addEventListener("submit",e=>{ e.preventDefault(); document.getElementById("cohortForm").hidden=true; document.getElementById("cohortDone").hidden=false; window.scrollTo({top:0}); });
+document.querySelectorAll(".brief .btn").forEach(b=>b.addEventListener("click",()=>{ b.textContent="Thanks. We'll email you to set a date."; b.disabled=true; }));
+document.getElementById("suggestForm").addEventListener("submit",e=>{ e.preventDefault(); document.getElementById("sgDone").hidden=false; document.getElementById("sgText").value=""; });
+document.querySelectorAll(".more-btn").forEach(b=>b.addEventListener("click",()=>{
+  const cls=b.dataset.target==="center"?".more":".more2";
+  document.querySelectorAll("#view-resources "+cls).forEach(q=>q.hidden=false);
+  b.remove();
+}));
+document.querySelectorAll(".onpage a").forEach(a=>a.addEventListener("click",e=>{
+  e.preventDefault(); const t=document.querySelector(a.getAttribute("href")); if(!t) return;
+  if(t.tagName==="DETAILS") t.open=true;
+  t.scrollIntoView({behavior:"smooth",block:"start"});
+}));
+renderSessions();
+renderSessions("y1Grid",x=>x.audience==="firstyear"&&x.date<"2027-01-01");
+let currentAlum = ALUMNI[0];
+let dirCat = "all";
+let ipOnly = false;
+let fyOnly = false;
+let majorSel = "all";
+let industrySel = "all";
+
+function isInPerson(a){return /in person|at the shop|downtown|near campus/i.test(a.avail);}
+
+function majorOf(a){return a.deg.replace(/^(BS|MS)\s/,"").replace(/\s'\d+(,.*)?$/,"");}
+
+const majorFilter = document.getElementById("majorFilter");
+const industryFilter = document.getElementById("industryFilter");
+function fillSelect(sel,values,allLabel){
+  sel.innerHTML = `<option value="all">${allLabel}</option>` +
+    values.map(v=>`<option value="${v}">${v}</option>`).join("");
+}
+fillSelect(majorFilter,[...new Set(ALUMNI.flatMap(a=>[majorOf(a),...(a.forMajors||[])]))].sort(),"All majors");
+fillSelect(industryFilter,[...new Set(ALUMNI.map(a=>a.industry))].sort(),"All industries");
+majorFilter.addEventListener("change",()=>{majorSel=majorFilter.value;renderGrid();});
+industryFilter.addEventListener("change",()=>{industrySel=industryFilter.value;renderGrid();});
+
+const grid = document.getElementById("alumGrid");
+const emptyMsg = document.getElementById("emptyMsg");
+const searchBox = document.getElementById("search");
+
+const TINTS=["#18453B","#2C6B57","#0E2B24","#3F7D63"];
+const TINTS_DARK=["#7FB89A","#5E9E7F","#9CCBB1","#4E8A6C"];
+function tint(id){const i=id%4;const dark=!!(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);return (dark?TINTS_DARK:TINTS)[i];}
+function initials(n){return n.trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase()||"?";}
+
+function renderGrid(){
+  const q = searchBox.value.trim().toLowerCase();
+  grid.innerHTML = "";
+  let shown = 0;
+  const order = ALUMNI.slice().sort((a,b)=>(a._r??(a._r=Math.random()))-(b._r??(b._r=Math.random())))
+    .sort((a,b)=>((a.semUsed>=a.semCap)?1:0)-((b.semUsed>=b.semCap)?1:0));
+  order.forEach(a=>{
+    const catOk = dirCat==="all" || (dirCat==="first" ? a.firstPick : dirCat==="ent" ? a.ent : a.stages.includes(dirCat));
+    const ipOk = !ipOnly || isInPerson(a);
+    const fyOk = !fyOnly || a.firstYears;
+    const majorOk = majorSel==="all" || majorOf(a)===majorSel || (a.forMajors||[]).includes(majorSel);
+    const indOk = industrySel==="all" || a.industry===industrySel;
+    const text = (a.name+" "+a.deg+" "+a.role+" "+a.industry+" "+a.tech.join(" ")+" "+a.interests.join(" ")+" "+a.topics.join(" ")).toLowerCase();
+    if(!catOk || !ipOk || !fyOk || !majorOk || !indOk || (q && !text.includes(q))) return;
+    shown++;
+    const card = document.createElement("button");
+    card.className = "alum-card";
+    card.setAttribute("aria-label","View profile: "+a.name);
+    const talksLine = a.talks>0 ? `${a.talks} conversations completed · ${a.city}` : `New to the directory · ${a.city}`;
+    card.innerHTML = `
+      <div class="who"><div class="avatar" aria-hidden="true" style="--av:${tint(a.id)}">${initials(a.name)}</div>
+        <div><h3>${a.name}</h3><div class="role">${a.deg}</div></div></div>
+      <div class="role">${a.role}</div>
+      ${(a.firstPick||a.ent||a.firstYears||a.semUsed>=a.semCap)?`<div class="tags">${a.ent?'<span class="pill ent-pill">Founder / owner</span>':""}${a.firstYears?'<span class="pill first-pill">Open to first-years</span>':""}${a.firstPick?'<span class="pill first-pill">Good first conversation</span>':""}${a.semUsed>=a.semCap?'<span class="pill full">Booked this semester</span>':""}</div>`:""}
+      <div class="tags">${a.tech.map(t=>`<span class="pill">${t}</span>`).join("")}</div>
+      <div class="outside">Topics: ${a.topics.slice(0,3).join(" · ")}</div>
+      <div class="talks">${talksLine}</div>`;
+    card.addEventListener("click",()=>openProfile(a));
+    grid.appendChild(card);
+  });
+  emptyMsg.hidden = shown>0;
+  if(shown===0){
+    emptyMsg.innerHTML = `No results for that combination. <button class="chip" id="clearFilters" style="margin-left:.4rem;">Clear all filters</button>`;
+    document.getElementById("clearFilters").addEventListener("click",clearAll);
+  }
+  document.getElementById("resultCount").textContent = shown>0 ? shown+" alumni" : "";
+  const ab = document.getElementById("applyFilters");
+  if(ab) ab.textContent = shown>0 ? "Show "+shown+" alumni" : "No matches. Adjust filters";
+  if(typeof updateFilterBadge==="function") updateFilterBadge();
+}
+
+function renderCats(){
+  const row = document.getElementById("catRow");
+  row.innerHTML = CATS.map(([key,label])=>
+    `<button class="chip cat-chip${key===dirCat?" on":""}" data-cat="${key}" aria-pressed="${key===dirCat}">${label}</button>`).join("");
+}
+
+function reopenProfile(){ openProfile(currentAlum||ALUMNI[0]); }
+function openProfile(a){
+  currentAlum = a;
+  document.getElementById("profileBody").innerHTML = `
+    <div class="profile-head">
+      <div class="avatar" aria-hidden="true" style="--av:${tint(a.id)}">${initials(a.name)}</div>
+      <div><h1>${a.name}</h1><div class="muted">${a.deg} · ${a.role}</div></div>
+    </div>
+    <div class="profile-cta" style="margin:0 0 1.2rem;">
+      <button class="btn${a.semUsed>=a.semCap?" ghost":""}" id="reqBtn" ${a.semUsed>=a.semCap?"disabled":""}>${a.semUsed>=a.semCap?"Booked this semester":"Request a conversation"}</button>
+      <span class="muted" style="font-size:.82rem;">${a.semUsed>=a.semCap?"This semester is full. ":""}Replies within 5 days, or we suggest someone similar. Contact details are shared only when ${a.name.split(" ")[0]} accepts.</span>
+    </div>
+    <div class="profile-cols">
+      <div class="panel">
+        <h2>Topics</h2>
+        <div class="tags" style="margin-bottom:.9rem;">${a.topics.map(t=>`<span class="pill">${t}</span>`).join("")}</div>
+        <h2>Technical areas</h2>
+        <div class="tags" style="margin-bottom:.9rem;">${a.tech.map(t=>`<span class="pill">${t}</span>`).join("")}</div>
+        <h2>Interests</h2>
+        <div class="tags">${a.interests.map(t=>`<span class="pill">${t}</span>`).join("")}</div>
+        ${(function(){const ss=SESSIONS.filter(x=>x.hosts.includes(a.id));return ss.length?`<h2 style="margin-top:.9rem;">Hosting a session</h2>${ss.map(x=>`<p style="font-size:.92rem;"><button class="inline-link sess-link" data-sid="${x.id}" style="background:none;border:none;color:var(--green);text-decoration:underline;padding:0;font-size:inherit;text-align:left;">${x.title}</button><br><span class="muted" style="font-size:.82rem;">${x.when}</span></p>`).join("")}`:""})()}
+        <p class="availability">${a.avail}</p>
+      </div>
+      <div>
+        <div class="panel">
+          <dl>
+            <div class="factline"><dt>Location</dt><dd>${a.city}</dd></div>
+            <div class="factline"><dt>Industry</dt><dd>${a.industry}</dd></div>
+            <div class="factline"><dt>Conversations</dt><dd>${a.talks>0 ? a.talks+" completed" : "New to the directory"}</dd></div>
+            ${(a.forMajors||a.forNote)?`<div class="factline stack"><dt>Most useful for</dt><dd>${[a.forNote,(a.forMajors||[]).length?(a.forMajors.join(", ")+" majors"):""].filter(Boolean).join("<br>")}</dd></div>`:""}
+            <div class="factline"><dt>Good fit for</dt><dd>${a.stages.map(s=>({exploring:"Exploring careers",deciding:"Deciding between paths",hunting:"Job searching"})[s]).join("; ")}</dd></div>
+            <div class="factline"><dt>This semester</dt><dd>${a.semUsed>=a.semCap ? "Fully booked" : (a.semCap-a.semUsed)+" of "+a.semCap+" conversations open"}</dd></div>
+            <div class="factline"><dt>Profile confirmed</dt><dd>${a.confirmed}</dd></div>
+          </dl>
+        </div>
+        <p style="margin-top:.6rem;"><a class="muted" style="font-size:.78rem;" href="mailto:engr.conversations@msu.edu?subject=Concern">Report a concern</a></p>
+      </div>
+    </div>`;
+  document.getElementById("reqBtn").addEventListener("click",()=>openRequest(a));
+  document.querySelectorAll(".sess-link").forEach(b=>b.addEventListener("click",()=>{ const x=SESSIONS.find(s=>s.id===b.dataset.sid); if(x) openSession(x); }));
+  showView("profile");
+}
+
+let lastRequestId = null;
+function openRequest(p){
+  formStage = "exploring";
+  renderStagePills();
+  renderPrimers();
+  if(lastRequestId!==p.id){
+    for(const id of ["fGoal","fWhy","fQs"]) document.getElementById(id).value = ""; const pv=document.getElementById("reqPreview"); if(pv) pv.hidden=true;
+    lastRequestId = p.id;
+  }
+  document.getElementById("requestTitle").textContent = "Request a conversation with "+p.name;
+  document.getElementById("reqContext").innerHTML = `
+    <div class="avatar" aria-hidden="true" style="width:40px;height:40px;font-size:.95rem;--av:${tint(p.id)}">${initials(p.name)}</div>
+    <div><div style="font-weight:600;">${p.name}</div><div class="muted" style="font-size:.83rem;">${p.deg} · ${p.role}</div>
+    <div class="muted" style="font-size:.83rem;">Topics: ${p.topics.join(" · ")}</div></div>`;
+  showView("request");
+}
+
+let formStage = "exploring";
+function renderStagePills(){
+  const wrap = document.getElementById("stagePills");
+  wrap.innerHTML = STAGES.map(([k,label])=>
+    `<button type="button" class="chip${k===formStage?" on":""}" data-stage="${k}">${label}</button>`).join("");
+}
+const pillWrap = document.getElementById("stagePills");
+pillWrap.addEventListener("click",e=>{
+  const b = e.target.closest("button[data-stage]");
+  if(!b) return;
+  pillWrap.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
+  b.classList.add("on");
+  formStage = b.dataset.stage;
+  renderPrimers();
+});
+
+const formatPills = document.getElementById("formatPills");
+formatPills.addEventListener("click",e=>{
+  const b = e.target.closest("button");
+  if(!b) return;
+  formatPills.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
+  b.classList.add("on");
+});
+
+function renderPrimers(){
+  const p = PRIMERS[formStage];
+  document.getElementById("primerIntro").textContent = p.intro;
+  const list = document.getElementById("primerList");
+  list.innerHTML = "";
+  p.qs.forEach(q=>{
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = q;
+    b.addEventListener("click",()=>{
+      const ta = document.getElementById("fQs");
+      ta.value = (ta.value.trim() ? ta.value.trim() + "\n" : "") + q;
+      b.textContent = "✓ " + q; b.disabled = true; b.style.opacity = ".6";
+    });
+    list.appendChild(b);
+  });
+}
+
+document.getElementById("previewBtn").addEventListener("click",()=>{
+  const v=id=>document.getElementById(id).value.trim();
+  const esc=t=>t.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+  const stage=document.querySelector("#stagePills .chip.on")?.textContent||"";
+  const fmt=document.querySelector("#formatPills .chip.on")?.textContent||"";
+  const name=v("fName")||"[your name]", major=v("fMajor")||"[year and major]";
+  const qs=v("fQs").split("\n").map(x=>x.trim()).filter(Boolean);
+  const first=currentAlum?currentAlum.name.split(" ")[0]:"";
+  const body=document.getElementById("reqPreviewBody");
+  body.innerHTML=`
+    <p><strong>Subject:</strong> ${esc(name)}, ${esc(major)}, would like 25 minutes</p>
+    <p style="margin-top:.5rem;">Hi ${esc(first)},</p>
+    <p style="margin-top:.5rem;">${esc(name)} (${esc(major)}; ${esc(stage.toLowerCase())}) asked to talk with you. This is their first conversation through the directory.</p>
+    <p style="margin-top:.5rem;"><strong>Why they chose you:</strong> ${esc(v("fWhy"))||"<span class=\"muted\">[fill this in above]</span>"}</p>
+    <p style="margin-top:.5rem;"><strong>What they hope to learn:</strong> ${esc(v("fGoal"))||"<span class=\"muted\">[fill this in above]</span>"}</p>
+    <p style="margin-top:.5rem;"><strong>Their questions:</strong></p>
+    <ol style="margin:.2rem 0 0 1.2rem;">${qs.length?qs.map(q=>"<li>"+esc(q)+"</li>").join(""):"<li class=\"muted\">[add your questions above]</li>"}</ol>
+    <p style="margin-top:.5rem;"><strong>Format:</strong> ${esc(fmt)}</p>
+    <p style="margin-top:.6rem;" class="muted">Accept and pick a time · Not right now · You have 2 of 3 conversations open this semester.</p>`;
+  document.getElementById("reqPreview").hidden=false;
+  document.getElementById("reqPreview").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+document.getElementById("requestForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  document.getElementById("confirmEmail").textContent = document.getElementById("fEmail").value || "your MSU email";
+  document.getElementById("confirmAlum").textContent = currentAlum.name;
+  showView("confirm");
+});
+
+document.getElementById("catRow").addEventListener("click",e=>{
+  const b = e.target.closest(".cat-chip");
+  if(!b) return;
+  dirCat = b.dataset.cat;
+  document.querySelectorAll(".cat-chip").forEach(c=>{c.classList.toggle("on",c===b);c.setAttribute("aria-pressed",String(c===b));});
+  renderGrid();
+});
+
+searchBox.addEventListener("input",renderGrid);
+
+/* filter sheet */
+const moreBtn = document.getElementById("moreFilters");
+const scrim = document.getElementById("filterScrim");
+const sheetClose = document.getElementById("sheetClose");
+const applyBtn = document.getElementById("applyFilters");
+const ipSwitch = document.getElementById("ipSwitch");
+const fySwitch = document.getElementById("fySwitch");
+document.getElementById("y1FindBtn").addEventListener("click",()=>{ fyOnly=true; fySwitch.setAttribute("aria-checked","true"); dirCat="all"; document.querySelectorAll("#catRow .cat").forEach(c=>c.classList.toggle("on",c.dataset.cat==="all")); renderGrid(); showView("directory"); const t=document.getElementById("directory-list"); if(t) t.scrollIntoView({behavior:"smooth",block:"start"}); });
+fySwitch.addEventListener("click",()=>{ fyOnly=!fyOnly; fySwitch.setAttribute("aria-checked",String(fyOnly)); renderGrid(); });
+
+function openSheet(){
+  scrim.hidden = false;
+  document.body.style.overflow = "hidden";
+  sheetClose.focus();
+}
+function closeSheet(){
+  scrim.hidden = true;
+  document.body.style.overflow = "";
+  moreBtn.focus();
+}
+moreBtn.addEventListener("click",openSheet);
+sheetClose.addEventListener("click",closeSheet);
+applyBtn.addEventListener("click",closeSheet);
+scrim.addEventListener("click",e=>{ if(e.target===scrim) closeSheet(); });
+document.addEventListener("keydown",e=>{
+  if(scrim.hidden) return;
+  if(e.key==="Escape"){ closeSheet(); return; }
+  if(e.key==="Tab"){
+    const f = scrim.querySelectorAll("button, select, input, [tabindex]");
+    const first = f[0], last = f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  }
+});
+
+ipSwitch.addEventListener("click",()=>{
+  ipOnly = !ipOnly;
+  ipSwitch.setAttribute("aria-checked",String(ipOnly));
+  renderGrid();
+});
+
+function updateFilterBadge(){
+  const n = (ipOnly?1:0)+(fyOnly?1:0)+(majorSel!=="all"?1:0)+(industrySel!=="all"?1:0);
+  const badge = document.getElementById("fbadge");
+  badge.hidden = n===0;
+  badge.textContent = n;
+}
+
+function clearAll(){
+  dirCat="all"; ipOnly=false; fyOnly=false; majorSel="all"; industrySel="all";
+  fySwitch.setAttribute("aria-checked","false");
+  searchBox.value="";
+  majorFilter.value="all"; industryFilter.value="all";
+  ipSwitch.setAttribute("aria-checked","false");
+  renderCats();
+  renderGrid();
+}
+document.getElementById("clearAllBtn").addEventListener("click",clearAll);
+
+let prevView = "directory";
+let dirScroll = 0;
+function showView(name){
+  const cur = document.querySelector(".view.active");
+  if(cur){
+    const curName = cur.id.replace("view-","");
+    if(curName==="directory" && name!=="directory") dirScroll = window.scrollY;
+    if(curName!==name && curName!=="standards") prevView = curName;
+  }
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById("view-"+name).classList.add("active");
+  if(name==="join"){
+    document.getElementById("joinForm").hidden = false;
+    document.getElementById("joinDone").hidden = true;
+  }
+  document.querySelectorAll("nav.main button").forEach(t=>t.classList.toggle("active",t.dataset.view===name));
+  if(name==="directory" && dirScroll>0){ window.scrollTo({top:dirScroll}); }
+  else { window.scrollTo({top:0}); }
+  const h = document.querySelector("#view-"+name+" h1");
+  if(h && name!=="directory"){ h.setAttribute("tabindex","-1"); h.focus({preventScroll:true}); }
+}
+function goBack(){ if(prevView==="profile") reopenProfile(); else showView(prevView||"directory"); }
+document.getElementById("standardsBack").addEventListener("click",goBack);
+
+for(const pid of ["capPills","jFormatPills","hostPills"]){
+  const wrap = document.getElementById(pid);
+  wrap.addEventListener("click",e=>{
+    const b = e.target.closest("button");
+    if(!b) return;
+    wrap.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
+    b.classList.add("on");
+  });
+}
+document.getElementById("jMajorsPills").addEventListener("click",e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  const wrap = document.getElementById("jMajorsPills");
+  const any = wrap.querySelector("button");
+  if(b===any){ wrap.querySelectorAll(".chip").forEach(c=>c.classList.remove("on")); any.classList.add("on"); return; }
+  b.classList.toggle("on");
+  any.classList.toggle("on", wrap.querySelectorAll(".chip.on").length===0);
+});
+document.getElementById("jTopicsPills").addEventListener("click",e=>{
+  const b = e.target.closest("button");
+  if(!b) return;
+  const wrap = document.getElementById("jTopicsPills");
+  const selected = wrap.querySelectorAll(".chip.on").length;
+  if(!b.classList.contains("on") && selected>=5){
+    const lbl = document.getElementById("jTopicsLabel");
+    lbl.querySelector(".hint").textContent = "(pick your top five; deselect one to swap)";
+    return;
+  }
+  b.classList.toggle("on");
+});
+document.getElementById("resendBtn").addEventListener("click",()=>{
+  const b=document.getElementById("resendBtn");
+  b.textContent="Sent again ✓"; b.disabled=true; b.style.opacity=".6";
+});
+document.getElementById("joinForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  document.getElementById("joinForm").hidden = true;
+  document.getElementById("joinDone").hidden = false;
+  window.scrollTo({top:0});
+});
+document.querySelectorAll("nav.main button").forEach(t=>t.addEventListener("click",()=>showView(t.dataset.view)));
+document.querySelectorAll("[data-view-link]").forEach(b=>b.addEventListener("click",()=>{
+  const v = b.dataset.viewLink;
+  if(v==="profile") reopenProfile(); else showView(v);
+}));
+document.getElementById("browseBtn").addEventListener("click",e=>{
+  e.preventDefault();
+  const reduce = !!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  document.getElementById("directory-list").scrollIntoView({behavior:reduce?"auto":"smooth"});
+});
+
+renderCats();
+renderGrid();
+renderStagePills();
+renderPrimers();
+
+document.querySelectorAll("#stab-attention .tlink").forEach(b=>b.addEventListener("click",()=>{
+  b.textContent = "Reminder sent ✓"; b.disabled = true; b.style.opacity = ".6";
+}));
+function staffTab(tab){
+  document.querySelectorAll("#staffTabs .snav").forEach(x=>x.classList.toggle("active",x.dataset.tab===tab));
+  document.querySelectorAll(".stab").forEach(t=>t.hidden = t.id!=="stab-"+tab);
+  window.scrollTo({top:0});
+}
+document.getElementById("staffTabs").addEventListener("click",e=>{ const b=e.target.closest(".snav"); if(b) staffTab(b.dataset.tab); });
+document.querySelectorAll(".today-row").forEach(b=>b.addEventListener("click",()=>staffTab(b.dataset.tab)));
+/* ---- reports (aggregate sample data) ---- */
+const REPORTS = {
+  months:{cols:["Month","Requests","Confirmed conversations"],rows:[["Sep 2026",24,18],["Oct 2026 (to date)",28,23]]},
+  flow:{cols:["Measure","Value"],rows:[["Requests sent",52],["Accepted within 5 days","84%"],["Declined or expired","16%"],["Confirmed conversations",41],["Reported no-shows","6%"],["Scheduled with no check-in response","6%"],["Second request within 90 days","19% (of 16 students whose 90 days have passed)"],["Average rating, 1 to 5 (72% of students and 81% of alumni responded)","4.7"]]},
+  topics:{cols:["Topic","Requested","Offered (alumni)"],rows:[["Job search & interviewing",17,7],["Choosing a career path",14,8],["Internships & co-ops",12,5],["Starting a company",9,4],["Graduate school",7,3],["Day-to-day in my field",6,9],["Leadership & management",4,6],["Work-life balance",3,4],["Career pivots",3,4],["First-generation experiences",2,2],["International student paths",2,1],["Professional licensure",1,3]]},
+  roster:{cols:["Alum","Status","Capacity / semester","Confirmed this year","Last conversation"],rows:[
+    ["Cedar Redmond","Active",3,4,"Oct 14, 2026"],["Beau Mont","Active",4,5,"Oct 16, 2026"],["Shawna Lane","Active",2,2,"Oct 2, 2026"],["Grant Rivers","Active",4,4,"Oct 9, 2026"],
+    ["Hallie Hubbard","Active",2,3,"Oct 15, 2026"],["Wilson Wells","Paused until Nov",2,2,"Sep 24, 2026"],["Casey Holden","Active",3,3,"Oct 8, 2026"],["Bogue Sterling","Active",4,5,"Oct 17, 2026"],
+    ["Wendy Wonders","Active",2,1,"Sep 30, 2026"],["Hagan Dorne","Active",2,4,"Oct 12, 2026"],["Sparty Greene","Active",4,3,"Oct 13, 2026"],["Jake Trowbridge","Active",2,2,"Sep 26, 2026"],
+    ["Brody Hall","Active",2,1,"Oct 5, 2026"],["Kelly Munn","Active",2,2,"Oct 7, 2026"]]},
+  participation:{cols:["Group","Requests","Confirmed conversations","Share of requests","Share of enrollment"],rows:[
+    ["First-year",6,4,"12%","27%"],["Sophomore",11,9,"21%","24%"],["Junior",18,15,"35%","25%"],["Senior",17,13,"32%","24%"],
+    ["Mechanical Engineering",15,12,"29%","22%"],["Computer Science",13,10,"25%","19%"],["Electrical Engineering",4,3,"8%","7%"],["Computer Engineering",3,3,"6%","6%"],["Civil Engineering",3,2,"6%","6%"],["Chemical Engineering",3,2,"6%","6%"],["Biosystems Engineering",2,2,"4%","5%"],["Applied Engineering Sciences",2,2,"4%","6%"],["Materials Science and Engineering",2,1,"4%","3%"],["Environmental Engineering",1,1,"2%","4%"],["Computational Data Science",1,1,"2%","3%"],["Technology Engineering",1,1,"2%","3%"],["Other or undeclared",2,1,"4%","10%"]]},
+  comp:{cols:["Dimension","Value","Count"],rows:[["Industry","Automotive",12],["Industry","Technology & software",10],["Industry","Medical devices & healthcare",8],["Industry","Energy & utilities",7],["Industry","Manufacturing",7],["Industry","Other",18],["Years since graduation","0 to 5",14],["Years since graduation","6 to 15",25],["Years since graduation","16 or more",23],["Founders and owners","Yes",9],["Open to in-person","Yes",27]]}
+};
+function renderReportTable(id,data){
+  const t=document.getElementById(id);
+  t.innerHTML="<thead><tr>"+data.cols.map(c=>"<th>"+c+"</th>").join("")+"</tr></thead><tbody>"+
+    data.rows.map(r=>"<tr>"+r.map(v=>"<td>"+v+"</td>").join("")+"</tr>").join("")+"</tbody>";
+}
+function renderBars(){
+  const b=document.getElementById("barMonths"); const rows=REPORTS.months.rows; const max=Math.max(...rows.map(r=>r[2]));
+  b.innerHTML=rows.map(r=>`<div style="height:${Math.round(r[2]/max*100)}%"><span>${r[2]}</span><i>${r[0].split(" ")[0]}</i></div>`).join("");
+}
+renderReportTable("tblRoster",REPORTS.roster); renderReportTable("tblPart",REPORTS.participation); renderReportTable("tblMonths",REPORTS.months); renderReportTable("tblFlow",REPORTS.flow); renderReportTable("tblTopics",REPORTS.topics); renderBars();
+document.getElementById("reportRange").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#reportRange .rlink").forEach(c=>c.classList.toggle("on",c===b));
+});
+document.querySelectorAll(".rep-export").forEach(b=>b.addEventListener("click",()=>{
+  const d=REPORTS[b.dataset.table];
+  const csv=[d.cols,...d.rows].map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(",")).join("\n");
+  try{
+    const blob=new Blob([csv],{type:"text/csv"}); const url=URL.createObjectURL(blob);
+    const a=document.createElement("a"); a.href=url; a.download="spartan-conversations-"+b.dataset.table+".csv"; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  }catch(err){}
+  b.textContent="Exported ✓"; setTimeout(()=>{b.textContent="Export CSV";},1800);
+}));
+
+document.querySelectorAll(".cue-done").forEach(b=>b.addEventListener("click",()=>{
+  const c=b.closest(".cue"); c.classList.add("closed"); b.textContent="Done ✓"; b.disabled=true; c.querySelector(".cue-snooze").disabled=true;
+}));
+document.querySelectorAll(".cue-snooze").forEach(b=>b.addEventListener("click",()=>{
+  const c=b.closest(".cue"); c.classList.add("closed"); b.textContent="Back in 7 days"; b.disabled=true; c.querySelector(".cue-done").disabled=true;
+}));
+document.querySelectorAll(".v-approve").forEach(b=>b.addEventListener("click",()=>{
+  const row=b.closest("tr"); row.querySelector(".state").textContent="Published"; row.querySelector(".state").classList.remove("warn"); row.querySelectorAll("button").forEach(x=>{x.disabled=true;x.style.opacity=".5";}); b.textContent="Approved ✓";
+}));
+document.querySelectorAll(".v-info").forEach(b=>b.addEventListener("click",()=>{
+  const row=b.closest("tr"); row.querySelector(".state").textContent="Info requested"; row.querySelectorAll("button").forEach(x=>{x.disabled=true;x.style.opacity=".5";}); b.textContent="Sent ✓";
+}));
+</script>
+</body>
+</html>
